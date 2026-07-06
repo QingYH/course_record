@@ -408,35 +408,46 @@
     td strong { color: #fbbf24; font-size: 0.8rem; }
 
     /* ===== Toast ===== */
-    .toast-message {
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(20px);
-      color: #f1f5f9;
-      padding: 0.6rem 1.8rem;
-      border-radius: 3rem;
+    #toast {
       position: fixed;
       bottom: 2rem;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      color: #f1f5f9;
+      padding: 0.7rem 2rem;
+      border-radius: 3rem;
       font-weight: 500;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
       z-index: 999;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       opacity: 0;
-      transition: 0.3s ease;
-      font-size: 0.85rem;
-      border: 1px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+      white-space: nowrap;
     }
-    .toast-show { opacity: 1; }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
 
     .loading-overlay {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;
       color: rgba(255,255,255,0.1);
     }
     .loading-overlay i {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
       color: #60a5fa;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .docs-section {
@@ -549,6 +560,17 @@
       text-align: center;
     }
 
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: rgba(255,255,255,0.15);
+    }
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: rgba(255,255,255,0.05);
+    }
+
     @media (max-width: 700px) {
       body { padding: 0.6rem 0.4rem; }
       .header-card { flex-direction: column; align-items: start; gap: 0.6rem; padding: 0.8rem 1rem; border-radius: 1.2rem; }
@@ -568,6 +590,7 @@
       .score-value { font-size: 0.6rem; }
       .score-item.total .score-value { font-size: 0.8rem; }
       .modal-box { padding: 1.8rem 1.2rem; }
+      #toast { font-size: 0.8rem; padding: 0.5rem 1.2rem; white-space: normal; max-width: 90%; }
     }
     @media (max-width: 480px) {
       .kpi-row { grid-template-columns: repeat(2, 1fr); }
@@ -639,80 +662,90 @@
       <button class="btn-clear" @click="clearSearch"><i class="fas fa-times-circle"></i></button>
     </div>
 
-    <!-- Loading -->
+    <!-- Content -->
     <div v-if="loading" class="loading-overlay">
-      <i class="fas fa-spinner fa-pulse"></i>
+      <i class="fas fa-spinner"></i>
       <p>加载数据中…</p>
     </div>
 
-    <!-- Grid -->
-    <div v-else-if="displayMode === 'grid'" class="student-grid">
-      <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id">
-        <div class="card-header">
-          <span class="student-name">{{ stu.name }}</span>
-          <span class="student-rank">#{{ idx + 1 }}</span>
+    <template v-else>
+      <!-- Grid View -->
+      <div v-if="displayMode === 'grid'" class="student-grid">
+        <div v-if="displayedStudents.length === 0" class="empty-state">
+          <i class="fas fa-users"></i>
+          <p>暂无学生数据</p>
         </div>
-        <div class="score-grid">
-          <div class="score-item"><i class="fas fa-user-check"></i> 考勤 <span class="score-value">{{ stu.attendance }}</span></div>
-          <div class="score-item"><i class="fas fa-chalkboard-teacher"></i> 表现 <span class="score-value">{{ stu.performance }}</span></div>
-          <div class="score-item"><i class="fas fa-book-open"></i> 作业 <span class="score-value">{{ stu.homework }}</span></div>
-          <div class="score-item"><i class="fas fa-flask"></i> 期中 <span class="score-value">{{ stu.midterm }}</span></div>
-          <div class="score-item"><i class="fas fa-check-circle"></i> 期末 <span class="score-value">{{ stu.final }}</span></div>
-          <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> 每日一题 <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
-          <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第1章 <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
-          <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第2章 <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
-          <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第3章 <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
-          <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第4章 <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
-          <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第5章 <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
-          <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第6章 <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
-          <div class="score-item total">
-            <i class="fas fa-star"></i> 总评 <span class="score-value">{{ stu.total }}</span>
+        <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id">
+          <div class="card-header">
+            <span class="student-name">{{ stu.name }}</span>
+            <span class="student-rank">#{{ idx + 1 }}</span>
+          </div>
+          <div class="score-grid">
+            <div class="score-item"><i class="fas fa-user-check"></i> 考勤 <span class="score-value">{{ stu.attendance }}</span></div>
+            <div class="score-item"><i class="fas fa-chalkboard-teacher"></i> 表现 <span class="score-value">{{ stu.performance }}</span></div>
+            <div class="score-item"><i class="fas fa-book-open"></i> 作业 <span class="score-value">{{ stu.homework }}</span></div>
+            <div class="score-item"><i class="fas fa-flask"></i> 期中 <span class="score-value">{{ stu.midterm }}</span></div>
+            <div class="score-item"><i class="fas fa-check-circle"></i> 期末 <span class="score-value">{{ stu.final }}</span></div>
+            <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> 每日一题 <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
+            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第1章 <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
+            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第2章 <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
+            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第3章 <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
+            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第4章 <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
+            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第5章 <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
+            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第6章 <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
+            <div class="score-item total">
+              <i class="fas fa-star"></i> 总评 <span class="score-value">{{ stu.total }}</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-small" @click="editStudent(stu.id)" v-if="isTeacher"><i class="fas fa-edit"></i> 记录</button>
+            <button class="btn-small chapter-btn" @click="editChapters(stu.id)" v-if="isTeacher"><i class="fas fa-layer-group"></i> 章节</button>
+            <button class="btn-small daily-btn" @click="editDailyScore(stu.id)" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
+            <button class="btn-small" @click="showSingleStudent(stu.id)"><i class="fas fa-user"></i> 详情</button>
           </div>
         </div>
-        <div class="card-actions">
-          <button class="btn-small" @click="editStudent(stu.id)" v-if="isTeacher"><i class="fas fa-edit"></i> 记录</button>
-          <button class="btn-small chapter-btn" @click="editChapters(stu.id)" v-if="isTeacher"><i class="fas fa-layer-group"></i> 章节</button>
-          <button class="btn-small daily-btn" @click="editDailyScore(stu.id)" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
-          <button class="btn-small" @click="showSingleStudent(stu.id)"><i class="fas fa-user"></i> 详情</button>
-        </div>
       </div>
-    </div>
 
-    <!-- Table -->
-    <div v-else-if="displayMode === 'table'" class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th><th>学号</th><th>姓名</th>
-            <th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th>
-            <th>每日一题</th>
-            <th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th>
-            <th>总评</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }">
-            <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
-            <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
-            <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
-            <td>{{ stu.daily_score || 0 }}</td>
-            <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td>
-            <td>{{ stu.chapter3 || 0 }}</td><td>{{ stu.chapter4 || 0 }}</td>
-            <td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
-            <td><strong>{{ stu.total }}</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- Table View -->
+      <div v-else-if="displayMode === 'table'" class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>学号</th><th>姓名</th>
+              <th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th>
+              <th>每日一题</th>
+              <th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th>
+              <th>总评</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="displayedStudents.length === 0">
+              <td colspan="15" style="text-align:center; color:rgba(255,255,255,0.2); padding:2rem;">暂无数据</td>
+            </tr>
+            <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }">
+              <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
+              <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
+              <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
+              <td>{{ stu.daily_score || 0 }}</td>
+              <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td>
+              <td>{{ stu.chapter3 || 0 }}</td><td>{{ stu.chapter4 || 0 }}</td>
+              <td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
+              <td><strong>{{ stu.total }}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
 
-    <div id="toast" class="toast-message">✅ 已更新</div>
+    <!-- Toast -->
+    <div id="toast"></div>
 
     <!-- 教师后台密码弹窗 -->
     <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
       <div class="modal-box">
         <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.5rem;"></i>教师后台</h2>
         <p class="sub">输入密码以编辑学生分数</p>
-        <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" />
+        <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" ref="passwordInput" />
         <div class="btn-row">
           <button class="btn btn-primary" @click="verifyTeacher" style="flex:1; justify-content:center; padding:0.7rem 0; font-size:0.95rem;">确认</button>
           <button class="btn" @click="closeTeacherModal" style="flex:1; justify-content:center; padding:0.7rem 0; font-size:0.95rem;">取消</button>
@@ -748,13 +781,13 @@
 
 <script>
   // ============ Supabase 配置 ============
-  // 请替换为您的实际值
+  // ⚠️ 请替换为您的实际值
   const SUPABASE_URL = 'https://your-project-url.supabase.co';
   const SUPABASE_ANON_KEY = 'your-anon-key';
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // ============ 教师密码 ============
-  const TEACHER_PASSWORD = 'math2024';
+  const TEACHER_PASSWORD = 'math2026';
 
   const app = Vue.createApp({
     data() {
@@ -786,11 +819,19 @@
       async loadAllData() {
         this.loading = true;
         try {
+          // 尝试从 Supabase 获取数据
           const { data: students, error } = await supabase
             .from('students')
             .select('*')
             .order('id');
+          
           if (error) throw error;
+
+          // 如果 Supabase 没有数据，使用模拟数据
+          if (!students || students.length === 0) {
+            this.loadMockData();
+            return;
+          }
 
           const { data: homeworkData, error: hwError } = await supabase
             .from('homework_scores')
@@ -816,54 +857,69 @@
             });
           }
 
-          this.allStudents = students.map(s => {
-            const total = (s.attendance ?? 0) + (s.performance ?? 0) + (hwMap[s.id] ?? s.homework ?? 0) + (s.midterm ?? 0) + (s.final ?? 0) + (dailyMap[s.id] ?? s.daily_score ?? 0) + (s.chapter1 ?? 0) + (s.chapter2 ?? 0) + (s.chapter3 ?? 0) + (s.chapter4 ?? 0) + (s.chapter5 ?? 0) + (s.chapter6 ?? 0);
-            return {
-              id: s.id,
-              name: s.name,
-              attendance: s.attendance ?? 0,
-              performance: s.performance ?? 0,
-              homework: hwMap[s.id] ?? s.homework ?? 0,
-              midterm: s.midterm ?? 0,
-              final: s.final ?? 0,
-              daily_score: dailyMap[s.id] ?? s.daily_score ?? 0,
-              chapter1: s.chapter1 ?? 0,
-              chapter2: s.chapter2 ?? 0,
-              chapter3: s.chapter3 ?? 0,
-              chapter4: s.chapter4 ?? 0,
-              chapter5: s.chapter5 ?? 0,
-              chapter6: s.chapter6 ?? 0,
-              total: total
-            };
-          });
-
-          this.allStudents.sort((a, b) => b.total - a.total);
-
-          if (this.allStudents.length > 0) {
-            const totals = this.allStudents.map(s => s.total);
-            this.avgTotal = Math.round(totals.reduce((a,b) => a+b, 0) / totals.length);
-            this.maxTotal = Math.max(...totals);
-            this.avgAttendance = Math.round(this.allStudents.reduce((a,b) => a + b.attendance, 0) / this.allStudents.length);
-            const chapters = this.allStudents.map(s => (s.chapter1||0) + (s.chapter2||0) + (s.chapter3||0) + (s.chapter4||0) + (s.chapter5||0) + (s.chapter6||0));
-            this.avgChapter = Math.round(chapters.reduce((a,b) => a+b, 0) / chapters.length);
-            this.avgDaily = Math.round(this.allStudents.reduce((a,b) => a + (b.daily_score||0), 0) / this.allStudents.length);
-          }
-
-          this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
-          this.filteredStudentOptions = this.studentOptions.slice();
-          this.filteredStudents = this.allStudents.slice();
-          this.displayedStudents = this.allStudents.slice();
-          this.displayMode = 'grid';
-          this.showToast(`加载 ${this.allStudents.length} 名学生`);
+          this.processStudentData(students, hwMap, dailyMap);
+          this.showToast('✅ 数据加载成功');
         } catch (e) {
-          console.error('数据加载失败:', e);
-          this.showToast('数据加载失败，请检查Supabase配置');
-          this.allStudents = [];
-          this.displayedStudents = [];
-          this.displayMode = 'grid';
+          console.warn('Supabase 连接失败，使用模拟数据', e);
+          this.loadMockData();
         } finally {
           this.loading = false;
         }
+      },
+
+      loadMockData() {
+        const mockStudents = [
+          {id:'061025022',name:'徐若伽',attendance:8,performance:7,homework:18,midterm:22,final:25,daily_score:5,chapter1:15,chapter2:16,chapter3:14,chapter4:17,chapter5:18,chapter6:15},
+          {id:'061025026',name:'程子昂',attendance:9,performance:8,homework:20,midterm:24,final:28,daily_score:6,chapter1:18,chapter2:17,chapter3:16,chapter4:19,chapter5:20,chapter6:18},
+          {id:'170425048',name:'李心然',attendance:7,performance:9,homework:16,midterm:20,final:22,daily_score:4,chapter1:14,chapter2:15,chapter3:13,chapter4:16,chapter5:17,chapter6:14},
+          {id:'061025041',name:'朱静蕾',attendance:10,performance:8,homework:22,midterm:25,final:30,daily_score:7,chapter1:20,chapter2:19,chapter3:18,chapter4:21,chapter5:22,chapter6:20},
+          {id:'170425057',name:'段诗雅',attendance:6,performance:7,homework:15,midterm:18,final:20,daily_score:3,chapter1:12,chapter2:13,chapter3:11,chapter4:14,chapter5:15,chapter6:12},
+          {id:'061025063',name:'王硕',attendance:8,performance:6,homework:17,midterm:19,final:23,daily_score:5,chapter1:16,chapter2:15,chapter3:14,chapter4:17,chapter5:18,chapter6:16},
+          {id:'061025103',name:'张怡',attendance:8,performance:9,homework:18,midterm:20,final:23,daily_score:5,chapter1:16,chapter2:17,chapter3:15,chapter4:18,chapter5:19,chapter6:16},
+        ];
+        this.processStudentData(mockStudents, {}, {});
+        this.showToast('✅ 使用模拟数据（请配置Supabase）');
+      },
+
+      processStudentData(students, hwMap, dailyMap) {
+        this.allStudents = students.map(s => {
+          const total = (s.attendance ?? 0) + (s.performance ?? 0) + (hwMap[s.id] ?? s.homework ?? 0) + (s.midterm ?? 0) + (s.final ?? 0) + (dailyMap[s.id] ?? s.daily_score ?? 0) + (s.chapter1 ?? 0) + (s.chapter2 ?? 0) + (s.chapter3 ?? 0) + (s.chapter4 ?? 0) + (s.chapter5 ?? 0) + (s.chapter6 ?? 0);
+          return {
+            id: s.id,
+            name: s.name,
+            attendance: s.attendance ?? 0,
+            performance: s.performance ?? 0,
+            homework: hwMap[s.id] ?? s.homework ?? 0,
+            midterm: s.midterm ?? 0,
+            final: s.final ?? 0,
+            daily_score: dailyMap[s.id] ?? s.daily_score ?? 0,
+            chapter1: s.chapter1 ?? 0,
+            chapter2: s.chapter2 ?? 0,
+            chapter3: s.chapter3 ?? 0,
+            chapter4: s.chapter4 ?? 0,
+            chapter5: s.chapter5 ?? 0,
+            chapter6: s.chapter6 ?? 0,
+            total: total
+          };
+        });
+
+        this.allStudents.sort((a, b) => b.total - a.total);
+
+        if (this.allStudents.length > 0) {
+          const totals = this.allStudents.map(s => s.total);
+          this.avgTotal = Math.round(totals.reduce((a,b) => a+b, 0) / totals.length);
+          this.maxTotal = Math.max(...totals);
+          this.avgAttendance = Math.round(this.allStudents.reduce((a,b) => a + b.attendance, 0) / this.allStudents.length);
+          const chapters = this.allStudents.map(s => (s.chapter1||0) + (s.chapter2||0) + (s.chapter3||0) + (s.chapter4||0) + (s.chapter5||0) + (s.chapter6||0));
+          this.avgChapter = Math.round(chapters.reduce((a,b) => a+b, 0) / chapters.length);
+          this.avgDaily = Math.round(this.allStudents.reduce((a,b) => a + (b.daily_score||0), 0) / this.allStudents.length);
+        }
+
+        this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
+        this.filteredStudentOptions = this.studentOptions.slice();
+        this.filteredStudents = this.allStudents.slice();
+        this.displayedStudents = this.allStudents.slice();
+        this.displayMode = 'grid';
       },
 
       filterBySurname() {
@@ -927,6 +983,11 @@
         this.showTeacherModal = true;
         this.teacherPassword = '';
         this.teacherError = '';
+        this.$nextTick(() => {
+          if (this.$refs.passwordInput) {
+            this.$refs.passwordInput.focus();
+          }
+        });
       },
       closeTeacherModal() {
         this.showTeacherModal = false;
@@ -941,6 +1002,11 @@
         } else {
           this.teacherError = '❌ 密码错误，请重试';
           this.teacherPassword = '';
+          this.$nextTick(() => {
+            if (this.$refs.passwordInput) {
+              this.$refs.passwordInput.focus();
+            }
+          });
         }
       },
 
@@ -973,7 +1039,7 @@
               this.loadAllData();
             } catch (e) {
               console.error(e);
-              this.showToast('❌ 更新失败: ' + e.message);
+              this.showToast('❌ 更新失败，请检查Supabase配置');
             }
           } else {
             this.showToast('❌ 请输入5个有效数字，用逗号分隔');
@@ -1010,7 +1076,7 @@
               this.loadAllData();
             } catch (e) {
               console.error(e);
-              this.showToast('❌ 更新失败: ' + e.message);
+              this.showToast('❌ 更新失败，请检查Supabase配置');
             }
           } else {
             this.showToast('❌ 请输入6个有效数字，用逗号分隔');
@@ -1039,7 +1105,7 @@
               this.loadAllData();
             } catch (e) {
               console.error(e);
-              this.showToast('❌ 更新失败: ' + e.message);
+              this.showToast('❌ 更新失败，请检查Supabase配置');
             }
           } else {
             this.showToast('❌ 请输入有效数字（大于等于0）');
@@ -1081,9 +1147,11 @@
         const el = document.getElementById('toast');
         if (!el) return;
         el.textContent = msg;
-        el.classList.add('toast-show');
+        el.classList.add('show');
         clearTimeout(this.toastTimer);
-        this.toastTimer = setTimeout(() => el.classList.remove('toast-show'), 3000);
+        this.toastTimer = setTimeout(() => {
+          el.classList.remove('show');
+        }, 3000);
       }
     }
   });

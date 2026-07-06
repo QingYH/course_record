@@ -1,1163 +1,1379 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>高等数学 · 学情驾驶舱</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-    body {
-      background: #080c1a;
-      min-height: 100vh;
-      padding: 1rem 0.8rem 2rem;
-      position: relative;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(ellipse at 15% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 85% 15%, rgba(139, 92, 246, 0.05) 0%, transparent 40%),
-        radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.02) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .app-container { max-width: 1440px; margin: 0 auto; position: relative; z-index: 1; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>高等数学 · 学情驾驶舱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+        body {
+            background: #080c1a;
+            min-height: 100vh;
+            padding: 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 15% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .app-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
 
-    /* ===== Header ===== */
-    .header-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 1.5rem;
-      padding: 1rem 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      box-shadow: 0 8px 32px -8px rgba(0,0,0,0.4);
-      margin-bottom: 1.2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.8rem;
-    }
-    .header-left { display: flex; align-items: center; gap: 1rem; }
-    .header-left .logo {
-      width: 48px; height: 48px;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      border-radius: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.3rem;
-      font-weight: 700;
-      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
-    }
-    .header-left h1 {
-      font-weight: 700;
-      font-size: 1.6rem;
-      background: linear-gradient(135deg, #60a5fa, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -0.02em;
-    }
-    .header-left .sub {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.2);
-      font-weight: 400;
-      -webkit-text-fill-color: rgba(255,255,255,0.2);
-    }
-    .header-right {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .student-count-badge {
-      background: rgba(255,255,255,0.04);
-      padding: 0.4rem 1.2rem;
-      border-radius: 2rem;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.3);
-      border: 1px solid rgba(255,255,255,0.04);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .student-count-badge i { color: #60a5fa; font-size: 0.9rem; }
-    .student-count-badge strong { color: #93c5fd; font-weight: 600; font-size: 0.95rem; }
+        /* Header */
+        .header-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .header-left .logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+        }
+        .header-left h1 {
+            font-weight: 700;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .header-left .sub {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: 400;
+        }
+        .header-right {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .student-count-badge {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .student-count-badge i {
+            color: #60a5fa;
+        }
+        .student-count-badge strong {
+            color: #93c5fd;
+            font-weight: 600;
+        }
+        .btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.5rem 1.2rem;
+            border-radius: 2.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            border: none;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #60a5fa, #818cf8);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            color: #fff;
+        }
+        .btn-success:hover {
+            background: linear-gradient(135deg, #34d399, #10b981);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+        }
+        .btn-teal {
+            background: rgba(16, 185, 129, 0.10);
+            border: 1px solid rgba(16, 185, 129, 0.12);
+            color: #6ee7b7;
+        }
+        .btn-teal:hover {
+            background: rgba(16, 185, 129, 0.18);
+            color: #fff;
+        }
+        .btn-gold {
+            background: rgba(251, 191, 36, 0.10);
+            border: 1px solid rgba(251, 191, 36, 0.12);
+            color: #fbbf24;
+        }
+        .btn-gold:hover {
+            background: rgba(251, 191, 36, 0.18);
+            color: #fff;
+        }
 
-    .btn {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 0.5rem 1.2rem;
-      border-radius: 2.5rem;
-      font-weight: 600;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(255,255,255,0.5);
-      transition: all 0.25s ease;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-    }
-    .btn i { font-size: 0.9rem; }
-    .btn:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.12);
-      transform: translateY(-2px);
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-    .btn-primary { background: linear-gradient(135deg, #3b82f6, #6366f1); border: none; color: #fff; }
-    .btn-primary:hover { background: linear-gradient(135deg, #60a5fa, #818cf8); color: #fff; box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25); }
-    .btn-success { background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff; }
-    .btn-success:hover { background: linear-gradient(135deg, #34d399, #10b981); color: #fff; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25); }
-    .btn-teal { background: rgba(16, 185, 129, 0.10); border: 1px solid rgba(16, 185, 129, 0.12); color: #6ee7b7; }
-    .btn-teal:hover { background: rgba(16, 185, 129, 0.18); color: #fff; }
-    .btn-gold { background: rgba(251, 191, 36, 0.10); border: 1px solid rgba(251, 191, 36, 0.12); color: #fbbf24; }
-    .btn-gold:hover { background: rgba(251, 191, 36, 0.18); color: #fff; }
+        /* KPI Row */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 1.2rem;
+            padding: 0.9rem 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent);
+            opacity: 0.6;
+        }
+        .kpi-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+        .kpi-card .label {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 500;
+        }
+        .kpi-card .value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 0.1rem;
+            letter-spacing: -0.02em;
+        }
+        .kpi-card .value.gold {
+            color: #fbbf24;
+        }
+        .kpi-card .value.blue {
+            color: #60a5fa;
+        }
+        .kpi-card .value.green {
+            color: #6ee7b7;
+        }
+        .kpi-card .value.purple {
+            color: #a78bfa;
+        }
+        .kpi-card .value.pink {
+            color: #f472b6;
+        }
+        .kpi-card .change {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.15);
+            margin-top: 0.1rem;
+        }
+        .kpi-card .change.up {
+            color: #6ee7b7;
+        }
+        .kpi-card .change.down {
+            color: #f87171;
+        }
 
-    /* ===== KPI 卡片行 ===== */
-    .kpi-row {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0.8rem;
-      margin-bottom: 1.2rem;
-    }
-    .kpi-card {
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 1.2rem;
-      padding: 0.9rem 0.8rem;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      text-align: center;
-      transition: 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .kpi-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent);
-      opacity: 0.6;
-    }
-    .kpi-card:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.08);
-      transform: translateY(-2px);
-    }
-    .kpi-card .label {
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.25);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-weight: 500;
-    }
-    .kpi-card .value {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-top: 0.1rem;
-      letter-spacing: -0.02em;
-    }
-    .kpi-card .value.gold { color: #fbbf24; }
-    .kpi-card .value.blue { color: #60a5fa; }
-    .kpi-card .value.green { color: #6ee7b7; }
-    .kpi-card .value.purple { color: #a78bfa; }
-    .kpi-card .value.pink { color: #f472b6; }
-    .kpi-card .change {
-      font-size: 0.6rem;
-      color: rgba(255,255,255,0.15);
-      margin-top: 0.1rem;
-    }
-    .kpi-card .change i { font-size: 0.55rem; margin-right: 0.1rem; }
-    .kpi-card .change.up { color: #6ee7b7; }
-    .kpi-card .change.down { color: #f87171; }
+        /* Search */
+        .search-section {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 3rem;
+            padding: 0.4rem 0.4rem 0.4rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.3);
+        }
+        .search-section i {
+            color: rgba(255, 255, 255, 0.12);
+            font-size: 0.9rem;
+        }
+        .search-section input {
+            border: none;
+            background: transparent;
+            padding: 0.6rem 0.3rem;
+            font-size: 1rem;
+            min-width: 120px;
+            flex: 1;
+            outline: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+        .search-section input::placeholder {
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .search-section select {
+            width: 100%;
+            padding: 0.6rem 1.8rem 0.6rem 1rem;
+            border-radius: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%2360a5fa" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 10px;
+            transition: 0.2s;
+        }
+        .search-section select:focus {
+            border-color: rgba(96, 165, 250, 0.15);
+        }
+        .search-section select option {
+            background: #0f1629;
+            color: #c8d6e8;
+        }
+        .btn-clear {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .btn-clear:hover {
+            color: rgba(255, 255, 255, 0.3);
+        }
 
-    /* ===== Search ===== */
-    .search-section {
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 3rem;
-      padding: 0.4rem 0.4rem 0.4rem 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-      border: 1px solid rgba(255,255,255,0.04);
-      margin-bottom: 1.2rem;
-      box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3);
-    }
-    .search-section i { color: rgba(255,255,255,0.12); font-size: 0.9rem; }
-    .search-section input {
-      border: none;
-      background: transparent;
-      padding: 0.6rem 0.3rem;
-      font-size: 1rem;
-      min-width: 120px;
-      flex: 1;
-      outline: none;
-      color: rgba(255,255,255,0.7);
-      font-weight: 400;
-    }
-    .search-section input::placeholder { color: rgba(255,255,255,0.1); font-size: 0.9rem; }
-    .search-section select {
-      width: 100%;
-      padding: 0.6rem 1.8rem 0.6rem 1rem;
-      border-radius: 3rem;
-      border: 1px solid rgba(255,255,255,0.04);
-      background: rgba(255,255,255,0.03);
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.6);
-      outline: none;
-      cursor: pointer;
-      appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%2360a5fa" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-size: 10px;
-      transition: 0.2s;
-    }
-    .search-section select:focus { border-color: rgba(96, 165, 250, 0.15); }
-    .search-section select option { background: #0f1629; color: #c8d6e8; }
-    .btn-clear {
-      background: transparent;
-      border: none;
-      color: rgba(255,255,255,0.1);
-      padding: 0.4rem 0.8rem;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.2s;
-    }
-    .btn-clear:hover { color: rgba(255,255,255,0.3); }
+        /* Student Grid */
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .student-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            border-radius: 1.2rem;
+            padding: 1.1rem 1.2rem 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.3);
+        }
+        .student-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(96, 165, 250, 0.08);
+            box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.4);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .student-name {
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: #f0f4ff;
+            letter-spacing: -0.2px;
+        }
+        .student-rank {
+            font-size: 0.65rem;
+            background: rgba(96, 165, 250, 0.08);
+            padding: 0.1rem 0.6rem;
+            border-radius: 2rem;
+            color: rgba(96, 165, 250, 0.5);
+            border: 1px solid rgba(96, 165, 250, 0.05);
+        }
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.3rem;
+            margin: 0.4rem 0 0.1rem;
+        }
+        .score-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0.8rem;
+            padding: 0.15rem 0.4rem 0.15rem 0.6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .score-item i {
+            font-size: 0.6rem;
+            color: rgba(96, 165, 250, 0.25);
+            margin-right: 0.1rem;
+        }
+        .score-value {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0 0.4rem;
+            border-radius: 0.6rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.7rem;
+        }
+        .score-item.chapter {
+            border-color: rgba(167, 139, 250, 0.05);
+            background: rgba(167, 139, 250, 0.03);
+        }
+        .score-item.chapter i {
+            color: #a78bfa;
+        }
+        .score-item.chapter .score-value {
+            color: #a78bfa;
+        }
+        .score-item.daily {
+            border-color: rgba(110, 231, 183, 0.05);
+            background: rgba(110, 231, 183, 0.03);
+        }
+        .score-item.daily i {
+            color: #6ee7b7;
+        }
+        .score-item.daily .score-value {
+            color: #6ee7b7;
+        }
+        .score-item.total {
+            grid-column: span 3;
+            background: rgba(251, 191, 36, 0.03);
+            border-color: rgba(251, 191, 36, 0.05);
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.25rem 0.4rem;
+        }
+        .score-item.total i {
+            color: #fbbf24;
+            font-size: 0.7rem;
+        }
+        .score-item.total .score-value {
+            font-size: 0.95rem;
+            background: rgba(251, 191, 36, 0.06);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.04);
+        }
+        .card-actions {
+            margin-top: 0.6rem;
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            padding-top: 0.5rem;
+        }
+        .btn-small {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 2rem;
+            padding: 0.15rem 0.8rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.3);
+            transition: 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+        .btn-small:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(96, 165, 250, 0.12);
+            color: #fff;
+        }
+        .btn-small.chapter-btn:hover {
+            border-color: rgba(167, 139, 250, 0.15);
+            color: #a78bfa;
+        }
+        .btn-small.daily-btn:hover {
+            border-color: rgba(110, 231, 183, 0.15);
+            color: #6ee7b7;
+        }
 
-    /* ===== Student Grid ===== */
-    .student-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 0.8rem;
-      margin: 1rem 0;
-    }
-    .student-card {
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 1.2rem;
-      padding: 1.1rem 1.2rem 0.9rem;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      transition: all 0.35s ease;
-      box-shadow: 0 4px 16px -8px rgba(0,0,0,0.3);
-    }
-    .student-card:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(96, 165, 250, 0.08);
-      box-shadow: 0 8px 32px -12px rgba(0,0,0,0.4);
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      padding-bottom: 0.4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-    }
-    .student-name {
-      font-weight: 600;
-      font-size: 1.15rem;
-      color: #f0f4ff;
-      letter-spacing: -0.2px;
-    }
-    .student-rank {
-      font-size: 0.65rem;
-      background: rgba(96, 165, 250, 0.08);
-      padding: 0.1rem 0.6rem;
-      border-radius: 2rem;
-      color: rgba(96, 165, 250, 0.5);
-      border: 1px solid rgba(96, 165, 250, 0.05);
-    }
-    .score-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0.3rem;
-      margin: 0.4rem 0 0.1rem;
-    }
-    .score-item {
-      background: rgba(255,255,255,0.02);
-      border-radius: 0.8rem;
-      padding: 0.15rem 0.4rem 0.15rem 0.6rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.35);
-      border: 1px solid rgba(255,255,255,0.02);
-    }
-    .score-item i { font-size: 0.6rem; color: rgba(96, 165, 250, 0.25); margin-right: 0.1rem; }
-    .score-value {
-      background: rgba(255,255,255,0.03);
-      padding: 0 0.4rem;
-      border-radius: 0.6rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      font-size: 0.7rem;
-    }
-    .score-item.chapter {
-      border-color: rgba(167, 139, 250, 0.05);
-      background: rgba(167, 139, 250, 0.03);
-    }
-    .score-item.chapter i { color: #a78bfa; }
-    .score-item.chapter .score-value { color: #a78bfa; }
-    .score-item.daily {
-      border-color: rgba(110, 231, 183, 0.05);
-      background: rgba(110, 231, 183, 0.03);
-    }
-    .score-item.daily i { color: #6ee7b7; }
-    .score-item.daily .score-value { color: #6ee7b7; }
-    .score-item.total {
-      grid-column: span 3;
-      background: rgba(251, 191, 36, 0.03);
-      border-color: rgba(251, 191, 36, 0.05);
-      justify-content: center;
-      gap: 1rem;
-      padding: 0.25rem 0.4rem;
-    }
-    .score-item.total i { color: #fbbf24; font-size: 0.7rem; }
-    .score-item.total .score-value { 
-      font-size: 0.95rem; 
-      background: rgba(251, 191, 36, 0.06);
-      color: #fbbf24;
-      border: 1px solid rgba(251, 191, 36, 0.04);
-    }
-    .card-actions {
-      margin-top: 0.6rem;
-      display: flex;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-      border-top: 1px solid rgba(255,255,255,0.02);
-      padding-top: 0.5rem;
-    }
-    .btn-small {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 2rem;
-      padding: 0.15rem 0.8rem;
-      font-size: 0.65rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.3);
-      transition: 0.2s;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
-    .btn-small:hover { 
-      background: rgba(255,255,255,0.06); 
-      border-color: rgba(96, 165, 250, 0.12);
-      color: #fff;
-    }
-    .btn-small.chapter-btn:hover { border-color: rgba(167, 139, 250, 0.15); color: #a78bfa; }
-    .btn-small.daily-btn:hover { border-color: rgba(110, 231, 183, 0.15); color: #6ee7b7; }
+        /* Table */
+        .table-wrap {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 1.2rem;
+            padding: 0.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 1rem;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.3);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            min-width: 1000px;
+        }
+        th {
+            text-align: left;
+            padding: 0.5rem 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+        }
+        td {
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.7rem;
+        }
+        .highlight-row {
+            background: rgba(96, 165, 250, 0.03);
+        }
+        td strong {
+            color: #fbbf24;
+            font-size: 0.8rem;
+        }
 
-    /* ===== Table ===== */
-    .table-wrap {
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(12px);
-      border-radius: 1.2rem;
-      padding: 0.2rem 0.2rem 0.2rem;
-      border: 1px solid rgba(255,255,255,0.03);
-      margin-top: 1rem;
-      overflow-x: auto;
-      box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.75rem;
-      min-width: 1000px;
-    }
-    th {
-      text-align: left;
-      padding: 0.5rem 0.5rem;
-      background: rgba(255,255,255,0.02);
-      color: rgba(255,255,255,0.2);
-      font-weight: 500;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 0.6rem;
-    }
-    td {
-      padding: 0.4rem 0.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.02);
-      color: rgba(255,255,255,0.5);
-      font-size: 0.7rem;
-    }
-    .highlight-row { background: rgba(96, 165, 250, 0.03); }
-    td strong { color: #fbbf24; font-size: 0.8rem; }
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            color: #f1f5f9;
+            padding: 0.7rem 2rem;
+            border-radius: 3rem;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
 
-    /* ===== Toast ===== */
-    #toast {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(20px);
-      color: #f1f5f9;
-      padding: 0.7rem 2rem;
-      border-radius: 3rem;
-      font-weight: 500;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      z-index: 999;
-      font-size: 0.9rem;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      opacity: 0;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      pointer-events: auto;
-    }
+        .loading-overlay {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: rgba(255, 255, 255, 0.1);
+        }
+        .loading-overlay i {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #60a5fa;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-    .loading-overlay {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: rgba(255,255,255,0.1);
-    }
-    .loading-overlay i {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      color: #60a5fa;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: rgba(255, 255, 255, 0.15);
+        }
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.05);
+        }
 
-    .docs-section {
-      margin-top: 1.5rem;
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(8px);
-      border-radius: 1.2rem;
-      padding: 0.8rem 1.2rem;
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-    .docs-section h3 {
-      color: rgba(255,255,255,0.15);
-      font-size: 0.75rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-bottom: 0.4rem;
-    }
-    .docs-section h3 i { color: #60a5fa; }
-    .docs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 0.4rem;
-    }
-    .docs-card {
-      background: rgba(255,255,255,0.02);
-      border-radius: 0.8rem;
-      padding: 0.4rem 0.6rem;
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-    .docs-card p { color: rgba(255,255,255,0.15); font-size: 0.7rem; font-weight: 400; }
-    .docs-card code {
-      background: rgba(255,255,255,0.04);
-      padding: 0.03rem 0.3rem;
-      border-radius: 0.2rem;
-      color: rgba(255,255,255,0.25);
-      font-size: 0.6rem;
-      font-family: 'Inter', monospace;
-    }
-    .docs-card .tag {
-      display: inline-block;
-      padding: 0.02rem 0.5rem;
-      border-radius: 0.8rem;
-      font-size: 0.5rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      margin-left: 0.15rem;
-    }
-    .tag-blue { background: rgba(96, 165, 250, 0.08); color: #60a5fa; }
-    .tag-green { background: rgba(110, 231, 183, 0.08); color: #6ee7b7; }
-    .tag-purple { background: rgba(167, 139, 250, 0.08); color: #a78bfa; }
+        .docs-section {
+            margin-top: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            border-radius: 1.2rem;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .docs-section h3 {
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+        .docs-section h3 i {
+            color: #60a5fa;
+        }
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.4rem;
+        }
+        .docs-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0.8rem;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .docs-card p {
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.7rem;
+            font-weight: 400;
+        }
+        .docs-card code {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.03rem 0.3rem;
+            border-radius: 0.2rem;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.6rem;
+            font-family: 'Inter', monospace;
+        }
+        .docs-card .tag {
+            display: inline-block;
+            padding: 0.02rem 0.5rem;
+            border-radius: 0.8rem;
+            font-size: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            margin-left: 0.15rem;
+        }
+        .tag-blue {
+            background: rgba(96, 165, 250, 0.08);
+            color: #60a5fa;
+        }
+        .tag-green {
+            background: rgba(110, 231, 183, 0.08);
+            color: #6ee7b7;
+        }
+        .tag-purple {
+            background: rgba(167, 139, 250, 0.08);
+            color: #a78bfa;
+        }
 
-    /* ===== 教师后台弹窗 ===== */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 1rem;
-    }
-    .modal-box {
-      background: #121b33;
-      border-radius: 2rem;
-      padding: 2.5rem 2rem;
-      max-width: 420px;
-      width: 100%;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    }
-    .modal-box h2 {
-      color: #f0f4ff;
-      font-size: 1.4rem;
-      margin-bottom: 0.3rem;
-      text-align: center;
-    }
-    .modal-box .sub {
-      color: rgba(255,255,255,0.2);
-      font-size: 0.8rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .modal-box input {
-      width: 100%;
-      padding: 0.8rem 1.2rem;
-      border-radius: 3rem;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.03);
-      color: #f0f4ff;
-      font-size: 1rem;
-      outline: none;
-      transition: 0.2s;
-    }
-    .modal-box input:focus { border-color: rgba(96, 165, 250, 0.2); }
-    .modal-box input::placeholder { color: rgba(255,255,255,0.1); }
-    .modal-box .btn-row {
-      display: flex;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-    }
-    .modal-box .btn-row .btn { flex: 1; justify-content: center; padding: 0.7rem 0; font-size: 0.95rem; }
-    .modal-box .error-msg {
-      color: #f87171;
-      font-size: 0.75rem;
-      margin-top: 0.8rem;
-      text-align: center;
-    }
+        /* ===== 教师后台弹窗 ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        .modal-box {
+            background: #121b33;
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+        .modal-box h2 {
+            color: #f0f4ff;
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+            text-align: center;
+        }
+        .modal-box .sub {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .modal-box input {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            color: #f0f4ff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+        }
+        .modal-box input:focus {
+            border-color: rgba(96, 165, 250, 0.2);
+        }
+        .modal-box input::placeholder {
+            color: rgba(255, 255, 255, 0.1);
+        }
+        .modal-box .btn-row {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+        .modal-box .btn-row .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 0.7rem 0;
+            font-size: 0.95rem;
+        }
+        .modal-box .error-msg {
+            color: #f87171;
+            font-size: 0.75rem;
+            margin-top: 0.8rem;
+            text-align: center;
+        }
 
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: rgba(255,255,255,0.15);
-    }
-    .empty-state i {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: rgba(255,255,255,0.05);
-    }
-
-    @media (max-width: 700px) {
-      body { padding: 0.6rem 0.4rem; }
-      .header-card { flex-direction: column; align-items: start; gap: 0.6rem; padding: 0.8rem 1rem; border-radius: 1.2rem; }
-      .header-left h1 { font-size: 1.2rem; }
-      .header-left .logo { width: 40px; height: 40px; font-size: 1rem; }
-      .header-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
-      .header-right .btn { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
-      .search-section { flex-direction: column; align-items: stretch; padding: 0.6rem 1rem; gap: 0.5rem; border-radius: 1.5rem; }
-      .search-section input { font-size: 0.9rem; padding: 0.5rem 0.2rem; }
-      .student-grid { grid-template-columns: 1fr; }
-      .docs-grid { grid-template-columns: 1fr; }
-      .kpi-row { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
-      .kpi-card .value { font-size: 1.2rem; }
-      .kpi-card .label { font-size: 0.55rem; }
-      .student-name { font-size: 1rem; }
-      .score-item { font-size: 0.6rem; }
-      .score-value { font-size: 0.6rem; }
-      .score-item.total .score-value { font-size: 0.8rem; }
-      .modal-box { padding: 1.8rem 1.2rem; }
-      #toast { font-size: 0.8rem; padding: 0.5rem 1.2rem; white-space: normal; max-width: 90%; }
-    }
-    @media (max-width: 480px) {
-      .kpi-row { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+        @media (max-width: 700px) {
+            body {
+                padding: 0.6rem 0.4rem;
+            }
+            .header-card {
+                flex-direction: column;
+                align-items: start;
+                gap: 0.6rem;
+                padding: 0.8rem 1rem;
+                border-radius: 1.2rem;
+            }
+            .header-left h1 {
+                font-size: 1.2rem;
+            }
+            .header-left .logo {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .header-right {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+            .header-right .btn {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.9rem;
+            }
+            .search-section {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0.6rem 1rem;
+                gap: 0.5rem;
+                border-radius: 1.5rem;
+            }
+            .search-section input {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.2rem;
+            }
+            .student-grid {
+                grid-template-columns: 1fr;
+            }
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+            .kpi-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.4rem;
+            }
+            .kpi-card .value {
+                font-size: 1.2rem;
+            }
+            .kpi-card .label {
+                font-size: 0.55rem;
+            }
+            .student-name {
+                font-size: 1rem;
+            }
+            .score-item {
+                font-size: 0.6rem;
+            }
+            .score-value {
+                font-size: 0.6rem;
+            }
+            .score-item.total .score-value {
+                font-size: 0.8rem;
+            }
+            .modal-box {
+                padding: 1.8rem 1.2rem;
+            }
+            #toast {
+                font-size: 0.8rem;
+                padding: 0.5rem 1.2rem;
+                white-space: normal;
+                max-width: 90%;
+            }
+        }
+        @media (max-width: 480px) {
+            .kpi-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div id="app">
-  <div class="app-container">
-    <!-- Header -->
-    <div class="header-card">
-      <div class="header-left">
-        <div class="logo"><i class="fas fa-chart-pie"></i></div>
-        <div>
-          <h1>高等数学 <span class="sub">· 学情驾驶舱</span></h1>
-        </div>
-      </div>
-      <div class="header-right">
-        <div class="student-count-badge">
-          <i class="fas fa-user-graduate"></i> <strong id="studentCount">0</strong> 人
-        </div>
-        <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
-        <button class="btn btn-success" @click="exportExcel"><i class="fas fa-file-excel"></i> 导出</button>
-        <button class="btn btn-teal" @click="showAllStudents"><i class="fas fa-th"></i> 全班</button>
-        <button class="btn btn-gold" @click="openTeacherModal"><i class="fas fa-user-cog"></i> 教师后台</button>
-      </div>
-    </div>
-
-    <!-- KPI 卡片行 -->
-    <div class="kpi-row">
-      <div class="kpi-card" style="--accent: #fbbf24;">
-        <div class="label">总评平均</div>
-        <div class="value gold" id="avgTotal">0</div>
-        <div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div>
-      </div>
-      <div class="kpi-card" style="--accent: #60a5fa;">
-        <div class="label">最高总评</div>
-        <div class="value blue" id="maxTotal">0</div>
-        <div class="change"><i class="fas fa-crown"></i> TOP1</div>
-      </div>
-      <div class="kpi-card" style="--accent: #6ee7b7;">
-        <div class="label">考勤平均</div>
-        <div class="value green" id="avgAttendance">0</div>
-        <div class="change up"><i class="fas fa-arrow-up"></i> +5%</div>
-      </div>
-      <div class="kpi-card" style="--accent: #a78bfa;">
-        <div class="label">章节平均</div>
-        <div class="value purple" id="avgChapter">0</div>
-        <div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div>
-      </div>
-      <div class="kpi-card" style="--accent: #f472b6;">
-        <div class="label">每日一题平均</div>
-        <div class="value pink" id="avgDaily">0</div>
-        <div class="change up"><i class="fas fa-arrow-up"></i> +8%</div>
-      </div>
-    </div>
-
-    <!-- Search -->
-    <div class="search-section">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" id="searchInput" />
-      <div style="flex:2; min-width:130px;">
-        <select v-model="selectedStudentId" @change="onSelectStudent" id="studentSelect">
-          <option value="">— 选择学生 —</option>
-          <option v-for="s in filteredStudentOptions" :key="s.id" :value="s.id">{{ s.name }} ({{ s.id }})</option>
-        </select>
-      </div>
-      <button class="btn-clear" @click="clearSearch"><i class="fas fa-times-circle"></i></button>
-    </div>
-
-    <!-- Content -->
-    <div v-if="loading" class="loading-overlay" id="loadingOverlay">
-      <i class="fas fa-spinner"></i>
-      <p>加载数据中…</p>
-    </div>
-
-    <template v-else>
-      <!-- Grid View -->
-      <div v-if="displayMode === 'grid'" class="student-grid" id="studentGrid">
-        <div v-if="displayedStudents.length === 0" class="empty-state">
-          <i class="fas fa-users"></i>
-          <p>暂无学生数据，请在 Supabase 的 students 表中添加数据</p>
-        </div>
-        <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id">
-          <div class="card-header">
-            <span class="student-name">{{ stu.name }}</span>
-            <span class="student-rank">#{{ idx + 1 }}</span>
-          </div>
-          <div class="score-grid">
-            <div class="score-item"><i class="fas fa-user-check"></i> 考勤 <span class="score-value">{{ stu.attendance }}</span></div>
-            <div class="score-item"><i class="fas fa-chalkboard-teacher"></i> 表现 <span class="score-value">{{ stu.performance }}</span></div>
-            <div class="score-item"><i class="fas fa-book-open"></i> 作业 <span class="score-value">{{ stu.homework }}</span></div>
-            <div class="score-item"><i class="fas fa-flask"></i> 期中 <span class="score-value">{{ stu.midterm }}</span></div>
-            <div class="score-item"><i class="fas fa-check-circle"></i> 期末 <span class="score-value">{{ stu.final }}</span></div>
-            <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> 每日一题 <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
-            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第1章 <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
-            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第2章 <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
-            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第3章 <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
-            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第4章 <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
-            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第5章 <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
-            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第6章 <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
-            <div class="score-item total">
-              <i class="fas fa-star"></i> 总评 <span class="score-value">{{ stu.total }}</span>
+    <div id="app">
+        <div class="app-container">
+            <!-- Header -->
+            <div class="header-card">
+                <div class="header-left">
+                    <div class="logo"><i class="fas fa-chart-pie"></i></div>
+                    <div>
+                        <h1>高等数学 <span class="sub">· 学情驾驶舱</span></h1>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="student-count-badge">
+                        <i class="fas fa-user-graduate"></i> <strong id="studentCount">0</strong> 人
+                    </div>
+                    <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
+                    <button class="btn btn-success" @click="exportExcel"><i class="fas fa-file-excel"></i> 导出</button>
+                    <button class="btn btn-teal" @click="showAllStudents"><i class="fas fa-th"></i> 全班</button>
+                    <button class="btn btn-gold" @click="openTeacherModal"><i class="fas fa-user-cog"></i> 教师后台</button>
+                </div>
             </div>
-          </div>
-          <div class="card-actions">
-            <button class="btn-small" @click="editStudent(stu.id)" v-if="isTeacher"><i class="fas fa-edit"></i> 记录</button>
-            <button class="btn-small chapter-btn" @click="editChapters(stu.id)" v-if="isTeacher"><i class="fas fa-layer-group"></i> 章节</button>
-            <button class="btn-small daily-btn" @click="editDailyScore(stu.id)" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
-            <button class="btn-small" @click="showSingleStudent(stu.id)"><i class="fas fa-user"></i> 详情</button>
-          </div>
+
+            <!-- KPI -->
+            <div class="kpi-row">
+                <div class="kpi-card" style="--accent: #fbbf24;">
+                    <div class="label">总评平均</div>
+                    <div class="value gold">{{ avgTotal }}</div>
+                    <div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div>
+                </div>
+                <div class="kpi-card" style="--accent: #60a5fa;">
+                    <div class="label">最高总评</div>
+                    <div class="value blue">{{ maxTotal }}</div>
+                    <div class="change"><i class="fas fa-crown"></i> TOP1</div>
+                </div>
+                <div class="kpi-card" style="--accent: #6ee7b7;">
+                    <div class="label">考勤平均</div>
+                    <div class="value green">{{ avgAttendance }}</div>
+                    <div class="change up"><i class="fas fa-arrow-up"></i> +5%</div>
+                </div>
+                <div class="kpi-card" style="--accent: #a78bfa;">
+                    <div class="label">章节平均</div>
+                    <div class="value purple">{{ avgChapter }}</div>
+                    <div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div>
+                </div>
+                <div class="kpi-card" style="--accent: #f472b6;">
+                    <div class="label">每日一题平均</div>
+                    <div class="value pink">{{ avgDaily }}</div>
+                    <div class="change up"><i class="fas fa-arrow-up"></i> +8%</div>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-section">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
+                <div style="flex:2; min-width:130px;">
+                    <select v-model="selectedStudentId" @change="onSelectStudent">
+                        <option value="">— 选择学生 —</option>
+                        <option v-for="s in filteredStudentOptions" :key="s.id" :value="s.id">{{ s.name }} ({{ s.id }})</option>
+                    </select>
+                </div>
+                <button class="btn-clear" @click="clearSearch"><i class="fas fa-times-circle"></i></button>
+            </div>
+
+            <!-- Content -->
+            <div v-if="loading" class="loading-overlay">
+                <i class="fas fa-spinner"></i>
+                <p>加载数据中…</p>
+            </div>
+
+            <template v-else>
+                <!-- Grid View -->
+                <div v-if="displayMode === 'grid'" class="student-grid">
+                    <div v-if="displayedStudents.length === 0" class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <p>暂无学生数据</p>
+                    </div>
+                    <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id">
+                        <div class="card-header">
+                            <span class="student-name">{{ stu.name }}</span>
+                            <span class="student-rank">#{{ idx + 1 }}</span>
+                        </div>
+                        <div class="score-grid">
+                            <div class="score-item"><i class="fas fa-user-check"></i> 考勤 <span class="score-value">{{ stu.attendance }}</span></div>
+                            <div class="score-item"><i class="fas fa-chalkboard-teacher"></i> 表现 <span class="score-value">{{ stu.performance }}</span></div>
+                            <div class="score-item"><i class="fas fa-book-open"></i> 作业 <span class="score-value">{{ stu.homework }}</span></div>
+                            <div class="score-item"><i class="fas fa-flask"></i> 期中 <span class="score-value">{{ stu.midterm }}</span></div>
+                            <div class="score-item"><i class="fas fa-check-circle"></i> 期末 <span class="score-value">{{ stu.final }}</span></div>
+                            <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> 每日一题 <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第1章 <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第2章 <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第3章 <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第4章 <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第5章 <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第6章 <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
+                            <div class="score-item total">
+                                <i class="fas fa-star"></i> 总评 <span class="score-value">{{ stu.total }}</span>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-small" @click="editStudent(stu.id)" v-if="isTeacher"><i class="fas fa-edit"></i> 记录</button>
+                            <button class="btn-small chapter-btn" @click="editChapters(stu.id)" v-if="isTeacher"><i class="fas fa-layer-group"></i> 章节</button>
+                            <button class="btn-small daily-btn" @click="editDailyScore(stu.id)" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
+                            <button class="btn-small" @click="showSingleStudent(stu.id)"><i class="fas fa-user"></i> 详情</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table View -->
+                <div v-else-if="displayMode === 'table'" class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th><th>学号</th><th>姓名</th>
+                                <th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th>
+                                <th>每日一题</th>
+                                <th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th>
+                                <th>总评</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="displayedStudents.length === 0">
+                                <td colspan="15" style="text-align:center; color:rgba(255,255,255,0.2); padding:2rem;">暂无数据</td>
+                            </tr>
+                            <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }">
+                                <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
+                                <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
+                                <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
+                                <td>{{ stu.daily_score || 0 }}</td>
+                                <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td>
+                                <td>{{ stu.chapter3 || 0 }}</td><td>{{ stu.chapter4 || 0 }}</td>
+                                <td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
+                                <td><strong>{{ stu.total }}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+
+            <!-- Toast -->
+            <div id="toast"></div>
+
+            <!-- 教师后台弹窗 -->
+            <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
+                <div class="modal-box">
+                    <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.5rem;"></i>教师后台</h2>
+                    <p class="sub">输入密码以编辑学生分数</p>
+                    <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" ref="passwordInput" />
+                    <div class="btn-row">
+                        <button class="btn btn-primary" @click="verifyTeacher">确认</button>
+                        <button class="btn" @click="closeTeacherModal">取消</button>
+                    </div>
+                    <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
+                </div>
+            </div>
+
+            <!-- Docs -->
+            <div class="docs-section">
+                <h3><i class="fas fa-database"></i> Supabase 数据表 · 学生名单在此管理</h3>
+                <div class="docs-grid">
+                    <div class="docs-card">
+                        <p><strong style="color:rgba(255,255,255,0.3);">students</strong> <span class="tag tag-blue">主表</span></p>
+                        <p style="margin-top:0.1rem;"><code>id</code> <code>name</code> <code>attendance</code> <code>performance</code> <code>homework</code> <code>midterm</code> <code>final</code> <code>daily_score</code><br><code>chapter1~6</code></p>
+                    </div>
+                    <div class="docs-card">
+                        <p><strong style="color:rgba(255,255,255,0.3);">homework_scores</strong> <span class="tag tag-green">作业明细</span></p>
+                        <p style="margin-top:0.1rem;"><code>id</code> <code>student_id</code> <code>homework_name</code> <code>score</code></p>
+                    </div>
+                    <div class="docs-card">
+                        <p><strong style="color:rgba(255,255,255,0.3);">daily_scores</strong> <span class="tag tag-green">每日一题</span></p>
+                        <p style="margin-top:0.1rem;"><code>id</code> <code>student_id</code> <code>score</code> <code>date</code></p>
+                    </div>
+                    <div class="docs-card">
+                        <p><strong style="color:rgba(255,255,255,0.3);">章节考核</strong> <span class="tag tag-purple">新增</span></p>
+                        <p style="margin-top:0.1rem; color:rgba(255,255,255,0.10); font-size:0.55rem;">存储在 <code>students</code> 表 <code>chapter1~6</code></p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Table View -->
-      <div v-else-if="displayMode === 'table'" class="table-wrap" id="tableWrap">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th><th>学号</th><th>姓名</th>
-              <th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th>
-              <th>每日一题</th>
-              <th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th>
-              <th>总评</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-if="displayedStudents.length === 0">
-              <td colspan="15" style="text-align:center; color:rgba(255,255,255,0.2); padding:2rem;">暂无数据</td>
-            </tr>
-            <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }">
-              <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
-              <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
-              <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
-              <td>{{ stu.daily_score || 0 }}</td>
-              <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td>
-              <td>{{ stu.chapter3 || 0 }}</td><td>{{ stu.chapter4 || 0 }}</td>
-              <td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
-              <td><strong>{{ stu.total }}</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </template>
-
-    <!-- Toast -->
-    <div id="toast"></div>
-
-    <!-- 教师后台密码弹窗 -->
-    <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
-      <div class="modal-box">
-        <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.5rem;"></i>教师后台</h2>
-        <p class="sub">输入密码以编辑学生分数</p>
-        <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" ref="passwordInput" />
-        <div class="btn-row">
-          <button class="btn btn-primary" @click="verifyTeacher" style="flex:1; justify-content:center; padding:0.7rem 0; font-size:0.95rem;">确认</button>
-          <button class="btn" @click="closeTeacherModal" style="flex:1; justify-content:center; padding:0.7rem 0; font-size:0.95rem;">取消</button>
-        </div>
-        <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
-      </div>
     </div>
 
-    <!-- Docs -->
-    <div class="docs-section">
-      <h3><i class="fas fa-database"></i> Supabase 数据表 · 学生名单在此管理</h3>
-      <div class="docs-grid">
-        <div class="docs-card">
-          <p><strong style="color:rgba(255,255,255,0.3);">students</strong> <span class="tag tag-blue">主表</span></p>
-          <p style="margin-top:0.1rem;"><code>id</code> <code>name</code> <code>attendance</code> <code>performance</code> <code>homework</code> <code>midterm</code> <code>final</code> <code>daily_score</code><br><code>chapter1~6</code></p>
-        </div>
-        <div class="docs-card">
-          <p><strong style="color:rgba(255,255,255,0.3);">homework_scores</strong> <span class="tag tag-green">作业明细</span></p>
-          <p style="margin-top:0.1rem;"><code>id</code> <code>student_id</code> <code>homework_name</code> <code>score</code></p>
-        </div>
-        <div class="docs-card">
-          <p><strong style="color:rgba(255,255,255,0.3);">daily_scores</strong> <span class="tag tag-green">每日一题</span></p>
-          <p style="margin-top:0.1rem;"><code>id</code> <code>student_id</code> <code>score</code> <code>date</code></p>
-        </div>
-        <div class="docs-card">
-          <p><strong style="color:rgba(255,255,255,0.3);">章节考核</strong> <span class="tag tag-purple">新增</span></p>
-          <p style="margin-top:0.1rem; color:rgba(255,255,255,0.10); font-size:0.55rem;">存储在 <code>students</code> 表 <code>chapter1~6</code></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 
-<script>
-  // ============ Supabase 配置 ============
-  // ⚠️ 请将下面两行替换为您的 Supabase 实际值
-  const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <script>
+        // ============ Supabase 配置 ============
+        const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ============ 教师密码 ============
-  const TEACHER_PASSWORD = 'math2026';
+        const TEACHER_PASSWORD = 'math2026';
 
-  const app = Vue.createApp({
-    data() {
-      return {
-        allStudents: [],
-        filteredStudents: [],
-        displayedStudents: [],
-        searchSurname: '',
-        selectedStudentId: '',
-        displayMode: 'grid',
-        studentOptions: [],
-        filteredStudentOptions: [],
-        loading: true,
-        avgTotal: 0,
-        maxTotal: 0,
-        avgAttendance: 0,
-        avgChapter: 0,
-        avgDaily: 0,
-        // 教师后台 - 默认关闭
-        showTeacherModal: false,
-        teacherPassword: '',
-        teacherError: '',
-        isTeacher: false
-      };
-    },
-    mounted() { 
-      this.loadAllData(); 
-    },
-    methods: {
-      async loadAllData() {
-        this.loading = true;
-        try {
-          // 尝试从 Supabase 获取数据
-          const { data: students, error } = await supabase
-            .from('students')
-            .select('*')
-            .order('id');
-          
-          if (error) throw error;
+        const app = Vue.createApp({
+            data() {
+                return {
+                    allStudents: [],
+                    filteredStudents: [],
+                    displayedStudents: [],
+                    searchSurname: '',
+                    selectedStudentId: '',
+                    displayMode: 'grid',
+                    studentOptions: [],
+                    filteredStudentOptions: [],
+                    loading: true,
+                    avgTotal: 0,
+                    maxTotal: 0,
+                    avgAttendance: 0,
+                    avgChapter: 0,
+                    avgDaily: 0,
+                    showTeacherModal: false,
+                    teacherPassword: '',
+                    teacherError: '',
+                    isTeacher: false
+                };
+            },
+            mounted() {
+                this.loadAllData();
+                console.log('Vue app mounted successfully!');
+            },
+            methods: {
+                async loadAllData() {
+                    this.loading = true;
+                    try {
+                        const { data: students, error } = await supabase
+                            .from('students')
+                            .select('*')
+                            .order('id');
 
-          // 如果 Supabase 没有数据，使用模拟数据
-          if (!students || students.length === 0) {
-            this.loadMockData();
-            return;
-          }
+                        if (error) throw error;
 
-          const { data: homeworkData, error: hwError } = await supabase
-            .from('homework_scores')
-            .select('student_id, score');
-          if (hwError) console.warn('作业表读取失败', hwError);
+                        if (!students || students.length === 0) {
+                            this.loadMockData();
+                            return;
+                        }
 
-          const { data: dailyData, error: dailyError } = await supabase
-            .from('daily_scores')
-            .select('student_id, score');
-          if (dailyError) console.warn('每日一题表读取失败', dailyError);
+                        const { data: homeworkData, error: hwError } = await supabase
+                            .from('homework_scores')
+                            .select('student_id, score');
+                        if (hwError) console.warn('作业表读取失败', hwError);
 
-          const hwMap = {};
-          if (homeworkData) {
-            homeworkData.forEach(item => { 
-              hwMap[item.student_id] = (hwMap[item.student_id] || 0) + item.score; 
-            });
-          }
+                        const { data: dailyData, error: dailyError } = await supabase
+                            .from('daily_scores')
+                            .select('student_id, score');
+                        if (dailyError) console.warn('每日一题表读取失败', dailyError);
 
-          const dailyMap = {};
-          if (dailyData) {
-            dailyData.forEach(item => { 
-              dailyMap[item.student_id] = (dailyMap[item.student_id] || 0) + item.score; 
-            });
-          }
+                        const hwMap = {};
+                        if (homeworkData) {
+                            homeworkData.forEach(item => {
+                                hwMap[item.student_id] = (hwMap[item.student_id] || 0) + item.score;
+                            });
+                        }
 
-          this.processStudentData(students, hwMap, dailyMap);
-          this.showToast('✅ 数据加载成功');
-        } catch (e) {
-          console.warn('Supabase 连接失败，使用模拟数据', e);
-          this.loadMockData();
-        } finally {
-          this.loading = false;
-        }
-      },
+                        const dailyMap = {};
+                        if (dailyData) {
+                            dailyData.forEach(item => {
+                                dailyMap[item.student_id] = (dailyMap[item.student_id] || 0) + item.score;
+                            });
+                        }
 
-      loadMockData() {
-        const mockStudents = [
-          {id:'061025022',name:'徐若伽',attendance:8,performance:7,homework:18,midterm:22,final:25,daily_score:5,chapter1:15,chapter2:16,chapter3:14,chapter4:17,chapter5:18,chapter6:15},
-          {id:'061025026',name:'程子昂',attendance:9,performance:8,homework:20,midterm:24,final:28,daily_score:6,chapter1:18,chapter2:17,chapter3:16,chapter4:19,chapter5:20,chapter6:18},
-          {id:'170425048',name:'李心然',attendance:7,performance:9,homework:16,midterm:20,final:22,daily_score:4,chapter1:14,chapter2:15,chapter3:13,chapter4:16,chapter5:17,chapter6:14},
-          {id:'061025041',name:'朱静蕾',attendance:10,performance:8,homework:22,midterm:25,final:30,daily_score:7,chapter1:20,chapter2:19,chapter3:18,chapter4:21,chapter5:22,chapter6:20},
-          {id:'170425057',name:'段诗雅',attendance:6,performance:7,homework:15,midterm:18,final:20,daily_score:3,chapter1:12,chapter2:13,chapter3:11,chapter4:14,chapter5:15,chapter6:12},
-          {id:'061025063',name:'王硕',attendance:8,performance:6,homework:17,midterm:19,final:23,daily_score:5,chapter1:16,chapter2:15,chapter3:14,chapter4:17,chapter5:18,chapter6:16},
-          {id:'061025103',name:'张怡',attendance:8,performance:9,homework:18,midterm:20,final:23,daily_score:5,chapter1:16,chapter2:17,chapter3:15,chapter4:18,chapter5:19,chapter6:16},
-        ];
-        this.processStudentData(mockStudents, {}, {});
-        this.showToast('⚠️ 使用模拟数据（请配置Supabase）');
-      },
+                        this.processStudentData(students, hwMap, dailyMap);
+                        this.showToast('✅ 数据加载成功');
+                    } catch (e) {
+                        console.warn('Supabase 连接失败，使用模拟数据', e);
+                        this.loadMockData();
+                    } finally {
+                        this.loading = false;
+                    }
+                },
 
-      processStudentData(students, hwMap, dailyMap) {
-        this.allStudents = students.map(s => {
-          const total = (s.attendance ?? 0) + (s.performance ?? 0) + (hwMap[s.id] ?? s.homework ?? 0) + (s.midterm ?? 0) + (s.final ?? 0) + (dailyMap[s.id] ?? s.daily_score ?? 0) + (s.chapter1 ?? 0) + (s.chapter2 ?? 0) + (s.chapter3 ?? 0) + (s.chapter4 ?? 0) + (s.chapter5 ?? 0) + (s.chapter6 ?? 0);
-          return {
-            id: s.id,
-            name: s.name,
-            attendance: s.attendance ?? 0,
-            performance: s.performance ?? 0,
-            homework: hwMap[s.id] ?? s.homework ?? 0,
-            midterm: s.midterm ?? 0,
-            final: s.final ?? 0,
-            daily_score: dailyMap[s.id] ?? s.daily_score ?? 0,
-            chapter1: s.chapter1 ?? 0,
-            chapter2: s.chapter2 ?? 0,
-            chapter3: s.chapter3 ?? 0,
-            chapter4: s.chapter4 ?? 0,
-            chapter5: s.chapter5 ?? 0,
-            chapter6: s.chapter6 ?? 0,
-            total: total
-          };
+                loadMockData() {
+                    const mockStudents = [
+                        { id: '061025022', name: '徐若伽', attendance: 8, performance: 7, homework: 18, midterm: 22,
+                            final: 25, daily_score: 5, chapter1: 15, chapter2: 16, chapter3: 14, chapter4: 17,
+                            chapter5: 18, chapter6: 15 },
+                        { id: '061025026', name: '程子昂', attendance: 9, performance: 8, homework: 20, midterm: 24,
+                            final: 28, daily_score: 6, chapter1: 18, chapter2: 17, chapter3: 16, chapter4: 19,
+                            chapter5: 20, chapter6: 18 },
+                        { id: '170425048', name: '李心然', attendance: 7, performance: 9, homework: 16, midterm: 20,
+                            final: 22, daily_score: 4, chapter1: 14, chapter2: 15, chapter3: 13, chapter4: 16,
+                            chapter5: 17, chapter6: 14 },
+                        { id: '061025041', name: '朱静蕾', attendance: 10, performance: 8, homework: 22, midterm: 25,
+                            final: 30, daily_score: 7, chapter1: 20, chapter2: 19, chapter3: 18, chapter4: 21,
+                            chapter5: 22, chapter6: 20 },
+                        { id: '170425057', name: '段诗雅', attendance: 6, performance: 7, homework: 15, midterm: 18,
+                            final: 20, daily_score: 3, chapter1: 12, chapter2: 13, chapter3: 11, chapter4: 14,
+                            chapter5: 15, chapter6: 12 },
+                        { id: '061025063', name: '王硕', attendance: 8, performance: 6, homework: 17, midterm: 19,
+                            final: 23, daily_score: 5, chapter1: 16, chapter2: 15, chapter3: 14, chapter4: 17,
+                            chapter5: 18, chapter6: 16 },
+                        { id: '061025103', name: '张怡', attendance: 8, performance: 9, homework: 18, midterm: 20,
+                            final: 23, daily_score: 5, chapter1: 16, chapter2: 17, chapter3: 15, chapter4: 18,
+                            chapter5: 19, chapter6: 16 },
+                    ];
+                    this.processStudentData(mockStudents, {}, {});
+                    this.showToast('⚠️ 使用模拟数据（请配置Supabase）');
+                },
+
+                processStudentData(students, hwMap, dailyMap) {
+                    this.allStudents = students.map(s => {
+                        const total = (s.attendance ?? 0) + (s.performance ?? 0) + (hwMap[s.id] ?? s.homework ?? 0) +
+                            (s.midterm ?? 0) + (s.final ?? 0) + (dailyMap[s.id] ?? s.daily_score ?? 0) +
+                            (s.chapter1 ?? 0) + (s.chapter2 ?? 0) + (s.chapter3 ?? 0) + (s.chapter4 ?? 0) +
+                            (s.chapter5 ?? 0) + (s.chapter6 ?? 0);
+                        return {
+                            id: s.id,
+                            name: s.name,
+                            attendance: s.attendance ?? 0,
+                            performance: s.performance ?? 0,
+                            homework: hwMap[s.id] ?? s.homework ?? 0,
+                            midterm: s.midterm ?? 0,
+                            final: s.final ?? 0,
+                            daily_score: dailyMap[s.id] ?? s.daily_score ?? 0,
+                            chapter1: s.chapter1 ?? 0,
+                            chapter2: s.chapter2 ?? 0,
+                            chapter3: s.chapter3 ?? 0,
+                            chapter4: s.chapter4 ?? 0,
+                            chapter5: s.chapter5 ?? 0,
+                            chapter6: s.chapter6 ?? 0,
+                            total: total
+                        };
+                    });
+
+                    this.allStudents.sort((a, b) => b.total - a.total);
+
+                    if (this.allStudents.length > 0) {
+                        const totals = this.allStudents.map(s => s.total);
+                        this.avgTotal = Math.round(totals.reduce((a, b) => a + b, 0) / totals.length);
+                        this.maxTotal = Math.max(...totals);
+                        this.avgAttendance = Math.round(this.allStudents.reduce((a, b) => a + b.attendance, 0) / this
+                            .allStudents.length);
+                        const chapters = this.allStudents.map(s => (s.chapter1 || 0) + (s.chapter2 || 0) + (s
+                            .chapter3 || 0) + (s.chapter4 || 0) + (s.chapter5 || 0) + (s.chapter6 || 0));
+                        this.avgChapter = Math.round(chapters.reduce((a, b) => a + b, 0) / chapters.length);
+                        this.avgDaily = Math.round(this.allStudents.reduce((a, b) => a + (b.daily_score || 0), 0) /
+                            this.allStudents.length);
+                    }
+
+                    this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
+                    this.filteredStudentOptions = this.studentOptions.slice();
+                    this.filteredStudents = this.allStudents.slice();
+                    this.displayedStudents = this.allStudents.slice();
+                    this.displayMode = 'grid';
+                },
+
+                filterBySurname() {
+                    const sur = this.searchSurname.trim();
+                    if (!sur) {
+                        this.filteredStudentOptions = this.studentOptions.slice();
+                        this.filteredStudents = this.allStudents.slice();
+                        this.displayedStudents = this.allStudents.slice();
+                        return;
+                    }
+                    const filtered = this.allStudents.filter(s => s.name.startsWith(sur));
+                    this.filteredStudents = filtered;
+                    this.displayedStudents = filtered;
+                    this.filteredStudentOptions = filtered.map(s => ({ id: s.id, name: s.name }));
+                    this.displayMode = 'grid';
+                    if (!filtered.length) this.showToast('未找到该姓氏');
+                },
+
+                onSelectStudent() {
+                    if (!this.selectedStudentId) {
+                        this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this
+                        .allStudents;
+                        return;
+                    }
+                    const target = this.allStudents.find(s => s.id === this.selectedStudentId);
+                    if (target) {
+                        this.displayedStudents = [target];
+                        this.displayMode = 'grid';
+                        this.searchSurname = target.name.charAt(0);
+                    }
+                },
+
+                showSingleStudent(id) {
+                    const target = this.allStudents.find(s => s.id === id);
+                    if (target) {
+                        this.displayedStudents = [target];
+                        this.displayMode = 'grid';
+                        this.selectedStudentId = id;
+                        this.searchSurname = target.name.charAt(0);
+                    }
+                },
+
+                showAllStudents() {
+                    this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this.allStudents;
+                    this.displayMode = 'grid';
+                    this.selectedStudentId = '';
+                    this.searchSurname = '';
+                    this.filteredStudentOptions = this.studentOptions.slice();
+                },
+
+                clearSearch() {
+                    this.searchSurname = '';
+                    this.selectedStudentId = '';
+                    this.filteredStudents = this.allStudents.slice();
+                    this.displayedStudents = this.allStudents.slice();
+                    this.filteredStudentOptions = this.studentOptions.slice();
+                    this.displayMode = 'grid';
+                },
+
+                // ===== 教师后台 =====
+                openTeacherModal() {
+                    this.showTeacherModal = true;
+                    this.teacherPassword = '';
+                    this.teacherError = '';
+                    this.$nextTick(() => {
+                        if (this.$refs.passwordInput) {
+                            this.$refs.passwordInput.focus();
+                        }
+                    });
+                },
+                closeTeacherModal() {
+                    this.showTeacherModal = false;
+                    this.teacherPassword = '';
+                    this.teacherError = '';
+                },
+                verifyTeacher() {
+                    if (this.teacherPassword === TEACHER_PASSWORD) {
+                        this.isTeacher = true;
+                        this.closeTeacherModal();
+                        this.showToast('✅ 教师模式已开启，可以编辑学生分数');
+                    } else {
+                        this.teacherError = '❌ 密码错误，请重试';
+                        this.teacherPassword = '';
+                        this.$nextTick(() => {
+                            if (this.$refs.passwordInput) {
+                                this.$refs.passwordInput.focus();
+                            }
+                        });
+                    }
+                },
+
+                // ===== 编辑功能 =====
+                async editStudent(id) {
+                    if (!this.isTeacher) {
+                        this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
+                        return;
+                    }
+                    const stu = this.allStudents.find(s => s.id === id);
+                    if (!stu) return;
+                    const newVal = prompt(
+                        `修改 ${stu.name} 的分数\n格式: 考勤,表现,作业,期中,期末\n当前: ${stu.attendance},${stu.performance},${stu.homework},${stu.midterm},${stu.final}`,
+                        `${stu.attendance},${stu.performance},${stu.homework},${stu.midterm},${stu.final}`
+                    );
+                    if (newVal) {
+                        const parts = newVal.split(',').map(Number);
+                        if (parts.length === 5 && parts.every(v => !isNaN(v))) {
+                            try {
+                                const { error } = await supabase
+                                    .from('students')
+                                    .update({
+                                        attendance: parts[0] || 0,
+                                        performance: parts[1] || 0,
+                                        homework: parts[2] || 0,
+                                        midterm: parts[3] || 0,
+                                        final: parts[4] || 0
+                                    })
+                                    .eq('id', id);
+                                if (error) throw error;
+                                this.showToast(`✅ ${stu.name} 分数已更新`);
+                                this.loadAllData();
+                            } catch (e) {
+                                console.error(e);
+                                this.showToast('❌ 更新失败，请检查Supabase配置');
+                            }
+                        } else {
+                            this.showToast('❌ 请输入5个有效数字，用逗号分隔');
+                        }
+                    }
+                },
+
+                async editChapters(id) {
+                    if (!this.isTeacher) {
+                        this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
+                        return;
+                    }
+                    const stu = this.allStudents.find(s => s.id === id);
+                    if (!stu) return;
+                    const current =
+                        `${stu.chapter1||0},${stu.chapter2||0},${stu.chapter3||0},${stu.chapter4||0},${stu.chapter5||0},${stu.chapter6||0}`;
+                    const newVal = prompt(
+                        `修改 ${stu.name} 的章节考核\n格式: 第1章,第2章,第3章,第4章,第5章,第6章\n当前: ${current}`,
+                        current
+                    );
+                    if (newVal) {
+                        const parts = newVal.split(',').map(Number);
+                        if (parts.length === 6 && parts.every(v => !isNaN(v))) {
+                            try {
+                                const { error } = await supabase
+                                    .from('students')
+                                    .update({
+                                        chapter1: parts[0] || 0,
+                                        chapter2: parts[1] || 0,
+                                        chapter3: parts[2] || 0,
+                                        chapter4: parts[3] || 0,
+                                        chapter5: parts[4] || 0,
+                                        chapter6: parts[5] || 0
+                                    })
+                                    .eq('id', id);
+                                if (error) throw error;
+                                this.showToast(`✅ ${stu.name} 章节分数已更新`);
+                                this.loadAllData();
+                            } catch (e) {
+                                console.error(e);
+                                this.showToast('❌ 更新失败，请检查Supabase配置');
+                            }
+                        } else {
+                            this.showToast('❌ 请输入6个有效数字，用逗号分隔');
+                        }
+                    }
+                },
+
+                async editDailyScore(id) {
+                    if (!this.isTeacher) {
+                        this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
+                        return;
+                    }
+                    const stu = this.allStudents.find(s => s.id === id);
+                    if (!stu) return;
+                    const newVal = prompt(`修改 ${stu.name} 的「每日一题」分数\n当前: ${stu.daily_score || 0}`, stu
+                        .daily_score || 0);
+                    if (newVal !== null) {
+                        const score = Number(newVal);
+                        if (!isNaN(score) && score >= 0) {
+                            try {
+                                const { error } = await supabase
+                                    .from('students')
+                                    .update({ daily_score: score })
+                                    .eq('id', id);
+                                if (error) throw error;
+                                this.showToast(`✅ ${stu.name} 每日一题分数已更新为 ${score}`);
+                                this.loadAllData();
+                            } catch (e) {
+                                console.error(e);
+                                this.showToast('❌ 更新失败，请检查Supabase配置');
+                            }
+                        } else {
+                            this.showToast('❌ 请输入有效数字（大于等于0）');
+                        }
+                    }
+                },
+
+                exportExcel() {
+                    if (!this.displayedStudents.length) {
+                        this.showToast('暂无数据可导出');
+                        return;
+                    }
+                    const data = this.displayedStudents.map((s, idx) => ({
+                        '排名': idx + 1,
+                        '学号': s.id,
+                        '姓名': s.name,
+                        '考勤': s.attendance,
+                        '课堂表现': s.performance,
+                        '平时作业': s.homework,
+                        '期中': s.midterm,
+                        '期末': s.final,
+                        '每日一题': s.daily_score || 0,
+                        '第1章': s.chapter1 || 0,
+                        '第2章': s.chapter2 || 0,
+                        '第3章': s.chapter3 || 0,
+                        '第4章': s.chapter4 || 0,
+                        '第5章': s.chapter5 || 0,
+                        '第6章': s.chapter6 || 0,
+                        '总评': s.total
+                    }));
+                    const wb = XLSX.utils.book_new();
+                    const ws = XLSX.utils.json_to_sheet(data);
+                    XLSX.utils.book_append_sheet(wb, ws, '高数成绩');
+                    XLSX.writeFile(wb, `高等数学_${new Date().toISOString().slice(0,10)}.xlsx`);
+                    this.showToast('✅ 导出成功');
+                },
+
+                showToast(msg) {
+                    const el = document.getElementById('toast');
+                    if (!el) return;
+                    el.textContent = msg;
+                    el.classList.add('show');
+                    clearTimeout(this.toastTimer);
+                    this.toastTimer = setTimeout(() => {
+                        el.classList.remove('show');
+                    }, 3000);
+                }
+            }
         });
 
-        this.allStudents.sort((a, b) => b.total - a.total);
+        app.mount('#app');
+        console.log('Vue app mounted!');
+    </script>
 
-        if (this.allStudents.length > 0) {
-          const totals = this.allStudents.map(s => s.total);
-          this.avgTotal = Math.round(totals.reduce((a,b) => a+b, 0) / totals.length);
-          this.maxTotal = Math.max(...totals);
-          this.avgAttendance = Math.round(this.allStudents.reduce((a,b) => a + b.attendance, 0) / this.allStudents.length);
-          const chapters = this.allStudents.map(s => (s.chapter1||0) + (s.chapter2||0) + (s.chapter3||0) + (s.chapter4||0) + (s.chapter5||0) + (s.chapter6||0));
-          this.avgChapter = Math.round(chapters.reduce((a,b) => a+b, 0) / chapters.length);
-          this.avgDaily = Math.round(this.allStudents.reduce((a,b) => a + (b.daily_score||0), 0) / this.allStudents.length);
-        }
-
-        this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
-        this.filteredStudentOptions = this.studentOptions.slice();
-        this.filteredStudents = this.allStudents.slice();
-        this.displayedStudents = this.allStudents.slice();
-        this.displayMode = 'grid';
-      },
-
-      filterBySurname() {
-        const sur = this.searchSurname.trim();
-        if (!sur) {
-          this.filteredStudentOptions = this.studentOptions.slice();
-          this.filteredStudents = this.allStudents.slice();
-          this.displayedStudents = this.allStudents.slice();
-          return;
-        }
-        const filtered = this.allStudents.filter(s => s.name.startsWith(sur));
-        this.filteredStudents = filtered;
-        this.displayedStudents = filtered;
-        this.filteredStudentOptions = filtered.map(s => ({ id: s.id, name: s.name }));
-        this.displayMode = 'grid';
-        if (!filtered.length) this.showToast('未找到该姓氏');
-      },
-
-      onSelectStudent() {
-        if (!this.selectedStudentId) {
-          this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this.allStudents;
-          return;
-        }
-        const target = this.allStudents.find(s => s.id === this.selectedStudentId);
-        if (target) {
-          this.displayedStudents = [target];
-          this.displayMode = 'grid';
-          this.searchSurname = target.name.charAt(0);
-        }
-      },
-
-      showSingleStudent(id) {
-        const target = this.allStudents.find(s => s.id === id);
-        if (target) {
-          this.displayedStudents = [target];
-          this.displayMode = 'grid';
-          this.selectedStudentId = id;
-          this.searchSurname = target.name.charAt(0);
-        }
-      },
-
-      showAllStudents() {
-        this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this.allStudents;
-        this.displayMode = 'grid';
-        this.selectedStudentId = '';
-        this.searchSurname = '';
-        this.filteredStudentOptions = this.studentOptions.slice();
-      },
-
-      clearSearch() {
-        this.searchSurname = '';
-        this.selectedStudentId = '';
-        this.filteredStudents = this.allStudents.slice();
-        this.displayedStudents = this.allStudents.slice();
-        this.filteredStudentOptions = this.studentOptions.slice();
-        this.displayMode = 'grid';
-      },
-
-      // ===== 教师后台 =====
-      openTeacherModal() {
-        this.showTeacherModal = true;
-        this.teacherPassword = '';
-        this.teacherError = '';
-        this.$nextTick(() => {
-          if (this.$refs.passwordInput) {
-            this.$refs.passwordInput.focus();
-          }
-        });
-      },
-      closeTeacherModal() {
-        this.showTeacherModal = false;
-        this.teacherPassword = '';
-        this.teacherError = '';
-      },
-      verifyTeacher() {
-        if (this.teacherPassword === TEACHER_PASSWORD) {
-          this.isTeacher = true;
-          this.closeTeacherModal();
-          this.showToast('✅ 教师模式已开启，可以编辑学生分数');
-        } else {
-          this.teacherError = '❌ 密码错误，请重试';
-          this.teacherPassword = '';
-          this.$nextTick(() => {
-            if (this.$refs.passwordInput) {
-              this.$refs.passwordInput.focus();
-            }
-          });
-        }
-      },
-
-      // ===== 编辑功能（仅教师可用） =====
-      async editStudent(id) {
-        if (!this.isTeacher) { 
-          this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-          return; 
-        }
-        const stu = this.allStudents.find(s => s.id === id);
-        if (!stu) return;
-        const newVal = prompt(`修改 ${stu.name} 的分数\n格式: 考勤,表现,作业,期中,期末\n当前: ${stu.attendance},${stu.performance},${stu.homework},${stu.midterm},${stu.final}`, 
-          `${stu.attendance},${stu.performance},${stu.homework},${stu.midterm},${stu.final}`);
-        if (newVal) {
-          const parts = newVal.split(',').map(Number);
-          if (parts.length === 5 && parts.every(v => !isNaN(v))) {
-            try {
-              const { error } = await supabase
-                .from('students')
-                .update({
-                  attendance: parts[0] || 0,
-                  performance: parts[1] || 0,
-                  homework: parts[2] || 0,
-                  midterm: parts[3] || 0,
-                  final: parts[4] || 0
-                })
-                .eq('id', id);
-              if (error) throw error;
-              this.showToast(`✅ ${stu.name} 分数已更新`);
-              this.loadAllData();
-            } catch (e) {
-              console.error(e);
-              this.showToast('❌ 更新失败，请检查Supabase配置');
-            }
-          } else {
-            this.showToast('❌ 请输入5个有效数字，用逗号分隔');
-          }
-        }
-      },
-
-      async editChapters(id) {
-        if (!this.isTeacher) { 
-          this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-          return; 
-        }
-        const stu = this.allStudents.find(s => s.id === id);
-        if (!stu) return;
-        const current = `${stu.chapter1||0},${stu.chapter2||0},${stu.chapter3||0},${stu.chapter4||0},${stu.chapter5||0},${stu.chapter6||0}`;
-        const newVal = prompt(`修改 ${stu.name} 的章节考核\n格式: 第1章,第2章,第3章,第4章,第5章,第6章\n当前: ${current}`, current);
-        if (newVal) {
-          const parts = newVal.split(',').map(Number);
-          if (parts.length === 6 && parts.every(v => !isNaN(v))) {
-            try {
-              const { error } = await supabase
-                .from('students')
-                .update({
-                  chapter1: parts[0] || 0,
-                  chapter2: parts[1] || 0,
-                  chapter3: parts[2] || 0,
-                  chapter4: parts[3] || 0,
-                  chapter5: parts[4] || 0,
-                  chapter6: parts[5] || 0
-                })
-                .eq('id', id);
-              if (error) throw error;
-              this.showToast(`✅ ${stu.name} 章节分数已更新`);
-              this.loadAllData();
-            } catch (e) {
-              console.error(e);
-              this.showToast('❌ 更新失败，请检查Supabase配置');
-            }
-          } else {
-            this.showToast('❌ 请输入6个有效数字，用逗号分隔');
-          }
-        }
-      },
-
-      async editDailyScore(id) {
-        if (!this.isTeacher) { 
-          this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-          return; 
-        }
-        const stu = this.allStudents.find(s => s.id === id);
-        if (!stu) return;
-        const newVal = prompt(`修改 ${stu.name} 的「每日一题」分数\n当前: ${stu.daily_score || 0}`, stu.daily_score || 0);
-        if (newVal !== null) {
-          const score = Number(newVal);
-          if (!isNaN(score) && score >= 0) {
-            try {
-              const { error } = await supabase
-                .from('students')
-                .update({ daily_score: score })
-                .eq('id', id);
-              if (error) throw error;
-              this.showToast(`✅ ${stu.name} 每日一题分数已更新为 ${score}`);
-              this.loadAllData();
-            } catch (e) {
-              console.error(e);
-              this.showToast('❌ 更新失败，请检查Supabase配置');
-            }
-          } else {
-            this.showToast('❌ 请输入有效数字（大于等于0）');
-          }
-        }
-      },
-
-      exportExcel() {
-        if (!this.displayedStudents.length) {
-          this.showToast('暂无数据可导出');
-          return;
-        }
-        const data = this.displayedStudents.map((s, idx) => ({
-          '排名': idx + 1,
-          '学号': s.id, 
-          '姓名': s.name, 
-          '考勤': s.attendance, 
-          '课堂表现': s.performance,
-          '平时作业': s.homework, 
-          '期中': s.midterm, 
-          '期末': s.final, 
-          '每日一题': s.daily_score || 0,
-          '第1章': s.chapter1 || 0,
-          '第2章': s.chapter2 || 0,
-          '第3章': s.chapter3 || 0,
-          '第4章': s.chapter4 || 0,
-          '第5章': s.chapter5 || 0,
-          '第6章': s.chapter6 || 0,
-          '总评': s.total
-        }));
-        const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.json_to_sheet(data);
-        XLSX.utils.book_append_sheet(wb, ws, '高数成绩');
-        XLSX.writeFile(wb, `高等数学_${new Date().toISOString().slice(0,10)}.xlsx`);
-        this.showToast('✅ 导出成功');
-      },
-
-      showToast(msg) {
-        const el = document.getElementById('toast');
-        if (!el) return;
-        el.textContent = msg;
-        el.classList.add('show');
-        clearTimeout(this.toastTimer);
-        this.toastTimer = setTimeout(() => {
-          el.classList.remove('show');
-        }, 3000);
-      }
-    }
-  });
-
-  app.mount('#app');
-</script>
 </body>
 </html>

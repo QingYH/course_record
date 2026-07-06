@@ -989,13 +989,11 @@
         </div>
     </div>
 
-    <!-- ===== 引入 Vue 3 ===== -->
+    <!-- ===== 引入外部库 ===== -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js">
     </script>
-    <!-- ===== 引入 Supabase ===== -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
     </script>
-    <!-- ===== 引入 SheetJS ===== -->
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
     </script>
 
@@ -1008,41 +1006,60 @@
             console.log('✅ Vue 加载成功！版本:', Vue.version);
 
             // ===== 检查 Supabase 是否加载 =====
-            if (typeof supabase === 'undefined') {
-                console.error('❌ Supabase 加载失败！请检查网络连接');
-                // 使用备用方式创建 supabase 客户端
-                var supabaseClient = function(url, key) {
-                    console.warn('⚠️ 使用备用 Supabase 客户端');
-                    return {
-                        from: function(table) {
-                            return {
-                                select: function(fields) {
-                                    return {
-                                        order: function(col) {
-                                            return {
-                                                then: function(callback) {
-                                                    callback({ data: [], error: null });
-                                                }
-                                            };
-                                        }
-                                    };
-                                }
-                            };
-                        }
-                    };
-                };
-                var createClient = function(url, key) {
-                    return supabaseClient(url, key);
-                };
-            } else {
+            let supabaseClient = null;
+
+            if (typeof supabase !== 'undefined' && supabase.createClient) {
                 console.log('✅ Supabase 加载成功！');
+                // Supabase 已加载，使用它
+                supabaseClient = supabase;
+            } else {
+                console.warn('⚠️ Supabase 未加载，使用模拟数据模式');
+                // 创建一个模拟客户端，直接使用模拟数据
+                supabaseClient = {
+                    from: function(table) {
+                        return {
+                            select: function(fields) {
+                                return {
+                                    order: function(col) {
+                                        return {
+                                            then: function(callback) {
+                                                // 返回空数据，让 loadAllData 使用模拟数据
+                                                callback({ data: [], error: null });
+                                            }
+                                        };
+                                    }
+                                };
+                            },
+                            update: function(data) {
+                                return {
+                                    eq: function(id) {
+                                        return {
+                                            then: function(callback) {
+                                                callback({ error: null });
+                                            }
+                                        };
+                                    }
+                                };
+                            }
+                        };
+                    }
+                };
             }
 
-            // ============ Supabase 配置 ============
+            // ============ Supabase 配置（如果使用真实 Supabase） ============
             // ⚠️ 请将下面两行替换为您的 Supabase 实际值
             const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
             const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
-            const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+            // 如果 supabase 已加载，使用真实客户端
+            if (typeof supabase !== 'undefined' && supabase.createClient) {
+                try {
+                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    console.log('✅ Supabase 客户端初始化成功');
+                } catch (e) {
+                    console.warn('⚠️ Supabase 客户端初始化失败，使用模拟模式', e);
+                }
+            }
 
             const TEACHER_PASSWORD = 'math2026';
 
@@ -1078,18 +1095,23 @@
                         this.loading = true;
                         try {
                             console.log('🔄 尝试连接 Supabase...');
-                            const { data: students, error } = await supabaseClient
-                                .from('students')
-                                .select('*')
-                                .order('id');
+                            let students = [];
+                            let error = null;
 
-                            if (error) {
-                                console.warn('⚠️ Supabase 查询出错:', error);
-                                throw error;
+                            try {
+                                const result = await supabaseClient
+                                    .from('students')
+                                    .select('*')
+                                    .order('id');
+                                students = result.data || [];
+                                error = result.error;
+                            } catch (e) {
+                                console.warn('⚠️ Supabase 查询出错:', e);
+                                error = e;
                             }
 
-                            if (!students || students.length === 0) {
-                                console.log('ℹ️ Supabase 无数据，使用模拟数据');
+                            if (error || !students || students.length === 0) {
+                                console.log('ℹ️ Supabase 无数据或连接失败，使用模拟数据');
                                 this.loadMockData();
                                 return;
                             }
@@ -1103,14 +1125,14 @@
                                 const hwResult = await supabaseClient
                                     .from('homework_scores')
                                     .select('student_id, score');
-                                if (!hwResult.error) homeworkData = hwResult.data;
+                                if (!hwResult.error) homeworkData = hwResult.data || [];
                             } catch (e) { console.warn('作业表读取失败', e); }
 
                             try {
                                 const dailyResult = await supabaseClient
                                     .from('daily_scores')
                                     .select('student_id, score');
-                                if (!dailyResult.error) dailyData = dailyResult.data;
+                                if (!dailyResult.error) dailyData = dailyResult.data || [];
                             } catch (e) { console.warn('每日一题表读取失败', e); }
 
                             const hwMap = {};
@@ -1130,7 +1152,7 @@
                             this.processStudentData(students, hwMap, dailyMap);
                             this.showToast('✅ 数据加载成功');
                         } catch (e) {
-                            console.warn('⚠️ Supabase 连接失败，使用模拟数据', e);
+                            console.warn('⚠️ 数据加载失败，使用模拟数据', e);
                             this.loadMockData();
                         } finally {
                             this.loading = false;

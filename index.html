@@ -587,7 +587,7 @@
     </div>
     <div class="header-right">
       <div class="student-count-badge">
-        <i class="fas fa-user-graduate"></i> <strong>{{ allStudents.length }}</strong> 人
+        <i class="fas fa-user-graduate"></i> <strong id="studentCount">0</strong> 人
       </div>
       <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
       <button class="btn btn-success" @click="exportExcel"><i class="fas fa-file-excel"></i> 导出</button>
@@ -600,27 +600,27 @@
   <div class="kpi-row">
     <div class="kpi-card" style="--accent: #fbbf24;">
       <div class="label">总评平均</div>
-      <div class="value gold">{{ avgTotal || 0 }}</div>
+      <div class="value gold" id="avgTotal">0</div>
       <div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div>
     </div>
     <div class="kpi-card" style="--accent: #60a5fa;">
       <div class="label">最高总评</div>
-      <div class="value blue">{{ maxTotal || 0 }}</div>
+      <div class="value blue" id="maxTotal">0</div>
       <div class="change"><i class="fas fa-crown"></i> TOP1</div>
     </div>
     <div class="kpi-card" style="--accent: #6ee7b7;">
       <div class="label">考勤平均</div>
-      <div class="value green">{{ avgAttendance || 0 }}</div>
+      <div class="value green" id="avgAttendance">0</div>
       <div class="change up"><i class="fas fa-arrow-up"></i> +5%</div>
     </div>
     <div class="kpi-card" style="--accent: #a78bfa;">
       <div class="label">章节平均</div>
-      <div class="value purple">{{ avgChapter || 0 }}</div>
+      <div class="value purple" id="avgChapter">0</div>
       <div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div>
     </div>
     <div class="kpi-card" style="--accent: #f472b6;">
       <div class="label">每日一题平均</div>
-      <div class="value pink">{{ avgDaily || 0 }}</div>
+      <div class="value pink" id="avgDaily">0</div>
       <div class="change up"><i class="fas fa-arrow-up"></i> +8%</div>
     </div>
   </div>
@@ -628,9 +628,9 @@
   <!-- Search -->
   <div class="search-section">
     <i class="fas fa-search"></i>
-    <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
+    <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" id="searchInput" />
     <div style="flex:2; min-width:130px;">
-      <select v-model="selectedStudentId" @change="onSelectStudent">
+      <select v-model="selectedStudentId" @change="onSelectStudent" id="studentSelect">
         <option value="">— 选择学生 —</option>
         <option v-for="s in filteredStudentOptions" :key="s.id" :value="s.id">{{ s.name }} ({{ s.id }})</option>
       </select>
@@ -639,13 +639,13 @@
   </div>
 
   <!-- Loading -->
-  <div v-if="loading" class="loading-overlay">
+  <div v-if="loading" class="loading-overlay" id="loadingOverlay">
     <i class="fas fa-spinner fa-pulse"></i>
     <p>加载数据中…</p>
   </div>
 
   <!-- Grid -->
-  <div v-else-if="displayMode === 'grid'" class="student-grid">
+  <div v-else-if="displayMode === 'grid'" class="student-grid" id="studentGrid">
     <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id">
       <div class="card-header">
         <span class="student-name">{{ stu.name }}</span>
@@ -678,7 +678,7 @@
   </div>
 
   <!-- Table -->
-  <div v-else-if="displayMode === 'table'" class="table-wrap">
+  <div v-else-if="displayMode === 'table'" class="table-wrap" id="tableWrap">
     <table>
       <thead>
         <tr>
@@ -707,14 +707,14 @@
   <div id="toast" class="toast-message">✅ 已更新</div>
 
   <!-- ===== 教师后台密码弹窗 ===== -->
-  <div v-if="showTeacherModal" class="modal-overlay" @click.self="showTeacherModal = false">
+  <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
     <div class="modal-box">
       <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.5rem;"></i>教师后台</h2>
       <p class="sub">输入密码以编辑学生分数</p>
-      <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" />
+      <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" id="teacherPasswordInput" />
       <div class="btn-row">
         <button class="btn btn-primary" @click="verifyTeacher" style="flex:1; justify-content:center; padding:0.7rem 0; font-size:0.95rem;">确认</button>
-        <button class="btn" @click="showTeacherModal = false" style="flex:1; justify-content:center; padding:0.7rem 0; font-size:0.95rem;">取消</button>
+        <button class="btn" @click="closeTeacherModal" style="flex:1; justify-content:center; padding:0.7rem 0; font-size:0.95rem;">取消</button>
       </div>
       <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
     </div>
@@ -746,8 +746,8 @@
 
 <script>
   // ============ Supabase 配置 ============
-  const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
+  const SUPABASE_URL = 'https://your-project-url.supabase.co';
+  const SUPABASE_ANON_KEY = 'your-anon-key';
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // ============ 教师密码 ============
@@ -777,7 +777,9 @@
         isTeacher: false
       };
     },
-    mounted() { this.loadAllData(); },
+    mounted() { 
+      this.loadAllData(); 
+    },
     methods: {
       async loadAllData() {
         this.loading = true;
@@ -922,24 +924,42 @@
         this.showTeacherModal = true;
         this.teacherPassword = '';
         this.teacherError = '';
+        // 自动聚焦输入框
+        this.$nextTick(() => {
+          const input = document.getElementById('teacherPasswordInput');
+          if (input) input.focus();
+        });
+      },
+      closeTeacherModal() {
+        this.showTeacherModal = false;
+        this.teacherPassword = '';
+        this.teacherError = '';
       },
       verifyTeacher() {
         if (this.teacherPassword === TEACHER_PASSWORD) {
           this.isTeacher = true;
-          this.showTeacherModal = false;
-          this.showToast('✅ 教师模式已开启');
+          this.closeTeacherModal();
+          this.showToast('✅ 教师模式已开启，可以编辑学生分数');
         } else {
-          this.teacherError = '密码错误，请重试';
+          this.teacherError = '❌ 密码错误，请重试';
           this.teacherPassword = '';
+          // 重新聚焦输入框
+          this.$nextTick(() => {
+            const input = document.getElementById('teacherPasswordInput');
+            if (input) input.focus();
+          });
         }
       },
 
       // ===== 编辑功能（仅教师可用） =====
       async editStudent(id) {
-        if (!this.isTeacher) { this.showToast('请先进入教师后台'); return; }
+        if (!this.isTeacher) { 
+          this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
+          return; 
+        }
         const stu = this.allStudents.find(s => s.id === id);
         if (!stu) return;
-        const newVal = prompt(`修改 ${stu.name} 的分数 (考勤/表现/作业/期中/期末 逗号分隔)`, 
+        const newVal = prompt(`修改 ${stu.name} 的分数\n格式: 考勤,表现,作业,期中,期末\n当前: ${stu.attendance},${stu.performance},${stu.homework},${stu.midterm},${stu.final}`, 
           `${stu.attendance},${stu.performance},${stu.homework},${stu.midterm},${stu.final}`);
         if (newVal) {
           const parts = newVal.split(',').map(Number);
@@ -960,20 +980,23 @@
               this.loadAllData();
             } catch (e) {
               console.error(e);
-              this.showToast('❌ 更新失败');
+              this.showToast('❌ 更新失败: ' + e.message);
             }
           } else {
-            this.showToast('请输入5个有效数字，用逗号分隔');
+            this.showToast('❌ 请输入5个有效数字，用逗号分隔');
           }
         }
       },
 
       async editChapters(id) {
-        if (!this.isTeacher) { this.showToast('请先进入教师后台'); return; }
+        if (!this.isTeacher) { 
+          this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
+          return; 
+        }
         const stu = this.allStudents.find(s => s.id === id);
         if (!stu) return;
         const current = `${stu.chapter1||0},${stu.chapter2||0},${stu.chapter3||0},${stu.chapter4||0},${stu.chapter5||0},${stu.chapter6||0}`;
-        const newVal = prompt(`修改 ${stu.name} 的章节考核 (第1~6章 逗号分隔)`, current);
+        const newVal = prompt(`修改 ${stu.name} 的章节考核\n格式: 第1章,第2章,第3章,第4章,第5章,第6章\n当前: ${current}`, current);
         if (newVal) {
           const parts = newVal.split(',').map(Number);
           if (parts.length === 6 && parts.every(v => !isNaN(v))) {
@@ -994,19 +1017,22 @@
               this.loadAllData();
             } catch (e) {
               console.error(e);
-              this.showToast('❌ 更新失败');
+              this.showToast('❌ 更新失败: ' + e.message);
             }
           } else {
-            this.showToast('请输入6个有效数字，用逗号分隔');
+            this.showToast('❌ 请输入6个有效数字，用逗号分隔');
           }
         }
       },
 
       async editDailyScore(id) {
-        if (!this.isTeacher) { this.showToast('请先进入教师后台'); return; }
+        if (!this.isTeacher) { 
+          this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
+          return; 
+        }
         const stu = this.allStudents.find(s => s.id === id);
         if (!stu) return;
-        const newVal = prompt(`修改 ${stu.name} 的「每日一题」分数`, stu.daily_score || 0);
+        const newVal = prompt(`修改 ${stu.name} 的「每日一题」分数\n当前: ${stu.daily_score || 0}`, stu.daily_score || 0);
         if (newVal !== null) {
           const score = Number(newVal);
           if (!isNaN(score) && score >= 0) {
@@ -1020,10 +1046,10 @@
               this.loadAllData();
             } catch (e) {
               console.error(e);
-              this.showToast('❌ 更新失败');
+              this.showToast('❌ 更新失败: ' + e.message);
             }
           } else {
-            this.showToast('请输入有效数字');
+            this.showToast('❌ 请输入有效数字（大于等于0）');
           }
         }
       },
@@ -1060,10 +1086,11 @@
 
       showToast(msg) {
         const el = document.getElementById('toast');
+        if (!el) return;
         el.textContent = msg;
         el.classList.add('toast-show');
         clearTimeout(this.toastTimer);
-        this.toastTimer = setTimeout(() => el.classList.remove('toast-show'), 2500);
+        this.toastTimer = setTimeout(() => el.classList.remove('toast-show'), 3000);
       }
     }
   }).mount('#app');

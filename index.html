@@ -611,7 +611,7 @@
       </div>
       <div class="header-right">
         <div class="student-count-badge">
-          <i class="fas fa-user-graduate"></i> <strong>{{ allStudents.length }}</strong> 人
+          <i class="fas fa-user-graduate"></i> <strong id="studentCount">0</strong> 人
         </div>
         <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
         <button class="btn btn-success" @click="exportExcel"><i class="fas fa-file-excel"></i> 导出</button>
@@ -624,27 +624,27 @@
     <div class="kpi-row">
       <div class="kpi-card" style="--accent: #fbbf24;">
         <div class="label">总评平均</div>
-        <div class="value gold">{{ avgTotal }}</div>
+        <div class="value gold" id="avgTotal">0</div>
         <div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div>
       </div>
       <div class="kpi-card" style="--accent: #60a5fa;">
         <div class="label">最高总评</div>
-        <div class="value blue">{{ maxTotal }}</div>
+        <div class="value blue" id="maxTotal">0</div>
         <div class="change"><i class="fas fa-crown"></i> TOP1</div>
       </div>
       <div class="kpi-card" style="--accent: #6ee7b7;">
         <div class="label">考勤平均</div>
-        <div class="value green">{{ avgAttendance }}</div>
+        <div class="value green" id="avgAttendance">0</div>
         <div class="change up"><i class="fas fa-arrow-up"></i> +5%</div>
       </div>
       <div class="kpi-card" style="--accent: #a78bfa;">
         <div class="label">章节平均</div>
-        <div class="value purple">{{ avgChapter }}</div>
+        <div class="value purple" id="avgChapter">0</div>
         <div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div>
       </div>
       <div class="kpi-card" style="--accent: #f472b6;">
         <div class="label">每日一题平均</div>
-        <div class="value pink">{{ avgDaily }}</div>
+        <div class="value pink" id="avgDaily">0</div>
         <div class="change up"><i class="fas fa-arrow-up"></i> +8%</div>
       </div>
     </div>
@@ -652,9 +652,9 @@
     <!-- Search -->
     <div class="search-section">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
+      <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" id="searchInput" />
       <div style="flex:2; min-width:130px;">
-        <select v-model="selectedStudentId" @change="onSelectStudent">
+        <select v-model="selectedStudentId" @change="onSelectStudent" id="studentSelect">
           <option value="">— 选择学生 —</option>
           <option v-for="s in filteredStudentOptions" :key="s.id" :value="s.id">{{ s.name }} ({{ s.id }})</option>
         </select>
@@ -663,17 +663,17 @@
     </div>
 
     <!-- Content -->
-    <div v-if="loading" class="loading-overlay">
+    <div v-if="loading" class="loading-overlay" id="loadingOverlay">
       <i class="fas fa-spinner"></i>
       <p>加载数据中…</p>
     </div>
 
     <template v-else>
       <!-- Grid View -->
-      <div v-if="displayMode === 'grid'" class="student-grid">
+      <div v-if="displayMode === 'grid'" class="student-grid" id="studentGrid">
         <div v-if="displayedStudents.length === 0" class="empty-state">
           <i class="fas fa-users"></i>
-          <p>暂无学生数据</p>
+          <p>暂无学生数据，请在 Supabase 的 students 表中添加数据</p>
         </div>
         <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id">
           <div class="card-header">
@@ -707,7 +707,7 @@
       </div>
 
       <!-- Table View -->
-      <div v-else-if="displayMode === 'table'" class="table-wrap">
+      <div v-else-if="displayMode === 'table'" class="table-wrap" id="tableWrap">
         <table>
           <thead>
             <tr>
@@ -781,7 +781,7 @@
 
 <script>
   // ============ Supabase 配置 ============
-  // ⚠️ 请替换为您的实际值
+  // ⚠️ 请将下面两行替换为您的 Supabase 实际值
   const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -806,6 +806,7 @@
         avgAttendance: 0,
         avgChapter: 0,
         avgDaily: 0,
+        // 教师后台 - 默认关闭
         showTeacherModal: false,
         teacherPassword: '',
         teacherError: '',
@@ -878,7 +879,7 @@
           {id:'061025103',name:'张怡',attendance:8,performance:9,homework:18,midterm:20,final:23,daily_score:5,chapter1:16,chapter2:17,chapter3:15,chapter4:18,chapter5:19,chapter6:16},
         ];
         this.processStudentData(mockStudents, {}, {});
-        this.showToast('✅ 使用模拟数据（请配置Supabase）');
+        this.showToast('⚠️ 使用模拟数据（请配置Supabase）');
       },
 
       processStudentData(students, hwMap, dailyMap) {

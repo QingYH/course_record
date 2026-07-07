@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* ===== 完整样式 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +21,7 @@
             position: relative;
             overflow-x: hidden;
         }
-        /* ===== 高等数学符号背景点缀 ===== */
+        /* 数学符号背景 */
         body::before {
             content: '∫ ∮ ∂ ∇ ∞ ∑ π √ ∛ ∜ ± × ÷ ≈ ≠ ≤ ≥ ∈ ∉ ∀ ∃ ∝ ⊂ ⊃ ∪ ∩ ∧ ∨ ¬ ⇒ ⇔';
             position: fixed;
@@ -29,7 +30,7 @@
             right: 0;
             bottom: 0;
             font-size: 8rem;
-            color: rgba(255, 255, 255, 0.008);
+            color: rgba(255, 255, 255, 0.006);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -51,197 +52,55 @@
             user-select: none;
             opacity: 0.5;
         }
-        .math-symbols.s1 {
-            top: 3%;
-            left: 2%;
-            transform: rotate(-6deg);
-            font-size: 7rem;
-            color: rgba(96, 165, 250, 0.04);
-        }
-        .math-symbols.s2 {
-            bottom: 5%;
-            right: 2%;
-            transform: rotate(8deg);
-            font-size: 9rem;
-            color: rgba(167, 139, 250, 0.035);
-        }
-        .math-symbols.s3 {
-            top: 35%;
-            right: 1%;
-            transform: rotate(12deg);
-            font-size: 5rem;
-            color: rgba(251, 191, 36, 0.03);
-        }
-        .math-symbols.s4 {
-            bottom: 30%;
-            left: 1%;
-            transform: rotate(-4deg);
-            font-size: 6rem;
-            color: rgba(52, 211, 153, 0.025);
-        }
-        .math-symbols.s5 {
-            top: 55%;
-            left: 50%;
-            transform: translateX(-50%) rotate(3deg);
-            font-size: 12rem;
-            color: rgba(255, 255, 255, 0.006);
-            letter-spacing: 2rem;
-        }
+        .math-symbols.s1 { top: 3%; left: 2%; transform: rotate(-6deg); font-size: 7rem; color: rgba(96, 165, 250, 0.04); }
+        .math-symbols.s2 { bottom: 5%; right: 2%; transform: rotate(8deg); font-size: 9rem; color: rgba(167, 139, 250, 0.035); }
+        .math-symbols.s3 { top: 35%; right: 1%; transform: rotate(12deg); font-size: 5rem; color: rgba(251, 191, 36, 0.03); }
+        .math-symbols.s4 { bottom: 30%; left: 1%; transform: rotate(-4deg); font-size: 6rem; color: rgba(52, 211, 153, 0.025); }
+        .math-symbols.s5 { top: 55%; left: 50%; transform: translateX(-50%) rotate(3deg); font-size: 12rem; color: rgba(255, 255, 255, 0.005); letter-spacing: 2rem; }
 
-        .app-container {
-            max-width: 1480px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+        .app-container { max-width: 1480px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* ===== 全局字号全面增大 ===== */
-        body {
-            font-size: 1.15rem;
-        }
-        .header-left h1 {
-            font-size: 2.4rem;
-        }
-        .header-left .sub {
-            font-size: 1rem;
-        }
-        .header-left .logo {
-            width: 60px;
-            height: 60px;
-            font-size: 1.8rem;
-        }
-        .btn {
-            font-size: 1.1rem;
-            padding: 0.7rem 1.8rem;
-            border-radius: 3rem;
-        }
-        .btn i {
-            font-size: 1.1rem;
-        }
-        .student-count-badge {
-            font-size: 1.1rem;
-            padding: 0.6rem 1.8rem;
-            border-radius: 3rem;
-        }
-        .search-section input {
-            font-size: 1.2rem;
-            padding: 0.8rem 0.5rem;
-        }
-        .search-section select {
-            font-size: 1.1rem;
-            padding: 0.8rem 2.2rem 0.8rem 1.4rem;
-        }
-        .search-section i {
-            font-size: 1.2rem;
-        }
-        .kpi-card .value {
-            font-size: 2.2rem;
-        }
-        .kpi-card .label {
-            font-size: 0.9rem;
-        }
-        .kpi-card .change {
-            font-size: 0.8rem;
-        }
-        .student-name {
-            font-size: 1.5rem;
-        }
-        .student-rank {
-            font-size: 0.9rem;
-        }
-        .score-item {
-            font-size: 1rem;
-            padding: 0.35rem 0.7rem 0.35rem 0.9rem;
-            border-radius: 1rem;
-        }
-        .score-item i {
-            font-size: 0.9rem;
-        }
-        .score-value {
-            font-size: 1rem;
-            padding: 0 0.6rem;
-            border-radius: 0.8rem;
-        }
-        .score-item.total .score-value {
-            font-size: 1.3rem;
-        }
-        .score-item.total {
-            padding: 0.4rem 0.6rem;
-        }
-        .card-actions {
-            gap: 0.5rem;
-            padding-top: 0.7rem;
-        }
-        .btn-small {
-            font-size: 0.9rem;
-            padding: 0.3rem 1.2rem;
-            border-radius: 2.5rem;
-        }
-        .btn-small i {
-            font-size: 0.85rem;
-        }
-        .modal-box h2 {
-            font-size: 1.8rem;
-        }
-        .modal-box .sub {
-            font-size: 1rem;
-        }
-        .modal-box input {
-            font-size: 1.2rem;
-            padding: 1rem 1.6rem;
-            border-radius: 3.5rem;
-        }
-        .modal-box .btn {
-            font-size: 1.1rem;
-            padding: 0.9rem 0;
-        }
-        #toast {
-            font-size: 1.1rem;
-            padding: 0.9rem 2.5rem;
-            border-radius: 3.5rem;
-        }
-        .detail-box .student-name-big {
-            font-size: 2.8rem;
-        }
-        .detail-box .student-id-big {
-            font-size: 1.1rem;
-        }
-        .detail-score-item .value {
-            font-size: 2.2rem;
-        }
-        .detail-score-item .label {
-            font-size: 0.85rem;
-        }
-        .detail-total .value {
-            font-size: 3.2rem;
-        }
-        .empty-state .title {
-            font-size: 1.6rem;
-        }
-        .empty-state p {
-            font-size: 1.1rem;
-        }
-        .teacher-badge {
-            font-size: 0.9rem;
-            padding: 0.4rem 1.2rem;
-        }
-        th {
-            font-size: 0.8rem;
-        }
-        td {
-            font-size: 0.95rem;
-        }
-        td strong {
-            font-size: 1.05rem;
-        }
-        .header-left .class-badge {
-            font-size: 1rem;
-            color: rgba(251, 191, 36, 0.4);
-            font-weight: 500;
-            -webkit-text-fill-color: rgba(251, 191, 36, 0.4);
-            margin-left: 0.3rem;
-            letter-spacing: 0.04em;
-        }
+        /* ===== 全局字号 ===== */
+        body { font-size: 1.15rem; }
+        .header-left h1 { font-size: 2.4rem; }
+        .header-left .sub { font-size: 1rem; }
+        .header-left .logo { width: 60px; height: 60px; font-size: 1.8rem; }
+        .btn { font-size: 1.1rem; padding: 0.7rem 1.8rem; border-radius: 3rem; }
+        .btn i { font-size: 1.1rem; }
+        .student-count-badge { font-size: 1.1rem; padding: 0.6rem 1.8rem; border-radius: 3rem; }
+        .search-section input { font-size: 1.2rem; padding: 0.8rem 0.5rem; }
+        .search-section select { font-size: 1.1rem; padding: 0.8rem 2.2rem 0.8rem 1.4rem; }
+        .search-section i { font-size: 1.2rem; }
+        .kpi-card .value { font-size: 2.2rem; }
+        .kpi-card .label { font-size: 0.9rem; }
+        .kpi-card .change { font-size: 0.8rem; }
+        .student-name { font-size: 1.5rem; }
+        .student-rank { font-size: 0.9rem; }
+        .score-item { font-size: 1rem; padding: 0.35rem 0.7rem 0.35rem 0.9rem; border-radius: 1rem; }
+        .score-item i { font-size: 0.9rem; }
+        .score-value { font-size: 1rem; padding: 0 0.6rem; border-radius: 0.8rem; }
+        .score-item.total .score-value { font-size: 1.3rem; }
+        .score-item.total { padding: 0.4rem 0.6rem; }
+        .card-actions { gap: 0.5rem; padding-top: 0.7rem; }
+        .btn-small { font-size: 0.9rem; padding: 0.3rem 1.2rem; border-radius: 2.5rem; }
+        .btn-small i { font-size: 0.85rem; }
+        .modal-box h2 { font-size: 1.8rem; }
+        .modal-box .sub { font-size: 1rem; }
+        .modal-box input { font-size: 1.2rem; padding: 1rem 1.6rem; border-radius: 3.5rem; }
+        .modal-box .btn { font-size: 1.1rem; padding: 0.9rem 0; }
+        #toast { font-size: 1.1rem; padding: 0.9rem 2.5rem; border-radius: 3.5rem; }
+        .detail-box .student-name-big { font-size: 2.8rem; }
+        .detail-box .student-id-big { font-size: 1.1rem; }
+        .detail-score-item .value { font-size: 2.2rem; }
+        .detail-score-item .label { font-size: 0.85rem; }
+        .detail-total .value { font-size: 3.2rem; }
+        .empty-state .title { font-size: 1.6rem; }
+        .empty-state p { font-size: 1.1rem; }
+        .teacher-badge { font-size: 0.9rem; padding: 0.4rem 1.2rem; }
+        th { font-size: 0.8rem; }
+        td { font-size: 0.95rem; }
+        td strong { font-size: 1.05rem; }
+        .header-left .class-badge { font-size: 1rem; color: rgba(251, 191, 36, 0.4); font-weight: 500; -webkit-text-fill-color: rgba(251, 191, 36, 0.4); margin-left: 0.3rem; letter-spacing: 0.04em; }
 
         /* ===== Header ===== */
         .header-card {
@@ -258,11 +117,7 @@
             justify-content: space-between;
             gap: 1rem;
         }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-        }
+        .header-left { display: flex; align-items: center; gap: 1.2rem; }
         .header-left .logo {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             border-radius: 1.4rem;
@@ -280,25 +135,9 @@
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
         }
-        .header-left .sub {
-            color: rgba(255, 255, 255, 0.2);
-            font-weight: 400;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.2);
-        }
-        .header-left .class-badge {
-            font-size: 1rem;
-            color: rgba(251, 191, 36, 0.4);
-            font-weight: 500;
-            -webkit-text-fill-color: rgba(251, 191, 36, 0.4);
-            margin-left: 0.3rem;
-            letter-spacing: 0.04em;
-        }
-        .header-right {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem;
-        }
+        .header-left .sub { color: rgba(255, 255, 255, 0.2); font-weight: 400; -webkit-text-fill-color: rgba(255, 255, 255, 0.2); }
+        .header-left .class-badge { font-size: 1rem; color: rgba(251, 191, 36, 0.4); font-weight: 500; -webkit-text-fill-color: rgba(251, 191, 36, 0.4); margin-left: 0.3rem; letter-spacing: 0.04em; }
+        .header-right { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
         .student-count-badge {
             background: rgba(255, 255, 255, 0.04);
             border-radius: 3rem;
@@ -308,13 +147,8 @@
             align-items: center;
             gap: 0.6rem;
         }
-        .student-count-badge i {
-            color: #60a5fa;
-        }
-        .student-count-badge strong {
-            color: #93c5fd;
-            font-weight: 600;
-        }
+        .student-count-badge i { color: #60a5fa; }
+        .student-count-badge strong { color: #93c5fd; font-weight: 600; }
         .btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -334,44 +168,14 @@
             color: #fff;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #6366f1);
-            border: none;
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #60a5fa, #818cf8);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
-        }
-        .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
-            border: none;
-            color: #fff;
-        }
-        .btn-success:hover {
-            background: linear-gradient(135deg, #34d399, #10b981);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
-        }
-        .btn-teal {
-            background: rgba(16, 185, 129, 0.10);
-            border: 1px solid rgba(16, 185, 129, 0.12);
-            color: #6ee7b7;
-        }
-        .btn-teal:hover {
-            background: rgba(16, 185, 129, 0.18);
-            color: #fff;
-        }
-        .btn-gold {
-            background: rgba(251, 191, 36, 0.10);
-            border: 1px solid rgba(251, 191, 36, 0.12);
-            color: #fbbf24;
-        }
-        .btn-gold:hover {
-            background: rgba(251, 191, 36, 0.18);
-            color: #fff;
-        }
+        .btn-primary { background: linear-gradient(135deg, #3b82f6, #6366f1); border: none; color: #fff; }
+        .btn-primary:hover { background: linear-gradient(135deg, #60a5fa, #818cf8); color: #fff; box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25); }
+        .btn-success { background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff; }
+        .btn-success:hover { background: linear-gradient(135deg, #34d399, #10b981); color: #fff; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25); }
+        .btn-teal { background: rgba(16, 185, 129, 0.10); border: 1px solid rgba(16, 185, 129, 0.12); color: #6ee7b7; }
+        .btn-teal:hover { background: rgba(16, 185, 129, 0.18); color: #fff; }
+        .btn-gold { background: rgba(251, 191, 36, 0.10); border: 1px solid rgba(251, 191, 36, 0.12); color: #fbbf24; }
+        .btn-gold:hover { background: rgba(251, 191, 36, 0.18); color: #fff; }
 
         /* ===== KPI Row ===== */
         .kpi-row {
@@ -401,47 +205,17 @@
             background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent);
             opacity: 0.6;
         }
-        .kpi-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-        }
-        .kpi-card .label {
-            color: rgba(255, 255, 255, 0.25);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 500;
-        }
-        .kpi-card .value {
-            font-weight: 700;
-            margin-top: 0.2rem;
-            letter-spacing: -0.02em;
-        }
-        .kpi-card .value.gold {
-            color: #fbbf24;
-        }
-        .kpi-card .value.blue {
-            color: #60a5fa;
-        }
-        .kpi-card .value.green {
-            color: #6ee7b7;
-        }
-        .kpi-card .value.purple {
-            color: #a78bfa;
-        }
-        .kpi-card .value.pink {
-            color: #f472b6;
-        }
-        .kpi-card .change {
-            color: rgba(255, 255, 255, 0.15);
-            margin-top: 0.1rem;
-        }
-        .kpi-card .change.up {
-            color: #6ee7b7;
-        }
-        .kpi-card .change.down {
-            color: #f87171;
-        }
+        .kpi-card:hover { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.08); transform: translateY(-2px); }
+        .kpi-card .label { color: rgba(255, 255, 255, 0.25); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+        .kpi-card .value { font-weight: 700; margin-top: 0.2rem; letter-spacing: -0.02em; }
+        .kpi-card .value.gold { color: #fbbf24; }
+        .kpi-card .value.blue { color: #60a5fa; }
+        .kpi-card .value.green { color: #6ee7b7; }
+        .kpi-card .value.purple { color: #a78bfa; }
+        .kpi-card .value.pink { color: #f472b6; }
+        .kpi-card .change { color: rgba(255, 255, 255, 0.15); margin-top: 0.1rem; }
+        .kpi-card .change.up { color: #6ee7b7; }
+        .kpi-card .change.down { color: #f87171; }
 
         /* ===== Search ===== */
         .search-section {
@@ -457,9 +231,7 @@
             margin-bottom: 1.8rem;
             box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.3);
         }
-        .search-section i {
-            color: rgba(255, 255, 255, 0.12);
-        }
+        .search-section i { color: rgba(255, 255, 255, 0.12); }
         .search-section input {
             border: none;
             background: transparent;
@@ -469,9 +241,7 @@
             color: rgba(255, 255, 255, 0.7);
             font-weight: 400;
         }
-        .search-section input::placeholder {
-            color: rgba(255, 255, 255, 0.1);
-        }
+        .search-section input::placeholder { color: rgba(255, 255, 255, 0.1); }
         .search-section select {
             width: 100%;
             border-radius: 3.5rem;
@@ -487,13 +257,8 @@
             background-size: 12px;
             transition: 0.2s;
         }
-        .search-section select:focus {
-            border-color: rgba(96, 165, 250, 0.15);
-        }
-        .search-section select option {
-            background: #0f1629;
-            color: #c8d6e8;
-        }
+        .search-section select:focus { border-color: rgba(96, 165, 250, 0.15); }
+        .search-section select option { background: #0f1629; color: #c8d6e8; }
         .btn-clear {
             background: transparent;
             border: none;
@@ -503,9 +268,7 @@
             font-size: 1.2rem;
             transition: 0.2s;
         }
-        .btn-clear:hover {
-            color: rgba(255, 255, 255, 0.3);
-        }
+        .btn-clear:hover { color: rgba(255, 255, 255, 0.3); }
 
         /* ===== Student Grid ===== */
         .student-grid {
@@ -538,11 +301,7 @@
             padding-bottom: 0.6rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-        .student-name {
-            font-weight: 700;
-            color: #f0f4ff;
-            letter-spacing: -0.2px;
-        }
+        .student-name { font-weight: 700; color: #f0f4ff; letter-spacing: -0.2px; }
         .student-rank {
             background: rgba(96, 165, 250, 0.08);
             padding: 0.2rem 1rem;
@@ -566,108 +325,43 @@
             border: 1px solid rgba(255, 255, 255, 0.02);
             transition: 0.15s;
         }
-        .score-item .score-value {
-            font-weight: 700;
-        }
+        .score-item .score-value { font-weight: 700; }
 
-        /* ===== 各类别字体颜色区分（亮色，清晰可见） ===== */
-        .score-item.attendance {
-            border-color: rgba(96, 165, 250, 0.20);
-            background: rgba(96, 165, 250, 0.05);
-        }
-        .score-item.attendance i {
-            color: #60a5fa;
-        }
-        .score-item.attendance .score-value {
-            color: #93c5fd;
-        }
-        .score-item.attendance .label-text {
-            color: #93c5fd;
-        }
+        /* ===== 各类别颜色 ===== */
+        .score-item.attendance { border-color: rgba(96, 165, 250, 0.20); background: rgba(96, 165, 250, 0.05); }
+        .score-item.attendance i { color: #60a5fa; }
+        .score-item.attendance .score-value { color: #93c5fd; }
+        .score-item.attendance .label-text { color: #93c5fd; }
 
-        .score-item.performance {
-            border-color: rgba(52, 211, 153, 0.20);
-            background: rgba(52, 211, 153, 0.05);
-        }
-        .score-item.performance i {
-            color: #34d399;
-        }
-        .score-item.performance .score-value {
-            color: #6ee7b7;
-        }
-        .score-item.performance .label-text {
-            color: #6ee7b7;
-        }
+        .score-item.performance { border-color: rgba(52, 211, 153, 0.20); background: rgba(52, 211, 153, 0.05); }
+        .score-item.performance i { color: #34d399; }
+        .score-item.performance .score-value { color: #6ee7b7; }
+        .score-item.performance .label-text { color: #6ee7b7; }
 
-        .score-item.homework {
-            border-color: rgba(251, 191, 36, 0.20);
-            background: rgba(251, 191, 36, 0.05);
-        }
-        .score-item.homework i {
-            color: #fbbf24;
-        }
-        .score-item.homework .score-value {
-            color: #fcd34d;
-        }
-        .score-item.homework .label-text {
-            color: #fcd34d;
-        }
+        .score-item.homework { border-color: rgba(251, 191, 36, 0.20); background: rgba(251, 191, 36, 0.05); }
+        .score-item.homework i { color: #fbbf24; }
+        .score-item.homework .score-value { color: #fcd34d; }
+        .score-item.homework .label-text { color: #fcd34d; }
 
-        .score-item.midterm {
-            border-color: rgba(244, 114, 182, 0.20);
-            background: rgba(244, 114, 182, 0.05);
-        }
-        .score-item.midterm i {
-            color: #f472b6;
-        }
-        .score-item.midterm .score-value {
-            color: #f9a8d4;
-        }
-        .score-item.midterm .label-text {
-            color: #f9a8d4;
-        }
+        .score-item.midterm { border-color: rgba(244, 114, 182, 0.20); background: rgba(244, 114, 182, 0.05); }
+        .score-item.midterm i { color: #f472b6; }
+        .score-item.midterm .score-value { color: #f9a8d4; }
+        .score-item.midterm .label-text { color: #f9a8d4; }
 
-        .score-item.final {
-            border-color: rgba(251, 146, 60, 0.20);
-            background: rgba(251, 146, 60, 0.05);
-        }
-        .score-item.final i {
-            color: #fb923c;
-        }
-        .score-item.final .score-value {
-            color: #fdba74;
-        }
-        .score-item.final .label-text {
-            color: #fdba74;
-        }
+        .score-item.final { border-color: rgba(251, 146, 60, 0.20); background: rgba(251, 146, 60, 0.05); }
+        .score-item.final i { color: #fb923c; }
+        .score-item.final .score-value { color: #fdba74; }
+        .score-item.final .label-text { color: #fdba74; }
 
-        .score-item.daily {
-            border-color: rgba(110, 231, 183, 0.20);
-            background: rgba(110, 231, 183, 0.05);
-        }
-        .score-item.daily i {
-            color: #6ee7b7;
-        }
-        .score-item.daily .score-value {
-            color: #8eeac7;
-        }
-        .score-item.daily .label-text {
-            color: #8eeac7;
-        }
+        .score-item.daily { border-color: rgba(110, 231, 183, 0.20); background: rgba(110, 231, 183, 0.05); }
+        .score-item.daily i { color: #6ee7b7; }
+        .score-item.daily .score-value { color: #8eeac7; }
+        .score-item.daily .label-text { color: #8eeac7; }
 
-        .score-item.chapter {
-            border-color: rgba(167, 139, 250, 0.15);
-            background: rgba(167, 139, 250, 0.04);
-        }
-        .score-item.chapter i {
-            color: #a78bfa;
-        }
-        .score-item.chapter .score-value {
-            color: #c4b5fd;
-        }
-        .score-item.chapter .label-text {
-            color: #c4b5fd;
-        }
+        .score-item.chapter { border-color: rgba(167, 139, 250, 0.15); background: rgba(167, 139, 250, 0.04); }
+        .score-item.chapter i { color: #a78bfa; }
+        .score-item.chapter .score-value { color: #c4b5fd; }
+        .score-item.chapter .label-text { color: #c4b5fd; }
 
         .score-item.total {
             grid-column: span 3;
@@ -677,17 +371,9 @@
             gap: 1.2rem;
             padding: 0.4rem 0.6rem;
         }
-        .score-item.total i {
-            color: #fbbf24;
-        }
-        .score-item.total .score-value {
-            background: rgba(251, 191, 36, 0.08);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.06);
-        }
-        .score-item.total .label-text {
-            color: #fbbf24;
-        }
+        .score-item.total i { color: #fbbf24; }
+        .score-item.total .score-value { background: rgba(251, 191, 36, 0.08); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.06); }
+        .score-item.total .label-text { color: #fbbf24; }
 
         .card-actions {
             margin-top: 0.8rem;
@@ -709,19 +395,9 @@
             align-items: center;
             gap: 0.4rem;
         }
-        .btn-small:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(96, 165, 250, 0.12);
-            color: #fff;
-        }
-        .btn-small.chapter-btn:hover {
-            border-color: rgba(167, 139, 250, 0.15);
-            color: #a78bfa;
-        }
-        .btn-small.daily-btn:hover {
-            border-color: rgba(110, 231, 183, 0.15);
-            color: #6ee7b7;
-        }
+        .btn-small:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(96, 165, 250, 0.12); color: #fff; }
+        .btn-small.chapter-btn:hover { border-color: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+        .btn-small.daily-btn:hover { border-color: rgba(110, 231, 183, 0.15); color: #6ee7b7; }
 
         /* ===== Table ===== */
         .table-wrap {
@@ -734,11 +410,7 @@
             overflow-x: auto;
             box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.3);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 1100px;
-        }
+        table { width: 100%; border-collapse: collapse; min-width: 1100px; }
         th {
             text-align: left;
             padding: 0.7rem 0.7rem;
@@ -749,17 +421,9 @@
             letter-spacing: 0.04em;
             text-transform: uppercase;
         }
-        td {
-            padding: 0.6rem 0.7rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .highlight-row {
-            background: rgba(96, 165, 250, 0.03);
-        }
-        td strong {
-            color: #fbbf24;
-        }
+        td { padding: 0.6rem 0.7rem; border-bottom: 1px solid rgba(255, 255, 255, 0.02); color: rgba(255, 255, 255, 0.5); }
+        .highlight-row { background: rgba(96, 165, 250, 0.03); }
+        td strong { color: #fbbf24; }
 
         /* ===== Toast ===== */
         #toast {
@@ -779,11 +443,7 @@
             pointer-events: none;
             white-space: nowrap;
         }
-        #toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
+        #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
         .loading-overlay {
             text-align: center;
@@ -796,16 +456,10 @@
             color: #60a5fa;
             animation: spin 1s linear infinite;
         }
-        .loading-overlay p {
-            font-size: 1.2rem;
-        }
+        .loading-overlay p { font-size: 1.2rem; }
         @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .empty-state {
@@ -818,27 +472,10 @@
             border-radius: 2.5rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1.2rem;
-            color: rgba(255, 255, 255, 0.08);
-        }
-        .empty-state .title {
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 0.6rem;
-        }
-        .empty-state p {
-            color: rgba(255, 255, 255, 0.15);
-            line-height: 1.8;
-        }
-        .empty-state code {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 0.15rem 0.6rem;
-            border-radius: 0.4rem;
-            color: rgba(255, 255, 255, 0.3);
-            font-family: 'Inter', monospace;
-        }
+        .empty-state i { font-size: 4rem; margin-bottom: 1.2rem; color: rgba(255, 255, 255, 0.08); }
+        .empty-state .title { font-weight: 600; color: rgba(255, 255, 255, 0.4); margin-bottom: 0.6rem; }
+        .empty-state p { color: rgba(255, 255, 255, 0.15); line-height: 1.8; }
+        .empty-state code { background: rgba(255, 255, 255, 0.04); padding: 0.15rem 0.6rem; border-radius: 0.4rem; color: rgba(255, 255, 255, 0.3); font-family: 'Inter', monospace; }
 
         /* ===== 教师后台弹窗 ===== */
         .modal-overlay {
@@ -864,16 +501,8 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
-        .modal-box h2 {
-            color: #f0f4ff;
-            margin-bottom: 0.3rem;
-            text-align: center;
-        }
-        .modal-box .sub {
-            color: rgba(255, 255, 255, 0.2);
-            text-align: center;
-            margin-bottom: 1.8rem;
-        }
+        .modal-box h2 { color: #f0f4ff; margin-bottom: 0.3rem; text-align: center; }
+        .modal-box .sub { color: rgba(255, 255, 255, 0.2); text-align: center; margin-bottom: 1.8rem; }
         .modal-box input {
             width: 100%;
             border-radius: 3.5rem;
@@ -883,26 +512,11 @@
             outline: none;
             transition: 0.2s;
         }
-        .modal-box input:focus {
-            border-color: rgba(96, 165, 250, 0.2);
-        }
-        .modal-box input::placeholder {
-            color: rgba(255, 255, 255, 0.1);
-        }
-        .modal-box .btn-row {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        .modal-box .btn-row .btn {
-            flex: 1;
-            justify-content: center;
-        }
-        .modal-box .error-msg {
-            color: #f87171;
-            margin-top: 1rem;
-            text-align: center;
-        }
+        .modal-box input:focus { border-color: rgba(96, 165, 250, 0.2); }
+        .modal-box input::placeholder { color: rgba(255, 255, 255, 0.1); }
+        .modal-box .btn-row { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .modal-box .btn-row .btn { flex: 1; justify-content: center; }
+        .modal-box .error-msg { color: #f87171; margin-top: 1rem; text-align: center; }
 
         /* ===== 全屏详情弹窗 ===== */
         .detail-overlay {
@@ -921,14 +535,8 @@
             animation: fadeIn 0.3s ease;
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         .detail-box {
             background: rgba(255, 255, 255, 0.04);
@@ -951,25 +559,10 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .detail-box .close-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-        }
-        .detail-box .student-name-big {
-            font-weight: 700;
-            color: #f0f4ff;
-            margin: 0.5rem 0 0.2rem;
-        }
-        .detail-box .student-id-big {
-            color: rgba(255, 255, 255, 0.2);
-            margin-bottom: 1.8rem;
-        }
-        .detail-score-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1rem;
-            margin: 1.2rem 0;
-        }
+        .detail-box .close-btn:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+        .detail-box .student-name-big { font-weight: 700; color: #f0f4ff; margin: 0.5rem 0 0.2rem; }
+        .detail-box .student-id-big { color: rgba(255, 255, 255, 0.2); margin-bottom: 1.8rem; }
+        .detail-score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.2rem 0; }
         .detail-score-item {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 1.5rem;
@@ -977,62 +570,23 @@
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .detail-score-item .label {
-            color: rgba(255, 255, 255, 0.2);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .detail-score-item .value {
-            font-weight: 700;
-            color: #f0f4ff;
-            margin-top: 0.2rem;
-        }
-        .detail-score-item .value.gold {
-            color: #fbbf24;
-        }
-        .detail-score-item .value.blue {
-            color: #60a5fa;
-        }
-        .detail-score-item .value.green {
-            color: #6ee7b7;
-        }
-        .detail-score-item .value.purple {
-            color: #a78bfa;
-        }
-        .detail-score-item .value.pink {
-            color: #f472b6;
-        }
-        .detail-score-item .value.teal {
-            color: #5eead4;
-        }
-        .detail-score-item .value.red {
-            color: #f87171;
-        }
-        .detail-score-item .value.orange {
-            color: #fdba74;
-        }
-        /* ===== 详情弹窗中的字体颜色（与主界面一致） ===== */
-        .detail-score-item .label.attendance-label {
-            color: #93c5fd;
-        }
-        .detail-score-item .label.performance-label {
-            color: #6ee7b7;
-        }
-        .detail-score-item .label.homework-label {
-            color: #fcd34d;
-        }
-        .detail-score-item .label.midterm-label {
-            color: #f9a8d4;
-        }
-        .detail-score-item .label.final-label {
-            color: #fdba74;
-        }
-        .detail-score-item .label.daily-label {
-            color: #8eeac7;
-        }
-        .detail-score-item .label.chapter-label {
-            color: #c4b5fd;
-        }
+        .detail-score-item .label { color: rgba(255, 255, 255, 0.2); text-transform: uppercase; letter-spacing: 0.04em; }
+        .detail-score-item .value { font-weight: 700; color: #f0f4ff; margin-top: 0.2rem; }
+        .detail-score-item .value.gold { color: #fbbf24; }
+        .detail-score-item .value.blue { color: #60a5fa; }
+        .detail-score-item .value.green { color: #6ee7b7; }
+        .detail-score-item .value.purple { color: #a78bfa; }
+        .detail-score-item .value.pink { color: #f472b6; }
+        .detail-score-item .value.teal { color: #5eead4; }
+        .detail-score-item .value.red { color: #f87171; }
+        .detail-score-item .value.orange { color: #fdba74; }
+        .detail-score-item .label.attendance-label { color: #93c5fd; }
+        .detail-score-item .label.performance-label { color: #6ee7b7; }
+        .detail-score-item .label.homework-label { color: #fcd34d; }
+        .detail-score-item .label.midterm-label { color: #f9a8d4; }
+        .detail-score-item .label.final-label { color: #fdba74; }
+        .detail-score-item .label.daily-label { color: #8eeac7; }
+        .detail-score-item .label.chapter-label { color: #c4b5fd; }
         .detail-total {
             margin-top: 1.2rem;
             background: rgba(251, 191, 36, 0.06);
@@ -1041,15 +595,9 @@
             text-align: center;
             border: 1px solid rgba(251, 191, 36, 0.08);
         }
-        .detail-total .label {
-            color: rgba(255, 255, 255, 0.2);
-        }
-        .detail-total .value {
-            font-weight: 700;
-            color: #fbbf24;
-        }
+        .detail-total .label { color: rgba(255, 255, 255, 0.2); }
+        .detail-total .value { font-weight: 700; color: #fbbf24; }
 
-        /* ===== 教师模式指示器 ===== */
         .teacher-badge {
             background: rgba(251, 191, 36, 0.10);
             border: 1px solid rgba(251, 191, 36, 0.15);
@@ -1060,159 +608,54 @@
             gap: 0.4rem;
         }
 
-        /* ===== 响应式 ===== */
         @media (max-width: 700px) {
-            body {
-                padding: 0.8rem 0.5rem;
-                font-size: 1rem;
-            }
-            body::before {
-                font-size: 3rem;
-                letter-spacing: 1.5rem;
-            }
-            .math-symbols {
-                display: none;
-            }
-            .header-card {
-                flex-direction: column;
-                align-items: start;
-                gap: 0.8rem;
-                padding: 1rem 1.2rem;
-                border-radius: 1.5rem;
-            }
-            .header-left h1 {
-                font-size: 1.6rem;
-            }
-            .header-left .logo {
-                width: 48px;
-                height: 48px;
-                font-size: 1.4rem;
-            }
-            .header-left .class-badge {
-                font-size: 0.85rem;
-            }
-            .header-right {
-                width: 100%;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-            }
-            .header-right .btn {
-                font-size: 0.9rem;
-                padding: 0.5rem 1.1rem;
-            }
-            .search-section {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 0.8rem 1.2rem;
-                gap: 0.6rem;
-                border-radius: 1.8rem;
-            }
-            .search-section input {
-                font-size: 1.05rem;
-                padding: 0.6rem 0.2rem;
-            }
-            .student-grid {
-                grid-template-columns: 1fr;
-            }
-            .kpi-row {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0.5rem;
-            }
-            .kpi-card .value {
-                font-size: 1.6rem;
-            }
-            .kpi-card .label {
-                font-size: 0.7rem;
-            }
-            .student-name {
-                font-size: 1.2rem;
-            }
-            .score-item {
-                font-size: 0.85rem;
-                padding: 0.25rem 0.5rem 0.25rem 0.7rem;
-            }
-            .score-value {
-                font-size: 0.85rem;
-            }
-            .score-item.total .score-value {
-                font-size: 1rem;
-            }
-            .modal-box {
-                padding: 1.8rem 1.2rem;
-            }
-            #toast {
-                font-size: 0.9rem;
-                padding: 0.6rem 1.4rem;
-                white-space: normal;
-                max-width: 92%;
-            }
-            .detail-box {
-                padding: 1.5rem;
-            }
-            .detail-box .student-name-big {
-                font-size: 2rem;
-            }
-            .detail-score-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .detail-score-item .value {
-                font-size: 1.6rem;
-            }
-            .detail-total .value {
-                font-size: 2.2rem;
-            }
-            .btn {
-                font-size: 0.9rem;
-                padding: 0.5rem 1.2rem;
-            }
-            .btn-small {
-                font-size: 0.75rem;
-                padding: 0.2rem 0.8rem;
-            }
-            .empty-state {
-                padding: 2rem 1rem;
-            }
-            .empty-state .title {
-                font-size: 1.3rem;
-            }
-            .student-count-badge {
-                font-size: 0.9rem;
-                padding: 0.4rem 1.2rem;
-            }
+            body { padding: 0.8rem 0.5rem; font-size: 1rem; }
+            body::before { font-size: 3rem; letter-spacing: 1.5rem; }
+            .math-symbols { display: none; }
+            .header-card { flex-direction: column; align-items: start; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 1.5rem; }
+            .header-left h1 { font-size: 1.6rem; }
+            .header-left .logo { width: 48px; height: 48px; font-size: 1.4rem; }
+            .header-left .class-badge { font-size: 0.85rem; }
+            .header-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+            .header-right .btn { font-size: 0.9rem; padding: 0.5rem 1.1rem; }
+            .search-section { flex-direction: column; align-items: stretch; padding: 0.8rem 1.2rem; gap: 0.6rem; border-radius: 1.8rem; }
+            .search-section input { font-size: 1.05rem; padding: 0.6rem 0.2rem; }
+            .student-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+            .kpi-card .value { font-size: 1.6rem; }
+            .kpi-card .label { font-size: 0.7rem; }
+            .student-name { font-size: 1.2rem; }
+            .score-item { font-size: 0.85rem; padding: 0.25rem 0.5rem 0.25rem 0.7rem; }
+            .score-value { font-size: 0.85rem; }
+            .score-item.total .score-value { font-size: 1rem; }
+            .modal-box { padding: 1.8rem 1.2rem; }
+            #toast { font-size: 0.9rem; padding: 0.6rem 1.4rem; white-space: normal; max-width: 92%; }
+            .detail-box { padding: 1.5rem; }
+            .detail-box .student-name-big { font-size: 2rem; }
+            .detail-score-grid { grid-template-columns: 1fr 1fr; }
+            .detail-score-item .value { font-size: 1.6rem; }
+            .detail-total .value { font-size: 2.2rem; }
+            .btn { font-size: 0.9rem; padding: 0.5rem 1.2rem; }
+            .btn-small { font-size: 0.75rem; padding: 0.2rem 0.8rem; }
+            .empty-state { padding: 2rem 1rem; }
+            .empty-state .title { font-size: 1.3rem; }
+            .student-count-badge { font-size: 0.9rem; padding: 0.4rem 1.2rem; }
         }
         @media (max-width: 480px) {
-            .kpi-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .detail-score-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            body::before {
-                font-size: 2rem;
-                letter-spacing: 1rem;
-            }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .detail-score-grid { grid-template-columns: 1fr 1fr; }
+            body::before { font-size: 2rem; letter-spacing: 1rem; }
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.15); }
     </style>
 </head>
 <body>
 
-    <!-- ===== 高等数学符号背景点缀 ===== -->
+    <!-- ===== 数学符号背景 ===== -->
     <div class="math-symbols s1">∫ ∂ ∇</div>
     <div class="math-symbols s2">∑ π √</div>
     <div class="math-symbols s3">∞ ≠ ≈</div>
@@ -1314,26 +757,18 @@
                             <span class="student-rank">#{{ idx + 1 }}</span>
                         </div>
                         <div class="score-grid">
-                            <!-- 考勤 - 蓝色 -->
                             <div class="score-item attendance"><i class="fas fa-user-check"></i> <span class="label-text">考勤</span> <span class="score-value">{{ stu.attendance }}</span></div>
-                            <!-- 课堂表现 - 翠绿 -->
                             <div class="score-item performance"><i class="fas fa-chalkboard-teacher"></i> <span class="label-text">表现</span> <span class="score-value">{{ stu.performance }}</span></div>
-                            <!-- 平时作业 - 金色 -->
                             <div class="score-item homework"><i class="fas fa-book-open"></i> <span class="label-text">作业</span> <span class="score-value">{{ stu.homework }}</span></div>
-                            <!-- 期中 - 粉色 -->
                             <div class="score-item midterm"><i class="fas fa-flask"></i> <span class="label-text">期中</span> <span class="score-value">{{ stu.midterm }}</span></div>
-                            <!-- 期末 - 橙色 -->
                             <div class="score-item final"><i class="fas fa-check-circle"></i> <span class="label-text">期末</span> <span class="score-value">{{ stu.final }}</span></div>
-                            <!-- 每日一题 - 青绿 -->
                             <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> <span class="label-text">每日一题</span> <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
-                            <!-- 章节 - 紫色 -->
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第1章</span> <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第2章</span> <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第3章</span> <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第4章</span> <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第5章</span> <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第6章</span> <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
-                            <!-- 总评 - 金色 -->
                             <div class="score-item total">
                                 <i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span>
                             </div>
@@ -1448,6 +883,7 @@
 
             let supabaseClient = null;
 
+            // 尝试初始化 Supabase 客户端
             if (typeof supabase !== 'undefined' && supabase.createClient) {
                 try {
                     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1457,7 +893,7 @@
                     supabaseClient = null;
                 }
             } else {
-                console.warn('⚠️ Supabase 未加载');
+                console.warn('⚠️ Supabase 库未加载，请检查网络');
                 supabaseClient = null;
             }
 
@@ -1509,6 +945,7 @@
                                 return;
                             }
 
+                            console.log('🔄 正在从 Supabase 读取数据...');
                             const { data: students, error } = await supabaseClient
                                 .from('students')
                                 .select('*')
@@ -1713,7 +1150,7 @@
                         }
                     },
 
-                    // ===== 编辑功能（每次操作后自动退出教师模式） =====
+                    // ===== 编辑功能（写入 Supabase） =====
                     async performEdit(id, updateData, successMsg) {
                         if (!this.isTeacher) {
                             this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
@@ -1723,22 +1160,42 @@
                             this.showToast('⚠️ Supabase 未连接，无法修改数据');
                             return false;
                         }
+
+                        console.log('🔄 正在写入 Supabase...', { id, updateData });
+
                         try {
-                            const { error } = await supabaseClient
+                            // 执行更新操作
+                            const { data, error } = await supabaseClient
                                 .from('students')
                                 .update(updateData)
-                                .eq('id', id);
-                            if (error) throw error;
+                                .eq('id', id)
+                                .select();
 
+                            if (error) {
+                                console.error('❌ Supabase 更新失败:', error);
+                                this.showToast('❌ 更新失败: ' + error.message);
+                                return false;
+                            }
+
+                            console.log('✅ Supabase 更新成功:', data);
+
+                            // 显示成功提示
                             this.showToast('💾 新数据已成功保存至远程服务器');
 
+                            // 退出教师模式（安全保护）
                             this.isTeacher = false;
                             console.log('🔒 教师模式已自动退出（安全保护）');
+
+                            // 重新加载数据以刷新界面
                             await this.loadAllData();
+
+                            // 额外提示更新成功
+                            this.showToast(successMsg + ' ✅ 数据已保存至远程服务器');
+
                             return true;
                         } catch (e) {
-                            console.error(e);
-                            this.showToast('❌ 更新失败: ' + (e.message || '未知错误'));
+                            console.error('❌ 更新异常:', e);
+                            this.showToast('❌ 更新异常: ' + (e.message || '未知错误'));
                             return false;
                         }
                     },
@@ -1842,7 +1299,7 @@
                         clearTimeout(this.toastTimer);
                         this.toastTimer = setTimeout(() => {
                             el.classList.remove('show');
-                        }, 3500);
+                        }, 4000);
                     }
                 }
             });

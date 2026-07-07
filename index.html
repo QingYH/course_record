@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
         body::before {
-            content: '∫ ∮ ∂ ∇ ∞ ∑ π √ ∛ ∜ ± × ÷ ≈ ≠ ≤ ≥ ∈ ∉ ∀ ∃ ∝ ⊂ ⊃ ∪ ∩ ∧ ∨ ¬ ⇒ ⇔';
+            content: '∫ ∮ ∂ ∇ ∞ ∑ π √';
             position: fixed;
             top: 0;
             left: 0;
@@ -51,205 +51,62 @@
             user-select: none;
             opacity: 0.5;
         }
-        .math-symbols.s1 {
-            top: 3%;
-            left: 2%;
-            transform: rotate(-6deg);
-            font-size: 7rem;
-            color: rgba(96, 165, 250, 0.04);
-        }
-        .math-symbols.s2 {
-            bottom: 5%;
-            right: 2%;
-            transform: rotate(8deg);
-            font-size: 9rem;
-            color: rgba(167, 139, 250, 0.035);
-        }
-        .math-symbols.s3 {
-            top: 35%;
-            right: 1%;
-            transform: rotate(12deg);
-            font-size: 5rem;
-            color: rgba(251, 191, 36, 0.03);
-        }
-        .math-symbols.s4 {
-            bottom: 30%;
-            left: 1%;
-            transform: rotate(-4deg);
-            font-size: 6rem;
-            color: rgba(52, 211, 153, 0.025);
-        }
-        .math-symbols.s5 {
-            top: 55%;
-            left: 50%;
-            transform: translateX(-50%) rotate(3deg);
-            font-size: 12rem;
-            color: rgba(255, 255, 255, 0.005);
-            letter-spacing: 2rem;
-        }
-        .app-container {
-            max-width: 1480px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+        .math-symbols.s1 { top: 3%; left: 2%; transform: rotate(-6deg); font-size: 7rem; color: rgba(96,165,250,0.04); }
+        .math-symbols.s2 { bottom: 5%; right: 2%; transform: rotate(8deg); font-size: 9rem; color: rgba(167,139,250,0.035); }
+        .math-symbols.s3 { top: 35%; right: 1%; transform: rotate(12deg); font-size: 5rem; color: rgba(251,191,36,0.03); }
+        .math-symbols.s4 { bottom: 30%; left: 1%; transform: rotate(-4deg); font-size: 6rem; color: rgba(52,211,153,0.025); }
+        .math-symbols.s5 { top: 55%; left: 50%; transform: translateX(-50%) rotate(3deg); font-size: 12rem; color: rgba(255,255,255,0.005); letter-spacing: 2rem; }
+        .app-container { max-width: 1480px; margin: 0 auto; position: relative; z-index: 1; }
 
         /* ===== 全局字号 ===== */
-        body {
-            font-size: 1.15rem;
-        }
-        .header-left h1 {
-            font-size: 2.4rem;
-        }
-        .header-left .sub {
-            font-size: 1rem;
-        }
-        .header-left .logo {
-            width: 60px;
-            height: 60px;
-            font-size: 1.8rem;
-        }
-        .btn {
-            font-size: 1.1rem;
-            padding: 0.7rem 1.8rem;
-            border-radius: 3rem;
-        }
-        .btn i {
-            font-size: 1.1rem;
-        }
-        .student-count-badge {
-            font-size: 1.1rem;
-            padding: 0.6rem 1.8rem;
-            border-radius: 3rem;
-        }
-        .search-section input {
-            font-size: 1.2rem;
-            padding: 0.8rem 0.5rem;
-        }
-        .search-section select {
-            font-size: 1.1rem;
-            padding: 0.8rem 2.2rem 0.8rem 1.4rem;
-        }
-        .search-section i {
-            font-size: 1.2rem;
-        }
-        .kpi-card .value {
-            font-size: 2.2rem;
-        }
-        .kpi-card .label {
-            font-size: 0.9rem;
-        }
-        .kpi-card .change {
-            font-size: 0.8rem;
-        }
-        .student-name {
-            font-size: 1.5rem;
-        }
-        .student-rank {
-            font-size: 0.9rem;
-        }
-        .score-item {
-            font-size: 1rem;
-            padding: 0.35rem 0.7rem 0.35rem 0.9rem;
-            border-radius: 1rem;
-        }
-        .score-item i {
-            font-size: 0.9rem;
-        }
-        .score-value {
-            font-size: 1rem;
-            padding: 0 0.6rem;
-            border-radius: 0.8rem;
-        }
-        .score-item.total .score-value {
-            font-size: 1.3rem;
-        }
-        .score-item.total {
-            padding: 0.4rem 0.6rem;
-        }
-        .card-actions {
-            gap: 0.5rem;
-            padding-top: 0.7rem;
-        }
-        .btn-small {
-            font-size: 0.9rem;
-            padding: 0.3rem 1.2rem;
-            border-radius: 2.5rem;
-        }
-        .btn-small i {
-            font-size: 0.85rem;
-        }
-        .modal-box h2 {
-            font-size: 1.8rem;
-        }
-        .modal-box .sub {
-            font-size: 1rem;
-        }
-        .modal-box input {
-            font-size: 1.2rem;
-            padding: 1rem 1.6rem;
-            border-radius: 3.5rem;
-        }
-        .modal-box .btn {
-            font-size: 1.1rem;
-            padding: 0.9rem 0;
-        }
-        #toast {
-            font-size: 1.1rem;
-            padding: 0.9rem 2.5rem;
-            border-radius: 3.5rem;
-        }
-        .detail-box .student-name-big {
-            font-size: 2.8rem;
-        }
-        .detail-box .student-id-big {
-            font-size: 1.1rem;
-        }
-        .detail-score-item .value {
-            font-size: 2.2rem;
-        }
-        .detail-score-item .label {
-            font-size: 0.85rem;
-        }
-        .detail-total .value {
-            font-size: 3.2rem;
-        }
-        .empty-state .title {
-            font-size: 1.6rem;
-        }
-        .empty-state p {
-            font-size: 1.1rem;
-        }
-        .teacher-badge {
-            font-size: 0.9rem;
-            padding: 0.4rem 1.2rem;
-        }
-        th {
-            font-size: 0.8rem;
-        }
-        td {
-            font-size: 0.95rem;
-        }
-        td strong {
-            font-size: 1.05rem;
-        }
-        .header-left .class-badge {
-            font-size: 1rem;
-            color: rgba(251, 191, 36, 0.4);
-            font-weight: 500;
-            -webkit-text-fill-color: rgba(251, 191, 36, 0.4);
-            margin-left: 0.3rem;
-            letter-spacing: 0.04em;
-        }
+        body { font-size: 1.15rem; }
+        .header-left h1 { font-size: 2.4rem; }
+        .header-left .sub { font-size: 1rem; }
+        .header-left .logo { width: 60px; height: 60px; font-size: 1.8rem; }
+        .btn { font-size: 1.1rem; padding: 0.7rem 1.8rem; border-radius: 3rem; }
+        .btn i { font-size: 1.1rem; }
+        .student-count-badge { font-size: 1.1rem; padding: 0.6rem 1.8rem; border-radius: 3rem; }
+        .search-section input { font-size: 1.2rem; padding: 0.8rem 0.5rem; }
+        .search-section select { font-size: 1.1rem; padding: 0.8rem 2.2rem 0.8rem 1.4rem; }
+        .search-section i { font-size: 1.2rem; }
+        .kpi-card .value { font-size: 2.2rem; }
+        .kpi-card .label { font-size: 0.9rem; }
+        .kpi-card .change { font-size: 0.8rem; }
+        .student-name { font-size: 1.5rem; }
+        .student-rank { font-size: 0.9rem; }
+        .score-item { font-size: 1rem; padding: 0.35rem 0.7rem 0.35rem 0.9rem; border-radius: 1rem; }
+        .score-item i { font-size: 0.9rem; }
+        .score-value { font-size: 1rem; padding: 0 0.6rem; border-radius: 0.8rem; }
+        .score-item.total .score-value { font-size: 1.3rem; }
+        .score-item.total { padding: 0.4rem 0.6rem; }
+        .card-actions { gap: 0.5rem; padding-top: 0.7rem; }
+        .btn-small { font-size: 0.9rem; padding: 0.3rem 1.2rem; border-radius: 2.5rem; }
+        .btn-small i { font-size: 0.85rem; }
+        .modal-box h2 { font-size: 1.8rem; }
+        .modal-box .sub { font-size: 1rem; }
+        .modal-box input { font-size: 1.2rem; padding: 1rem 1.6rem; border-radius: 3.5rem; }
+        .modal-box .btn { font-size: 1.1rem; padding: 0.9rem 0; }
+        #toast { font-size: 1.1rem; padding: 0.9rem 2.5rem; border-radius: 3.5rem; }
+        .detail-box .student-name-big { font-size: 2.8rem; }
+        .detail-box .student-id-big { font-size: 1.1rem; }
+        .detail-score-item .value { font-size: 2.2rem; }
+        .detail-score-item .label { font-size: 0.85rem; }
+        .detail-total .value { font-size: 3.2rem; }
+        .empty-state .title { font-size: 1.6rem; }
+        .empty-state p { font-size: 1.1rem; }
+        .teacher-badge { font-size: 0.9rem; padding: 0.4rem 1.2rem; }
+        th { font-size: 0.8rem; }
+        td { font-size: 0.95rem; }
+        td strong { font-size: 1.05rem; }
+        .header-left .class-badge { font-size: 1rem; color: rgba(251,191,36,0.4); font-weight: 500; -webkit-text-fill-color: rgba(251,191,36,0.4); margin-left: 0.3rem; letter-spacing: 0.04em; }
 
-        /* ===== Header ===== */
         .header-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255,255,255,0.03);
             backdrop-filter: blur(16px);
             border-radius: 2rem;
             padding: 1.4rem 2.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: 0 8px 32px -8px rgba(0,0,0,0.4);
             margin-bottom: 1.8rem;
             display: flex;
             flex-wrap: wrap;
@@ -257,948 +114,218 @@
             justify-content: space-between;
             gap: 1rem;
         }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-        }
-        .header-left .logo {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 1.4rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
-        }
-        .header-left h1 {
-            font-weight: 800;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
-        }
-        .header-left .sub {
-            color: rgba(255, 255, 255, 0.2);
-            font-weight: 400;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.2);
-        }
-        .header-left .class-badge {
-            font-size: 1rem;
-            color: rgba(251, 191, 36, 0.4);
-            font-weight: 500;
-            -webkit-text-fill-color: rgba(251, 191, 36, 0.4);
-            margin-left: 0.3rem;
-            letter-spacing: 0.04em;
-        }
-        .header-right {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .student-count-badge {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 3rem;
-            color: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .student-count-badge i {
-            color: #60a5fa;
-        }
-        .student-count-badge strong {
-            color: #93c5fd;
-            font-weight: 600;
-        }
-        .btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: rgba(255, 255, 255, 0.5);
-            transition: all 0.25s ease;
-            cursor: pointer;
-            backdrop-filter: blur(4px);
-        }
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.12);
-            transform: translateY(-2px);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #6366f1);
-            border: none;
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #60a5fa, #818cf8);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
-        }
-        .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
-            border: none;
-            color: #fff;
-        }
-        .btn-success:hover {
-            background: linear-gradient(135deg, #34d399, #10b981);
-            color: #fff;
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
-        }
-        .btn-teal {
-            background: rgba(16, 185, 129, 0.10);
-            border: 1px solid rgba(16, 185, 129, 0.12);
-            color: #6ee7b7;
-        }
-        .btn-teal:hover {
-            background: rgba(16, 185, 129, 0.18);
-            color: #fff;
-        }
-        .btn-gold {
-            background: rgba(251, 191, 36, 0.10);
-            border: 1px solid rgba(251, 191, 36, 0.12);
-            color: #fbbf24;
-        }
-        .btn-gold:hover {
-            background: rgba(251, 191, 36, 0.18);
-            color: #fff;
-        }
+        .header-left { display: flex; align-items: center; gap: 1.2rem; }
+        .header-left .logo { background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 1.4rem; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; box-shadow: 0 4px 16px rgba(59,130,246,0.2); }
+        .header-left h1 { font-weight: 800; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; }
+        .header-left .sub { color: rgba(255,255,255,0.2); font-weight: 400; -webkit-text-fill-color: rgba(255,255,255,0.2); }
+        .header-left .class-badge { font-size: 1rem; color: rgba(251,191,36,0.4); font-weight: 500; -webkit-text-fill-color: rgba(251,191,36,0.4); margin-left: 0.3rem; letter-spacing: 0.04em; }
+        .header-right { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+        .student-count-badge { background: rgba(255,255,255,0.04); border-radius: 3rem; color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 0.6rem; }
+        .student-count-badge i { color: #60a5fa; }
+        .student-count-badge strong { color: #93c5fd; font-weight: 600; }
+        .btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); font-weight: 600; display: inline-flex; align-items: center; gap: 0.6rem; color: rgba(255,255,255,0.5); transition: all 0.25s ease; cursor: pointer; backdrop-filter: blur(4px); }
+        .btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); transform: translateY(-2px); color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .btn-primary { background: linear-gradient(135deg, #3b82f6, #6366f1); border: none; color: #fff; }
+        .btn-primary:hover { background: linear-gradient(135deg, #60a5fa, #818cf8); color: #fff; box-shadow: 0 8px 24px rgba(59,130,246,0.25); }
+        .btn-success { background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff; }
+        .btn-success:hover { background: linear-gradient(135deg, #34d399, #10b981); color: #fff; box-shadow: 0 8px 24px rgba(16,185,129,0.25); }
+        .btn-teal { background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.12); color: #6ee7b7; }
+        .btn-teal:hover { background: rgba(16,185,129,0.18); color: #fff; }
+        .btn-gold { background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.12); color: #fbbf24; }
+        .btn-gold:hover { background: rgba(251,191,36,0.18); color: #fff; }
 
-        /* ===== KPI Row ===== */
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
-        }
-        .kpi-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 1.8rem;
-            padding: 1.2rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent);
-            opacity: 0.6;
-        }
-        .kpi-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-        }
-        .kpi-card .label {
-            color: rgba(255, 255, 255, 0.25);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 500;
-        }
-        .kpi-card .value {
-            font-weight: 700;
-            margin-top: 0.2rem;
-            letter-spacing: -0.02em;
-        }
-        .kpi-card .value.gold {
-            color: #fbbf24;
-        }
-        .kpi-card .value.blue {
-            color: #60a5fa;
-        }
-        .kpi-card .value.green {
-            color: #6ee7b7;
-        }
-        .kpi-card .value.purple {
-            color: #a78bfa;
-        }
-        .kpi-card .value.pink {
-            color: #f472b6;
-        }
-        .kpi-card .change {
-            color: rgba(255, 255, 255, 0.15);
-            margin-top: 0.1rem;
-        }
-        .kpi-card .change.up {
-            color: #6ee7b7;
-        }
-        .kpi-card .change.down {
-            color: #f87171;
-        }
+        .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; margin-bottom: 1.8rem; }
+        .kpi-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 1.8rem; padding: 1.2rem 1rem; border: 1px solid rgba(255,255,255,0.04); text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent); opacity: 0.6; }
+        .kpi-card:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); transform: translateY(-2px); }
+        .kpi-card .label { color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+        .kpi-card .value { font-weight: 700; margin-top: 0.2rem; letter-spacing: -0.02em; }
+        .kpi-card .value.gold { color: #fbbf24; }
+        .kpi-card .value.blue { color: #60a5fa; }
+        .kpi-card .value.green { color: #6ee7b7; }
+        .kpi-card .value.purple { color: #a78bfa; }
+        .kpi-card .value.pink { color: #f472b6; }
+        .kpi-card .change { color: rgba(255,255,255,0.15); margin-top: 0.1rem; }
+        .kpi-card .change.up { color: #6ee7b7; }
+        .kpi-card .change.down { color: #f87171; }
 
-        /* ===== Search ===== */
-        .search-section {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 4rem;
-            padding: 0.3rem 0.3rem 0.3rem 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 1.8rem;
-            box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.3);
-        }
-        .search-section i {
-            color: rgba(255, 255, 255, 0.12);
-        }
-        .search-section input {
-            border: none;
-            background: transparent;
-            min-width: 150px;
-            flex: 1;
-            outline: none;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 400;
-        }
-        .search-section input::placeholder {
-            color: rgba(255, 255, 255, 0.1);
-        }
-        .search-section select {
-            width: 100%;
-            border-radius: 3.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.03);
-            color: rgba(255, 255, 255, 0.6);
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2360a5fa" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 1.2rem center;
-            background-size: 12px;
-            transition: 0.2s;
-        }
-        .search-section select:focus {
-            border-color: rgba(96, 165, 250, 0.15);
-        }
-        .search-section select option {
-            background: #0f1629;
-            color: #c8d6e8;
-        }
-        .btn-clear {
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: 0.2s;
-        }
-        .btn-clear:hover {
-            color: rgba(255, 255, 255, 0.3);
-        }
+        .search-section { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 4rem; padding: 0.3rem 0.3rem 0.3rem 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; border: 1px solid rgba(255,255,255,0.04); margin-bottom: 1.8rem; box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3); }
+        .search-section i { color: rgba(255,255,255,0.12); }
+        .search-section input { border: none; background: transparent; min-width: 150px; flex: 1; outline: none; color: rgba(255,255,255,0.7); font-weight: 400; }
+        .search-section input::placeholder { color: rgba(255,255,255,0.1); }
+        .search-section select { width: 100%; border-radius: 3.5rem; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.6); outline: none; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2360a5fa" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'); background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 12px; transition: 0.2s; }
+        .search-section select:focus { border-color: rgba(96,165,250,0.15); }
+        .search-section select option { background: #0f1629; color: #c8d6e8; }
+        .btn-clear { background: transparent; border: none; color: rgba(255,255,255,0.1); padding: 0.5rem 1rem; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+        .btn-clear:hover { color: rgba(255,255,255,0.3); }
 
-        /* ===== Student Grid ===== */
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-            gap: 1.2rem;
-            margin: 1.2rem 0;
-        }
-        .student-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(16px);
-            border-radius: 1.8rem;
-            padding: 1.4rem 1.5rem 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: all 0.35s ease;
-            box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-        }
-        .student-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(96, 165, 250, 0.08);
-            box-shadow: 0 12px 36px -12px rgba(0, 0, 0, 0.4);
-        }
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.6rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-        .student-name {
-            font-weight: 700;
-            color: #f0f4ff;
-            letter-spacing: -0.2px;
-        }
-        .student-rank {
-            background: rgba(96, 165, 250, 0.08);
-            padding: 0.2rem 1rem;
-            border-radius: 2.5rem;
-            color: rgba(96, 165, 250, 0.5);
-            border: 1px solid rgba(96, 165, 250, 0.05);
-        }
-        .score-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.5rem;
-            margin: 0.6rem 0 0.2rem;
-        }
-        .score-item {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            transition: 0.15s;
-        }
-        .score-item .score-value {
-            font-weight: 700;
-        }
-        .score-item.attendance {
-            border-color: rgba(96, 165, 250, 0.20);
-            background: rgba(96, 165, 250, 0.05);
-        }
-        .score-item.attendance i {
-            color: #60a5fa;
-        }
-        .score-item.attendance .score-value {
-            color: #93c5fd;
-        }
-        .score-item.attendance .label-text {
-            color: #93c5fd;
-        }
-        .score-item.performance {
-            border-color: rgba(52, 211, 153, 0.20);
-            background: rgba(52, 211, 153, 0.05);
-        }
-        .score-item.performance i {
-            color: #34d399;
-        }
-        .score-item.performance .score-value {
-            color: #6ee7b7;
-        }
-        .score-item.performance .label-text {
-            color: #6ee7b7;
-        }
-        .score-item.homework {
-            border-color: rgba(251, 191, 36, 0.20);
-            background: rgba(251, 191, 36, 0.05);
-        }
-        .score-item.homework i {
-            color: #fbbf24;
-        }
-        .score-item.homework .score-value {
-            color: #fcd34d;
-        }
-        .score-item.homework .label-text {
-            color: #fcd34d;
-        }
-        .score-item.midterm {
-            border-color: rgba(244, 114, 182, 0.20);
-            background: rgba(244, 114, 182, 0.05);
-        }
-        .score-item.midterm i {
-            color: #f472b6;
-        }
-        .score-item.midterm .score-value {
-            color: #f9a8d4;
-        }
-        .score-item.midterm .label-text {
-            color: #f9a8d4;
-        }
-        .score-item.final {
-            border-color: rgba(251, 146, 60, 0.20);
-            background: rgba(251, 146, 60, 0.05);
-        }
-        .score-item.final i {
-            color: #fb923c;
-        }
-        .score-item.final .score-value {
-            color: #fdba74;
-        }
-        .score-item.final .label-text {
-            color: #fdba74;
-        }
-        .score-item.daily {
-            border-color: rgba(110, 231, 183, 0.20);
-            background: rgba(110, 231, 183, 0.05);
-        }
-        .score-item.daily i {
-            color: #6ee7b7;
-        }
-        .score-item.daily .score-value {
-            color: #8eeac7;
-        }
-        .score-item.daily .label-text {
-            color: #8eeac7;
-        }
-        .score-item.chapter {
-            border-color: rgba(167, 139, 250, 0.15);
-            background: rgba(167, 139, 250, 0.04);
-        }
-        .score-item.chapter i {
-            color: #a78bfa;
-        }
-        .score-item.chapter .score-value {
-            color: #c4b5fd;
-        }
-        .score-item.chapter .label-text {
-            color: #c4b5fd;
-        }
-        .score-item.total {
-            grid-column: span 3;
-            background: rgba(251, 191, 36, 0.05);
-            border-color: rgba(251, 191, 36, 0.10);
-            justify-content: center;
-            gap: 1.2rem;
-            padding: 0.4rem 0.6rem;
-        }
-        .score-item.total i {
-            color: #fbbf24;
-        }
-        .score-item.total .score-value {
-            background: rgba(251, 191, 36, 0.08);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.06);
-        }
-        .score-item.total .label-text {
-            color: #fbbf24;
-        }
-        .card-actions {
-            margin-top: 0.8rem;
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            padding-top: 0.7rem;
-        }
-        .btn-small {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 2.5rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.3);
-            transition: 0.2s;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .btn-small:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(96, 165, 250, 0.12);
-            color: #fff;
-        }
-        .btn-small.chapter-btn:hover {
-            border-color: rgba(167, 139, 250, 0.15);
-            color: #a78bfa;
-        }
-        .btn-small.daily-btn:hover {
-            border-color: rgba(110, 231, 183, 0.15);
-            color: #6ee7b7;
-        }
+        .student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 1.2rem; margin: 1.2rem 0; }
+        .student-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(16px); border-radius: 1.8rem; padding: 1.4rem 1.5rem 1.2rem; border: 1px solid rgba(255,255,255,0.03); transition: all 0.35s ease; box-shadow: 0 4px 16px -8px rgba(0,0,0,0.3); cursor: pointer; }
+        .student-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.04); border-color: rgba(96,165,250,0.08); box-shadow: 0 12px 36px -12px rgba(0,0,0,0.4); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .student-name { font-weight: 700; color: #f0f4ff; letter-spacing: -0.2px; }
+        .student-rank { background: rgba(96,165,250,0.08); padding: 0.2rem 1rem; border-radius: 2.5rem; color: rgba(96,165,250,0.5); border: 1px solid rgba(96,165,250,0.05); }
 
-        /* ===== Table ===== */
-        .table-wrap {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 1.8rem;
-            padding: 0.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 1.2rem;
-            overflow-x: auto;
-            box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.3);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 1100px;
-        }
-        th {
-            text-align: left;
-            padding: 0.7rem 0.7rem;
-            background: rgba(255, 255, 255, 0.02);
-            color: rgba(255, 255, 255, 0.2);
-            font-weight: 500;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-        td {
-            padding: 0.6rem 0.7rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .highlight-row {
-            background: rgba(96, 165, 250, 0.03);
-        }
-        td strong {
-            color: #fbbf24;
-        }
+        .score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 0.6rem 0 0.2rem; }
+        .score-item { background: rgba(255,255,255,0.02); border-radius: 1rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid rgba(255,255,255,0.02); transition: 0.15s; }
+        .score-item .score-value { font-weight: 700; }
 
-        /* ===== Toast ===== */
-        #toast {
-            position: fixed;
-            bottom: 2.5rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            color: #f1f5f9;
-            font-weight: 500;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            opacity: 0;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-        #toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
+        .score-item.attendance { border-color: rgba(96,165,250,0.20); background: rgba(96,165,250,0.05); }
+        .score-item.attendance i { color: #60a5fa; }
+        .score-item.attendance .score-value { color: #93c5fd; }
+        .score-item.attendance .label-text { color: #93c5fd; }
 
-        .loading-overlay {
-            text-align: center;
-            padding: 5rem 1rem;
-            color: rgba(255, 255, 255, 0.1);
-        }
-        .loading-overlay i {
-            font-size: 3.5rem;
-            margin-bottom: 0.8rem;
-            color: #60a5fa;
-            animation: spin 1s linear infinite;
-        }
-        .loading-overlay p {
-            font-size: 1.2rem;
-        }
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
+        .score-item.performance { border-color: rgba(52,211,153,0.20); background: rgba(52,211,153,0.05); }
+        .score-item.performance i { color: #34d399; }
+        .score-item.performance .score-value { color: #6ee7b7; }
+        .score-item.performance .label-text { color: #6ee7b7; }
 
-        .empty-state {
-            text-align: center;
-            padding: 5rem 2rem;
-            color: rgba(255, 255, 255, 0.2);
-            max-width: 650px;
-            margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1.2rem;
-            color: rgba(255, 255, 255, 0.08);
-        }
-        .empty-state .title {
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 0.6rem;
-        }
-        .empty-state p {
-            color: rgba(255, 255, 255, 0.15);
-            line-height: 1.8;
-        }
-        .empty-state code {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 0.15rem 0.6rem;
-            border-radius: 0.4rem;
-            color: rgba(255, 255, 255, 0.3);
-            font-family: 'Inter', monospace;
-        }
+        .score-item.homework { border-color: rgba(251,191,36,0.20); background: rgba(251,191,36,0.05); }
+        .score-item.homework i { color: #fbbf24; }
+        .score-item.homework .score-value { color: #fcd34d; }
+        .score-item.homework .label-text { color: #fcd34d; }
 
-        /* ===== 教师后台弹窗 ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 1rem;
-        }
-        .modal-box {
-            background: #121b33;
-            border-radius: 2.5rem;
-            padding: 2.8rem 2.5rem;
-            max-width: 480px;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        }
-        .modal-box h2 {
-            color: #f0f4ff;
-            margin-bottom: 0.3rem;
-            text-align: center;
-        }
-        .modal-box .sub {
-            color: rgba(255, 255, 255, 0.2);
-            text-align: center;
-            margin-bottom: 1.8rem;
-        }
-        .modal-box input {
-            width: 100%;
-            border-radius: 3.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            color: #f0f4ff;
-            outline: none;
-            transition: 0.2s;
-        }
-        .modal-box input:focus {
-            border-color: rgba(96, 165, 250, 0.2);
-        }
-        .modal-box input::placeholder {
-            color: rgba(255, 255, 255, 0.1);
-        }
-        .modal-box .btn-row {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        .modal-box .btn-row .btn {
-            flex: 1;
-            justify-content: center;
-        }
-        .modal-box .error-msg {
-            color: #f87171;
-            margin-top: 1rem;
-            text-align: center;
-        }
+        .score-item.midterm { border-color: rgba(244,114,182,0.20); background: rgba(244,114,182,0.05); }
+        .score-item.midterm i { color: #f472b6; }
+        .score-item.midterm .score-value { color: #f9a8d4; }
+        .score-item.midterm .label-text { color: #f9a8d4; }
 
-        /* ===== 全屏详情弹窗 ===== */
-        .detail-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(8, 12, 26, 0.95);
-            backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 2rem;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        .detail-box {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 3rem;
-            padding: 3rem 3.5rem;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-        }
-        .detail-box .close-btn {
-            float: right;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 3.5rem;
-            padding: 0.5rem 1.5rem;
-            color: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .detail-box .close-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-        }
-        .detail-box .student-name-big {
-            font-weight: 700;
-            color: #f0f4ff;
-            margin: 0.5rem 0 0.2rem;
-        }
-        .detail-box .student-id-big {
-            color: rgba(255, 255, 255, 0.2);
-            margin-bottom: 1.8rem;
-        }
-        .detail-score-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1rem;
-            margin: 1.2rem 0;
-        }
-        .detail-score-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 1.5rem;
-            padding: 1rem 1.2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .detail-score-item .label {
-            color: rgba(255, 255, 255, 0.2);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .detail-score-item .value {
-            font-weight: 700;
-            color: #f0f4ff;
-            margin-top: 0.2rem;
-        }
-        .detail-score-item .value.gold {
-            color: #fbbf24;
-        }
-        .detail-score-item .value.blue {
-            color: #60a5fa;
-        }
-        .detail-score-item .value.green {
-            color: #6ee7b7;
-        }
-        .detail-score-item .value.purple {
-            color: #a78bfa;
-        }
-        .detail-score-item .value.pink {
-            color: #f472b6;
-        }
-        .detail-score-item .value.teal {
-            color: #5eead4;
-        }
-        .detail-score-item .value.red {
-            color: #f87171;
-        }
-        .detail-score-item .value.orange {
-            color: #fdba74;
-        }
-        .detail-score-item .label.attendance-label {
-            color: #93c5fd;
-        }
-        .detail-score-item .label.performance-label {
-            color: #6ee7b7;
-        }
-        .detail-score-item .label.homework-label {
-            color: #fcd34d;
-        }
-        .detail-score-item .label.midterm-label {
-            color: #f9a8d4;
-        }
-        .detail-score-item .label.final-label {
-            color: #fdba74;
-        }
-        .detail-score-item .label.daily-label {
-            color: #8eeac7;
-        }
-        .detail-score-item .label.chapter-label {
-            color: #c4b5fd;
-        }
-        .detail-total {
-            margin-top: 1.2rem;
-            background: rgba(251, 191, 36, 0.06);
-            border-radius: 1.5rem;
-            padding: 1.2rem;
-            text-align: center;
-            border: 1px solid rgba(251, 191, 36, 0.08);
-        }
-        .detail-total .label {
-            color: rgba(255, 255, 255, 0.2);
-        }
-        .detail-total .value {
-            font-weight: 700;
-            color: #fbbf24;
-        }
+        .score-item.final { border-color: rgba(251,146,60,0.20); background: rgba(251,146,60,0.05); }
+        .score-item.final i { color: #fb923c; }
+        .score-item.final .score-value { color: #fdba74; }
+        .score-item.final .label-text { color: #fdba74; }
 
-        .teacher-badge {
-            background: rgba(251, 191, 36, 0.10);
-            border: 1px solid rgba(251, 191, 36, 0.15);
-            color: #fbbf24;
-            border-radius: 2.5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
+        .score-item.daily { border-color: rgba(110,231,183,0.20); background: rgba(110,231,183,0.05); }
+        .score-item.daily i { color: #6ee7b7; }
+        .score-item.daily .score-value { color: #8eeac7; }
+        .score-item.daily .label-text { color: #8eeac7; }
+
+        .score-item.chapter { border-color: rgba(167,139,250,0.15); background: rgba(167,139,250,0.04); }
+        .score-item.chapter i { color: #a78bfa; }
+        .score-item.chapter .score-value { color: #c4b5fd; }
+        .score-item.chapter .label-text { color: #c4b5fd; }
+
+        .score-item.total { grid-column: span 3; background: rgba(251,191,36,0.05); border-color: rgba(251,191,36,0.10); justify-content: center; gap: 1.2rem; padding: 0.4rem 0.6rem; }
+        .score-item.total i { color: #fbbf24; }
+        .score-item.total .score-value { background: rgba(251,191,36,0.08); color: #fbbf24; border: 1px solid rgba(251,191,36,0.06); }
+        .score-item.total .label-text { color: #fbbf24; }
+
+        .card-actions { margin-top: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 0.7rem; }
+        .btn-small { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); border-radius: 2.5rem; font-weight: 500; color: rgba(255,255,255,0.3); transition: 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .btn-small:hover { background: rgba(255,255,255,0.06); border-color: rgba(96,165,250,0.12); color: #fff; }
+        .btn-small.chapter-btn:hover { border-color: rgba(167,139,250,0.15); color: #a78bfa; }
+        .btn-small.daily-btn:hover { border-color: rgba(110,231,183,0.15); color: #6ee7b7; }
+
+        .table-wrap { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 1.8rem; padding: 0.2rem; border: 1px solid rgba(255,255,255,0.03); margin-top: 1.2rem; overflow-x: auto; box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3); }
+        table { width: 100%; border-collapse: collapse; min-width: 1100px; }
+        th { text-align: left; padding: 0.7rem 0.7rem; background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.2); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.03); letter-spacing: 0.04em; text-transform: uppercase; }
+        td { padding: 0.6rem 0.7rem; border-bottom: 1px solid rgba(255,255,255,0.02); color: rgba(255,255,255,0.5); }
+        .highlight-row { background: rgba(96,165,250,0.03); }
+        td strong { color: #fbbf24; }
+
+        #toast { position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(15,23,42,0.95); backdrop-filter: blur(20px); color: #f1f5f9; font-weight: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 999; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.22,1,0.36,1); opacity: 0; pointer-events: none; white-space: nowrap; }
+        #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+        .loading-overlay { text-align: center; padding: 5rem 1rem; color: rgba(255,255,255,0.1); }
+        .loading-overlay i { font-size: 3.5rem; margin-bottom: 0.8rem; color: #60a5fa; animation: spin 1s linear infinite; }
+        .loading-overlay p { font-size: 1.2rem; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .empty-state { text-align: center; padding: 5rem 2rem; color: rgba(255,255,255,0.2); max-width: 650px; margin: 2rem auto; background: rgba(255,255,255,0.02); border-radius: 2.5rem; border: 1px solid rgba(255,255,255,0.04); }
+        .empty-state i { font-size: 4rem; margin-bottom: 1.2rem; color: rgba(255,255,255,0.08); }
+        .empty-state .title { font-weight: 600; color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; }
+        .empty-state p { color: rgba(255,255,255,0.15); line-height: 1.8; }
+        .empty-state code { background: rgba(255,255,255,0.04); padding: 0.15rem 0.6rem; border-radius: 0.4rem; color: rgba(255,255,255,0.3); font-family: 'Inter', monospace; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+        .modal-box { background: #121b33; border-radius: 2.5rem; padding: 2.8rem 2.5rem; max-width: 480px; width: 100%; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+        .modal-box h2 { color: #f0f4ff; margin-bottom: 0.3rem; text-align: center; }
+        .modal-box .sub { color: rgba(255,255,255,0.2); text-align: center; margin-bottom: 1.8rem; }
+        .modal-box input { width: 100%; border-radius: 3.5rem; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); color: #f0f4ff; outline: none; transition: 0.2s; }
+        .modal-box input:focus { border-color: rgba(96,165,250,0.2); }
+        .modal-box input::placeholder { color: rgba(255,255,255,0.1); }
+        .modal-box .btn-row { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .modal-box .btn-row .btn { flex: 1; justify-content: center; }
+        .modal-box .error-msg { color: #f87171; margin-top: 1rem; text-align: center; }
+
+        .detail-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8,12,26,0.95); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 2rem; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .detail-box { background: rgba(255,255,255,0.04); border-radius: 3rem; padding: 3rem 3.5rem; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+        .detail-box .close-btn { float: right; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 3.5rem; padding: 0.5rem 1.5rem; color: rgba(255,255,255,0.3); cursor: pointer; transition: 0.2s; }
+        .detail-box .close-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+        .detail-box .student-name-big { font-weight: 700; color: #f0f4ff; margin: 0.5rem 0 0.2rem; }
+        .detail-box .student-id-big { color: rgba(255,255,255,0.2); margin-bottom: 1.8rem; }
+        .detail-score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.2rem 0; }
+        .detail-score-item { background: rgba(255,255,255,0.03); border-radius: 1.5rem; padding: 1rem 1.2rem; text-align: center; border: 1px solid rgba(255,255,255,0.04); }
+        .detail-score-item .label { color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.04em; }
+        .detail-score-item .value { font-weight: 700; color: #f0f4ff; margin-top: 0.2rem; }
+        .detail-score-item .value.gold { color: #fbbf24; }
+        .detail-score-item .value.blue { color: #60a5fa; }
+        .detail-score-item .value.green { color: #6ee7b7; }
+        .detail-score-item .value.purple { color: #a78bfa; }
+        .detail-score-item .value.pink { color: #f472b6; }
+        .detail-score-item .value.teal { color: #5eead4; }
+        .detail-score-item .value.red { color: #f87171; }
+        .detail-score-item .value.orange { color: #fdba74; }
+        .detail-score-item .label.attendance-label { color: #93c5fd; }
+        .detail-score-item .label.performance-label { color: #6ee7b7; }
+        .detail-score-item .label.homework-label { color: #fcd34d; }
+        .detail-score-item .label.midterm-label { color: #f9a8d4; }
+        .detail-score-item .label.final-label { color: #fdba74; }
+        .detail-score-item .label.daily-label { color: #8eeac7; }
+        .detail-score-item .label.chapter-label { color: #c4b5fd; }
+        .detail-total { margin-top: 1.2rem; background: rgba(251,191,36,0.06); border-radius: 1.5rem; padding: 1.2rem; text-align: center; border: 1px solid rgba(251,191,36,0.08); }
+        .detail-total .label { color: rgba(255,255,255,0.2); }
+        .detail-total .value { font-weight: 700; color: #fbbf24; }
+
+        .teacher-badge { background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.15); color: #fbbf24; border-radius: 2.5rem; display: inline-flex; align-items: center; gap: 0.4rem; }
 
         @media (max-width: 700px) {
-            body {
-                padding: 0.8rem 0.5rem;
-                font-size: 1rem;
-            }
-            body::before {
-                font-size: 3rem;
-                letter-spacing: 1.5rem;
-            }
-            .math-symbols {
-                display: none;
-            }
-            .header-card {
-                flex-direction: column;
-                align-items: start;
-                gap: 0.8rem;
-                padding: 1rem 1.2rem;
-                border-radius: 1.5rem;
-            }
-            .header-left h1 {
-                font-size: 1.6rem;
-            }
-            .header-left .logo {
-                width: 48px;
-                height: 48px;
-                font-size: 1.4rem;
-            }
-            .header-left .class-badge {
-                font-size: 0.85rem;
-            }
-            .header-right {
-                width: 100%;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-            }
-            .header-right .btn {
-                font-size: 0.9rem;
-                padding: 0.5rem 1.1rem;
-            }
-            .search-section {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 0.8rem 1.2rem;
-                gap: 0.6rem;
-                border-radius: 1.8rem;
-            }
-            .search-section input {
-                font-size: 1.05rem;
-                padding: 0.6rem 0.2rem;
-            }
-            .student-grid {
-                grid-template-columns: 1fr;
-            }
-            .kpi-row {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0.5rem;
-            }
-            .kpi-card .value {
-                font-size: 1.6rem;
-            }
-            .kpi-card .label {
-                font-size: 0.7rem;
-            }
-            .student-name {
-                font-size: 1.2rem;
-            }
-            .score-item {
-                font-size: 0.85rem;
-                padding: 0.25rem 0.5rem 0.25rem 0.7rem;
-            }
-            .score-value {
-                font-size: 0.85rem;
-            }
-            .score-item.total .score-value {
-                font-size: 1rem;
-            }
-            .modal-box {
-                padding: 1.8rem 1.2rem;
-            }
-            #toast {
-                font-size: 0.9rem;
-                padding: 0.6rem 1.4rem;
-                white-space: normal;
-                max-width: 92%;
-            }
-            .detail-box {
-                padding: 1.5rem;
-            }
-            .detail-box .student-name-big {
-                font-size: 2rem;
-            }
-            .detail-score-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .detail-score-item .value {
-                font-size: 1.6rem;
-            }
-            .detail-total .value {
-                font-size: 2.2rem;
-            }
-            .btn {
-                font-size: 0.9rem;
-                padding: 0.5rem 1.2rem;
-            }
-            .btn-small {
-                font-size: 0.75rem;
-                padding: 0.2rem 0.8rem;
-            }
-            .empty-state {
-                padding: 2rem 1rem;
-            }
-            .empty-state .title {
-                font-size: 1.3rem;
-            }
-            .student-count-badge {
-                font-size: 0.9rem;
-                padding: 0.4rem 1.2rem;
-            }
+            body { padding: 0.8rem 0.5rem; font-size: 1rem; }
+            body::before { font-size: 3rem; letter-spacing: 1.5rem; }
+            .math-symbols { display: none; }
+            .header-card { flex-direction: column; align-items: start; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 1.5rem; }
+            .header-left h1 { font-size: 1.6rem; }
+            .header-left .logo { width: 48px; height: 48px; font-size: 1.4rem; }
+            .header-left .class-badge { font-size: 0.85rem; }
+            .header-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+            .header-right .btn { font-size: 0.9rem; padding: 0.5rem 1.1rem; }
+            .search-section { flex-direction: column; align-items: stretch; padding: 0.8rem 1.2rem; gap: 0.6rem; border-radius: 1.8rem; }
+            .search-section input { font-size: 1.05rem; padding: 0.6rem 0.2rem; }
+            .student-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+            .kpi-card .value { font-size: 1.6rem; }
+            .kpi-card .label { font-size: 0.7rem; }
+            .student-name { font-size: 1.2rem; }
+            .score-item { font-size: 0.85rem; padding: 0.25rem 0.5rem 0.25rem 0.7rem; }
+            .score-value { font-size: 0.85rem; }
+            .score-item.total .score-value { font-size: 1rem; }
+            .modal-box { padding: 1.8rem 1.2rem; }
+            #toast { font-size: 0.9rem; padding: 0.6rem 1.4rem; white-space: normal; max-width: 92%; }
+            .detail-box { padding: 1.5rem; }
+            .detail-box .student-name-big { font-size: 2rem; }
+            .detail-score-grid { grid-template-columns: 1fr 1fr; }
+            .detail-score-item .value { font-size: 1.6rem; }
+            .detail-total .value { font-size: 2.2rem; }
+            .btn { font-size: 0.9rem; padding: 0.5rem 1.2rem; }
+            .btn-small { font-size: 0.75rem; padding: 0.2rem 0.8rem; }
+            .empty-state { padding: 2rem 1rem; }
+            .empty-state .title { font-size: 1.3rem; }
+            .student-count-badge { font-size: 0.9rem; padding: 0.4rem 1.2rem; }
         }
         @media (max-width: 480px) {
-            .kpi-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .detail-score-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            body::before {
-                font-size: 2rem;
-                letter-spacing: 1rem;
-            }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .detail-score-grid { grid-template-columns: 1fr 1fr; }
+            body::before { font-size: 2rem; letter-spacing: 1rem; }
         }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
     </style>
 </head>
 <body>
 
-    <!-- ===== 数学符号背景 ===== -->
     <div class="math-symbols s1">∫ ∂ ∇</div>
     <div class="math-symbols s2">∑ π √</div>
     <div class="math-symbols s3">∞ ≠ ≈</div>
@@ -1207,7 +334,6 @@
 
     <div id="app">
         <div class="app-container">
-            <!-- Header -->
             <div class="header-card">
                 <div class="header-left">
                     <div class="logo"><i class="fas fa-chart-pie"></i></div>
@@ -1216,9 +342,7 @@
                     </div>
                 </div>
                 <div class="header-right">
-                    <div class="student-count-badge">
-                        <i class="fas fa-user-graduate"></i> <strong>{{ allStudents.length }}</strong> 人
-                    </div>
+                    <div class="student-count-badge"><i class="fas fa-user-graduate"></i> <strong>{{ allStudents.length }}</strong> 人</div>
                     <span v-if="isTeacher" class="teacher-badge"><i class="fas fa-user-cog"></i> 教师模式</span>
                     <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
                     <button class="btn btn-success" @click="exportExcel" v-if="allStudents.length > 0"><i class="fas fa-file-excel"></i> 导出</button>
@@ -1227,36 +351,14 @@
                 </div>
             </div>
 
-            <!-- KPI -->
             <div class="kpi-row" v-if="allStudents.length > 0">
-                <div class="kpi-card" style="--accent: #fbbf24;">
-                    <div class="label">总评平均</div>
-                    <div class="value gold">{{ avgTotal }}</div>
-                    <div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div>
-                </div>
-                <div class="kpi-card" style="--accent: #60a5fa;">
-                    <div class="label">最高总评</div>
-                    <div class="value blue">{{ maxTotal }}</div>
-                    <div class="change"><i class="fas fa-crown"></i> TOP1</div>
-                </div>
-                <div class="kpi-card" style="--accent: #6ee7b7;">
-                    <div class="label">考勤平均</div>
-                    <div class="value green">{{ avgAttendance }}</div>
-                    <div class="change up"><i class="fas fa-arrow-up"></i> +5%</div>
-                </div>
-                <div class="kpi-card" style="--accent: #a78bfa;">
-                    <div class="label">章节平均</div>
-                    <div class="value purple">{{ avgChapter }}</div>
-                    <div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div>
-                </div>
-                <div class="kpi-card" style="--accent: #f472b6;">
-                    <div class="label">每日一题平均</div>
-                    <div class="value pink">{{ avgDaily }}</div>
-                    <div class="change up"><i class="fas fa-arrow-up"></i> +8%</div>
-                </div>
+                <div class="kpi-card" style="--accent: #fbbf24;"><div class="label">总评平均</div><div class="value gold">{{ avgTotal }}</div><div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div></div>
+                <div class="kpi-card" style="--accent: #60a5fa;"><div class="label">最高总评</div><div class="value blue">{{ maxTotal }}</div><div class="change"><i class="fas fa-crown"></i> TOP1</div></div>
+                <div class="kpi-card" style="--accent: #6ee7b7;"><div class="label">考勤平均</div><div class="value green">{{ avgAttendance }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +5%</div></div>
+                <div class="kpi-card" style="--accent: #a78bfa;"><div class="label">章节平均</div><div class="value purple">{{ avgChapter }}</div><div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div></div>
+                <div class="kpi-card" style="--accent: #f472b6;"><div class="label">每日一题平均</div><div class="value pink">{{ avgDaily }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +8%</div></div>
             </div>
 
-            <!-- Search -->
             <div class="search-section" v-if="allStudents.length > 0">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
@@ -1269,30 +371,19 @@
                 <button class="btn-clear" @click="clearSearch"><i class="fas fa-times-circle"></i></button>
             </div>
 
-            <!-- Content -->
             <div v-if="loading" class="loading-overlay">
                 <i class="fas fa-spinner"></i>
                 <p>加载数据中…</p>
             </div>
 
-            <!-- 空状态 -->
             <div v-else-if="allStudents.length === 0" class="empty-state">
                 <i class="fas fa-database"></i>
                 <div class="title">暂无数据</div>
-                <p>
-                    请检查 Supabase 配置是否正确。<br>
-                    确保 <code>students</code> 表中已有学生数据。<br>
-                    当前配置：<br>
-                    <code>SUPABASE_URL = '{{ supabaseUrlDisplay || "未配置" }}'</code><br>
-                    <code>SUPABASE_ANON_KEY = '{{ supabaseKeyDisplay || "未配置" }}'</code>
-                </p>
-                <button class="btn btn-primary" @click="loadAllData" style="margin-top:1.5rem;">
-                    <i class="fas fa-sync-alt"></i> 重新加载
-                </button>
+                <p>请检查 Supabase 配置是否正确。<br>确保 <code>students</code> 表中已有学生数据。</p>
+                <button class="btn btn-primary" @click="loadAllData" style="margin-top:1.5rem;"><i class="fas fa-sync-alt"></i> 重新加载</button>
             </div>
 
             <template v-else>
-                <!-- Grid View -->
                 <div v-if="displayMode === 'grid'" class="student-grid">
                     <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id" @click="showDetail(stu)">
                         <div class="card-header">
@@ -1312,20 +403,21 @@
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第4章</span> <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第5章</span> <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
                             <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第6章</span> <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
-                            <div class="score-item total">
-                                <i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span>
-                            </div>
+                            <div class="score-item total"><i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span></div>
                         </div>
                         <div class="card-actions" @click.stop>
-                            <button class="btn-small" @click="editStudent(stu.id)" v-if="isTeacher"><i class="fas fa-edit"></i> 记录</button>
-                            <button class="btn-small chapter-btn" @click="editChapters(stu.id)" v-if="isTeacher"><i class="fas fa-layer-group"></i> 章节</button>
-                            <button class="btn-small daily-btn" @click="editDailyScore(stu.id)" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
+                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'attendance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 考勤</button>
+                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'performance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 表现</button>
+                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'homework')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 作业</button>
+                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'midterm')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期中</button>
+                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'final')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期末</button>
+                            <button class="btn-small daily-btn" @click="showAddScoreModal(stu.id, 'daily')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
+                            <button class="btn-small chapter-btn" @click="showAddScoreModal(stu.id, 'chapter')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 章节</button>
                             <button class="btn-small" @click="showDetail(stu)"><i class="fas fa-expand"></i> 放大</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Table View -->
                 <div v-else-if="displayMode === 'table'" class="table-wrap">
                     <table>
                         <thead>
@@ -1353,7 +445,6 @@
                 </div>
             </template>
 
-            <!-- Toast -->
             <div id="toast"></div>
 
             <!-- 教师后台弹窗 -->
@@ -1367,6 +458,22 @@
                         <button class="btn" @click="closeTeacherModal">取消</button>
                     </div>
                     <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
+                </div>
+            </div>
+
+            <!-- 添加分数弹窗 -->
+            <div v-if="showScoreModal" class="modal-overlay" @click.self="closeScoreModal">
+                <div class="modal-box">
+                    <h2><i class="fas fa-plus-circle" style="color:#6ee7b7; margin-right:0.6rem;"></i>添加分数</h2>
+                    <p class="sub">{{ scoreModalStudentName }} · {{ scoreModalTypeLabel }}</p>
+                    <p style="color:rgba(255,255,255,0.15); font-size:0.85rem; text-align:center; margin-bottom:0.5rem;">当前总分：<strong style="color:#fbbf24;">{{ scoreModalCurrentTotal }}</strong></p>
+                    <input type="text" v-model="scoreModalValue" placeholder="输入分数（负值可减分）…" @keyup.enter="confirmAddScore" />
+                    <p style="color:rgba(255,255,255,0.1); font-size:0.7rem; text-align:center; margin-top:0.3rem;">输入正数加分，输入负数减分</p>
+                    <div class="btn-row">
+                        <button class="btn btn-primary" @click="confirmAddScore">确认添加</button>
+                        <button class="btn" @click="closeScoreModal">取消</button>
+                    </div>
+                    <div v-if="scoreError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ scoreError }}</div>
                 </div>
             </div>
 
@@ -1420,7 +527,6 @@
             console.log('✅ Vue 加载成功！版本:', Vue.version);
 
             // ===== Supabase 配置 =====
-            // ⚠️ 请将下面两行替换为您的 Supabase 实际值
             const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
             const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
 
@@ -1440,6 +546,17 @@
             }
 
             const TEACHER_PASSWORD = 'math2026';
+
+            // ===== 分数类型配置 =====
+            const SCORE_TYPES = {
+                attendance: { table: 'attendance_scores', label: '考勤', icon: 'fa-user-check' },
+                performance: { table: 'performance_scores', label: '课堂表现', icon: 'fa-chalkboard-teacher' },
+                homework: { table: 'homework_scores', label: '平时作业', icon: 'fa-book-open' },
+                midterm: { table: 'midterm_scores', label: '期中测试', icon: 'fa-flask' },
+                final: { table: 'final_scores', label: '期末考试', icon: 'fa-check-circle' },
+                daily: { table: 'daily_scores', label: '每日一题', icon: 'fa-puzzle-piece' },
+                chapter: { table: 'chapter_scores', label: '章节考核', icon: 'fa-layer-group' }
+            };
 
             const app = Vue.createApp({
                 data() {
@@ -1466,6 +583,15 @@
                         detailStudent: { name: '', id: '', attendance: 0, performance: 0, homework: 0, midterm: 0,
                             final: 0, daily_score: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0,
                             chapter5: 0, chapter6: 0, total: 0 },
+                        // 添加分数弹窗
+                        showScoreModal: false,
+                        scoreModalStudentId: '',
+                        scoreModalStudentName: '',
+                        scoreModalType: '',
+                        scoreModalTypeLabel: '',
+                        scoreModalCurrentTotal: 0,
+                        scoreModalValue: '',
+                        scoreError: '',
                         supabaseUrlDisplay: SUPABASE_URL,
                         supabaseKeyDisplay: SUPABASE_ANON_KEY ? SUPABASE_ANON_KEY.substring(0, 10) + '...' : '未配置'
                     };
@@ -1488,17 +614,19 @@
                             }
 
                             console.log('🔄 正在从 Supabase 读取数据...');
-                            const { data: students, error } = await supabaseClient
+
+                            // 1. 读取学生列表
+                            const { data: students, error: stuError } = await supabaseClient
                                 .from('students')
                                 .select('*')
                                 .order('id');
 
-                            if (error) {
-                                console.warn('⚠️ Supabase 查询出错:', error);
+                            if (stuError) {
+                                console.warn('⚠️ 学生表查询出错:', stuError);
                                 this.loading = false;
                                 this.allStudents = [];
                                 this.displayedStudents = [];
-                                this.showToast('⚠️ 数据加载失败: ' + error.message);
+                                this.showToast('⚠️ 数据加载失败: ' + stuError.message);
                                 return;
                             }
 
@@ -1511,9 +639,138 @@
                                 return;
                             }
 
-                            console.log('✅ Supabase 数据获取成功，共', students.length, '名学生');
+                            console.log('✅ 学生数据获取成功，共', students.length, '名学生');
 
-                            this.processStudentData(students);
+                            // 2. 读取所有分数表
+                            const scoreData = {};
+                            for (const [key, config] of Object.entries(SCORE_TYPES)) {
+                                try {
+                                    const { data, error } = await supabaseClient
+                                        .from(config.table)
+                                        .select('*');
+                                    if (error) {
+                                        console.warn(`⚠️ 表 ${config.table} 读取失败:`, error);
+                                        scoreData[key] = [];
+                                    } else {
+                                        scoreData[key] = data || [];
+                                        console.log(`✅ 表 ${config.table} 读取成功，共`, (data || []).length, '条记录');
+                                    }
+                                } catch (e) {
+                                    console.warn(`⚠️ 表 ${config.table} 读取异常:`, e);
+                                    scoreData[key] = [];
+                                }
+                            }
+
+                            // 3. 汇总计算每个学生的各类总分
+                            const studentScores = {};
+                            students.forEach(s => {
+                                studentScores[s.id] = {
+                                    attendance: 0,
+                                    performance: 0,
+                                    homework: 0,
+                                    midterm: 0,
+                                    final: 0,
+                                    daily: 0,
+                                    chapter: 0,
+                                    chapter1: 0,
+                                    chapter2: 0,
+                                    chapter3: 0,
+                                    chapter4: 0,
+                                    chapter5: 0,
+                                    chapter6: 0,
+                                    total: 0
+                                };
+                            });
+
+                            // 汇总各类分数
+                            for (const [key, records] of Object.entries(scoreData)) {
+                                records.forEach(record => {
+                                    if (studentScores[record.student_id] !== undefined) {
+                                        if (key === 'chapter') {
+                                            // 章节考核特殊处理：根据 chapter_number 分到不同章节
+                                            const chNum = record.chapter_number || 1;
+                                            const fieldName = 'chapter' + chNum;
+                                            if (studentScores[record.student_id][fieldName] !== undefined) {
+                                                studentScores[record.student_id][fieldName] += (record
+                                                .score || 0);
+                                            }
+                                            studentScores[record.student_id].chapter += (record.score || 0);
+                                        } else {
+                                            studentScores[record.student_id][key] += (record.score || 0);
+                                        }
+                                    }
+                                });
+                            }
+
+                            // 计算总评
+                            students.forEach(s => {
+                                const sc = studentScores[s.id];
+                                sc.total = sc.attendance + sc.performance + sc.homework +
+                                    sc.midterm + sc.final + sc.daily + sc.chapter;
+                            });
+
+                            // 4. 组装最终数据
+                            this.allStudents = students.map(s => {
+                                const sc = studentScores[s.id] || {
+                                    attendance: 0,
+                                    performance: 0,
+                                    homework: 0,
+                                    midterm: 0,
+                                    final: 0,
+                                    daily: 0,
+                                    chapter: 0,
+                                    chapter1: 0,
+                                    chapter2: 0,
+                                    chapter3: 0,
+                                    chapter4: 0,
+                                    chapter5: 0,
+                                    chapter6: 0,
+                                    total: 0
+                                };
+                                return {
+                                    id: s.id,
+                                    name: s.name,
+                                    attendance: sc.attendance,
+                                    performance: sc.performance,
+                                    homework: sc.homework,
+                                    midterm: sc.midterm,
+                                    final: sc.final,
+                                    daily_score: sc.daily,
+                                    chapter1: sc.chapter1,
+                                    chapter2: sc.chapter2,
+                                    chapter3: sc.chapter3,
+                                    chapter4: sc.chapter4,
+                                    chapter5: sc.chapter5,
+                                    chapter6: sc.chapter6,
+                                    total: sc.total
+                                };
+                            });
+
+                            this.allStudents.sort((a, b) => b.total - a.total);
+
+                            // 计算KPI
+                            if (this.allStudents.length > 0) {
+                                const totals = this.allStudents.map(s => s.total);
+                                this.avgTotal = Math.round(totals.reduce((a, b) => a + b, 0) / totals.length);
+                                this.maxTotal = Math.max(...totals);
+                                this.avgAttendance = Math.round(this.allStudents.reduce((a, b) => a + b.attendance,
+                                    0) / this.allStudents.length);
+                                const chapters = this.allStudents.map(s => (s.chapter1 || 0) + (s.chapter2 || 0) + (s
+                                    .chapter3 || 0) + (s.chapter4 || 0) + (s.chapter5 || 0) + (s.chapter6 ||
+                                    0));
+                                this.avgChapter = Math.round(chapters.reduce((a, b) => a + b, 0) / chapters
+                                .length);
+                                this.avgDaily = Math.round(this.allStudents.reduce((a, b) => a + (b.daily_score ||
+                                    0), 0) / this.allStudents.length);
+                            }
+
+                            this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
+                            this.filteredStudentOptions = this.studentOptions.slice();
+                            this.filteredStudents = this.allStudents.slice();
+                            this.displayedStudents = this.allStudents.slice();
+                            this.displayMode = 'grid';
+
+                            console.log('✅ 数据处理完成，共', this.allStudents.length, '名学生');
                             this.showToast('✅ 数据加载成功');
                         } catch (e) {
                             console.warn('⚠️ 数据加载失败:', e);
@@ -1523,57 +780,6 @@
                         } finally {
                             this.loading = false;
                         }
-                    },
-
-                    processStudentData(students) {
-                        this.allStudents = students.map(s => {
-                            const total = (s.attendance ?? 0) + (s.performance ?? 0) +
-                                (s.homework ?? 0) +
-                                (s.midterm ?? 0) + (s.final ?? 0) +
-                                (s.daily_score ?? 0) +
-                                (s.chapter1 ?? 0) + (s.chapter2 ?? 0) + (s.chapter3 ?? 0) +
-                                (s.chapter4 ?? 0) + (s.chapter5 ?? 0) + (s.chapter6 ?? 0);
-                            return {
-                                id: s.id,
-                                name: s.name,
-                                attendance: s.attendance ?? 0,
-                                performance: s.performance ?? 0,
-                                homework: s.homework ?? 0,
-                                midterm: s.midterm ?? 0,
-                                final: s.final ?? 0,
-                                daily_score: s.daily_score ?? 0,
-                                chapter1: s.chapter1 ?? 0,
-                                chapter2: s.chapter2 ?? 0,
-                                chapter3: s.chapter3 ?? 0,
-                                chapter4: s.chapter4 ?? 0,
-                                chapter5: s.chapter5 ?? 0,
-                                chapter6: s.chapter6 ?? 0,
-                                total: total
-                            };
-                        });
-
-                        this.allStudents.sort((a, b) => b.total - a.total);
-
-                        if (this.allStudents.length > 0) {
-                            const totals = this.allStudents.map(s => s.total);
-                            this.avgTotal = Math.round(totals.reduce((a, b) => a + b, 0) / totals.length);
-                            this.maxTotal = Math.max(...totals);
-                            this.avgAttendance = Math.round(this.allStudents.reduce((a, b) => a + b.attendance, 0) /
-                                this.allStudents.length);
-                            const chapters = this.allStudents.map(s => (s.chapter1 || 0) + (s.chapter2 || 0) + (s
-                                .chapter3 || 0) + (s.chapter4 || 0) + (s.chapter5 || 0) + (s.chapter6 || 0));
-                            this.avgChapter = Math.round(chapters.reduce((a, b) => a + b, 0) / chapters.length);
-                            this.avgDaily = Math.round(this.allStudents.reduce((a, b) => a + (b.daily_score || 0),
-                                0) / this.allStudents.length);
-                        }
-
-                        this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
-                        this.filteredStudentOptions = this.studentOptions.slice();
-                        this.filteredStudents = this.allStudents.slice();
-                        this.displayedStudents = this.allStudents.slice();
-                        this.displayMode = 'grid';
-
-                        console.log('✅ 数据处理完成，共', this.allStudents.length, '名学生');
                     },
 
                     filterBySurname() {
@@ -1648,7 +854,7 @@
                         if (this.teacherPassword === TEACHER_PASSWORD) {
                             this.isTeacher = true;
                             this.closeTeacherModal();
-                            this.showToast('✅ 教师模式已开启，可以编辑学生分数（支持负分减分）');
+                            this.showToast('✅ 教师模式已开启，可以编辑学生分数');
                             console.log('✅ 教师模式已开启');
                         } else {
                             this.teacherError = '❌ 密码错误，请重试';
@@ -1661,42 +867,108 @@
                         }
                     },
 
-                    // ===== 核心修复：写入 Supabase =====
-                    async updateStudentScore(studentId, fieldName, newValue) {
+                    // ===== 添加分数弹窗 =====
+                    showAddScoreModal(studentId, type) {
                         if (!this.isTeacher) {
                             this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-                            return false;
+                            return;
                         }
-                        if (!supabaseClient) {
-                            this.showToast('⚠️ Supabase 未连接，无法修改数据');
-                            return false;
+                        const stu = this.allStudents.find(s => s.id === studentId);
+                        if (!stu) return;
+
+                        const config = SCORE_TYPES[type];
+                        if (!config) return;
+
+                        let currentTotal = 0;
+                        if (type === 'chapter') {
+                            currentTotal = (stu.chapter1 || 0) + (stu.chapter2 || 0) + (stu.chapter3 || 0) +
+                                (stu.chapter4 || 0) + (stu.chapter5 || 0) + (stu.chapter6 || 0);
+                        } else if (type === 'daily') {
+                            currentTotal = stu.daily_score || 0;
+                        } else {
+                            currentTotal = stu[type] || 0;
                         }
 
-                        // 构建更新数据对象
-                        const updateData = {};
-                        updateData[fieldName] = Number(newValue);
+                        this.scoreModalStudentId = studentId;
+                        this.scoreModalStudentName = stu.name;
+                        this.scoreModalType = type;
+                        this.scoreModalTypeLabel = config.label;
+                        this.scoreModalCurrentTotal = currentTotal;
+                        this.scoreModalValue = '';
+                        this.scoreError = '';
+                        this.showScoreModal = true;
 
-                        console.log('🔄 正在写入 Supabase...', {
-                            studentId: studentId,
-                            fieldName: fieldName,
-                            newValue: newValue,
-                            updateData: JSON.stringify(updateData)
+                        this.$nextTick(() => {
+                            const inputs = document.querySelectorAll('.modal-box input');
+                            if (inputs.length > 0) {
+                                inputs[inputs.length - 1].focus();
+                            }
                         });
+                    },
+
+                    closeScoreModal() {
+                        this.showScoreModal = false;
+                        this.scoreModalValue = '';
+                        this.scoreError = '';
+                    },
+
+                    async confirmAddScore() {
+                        if (!this.isTeacher) {
+                            this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
+                            return;
+                        }
+
+                        const val = this.scoreModalValue.trim();
+                        if (val === '') {
+                            this.scoreError = '请输入分数';
+                            return;
+                        }
+
+                        const score = Number(val);
+                        if (isNaN(score)) {
+                            this.scoreError = '请输入有效数字';
+                            return;
+                        }
+
+                        const studentId = this.scoreModalStudentId;
+                        const type = this.scoreModalType;
+                        const config = SCORE_TYPES[type];
 
                         try {
+                            // 写入数据库
+                            const insertData = {
+                                student_id: studentId,
+                                score: score,
+                                created_at: new Date().toISOString()
+                            };
+
+                            // 章节考核需要额外字段
+                            if (type === 'chapter') {
+                                // 章节考核：询问是哪一章
+                                const chNum = prompt('请输入章节编号 (1-6):', '1');
+                                if (chNum === null) return;
+                                const ch = parseInt(chNum);
+                                if (isNaN(ch) || ch < 1 || ch > 6) {
+                                    this.scoreError = '请输入1-6之间的数字';
+                                    return;
+                                }
+                                insertData.chapter_number = ch;
+                            }
+
                             const { data, error } = await supabaseClient
-                                .from('students')
-                                .update(updateData)
-                                .eq('id', studentId)
+                                .from(config.table)
+                                .insert([insertData])
                                 .select();
 
                             if (error) {
-                                console.error('❌ Supabase 更新失败:', error);
-                                this.showToast('❌ 更新失败: ' + error.message);
-                                return false;
+                                console.error('❌ 添加分数失败:', error);
+                                this.scoreError = '添加失败: ' + error.message;
+                                return;
                             }
 
-                            console.log('✅ Supabase 更新成功:', data);
+                            console.log('✅ 分数添加成功:', data);
+                            this.showToast(`✅ ${this.scoreModalStudentName} 的「${config.label}」已添加 ${score} 分`);
+                            this.closeScoreModal();
 
                             // 退出教师模式（安全保护）
                             this.isTeacher = false;
@@ -1705,85 +977,9 @@
                             // 重新加载数据
                             await this.loadAllData();
 
-                            return true;
                         } catch (e) {
-                            console.error('❌ 更新异常:', e);
-                            this.showToast('❌ 更新异常: ' + (e.message || '未知错误'));
-                            return false;
-                        }
-                    },
-
-                    // ===== 编辑单个字段 =====
-                    async editSingleField(studentId, fieldName, fieldLabel) {
-                        const stu = this.allStudents.find(s => s.id === studentId);
-                        if (!stu) return;
-
-                        const currentValue = stu[fieldName] ?? 0;
-                        const newVal = prompt(
-                            `修改 ${stu.name} 的「${fieldLabel}」\n当前值: ${currentValue}\n（输入负值可减分）`,
-                            currentValue
-                        );
-
-                        if (newVal === null) return; // 用户取消
-
-                        const num = Number(newVal);
-                        if (isNaN(num)) {
-                            this.showToast('❌ 请输入有效数字');
-                            return;
-                        }
-
-                        const success = await this.updateStudentScore(studentId, fieldName, num);
-                        if (success) {
-                            this.showToast(`✅ ${stu.name} 的「${fieldLabel}」已更新为 ${num} 💾 数据已保存至远程服务器`);
-                        }
-                    },
-
-                    async editStudent(id) {
-                        await this.editSingleField(id, 'attendance', '考勤');
-                    },
-
-                    async editDailyScore(id) {
-                        await this.editSingleField(id, 'daily_score', '每日一题');
-                    },
-
-                    async editChapters(id) {
-                        const stu = this.allStudents.find(s => s.id === id);
-                        if (!stu) return;
-                        if (!this.isTeacher) {
-                            this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-                            return;
-                        }
-
-                        const current =
-                            `${stu.chapter1||0},${stu.chapter2||0},${stu.chapter3||0},${stu.chapter4||0},${stu.chapter5||0},${stu.chapter6||0}`;
-                        const newVal = prompt(
-                            `修改 ${stu.name} 的章节考核\n格式: 第1章,第2章,第3章,第4章,第5章,第6章\n当前: ${current}\n（输入负值可减分）`,
-                            current
-                        );
-
-                        if (newVal === null) return;
-
-                        const parts = newVal.split(',').map(Number);
-                        if (parts.length !== 6 || parts.some(v => isNaN(v))) {
-                            this.showToast('❌ 请输入6个有效数字，用逗号分隔');
-                            return;
-                        }
-
-                        // 逐个更新每个章节
-                        const fields = ['chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5', 'chapter6'];
-                        let allSuccess = true;
-
-                        for (let i = 0; i < fields.length; i++) {
-                            const success = await this.updateStudentScore(id, fields[i], parts[i]);
-                            if (!success) {
-                                allSuccess = false;
-                                break;
-                            }
-                        }
-
-                        if (allSuccess) {
-                            this.showToast(`✅ ${stu.name} 所有章节分数已更新 💾 数据已保存至远程服务器`);
-                            await this.loadAllData();
+                            console.error('❌ 添加异常:', e);
+                            this.scoreError = '添加异常: ' + (e.message || '未知错误');
                         }
                     },
 

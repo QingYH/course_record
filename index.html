@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -20,6 +21,7 @@
             position: relative;
             overflow-x: hidden;
         }
+        /* ===== 安庆师范大学背景装饰 ===== */
         body::before {
             content: '';
             position: fixed;
@@ -33,6 +35,77 @@
             pointer-events: none;
             z-index: 0;
         }
+        /* 校园背景 - 使用CSS绘制的简约校园元素 */
+        .campus-bg {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            color: rgba(255, 255, 255, 0.015);
+            font-size: 14rem;
+            font-weight: 100;
+            user-select: none;
+            opacity: 0.4;
+        }
+        .campus-bg.c1 {
+            bottom: 2%;
+            right: 3%;
+            font-size: 18rem;
+            transform: rotate(-2deg);
+            color: rgba(59, 130, 246, 0.04);
+        }
+        .campus-bg.c2 {
+            bottom: 8%;
+            left: 2%;
+            font-size: 12rem;
+            transform: rotate(5deg);
+            color: rgba(167, 139, 250, 0.03);
+        }
+        .campus-bg.c3 {
+            top: 15%;
+            right: 5%;
+            font-size: 8rem;
+            transform: rotate(8deg);
+            color: rgba(251, 191, 36, 0.025);
+        }
+        .campus-bg .building {
+            display: block;
+            line-height: 1;
+            letter-spacing: -0.5rem;
+        }
+        .campus-bg .gate {
+            display: block;
+            font-size: 10rem;
+            line-height: 1;
+            letter-spacing: -0.3rem;
+        }
+        .campus-bg .tree {
+            display: inline-block;
+            font-size: 6rem;
+            margin: 0 -0.5rem;
+        }
+        /* 真实图片背景 - 使用校门/红楼等元素（CSS艺术字代替） */
+        .campus-watermark {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            opacity: 0.03;
+            font-size: 2.5rem;
+            color: #60a5fa;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            line-height: 1.6;
+            letter-spacing: 0.3rem;
+            font-weight: 300;
+        }
+        .campus-watermark span {
+            display: inline-block;
+            margin: 0 0.5rem;
+            opacity: 0.6;
+        }
+
         .app-container {
             max-width: 1480px;
             margin: 0 auto;
@@ -45,7 +118,7 @@
             font-size: 1.15rem;
         }
         .header-left h1 {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
         }
         .header-left .sub {
             font-size: 1rem;
@@ -95,15 +168,15 @@
             font-size: 0.9rem;
         }
         .score-item {
-            font-size: 0.95rem;
-            padding: 0.3rem 0.6rem 0.3rem 0.8rem;
+            font-size: 1rem;
+            padding: 0.35rem 0.7rem 0.35rem 0.9rem;
             border-radius: 1rem;
         }
         .score-item i {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         .score-value {
-            font-size: 0.95rem;
+            font-size: 1rem;
             padding: 0 0.6rem;
             border-radius: 0.8rem;
         }
@@ -139,15 +212,6 @@
         .modal-box .btn {
             font-size: 1.1rem;
             padding: 0.9rem 0;
-        }
-        .docs-section h3 {
-            font-size: 1rem;
-        }
-        .docs-card p {
-            font-size: 0.95rem;
-        }
-        .docs-card code {
-            font-size: 0.8rem;
         }
         #toast {
             font-size: 1.1rem;
@@ -187,6 +251,14 @@
         }
         td strong {
             font-size: 1.05rem;
+        }
+        .header-left .class-badge {
+            font-size: 1rem;
+            color: rgba(251, 191, 36, 0.5);
+            font-weight: 400;
+            -webkit-text-fill-color: rgba(251, 191, 36, 0.5);
+            margin-left: 0.3rem;
+            letter-spacing: 0.04em;
         }
 
         /* ===== Header ===== */
@@ -229,6 +301,15 @@
         .header-left .sub {
             color: rgba(255, 255, 255, 0.2);
             font-weight: 400;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.2);
+        }
+        .header-left .class-badge {
+            font-size: 1rem;
+            color: rgba(251, 191, 36, 0.4);
+            font-weight: 500;
+            -webkit-text-fill-color: rgba(251, 191, 36, 0.4);
+            margin-left: 0.3rem;
+            letter-spacing: 0.04em;
         }
         .header-right {
             display: flex;
@@ -499,91 +580,117 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 500;
+            font-weight: 600;
             border: 1px solid rgba(255, 255, 255, 0.02);
+            transition: 0.15s;
         }
-        /* ===== 不同类别的颜色区分 ===== */
+        .score-item .score-value {
+            font-weight: 700;
+        }
+
+        /* ===== 各类别字体颜色区分（亮色，清晰可见） ===== */
         .score-item.attendance {
-            border-color: rgba(96, 165, 250, 0.15);
-            background: rgba(96, 165, 250, 0.04);
+            border-color: rgba(96, 165, 250, 0.20);
+            background: rgba(96, 165, 250, 0.05);
         }
         .score-item.attendance i {
             color: #60a5fa;
         }
         .score-item.attendance .score-value {
-            color: #60a5fa;
+            color: #93c5fd;
+        }
+        .score-item.attendance .label-text {
+            color: #93c5fd;
         }
 
         .score-item.performance {
-            border-color: rgba(52, 211, 153, 0.15);
-            background: rgba(52, 211, 153, 0.04);
+            border-color: rgba(52, 211, 153, 0.20);
+            background: rgba(52, 211, 153, 0.05);
         }
         .score-item.performance i {
             color: #34d399;
         }
         .score-item.performance .score-value {
-            color: #34d399;
+            color: #6ee7b7;
+        }
+        .score-item.performance .label-text {
+            color: #6ee7b7;
         }
 
         .score-item.homework {
-            border-color: rgba(251, 191, 36, 0.15);
-            background: rgba(251, 191, 36, 0.04);
+            border-color: rgba(251, 191, 36, 0.20);
+            background: rgba(251, 191, 36, 0.05);
         }
         .score-item.homework i {
             color: #fbbf24;
         }
         .score-item.homework .score-value {
-            color: #fbbf24;
+            color: #fcd34d;
+        }
+        .score-item.homework .label-text {
+            color: #fcd34d;
         }
 
         .score-item.midterm {
-            border-color: rgba(244, 114, 182, 0.15);
-            background: rgba(244, 114, 182, 0.04);
+            border-color: rgba(244, 114, 182, 0.20);
+            background: rgba(244, 114, 182, 0.05);
         }
         .score-item.midterm i {
             color: #f472b6;
         }
         .score-item.midterm .score-value {
-            color: #f472b6;
+            color: #f9a8d4;
+        }
+        .score-item.midterm .label-text {
+            color: #f9a8d4;
         }
 
         .score-item.final {
-            border-color: rgba(251, 146, 60, 0.15);
-            background: rgba(251, 146, 60, 0.04);
+            border-color: rgba(251, 146, 60, 0.20);
+            background: rgba(251, 146, 60, 0.05);
         }
         .score-item.final i {
             color: #fb923c;
         }
         .score-item.final .score-value {
-            color: #fb923c;
+            color: #fdba74;
+        }
+        .score-item.final .label-text {
+            color: #fdba74;
         }
 
         .score-item.daily {
-            border-color: rgba(52, 211, 153, 0.15);
-            background: rgba(52, 211, 153, 0.04);
+            border-color: rgba(110, 231, 183, 0.20);
+            background: rgba(110, 231, 183, 0.05);
         }
         .score-item.daily i {
             color: #6ee7b7;
         }
         .score-item.daily .score-value {
-            color: #6ee7b7;
+            color: #8eeac7;
+        }
+        .score-item.daily .label-text {
+            color: #8eeac7;
         }
 
         .score-item.chapter {
-            border-color: rgba(167, 139, 250, 0.10);
-            background: rgba(167, 139, 250, 0.03);
+            border-color: rgba(167, 139, 250, 0.15);
+            background: rgba(167, 139, 250, 0.04);
         }
         .score-item.chapter i {
             color: #a78bfa;
         }
         .score-item.chapter .score-value {
-            color: #a78bfa;
+            color: #c4b5fd;
+        }
+        .score-item.chapter .label-text {
+            color: #c4b5fd;
         }
 
         .score-item.total {
             grid-column: span 3;
-            background: rgba(251, 191, 36, 0.04);
-            border-color: rgba(251, 191, 36, 0.08);
+            background: rgba(251, 191, 36, 0.05);
+            border-color: rgba(251, 191, 36, 0.10);
             justify-content: center;
             gap: 1.2rem;
             padding: 0.4rem 0.6rem;
@@ -592,9 +699,12 @@
             color: #fbbf24;
         }
         .score-item.total .score-value {
-            background: rgba(251, 191, 36, 0.06);
+            background: rgba(251, 191, 36, 0.08);
             color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.04);
+            border: 1px solid rgba(251, 191, 36, 0.06);
+        }
+        .score-item.total .label-text {
+            color: #fbbf24;
         }
 
         .card-actions {
@@ -746,69 +856,6 @@
             border-radius: 0.4rem;
             color: rgba(255, 255, 255, 0.3);
             font-family: 'Inter', monospace;
-        }
-
-        .docs-section {
-            margin-top: 2.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(8px);
-            border-radius: 1.8rem;
-            padding: 1.2rem 1.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-        .docs-section h3 {
-            color: rgba(255, 255, 255, 0.15);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.6rem;
-        }
-        .docs-section h3 i {
-            color: #60a5fa;
-        }
-        .docs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 0.6rem;
-        }
-        .docs-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 1.2rem;
-            padding: 0.6rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-        .docs-card p {
-            color: rgba(255, 255, 255, 0.15);
-            font-weight: 400;
-        }
-        .docs-card code {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 0.05rem 0.4rem;
-            border-radius: 0.3rem;
-            color: rgba(255, 255, 255, 0.25);
-            font-family: 'Inter', monospace;
-        }
-        .docs-card .tag {
-            display: inline-block;
-            padding: 0.05rem 0.6rem;
-            border-radius: 1rem;
-            font-size: 0.6rem;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-            margin-left: 0.2rem;
-        }
-        .tag-blue {
-            background: rgba(96, 165, 250, 0.08);
-            color: #60a5fa;
-        }
-        .tag-green {
-            background: rgba(110, 231, 183, 0.08);
-            color: #6ee7b7;
-        }
-        .tag-purple {
-            background: rgba(167, 139, 250, 0.08);
-            color: #a78bfa;
         }
 
         /* ===== 教师后台弹窗 ===== */
@@ -1006,6 +1053,7 @@
             gap: 0.4rem;
         }
 
+        /* ===== 响应式 ===== */
         @media (max-width: 700px) {
             body {
                 padding: 0.8rem 0.5rem;
@@ -1025,6 +1073,9 @@
                 width: 48px;
                 height: 48px;
                 font-size: 1.4rem;
+            }
+            .header-left .class-badge {
+                font-size: 0.85rem;
             }
             .header-right {
                 width: 100%;
@@ -1049,9 +1100,6 @@
             .student-grid {
                 grid-template-columns: 1fr;
             }
-            .docs-grid {
-                grid-template-columns: 1fr;
-            }
             .kpi-row {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 0.5rem;
@@ -1066,10 +1114,11 @@
                 font-size: 1.2rem;
             }
             .score-item {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
+                padding: 0.25rem 0.5rem 0.25rem 0.7rem;
             }
             .score-value {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .score-item.total .score-value {
                 font-size: 1rem;
@@ -1116,6 +1165,14 @@
                 font-size: 0.9rem;
                 padding: 0.4rem 1.2rem;
             }
+            .campus-bg {
+                display: none;
+            }
+            .campus-watermark {
+                font-size: 1.2rem;
+                bottom: 2%;
+                opacity: 0.02;
+            }
         }
         @media (max-width: 480px) {
             .kpi-row {
@@ -1145,6 +1202,28 @@
 </head>
 <body>
 
+    <!-- ===== 安庆师范大学校园背景装饰 ===== -->
+    <div class="campus-bg c1">
+        <span class="building">🏛️</span>
+        <span style="display:block; font-size:6rem; opacity:0.5;">📚</span>
+    </div>
+    <div class="campus-bg c2">
+        <span class="gate">🚪</span>
+        <span style="display:block; font-size:4rem; opacity:0.4;">🌳🌳🌳</span>
+    </div>
+    <div class="campus-bg c3">
+        <span style="font-size:4rem;">🏫</span>
+        <span style="display:block; font-size:3rem; opacity:0.5;">🌸</span>
+    </div>
+    <div class="campus-watermark">
+        <span>🏛️</span>
+        <span>安庆师范大学</span>
+        <span>📖</span>
+        <span>·</span>
+        <span>红楼</span>
+        <span>🏫</span>
+    </div>
+
     <div id="app">
         <div class="app-container">
             <!-- Header -->
@@ -1152,7 +1231,7 @@
                 <div class="header-left">
                     <div class="logo"><i class="fas fa-chart-pie"></i></div>
                     <div>
-                        <h1>高等数学 <span class="sub">· 学情驾驶舱</span></h1>
+                        <h1>高等数学 <span class="sub">· 学情驾驶舱</span><span class="class-badge">2026级A4班专享</span></h1>
                     </div>
                 </div>
                 <div class="header-right">
@@ -1241,27 +1320,27 @@
                         </div>
                         <div class="score-grid">
                             <!-- 考勤 - 蓝色 -->
-                            <div class="score-item attendance"><i class="fas fa-user-check"></i> 考勤 <span class="score-value">{{ stu.attendance }}</span></div>
-                            <!-- 课堂表现 - 绿色 -->
-                            <div class="score-item performance"><i class="fas fa-chalkboard-teacher"></i> 表现 <span class="score-value">{{ stu.performance }}</span></div>
+                            <div class="score-item attendance"><i class="fas fa-user-check"></i> <span class="label-text">考勤</span> <span class="score-value">{{ stu.attendance }}</span></div>
+                            <!-- 课堂表现 - 翠绿 -->
+                            <div class="score-item performance"><i class="fas fa-chalkboard-teacher"></i> <span class="label-text">表现</span> <span class="score-value">{{ stu.performance }}</span></div>
                             <!-- 平时作业 - 金色 -->
-                            <div class="score-item homework"><i class="fas fa-book-open"></i> 作业 <span class="score-value">{{ stu.homework }}</span></div>
+                            <div class="score-item homework"><i class="fas fa-book-open"></i> <span class="label-text">作业</span> <span class="score-value">{{ stu.homework }}</span></div>
                             <!-- 期中 - 粉色 -->
-                            <div class="score-item midterm"><i class="fas fa-flask"></i> 期中 <span class="score-value">{{ stu.midterm }}</span></div>
+                            <div class="score-item midterm"><i class="fas fa-flask"></i> <span class="label-text">期中</span> <span class="score-value">{{ stu.midterm }}</span></div>
                             <!-- 期末 - 橙色 -->
-                            <div class="score-item final"><i class="fas fa-check-circle"></i> 期末 <span class="score-value">{{ stu.final }}</span></div>
-                            <!-- 每日一题 - 翠绿 -->
-                            <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> 每日一题 <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
+                            <div class="score-item final"><i class="fas fa-check-circle"></i> <span class="label-text">期末</span> <span class="score-value">{{ stu.final }}</span></div>
+                            <!-- 每日一题 - 青绿 -->
+                            <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> <span class="label-text">每日一题</span> <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
                             <!-- 章节 - 紫色 -->
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第1章 <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第2章 <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第3章 <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第4章 <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第5章 <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> 第6章 <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第1章</span> <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第2章</span> <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第3章</span> <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第4章</span> <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第5章</span> <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
+                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第6章</span> <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
                             <!-- 总评 - 金色 -->
                             <div class="score-item total">
-                                <i class="fas fa-star"></i> 总评 <span class="score-value">{{ stu.total }}</span>
+                                <i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span>
                             </div>
                         </div>
                         <div class="card-actions" @click.stop>
@@ -1348,28 +1427,6 @@
                 </div>
             </div>
 
-            <!-- Docs -->
-            <div class="docs-section">
-                <h3><i class="fas fa-database"></i> Supabase 数据表 · 学生名单在此管理</h3>
-                <div class="docs-grid">
-                    <div class="docs-card">
-                        <p><strong style="color:rgba(255,255,255,0.3);">students</strong> <span class="tag tag-blue">主表</span></p>
-                        <p style="margin-top:0.1rem;"><code>id</code> <code>name</code> <code>attendance</code> <code>performance</code> <code>homework</code> <code>midterm</code> <code>final</code> <code>daily_score</code><br><code>chapter1~6</code></p>
-                    </div>
-                    <div class="docs-card">
-                        <p><strong style="color:rgba(255,255,255,0.3);">homework_scores</strong> <span class="tag tag-green">作业明细</span></p>
-                        <p style="margin-top:0.1rem;"><code>id</code> <code>student_id</code> <code>homework_name</code> <code>score</code></p>
-                    </div>
-                    <div class="docs-card">
-                        <p><strong style="color:rgba(255,255,255,0.3);">daily_scores</strong> <span class="tag tag-green">每日一题</span></p>
-                        <p style="margin-top:0.1rem;"><code>id</code> <code>student_id</code> <code>score</code> <code>date</code></p>
-                    </div>
-                    <div class="docs-card">
-                        <p><strong style="color:rgba(255,255,255,0.3);">章节考核</strong> <span class="tag tag-purple">新增</span></p>
-                        <p style="margin-top:0.1rem; color:rgba(255,255,255,0.10); font-size:0.7rem;">存储在 <code>students</code> 表 <code>chapter1~6</code></p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1527,7 +1584,6 @@
 
                     processStudentData(students, hwMap, dailyMap) {
                         this.allStudents = students.map(s => {
-                            // 计算总评：所有分数相加（支持负数）
                             const total = (s.attendance ?? 0) + (s.performance ?? 0) +
                                 (hwMap[s.id] ?? s.homework ?? 0) +
                                 (s.midterm ?? 0) + (s.final ?? 0) +
@@ -1679,13 +1735,10 @@
                                 .eq('id', id);
                             if (error) throw error;
 
-                            // 显示保存成功提示
                             this.showToast('💾 新数据已成功保存至远程服务器');
 
-                            // 退出教师模式，防止别人恶意修改
                             this.isTeacher = false;
                             console.log('🔒 教师模式已自动退出（安全保护）');
-                            // 刷新数据
                             await this.loadAllData();
                             return true;
                         } catch (e) {
@@ -1695,7 +1748,6 @@
                         }
                     },
 
-                    // 通用编辑函数：支持负分
                     async editField(id, fieldName, fieldLabel, currentValue) {
                         const stu = this.allStudents.find(s => s.id === id);
                         if (!stu) return;
@@ -1724,7 +1776,6 @@
                     async editChapters(id) {
                         const stu = this.allStudents.find(s => s.id === id);
                         if (!stu) return;
-                        // 为章节单独提供多字段编辑
                         if (!this.isTeacher) {
                             this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
                             return;

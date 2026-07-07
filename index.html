@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -21,89 +20,72 @@
             position: relative;
             overflow-x: hidden;
         }
-        /* ===== 安庆师范大学背景装饰 ===== */
+        /* ===== 高等数学符号背景点缀 ===== */
         body::before {
-            content: '';
+            content: '∫ ∮ ∂ ∇ ∞ ∑ π √ ∛ ∜ ± × ÷ ≈ ≠ ≤ ≥ ∈ ∉ ∀ ∃ ∝ ⊂ ⊃ ∪ ∩ ∧ ∨ ¬ ⇒ ⇔';
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background:
-                radial-gradient(ellipse at 15% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 85% 15%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        /* 校园背景 - 使用CSS绘制的简约校园元素 */
-        .campus-bg {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            color: rgba(255, 255, 255, 0.015);
-            font-size: 14rem;
-            font-weight: 100;
-            user-select: none;
-            opacity: 0.4;
-        }
-        .campus-bg.c1 {
-            bottom: 2%;
-            right: 3%;
-            font-size: 18rem;
-            transform: rotate(-2deg);
-            color: rgba(59, 130, 246, 0.04);
-        }
-        .campus-bg.c2 {
-            bottom: 8%;
-            left: 2%;
-            font-size: 12rem;
-            transform: rotate(5deg);
-            color: rgba(167, 139, 250, 0.03);
-        }
-        .campus-bg.c3 {
-            top: 15%;
-            right: 5%;
             font-size: 8rem;
-            transform: rotate(8deg);
-            color: rgba(251, 191, 36, 0.025);
+            color: rgba(255, 255, 255, 0.008);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 4rem;
+            word-break: break-all;
+            line-height: 1.3;
+            transform: rotate(-2deg) scale(1.1);
+            user-select: none;
         }
-        .campus-bg .building {
-            display: block;
-            line-height: 1;
-            letter-spacing: -0.5rem;
-        }
-        .campus-bg .gate {
-            display: block;
-            font-size: 10rem;
-            line-height: 1;
-            letter-spacing: -0.3rem;
-        }
-        .campus-bg .tree {
-            display: inline-block;
-            font-size: 6rem;
-            margin: 0 -0.5rem;
-        }
-        /* 真实图片背景 - 使用校门/红楼等元素（CSS艺术字代替） */
-        .campus-watermark {
+        .math-symbols {
             position: fixed;
             pointer-events: none;
             z-index: 0;
-            user-select: none;
-            opacity: 0.03;
-            font-size: 2.5rem;
-            color: #60a5fa;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            line-height: 1.6;
-            letter-spacing: 0.3rem;
+            color: rgba(255, 255, 255, 0.010);
+            font-size: 6rem;
             font-weight: 300;
+            user-select: none;
+            opacity: 0.5;
         }
-        .campus-watermark span {
-            display: inline-block;
-            margin: 0 0.5rem;
-            opacity: 0.6;
+        .math-symbols.s1 {
+            top: 3%;
+            left: 2%;
+            transform: rotate(-6deg);
+            font-size: 7rem;
+            color: rgba(96, 165, 250, 0.04);
+        }
+        .math-symbols.s2 {
+            bottom: 5%;
+            right: 2%;
+            transform: rotate(8deg);
+            font-size: 9rem;
+            color: rgba(167, 139, 250, 0.035);
+        }
+        .math-symbols.s3 {
+            top: 35%;
+            right: 1%;
+            transform: rotate(12deg);
+            font-size: 5rem;
+            color: rgba(251, 191, 36, 0.03);
+        }
+        .math-symbols.s4 {
+            bottom: 30%;
+            left: 1%;
+            transform: rotate(-4deg);
+            font-size: 6rem;
+            color: rgba(52, 211, 153, 0.025);
+        }
+        .math-symbols.s5 {
+            top: 55%;
+            left: 50%;
+            transform: translateX(-50%) rotate(3deg);
+            font-size: 12rem;
+            color: rgba(255, 255, 255, 0.006);
+            letter-spacing: 2rem;
         }
 
         .app-container {
@@ -254,9 +236,9 @@
         }
         .header-left .class-badge {
             font-size: 1rem;
-            color: rgba(251, 191, 36, 0.5);
-            font-weight: 400;
-            -webkit-text-fill-color: rgba(251, 191, 36, 0.5);
+            color: rgba(251, 191, 36, 0.4);
+            font-weight: 500;
+            -webkit-text-fill-color: rgba(251, 191, 36, 0.4);
             margin-left: 0.3rem;
             letter-spacing: 0.04em;
         }
@@ -1026,6 +1008,31 @@
         .detail-score-item .value.red {
             color: #f87171;
         }
+        .detail-score-item .value.orange {
+            color: #fdba74;
+        }
+        /* ===== 详情弹窗中的字体颜色（与主界面一致） ===== */
+        .detail-score-item .label.attendance-label {
+            color: #93c5fd;
+        }
+        .detail-score-item .label.performance-label {
+            color: #6ee7b7;
+        }
+        .detail-score-item .label.homework-label {
+            color: #fcd34d;
+        }
+        .detail-score-item .label.midterm-label {
+            color: #f9a8d4;
+        }
+        .detail-score-item .label.final-label {
+            color: #fdba74;
+        }
+        .detail-score-item .label.daily-label {
+            color: #8eeac7;
+        }
+        .detail-score-item .label.chapter-label {
+            color: #c4b5fd;
+        }
         .detail-total {
             margin-top: 1.2rem;
             background: rgba(251, 191, 36, 0.06);
@@ -1058,6 +1065,13 @@
             body {
                 padding: 0.8rem 0.5rem;
                 font-size: 1rem;
+            }
+            body::before {
+                font-size: 3rem;
+                letter-spacing: 1.5rem;
+            }
+            .math-symbols {
+                display: none;
             }
             .header-card {
                 flex-direction: column;
@@ -1165,14 +1179,6 @@
                 font-size: 0.9rem;
                 padding: 0.4rem 1.2rem;
             }
-            .campus-bg {
-                display: none;
-            }
-            .campus-watermark {
-                font-size: 1.2rem;
-                bottom: 2%;
-                opacity: 0.02;
-            }
         }
         @media (max-width: 480px) {
             .kpi-row {
@@ -1180,6 +1186,10 @@
             }
             .detail-score-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+            body::before {
+                font-size: 2rem;
+                letter-spacing: 1rem;
             }
         }
 
@@ -1202,27 +1212,12 @@
 </head>
 <body>
 
-    <!-- ===== 安庆师范大学校园背景装饰 ===== -->
-    <div class="campus-bg c1">
-        <span class="building">🏛️</span>
-        <span style="display:block; font-size:6rem; opacity:0.5;">📚</span>
-    </div>
-    <div class="campus-bg c2">
-        <span class="gate">🚪</span>
-        <span style="display:block; font-size:4rem; opacity:0.4;">🌳🌳🌳</span>
-    </div>
-    <div class="campus-bg c3">
-        <span style="font-size:4rem;">🏫</span>
-        <span style="display:block; font-size:3rem; opacity:0.5;">🌸</span>
-    </div>
-    <div class="campus-watermark">
-        <span>🏛️</span>
-        <span>安庆师范大学</span>
-        <span>📖</span>
-        <span>·</span>
-        <span>红楼</span>
-        <span>🏫</span>
-    </div>
+    <!-- ===== 高等数学符号背景点缀 ===== -->
+    <div class="math-symbols s1">∫ ∂ ∇</div>
+    <div class="math-symbols s2">∑ π √</div>
+    <div class="math-symbols s3">∞ ≠ ≈</div>
+    <div class="math-symbols s4">∮ ∝ ⊂</div>
+    <div class="math-symbols s5">± × ÷</div>
 
     <div id="app">
         <div class="app-container">
@@ -1404,18 +1399,18 @@
                     <div class="student-name-big">{{ detailStudent.name }}</div>
                     <div class="student-id-big">学号：{{ detailStudent.id }}</div>
                     <div class="detail-score-grid">
-                        <div class="detail-score-item"><div class="label">考勤</div><div class="value blue">{{ detailStudent.attendance }}</div></div>
-                        <div class="detail-score-item"><div class="label">课堂表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
-                        <div class="detail-score-item"><div class="label">平时作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
-                        <div class="detail-score-item"><div class="label">期中测试</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
-                        <div class="detail-score-item"><div class="label">期末考试</div><div class="value red">{{ detailStudent.final }}</div></div>
-                        <div class="detail-score-item"><div class="label">每日一题</div><div class="value teal">{{ detailStudent.daily_score || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label">第1章</div><div class="value purple">{{ detailStudent.chapter1 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label">第2章</div><div class="value purple">{{ detailStudent.chapter2 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label">第3章</div><div class="value purple">{{ detailStudent.chapter3 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label">第4章</div><div class="value purple">{{ detailStudent.chapter4 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label">第5章</div><div class="value purple">{{ detailStudent.chapter5 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label">第6章</div><div class="value purple">{{ detailStudent.chapter6 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label attendance-label">考勤</div><div class="value blue">{{ detailStudent.attendance }}</div></div>
+                        <div class="detail-score-item"><div class="label performance-label">课堂表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
+                        <div class="detail-score-item"><div class="label homework-label">平时作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
+                        <div class="detail-score-item"><div class="label midterm-label">期中测试</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
+                        <div class="detail-score-item"><div class="label final-label">期末考试</div><div class="value red">{{ detailStudent.final }}</div></div>
+                        <div class="detail-score-item"><div class="label daily-label">每日一题</div><div class="value teal">{{ detailStudent.daily_score || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label chapter-label">第1章</div><div class="value purple">{{ detailStudent.chapter1 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label chapter-label">第2章</div><div class="value purple">{{ detailStudent.chapter2 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label chapter-label">第3章</div><div class="value purple">{{ detailStudent.chapter3 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label chapter-label">第4章</div><div class="value purple">{{ detailStudent.chapter4 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label chapter-label">第5章</div><div class="value purple">{{ detailStudent.chapter5 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label chapter-label">第6章</div><div class="value purple">{{ detailStudent.chapter6 || 0 }}</div></div>
                     </div>
                     <div class="detail-total">
                         <div class="label">总评</div>

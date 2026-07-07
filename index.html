@@ -16,7 +16,7 @@
         body {
             background: #080c1a;
             min-height: 100vh;
-            padding: 1rem;
+            padding: 1.2rem;
             position: relative;
             overflow-x: hidden;
         }
@@ -40,15 +40,90 @@
             z-index: 1;
         }
 
-        /* Header */
+        /* ===== 全局字号放大 ===== */
+        body {
+            font-size: 1.05rem;
+        }
+        .header-left h1 {
+            font-size: 1.9rem;
+        }
+        .btn {
+            font-size: 1rem;
+            padding: 0.6rem 1.5rem;
+        }
+        .btn-small {
+            font-size: 0.8rem;
+            padding: 0.25rem 1rem;
+        }
+        .student-count-badge {
+            font-size: 1rem;
+            padding: 0.5rem 1.5rem;
+        }
+        .search-section input {
+            font-size: 1.1rem;
+            padding: 0.7rem 0.4rem;
+        }
+        .search-section select {
+            font-size: 1rem;
+            padding: 0.7rem 2rem 0.7rem 1.2rem;
+        }
+        .search-section i {
+            font-size: 1.1rem;
+        }
+        .kpi-card .value {
+            font-size: 1.9rem;
+        }
+        .kpi-card .label {
+            font-size: 0.8rem;
+        }
+        .student-name {
+            font-size: 1.3rem;
+        }
+        .student-rank {
+            font-size: 0.8rem;
+        }
+        .score-item {
+            font-size: 0.85rem;
+            padding: 0.2rem 0.5rem 0.2rem 0.7rem;
+        }
+        .score-value {
+            font-size: 0.85rem;
+            padding: 0 0.5rem;
+        }
+        .score-item.total .score-value {
+            font-size: 1.1rem;
+        }
+        .modal-box h2 {
+            font-size: 1.6rem;
+        }
+        .modal-box input {
+            font-size: 1.1rem;
+            padding: 0.9rem 1.4rem;
+        }
+        .modal-box .btn {
+            font-size: 1rem;
+            padding: 0.8rem 0;
+        }
+        .docs-section h3 {
+            font-size: 0.9rem;
+        }
+        .docs-card p {
+            font-size: 0.85rem;
+        }
+        #toast {
+            font-size: 1rem;
+            padding: 0.8rem 2.2rem;
+        }
+
+        /* ===== Header ===== */
         .header-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px);
-            border-radius: 1.5rem;
-            padding: 1rem 1.5rem;
+            border-radius: 1.8rem;
+            padding: 1.2rem 2rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
             box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -61,28 +136,27 @@
             gap: 1rem;
         }
         .header-left .logo {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 1rem;
+            border-radius: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
         }
         .header-left h1 {
             font-weight: 700;
-            font-size: 1.6rem;
             background: linear-gradient(135deg, #60a5fa, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
         }
         .header-left .sub {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.2);
             font-weight: 400;
         }
@@ -90,18 +164,17 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.7rem;
         }
         .student-count-badge {
             background: rgba(255, 255, 255, 0.04);
-            padding: 0.4rem 1.2rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2.5rem;
             color: rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
         }
         .student-count-badge i {
             color: #60a5fa;
@@ -113,10 +186,9 @@
         .btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 2.5rem;
             font-weight: 600;
-            font-size: 0.85rem;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -124,6 +196,9 @@
             transition: all 0.25s ease;
             cursor: pointer;
             backdrop-filter: blur(4px);
+        }
+        .btn i {
+            font-size: 1rem;
         }
         .btn:hover {
             background: rgba(255, 255, 255, 0.08);
@@ -171,18 +246,18 @@
             color: #fff;
         }
 
-        /* KPI Row */
+        /* ===== KPI Row ===== */
         .kpi-row {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 0.8rem;
-            margin-bottom: 1.2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         .kpi-card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
-            border-radius: 1.2rem;
-            padding: 0.9rem 0.8rem;
+            border-radius: 1.5rem;
+            padding: 1rem 0.8rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
             text-align: center;
             transition: 0.3s;
@@ -205,14 +280,14 @@
             transform: translateY(-2px);
         }
         .kpi-card .label {
-            font-size: 0.65rem;
+            font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.25);
             text-transform: uppercase;
             letter-spacing: 0.06em;
             font-weight: 500;
         }
         .kpi-card .value {
-            font-size: 1.6rem;
+            font-size: 1.9rem;
             font-weight: 700;
             margin-top: 0.1rem;
             letter-spacing: -0.02em;
@@ -233,7 +308,7 @@
             color: #f472b6;
         }
         .kpi-card .change {
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.15);
             margin-top: 0.1rem;
         }
@@ -244,30 +319,30 @@
             color: #f87171;
         }
 
-        /* Search */
+        /* ===== Search ===== */
         .search-section {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
-            border-radius: 3rem;
-            padding: 0.4rem 0.4rem 0.4rem 1.5rem;
+            border-radius: 3.5rem;
+            padding: 0.3rem 0.3rem 0.3rem 1.8rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.3);
         }
         .search-section i {
             color: rgba(255, 255, 255, 0.12);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
         }
         .search-section input {
             border: none;
             background: transparent;
-            padding: 0.6rem 0.3rem;
-            font-size: 1rem;
-            min-width: 120px;
+            padding: 0.7rem 0.4rem;
+            font-size: 1.1rem;
+            min-width: 130px;
             flex: 1;
             outline: none;
             color: rgba(255, 255, 255, 0.7);
@@ -275,15 +350,14 @@
         }
         .search-section input::placeholder {
             color: rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
         }
         .search-section select {
             width: 100%;
-            padding: 0.6rem 1.8rem 0.6rem 1rem;
+            padding: 0.7rem 2rem 0.7rem 1.2rem;
             border-radius: 3rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
             background: rgba(255, 255, 255, 0.03);
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: rgba(255, 255, 255, 0.6);
             outline: none;
             cursor: pointer;
@@ -305,55 +379,56 @@
             background: transparent;
             border: none;
             color: rgba(255, 255, 255, 0.1);
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 0.8rem;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: 0.2s;
         }
         .btn-clear:hover {
             color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Student Grid */
+        /* ===== Student Grid ===== */
         .student-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 0.8rem;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1rem;
             margin: 1rem 0;
         }
         .student-card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(16px);
-            border-radius: 1.2rem;
-            padding: 1.1rem 1.2rem 0.9rem;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.3rem 1rem;
             border: 1px solid rgba(255, 255, 255, 0.03);
             transition: all 0.35s ease;
             box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
         }
         .student-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             background: rgba(255, 255, 255, 0.04);
             border-color: rgba(96, 165, 250, 0.08);
-            box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 12px 36px -12px rgba(0, 0, 0, 0.4);
         }
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.4rem;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         .student-name {
             font-weight: 600;
-            font-size: 1.15rem;
+            font-size: 1.3rem;
             color: #f0f4ff;
             letter-spacing: -0.2px;
         }
         .student-rank {
-            font-size: 0.65rem;
+            font-size: 0.8rem;
             background: rgba(96, 165, 250, 0.08);
-            padding: 0.1rem 0.6rem;
+            padding: 0.15rem 0.8rem;
             border-radius: 2rem;
             color: rgba(96, 165, 250, 0.5);
             border: 1px solid rgba(96, 165, 250, 0.05);
@@ -361,33 +436,33 @@
         .score-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.3rem;
-            margin: 0.4rem 0 0.1rem;
+            gap: 0.4rem;
+            margin: 0.5rem 0 0.1rem;
         }
         .score-item {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 0.8rem;
-            padding: 0.15rem 0.4rem 0.15rem 0.6rem;
+            padding: 0.2rem 0.5rem 0.2rem 0.7rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.35);
             border: 1px solid rgba(255, 255, 255, 0.02);
         }
         .score-item i {
-            font-size: 0.6rem;
+            font-size: 0.75rem;
             color: rgba(96, 165, 250, 0.25);
             margin-right: 0.1rem;
         }
         .score-value {
             background: rgba(255, 255, 255, 0.03);
-            padding: 0 0.4rem;
+            padding: 0 0.5rem;
             border-radius: 0.6rem;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.55);
-            font-size: 0.7rem;
+            font-size: 0.85rem;
         }
         .score-item.chapter {
             border-color: rgba(167, 139, 250, 0.05);
@@ -415,39 +490,39 @@
             border-color: rgba(251, 191, 36, 0.05);
             justify-content: center;
             gap: 1rem;
-            padding: 0.25rem 0.4rem;
+            padding: 0.3rem 0.5rem;
         }
         .score-item.total i {
             color: #fbbf24;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
         }
         .score-item.total .score-value {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             background: rgba(251, 191, 36, 0.06);
             color: #fbbf24;
             border: 1px solid rgba(251, 191, 36, 0.04);
         }
         .card-actions {
-            margin-top: 0.6rem;
+            margin-top: 0.7rem;
             display: flex;
-            gap: 0.3rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
             border-top: 1px solid rgba(255, 255, 255, 0.02);
-            padding-top: 0.5rem;
+            padding-top: 0.6rem;
         }
         .btn-small {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 2rem;
-            padding: 0.15rem 0.8rem;
-            font-size: 0.65rem;
+            padding: 0.25rem 1rem;
+            font-size: 0.8rem;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.3);
             transition: 0.2s;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 0.2rem;
+            gap: 0.3rem;
         }
         .btn-small:hover {
             background: rgba(255, 255, 255, 0.06);
@@ -463,11 +538,11 @@
             color: #6ee7b7;
         }
 
-        /* Table */
+        /* ===== Table ===== */
         .table-wrap {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
-            border-radius: 1.2rem;
+            border-radius: 1.5rem;
             padding: 0.2rem;
             border: 1px solid rgba(255, 255, 255, 0.03);
             margin-top: 1rem;
@@ -477,35 +552,35 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             min-width: 1000px;
         }
         th {
             text-align: left;
-            padding: 0.5rem 0.5rem;
+            padding: 0.6rem 0.6rem;
             background: rgba(255, 255, 255, 0.02);
             color: rgba(255, 255, 255, 0.2);
             font-weight: 500;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             letter-spacing: 0.04em;
             text-transform: uppercase;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
         }
         td {
-            padding: 0.4rem 0.5rem;
+            padding: 0.5rem 0.6rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.7rem;
+            font-size: 0.85rem;
         }
         .highlight-row {
             background: rgba(96, 165, 250, 0.03);
         }
         td strong {
             color: #fbbf24;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
         }
 
-        /* Toast */
+        /* ===== Toast ===== */
         #toast {
             position: fixed;
             bottom: 2rem;
@@ -514,12 +589,12 @@
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
             color: #f1f5f9;
-            padding: 0.7rem 2rem;
+            padding: 0.8rem 2.2rem;
             border-radius: 3rem;
             font-weight: 500;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
             z-index: 999;
-            font-size: 0.9rem;
+            font-size: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             opacity: 0;
@@ -534,11 +609,11 @@
 
         .loading-overlay {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             color: rgba(255, 255, 255, 0.1);
         }
         .loading-overlay i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
             color: #60a5fa;
             animation: spin 1s linear infinite;
@@ -554,64 +629,88 @@
 
         .empty-state {
             text-align: center;
-            padding: 3rem 1rem;
-            color: rgba(255, 255, 255, 0.15);
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .empty-state i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            color: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.08);
+        }
+        .empty-state .title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.5rem;
+        }
+        .empty-state p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.15);
+            line-height: 1.8;
+        }
+        .empty-state code {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.1rem 0.5rem;
+            border-radius: 0.4rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+            font-family: 'Inter', monospace;
         }
 
         .docs-section {
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(8px);
-            border-radius: 1.2rem;
-            padding: 0.8rem 1.2rem;
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.03);
         }
         .docs-section h3 {
             color: rgba(255, 255, 255, 0.15);
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            margin-bottom: 0.4rem;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
         .docs-section h3 i {
             color: #60a5fa;
         }
         .docs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 0.4rem;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.5rem;
         }
         .docs-card {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 0.8rem;
-            padding: 0.4rem 0.6rem;
+            border-radius: 1rem;
+            padding: 0.5rem 0.8rem;
             border: 1px solid rgba(255, 255, 255, 0.03);
         }
         .docs-card p {
             color: rgba(255, 255, 255, 0.15);
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             font-weight: 400;
         }
         .docs-card code {
             background: rgba(255, 255, 255, 0.04);
-            padding: 0.03rem 0.3rem;
+            padding: 0.05rem 0.3rem;
             border-radius: 0.2rem;
             color: rgba(255, 255, 255, 0.25);
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             font-family: 'Inter', monospace;
         }
         .docs-card .tag {
             display: inline-block;
             padding: 0.02rem 0.5rem;
             border-radius: 0.8rem;
-            font-size: 0.5rem;
+            font-size: 0.55rem;
             font-weight: 600;
             letter-spacing: 0.03em;
             margin-left: 0.15rem;
@@ -648,31 +747,31 @@
             background: #121b33;
             border-radius: 2rem;
             padding: 2.5rem 2rem;
-            max-width: 420px;
+            max-width: 440px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
         .modal-box h2 {
             color: #f0f4ff;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             margin-bottom: 0.3rem;
             text-align: center;
         }
         .modal-box .sub {
             color: rgba(255, 255, 255, 0.2);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-align: center;
             margin-bottom: 1.5rem;
         }
         .modal-box input {
             width: 100%;
-            padding: 0.8rem 1.2rem;
+            padding: 0.9rem 1.4rem;
             border-radius: 3rem;
             border: 1px solid rgba(255, 255, 255, 0.06);
             background: rgba(255, 255, 255, 0.03);
             color: #f0f4ff;
-            font-size: 1rem;
+            font-size: 1.1rem;
             outline: none;
             transition: 0.2s;
         }
@@ -690,19 +789,160 @@
         .modal-box .btn-row .btn {
             flex: 1;
             justify-content: center;
-            padding: 0.7rem 0;
-            font-size: 0.95rem;
+            padding: 0.8rem 0;
+            font-size: 1rem;
         }
         .modal-box .error-msg {
             color: #f87171;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             margin-top: 0.8rem;
             text-align: center;
+        }
+
+        /* ===== 全屏详情弹窗 ===== */
+        .detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(8, 12, 26, 0.95);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .detail-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 2.5rem;
+            padding: 2.5rem 3rem;
+            max-width: 750px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+        .detail-box .close-btn {
+            float: right;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 3rem;
+            padding: 0.4rem 1.2rem;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .detail-box .close-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        .detail-box .student-name-big {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #f0f4ff;
+            margin: 0.5rem 0 0.2rem;
+        }
+        .detail-box .student-id-big {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .detail-score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .detail-score-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1.2rem;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .detail-score-item .label {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .detail-score-item .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f0f4ff;
+            margin-top: 0.2rem;
+        }
+        .detail-score-item .value.gold {
+            color: #fbbf24;
+        }
+        .detail-score-item .value.blue {
+            color: #60a5fa;
+        }
+        .detail-score-item .value.green {
+            color: #6ee7b7;
+        }
+        .detail-score-item .value.purple {
+            color: #a78bfa;
+        }
+        .detail-score-item .value.pink {
+            color: #f472b6;
+        }
+        .detail-score-item .value.teal {
+            color: #5eead4;
+        }
+        .detail-score-item .value.red {
+            color: #f87171;
+        }
+        .detail-total {
+            margin-top: 1rem;
+            background: rgba(251, 191, 36, 0.06);
+            border-radius: 1.2rem;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(251, 191, 36, 0.08);
+        }
+        .detail-total .label {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+        }
+        .detail-total .value {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        /* ===== 教师模式指示器 ===== */
+        .teacher-badge {
+            background: rgba(251, 191, 36, 0.10);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         @media (max-width: 700px) {
             body {
                 padding: 0.6rem 0.4rem;
+                font-size: 0.95rem;
             }
             .header-card {
                 flex-direction: column;
@@ -712,7 +952,7 @@
                 border-radius: 1.2rem;
             }
             .header-left h1 {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
             .header-left .logo {
                 width: 40px;
@@ -725,8 +965,8 @@
                 flex-wrap: wrap;
             }
             .header-right .btn {
-                font-size: 0.75rem;
-                padding: 0.4rem 0.9rem;
+                font-size: 0.85rem;
+                padding: 0.4rem 1rem;
             }
             .search-section {
                 flex-direction: column;
@@ -736,7 +976,7 @@
                 border-radius: 1.5rem;
             }
             .search-section input {
-                font-size: 0.9rem;
+                font-size: 1rem;
                 padding: 0.5rem 0.2rem;
             }
             .student-grid {
@@ -750,65 +990,90 @@
                 gap: 0.4rem;
             }
             .kpi-card .value {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
             .kpi-card .label {
-                font-size: 0.55rem;
+                font-size: 0.6rem;
             }
             .student-name {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .score-item {
-                font-size: 0.6rem;
+                font-size: 0.7rem;
             }
             .score-value {
-                font-size: 0.6rem;
+                font-size: 0.7rem;
             }
             .score-item.total .score-value {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
             .modal-box {
                 padding: 1.8rem 1.2rem;
             }
             #toast {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
                 padding: 0.5rem 1.2rem;
                 white-space: normal;
                 max-width: 90%;
+            }
+            .detail-box {
+                padding: 1.5rem;
+            }
+            .detail-box .student-name-big {
+                font-size: 1.8rem;
+            }
+            .detail-score-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .detail-score-item .value {
+                font-size: 1.5rem;
+            }
+            .detail-total .value {
+                font-size: 2rem;
+            }
+            .btn {
+                font-size: 0.85rem;
+                padding: 0.4rem 1rem;
+            }
+            .btn-small {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.7rem;
+            }
+            .empty-state {
+                padding: 2rem 1rem;
+            }
+            .empty-state .title {
+                font-size: 1.1rem;
             }
         }
         @media (max-width: 480px) {
             .kpi-row {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .detail-score-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        /* Vue 加载失败提示 */
-        #vue-error {
-            display: none;
-            text-align: center;
-            padding: 3rem 1rem;
-            color: rgba(255, 255, 255, 0.3);
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-        #vue-error i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #ef4444;
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
         }
-        #vue-error.show {
-            display: block;
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
 <body>
 
-    <!-- Vue 加载失败提示 -->
-    <div id="vue-error">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>Vue 加载失败，请检查网络连接或刷新页面</p>
-    </div>
-
-    <!-- Vue 应用容器 -->
     <div id="app">
         <div class="app-container">
             <!-- Header -->
@@ -823,15 +1088,16 @@
                     <div class="student-count-badge">
                         <i class="fas fa-user-graduate"></i> <strong>{{ allStudents.length }}</strong> 人
                     </div>
+                    <span v-if="isTeacher" class="teacher-badge"><i class="fas fa-user-cog"></i> 教师模式</span>
                     <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
-                    <button class="btn btn-success" @click="exportExcel"><i class="fas fa-file-excel"></i> 导出</button>
-                    <button class="btn btn-teal" @click="showAllStudents"><i class="fas fa-th"></i> 全班</button>
+                    <button class="btn btn-success" @click="exportExcel" v-if="allStudents.length > 0"><i class="fas fa-file-excel"></i> 导出</button>
+                    <button class="btn btn-teal" @click="showAllStudents" v-if="allStudents.length > 0"><i class="fas fa-th"></i> 全班</button>
                     <button class="btn btn-gold" @click="openTeacherModal"><i class="fas fa-user-cog"></i> 教师后台</button>
                 </div>
             </div>
 
             <!-- KPI -->
-            <div class="kpi-row">
+            <div class="kpi-row" v-if="allStudents.length > 0">
                 <div class="kpi-card" style="--accent: #fbbf24;">
                     <div class="label">总评平均</div>
                     <div class="value gold">{{ avgTotal }}</div>
@@ -860,7 +1126,7 @@
             </div>
 
             <!-- Search -->
-            <div class="search-section">
+            <div class="search-section" v-if="allStudents.length > 0">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
                 <div style="flex:2; min-width:130px;">
@@ -878,14 +1144,26 @@
                 <p>加载数据中…</p>
             </div>
 
+            <!-- 空状态：数据加载失败或无数据 -->
+            <div v-else-if="allStudents.length === 0" class="empty-state">
+                <i class="fas fa-database"></i>
+                <div class="title">暂无数据</div>
+                <p>
+                    请检查 Supabase 配置是否正确。<br>
+                    确保 <code>students</code> 表中已有学生数据。<br>
+                    当前配置：<br>
+                    <code>SUPABASE_URL = '{{ supabaseUrlDisplay || "未配置" }}'</code><br>
+                    <code>SUPABASE_ANON_KEY = '{{ supabaseKeyDisplay || "未配置" }}'</code>
+                </p>
+                <button class="btn btn-primary" @click="loadAllData" style="margin-top:1.2rem;">
+                    <i class="fas fa-sync-alt"></i> 重新加载
+                </button>
+            </div>
+
             <template v-else>
                 <!-- Grid View -->
                 <div v-if="displayMode === 'grid'" class="student-grid">
-                    <div v-if="displayedStudents.length === 0" class="empty-state">
-                        <i class="fas fa-users"></i>
-                        <p>暂无学生数据</p>
-                    </div>
-                    <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id">
+                    <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id" @click="showDetail(stu)">
                         <div class="card-header">
                             <span class="student-name">{{ stu.name }}</span>
                             <span class="student-rank">#{{ idx + 1 }}</span>
@@ -907,11 +1185,11 @@
                                 <i class="fas fa-star"></i> 总评 <span class="score-value">{{ stu.total }}</span>
                             </div>
                         </div>
-                        <div class="card-actions">
+                        <div class="card-actions" @click.stop>
                             <button class="btn-small" @click="editStudent(stu.id)" v-if="isTeacher"><i class="fas fa-edit"></i> 记录</button>
                             <button class="btn-small chapter-btn" @click="editChapters(stu.id)" v-if="isTeacher"><i class="fas fa-layer-group"></i> 章节</button>
                             <button class="btn-small daily-btn" @click="editDailyScore(stu.id)" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
-                            <button class="btn-small" @click="showSingleStudent(stu.id)"><i class="fas fa-user"></i> 详情</button>
+                            <button class="btn-small" @click="showDetail(stu)"><i class="fas fa-expand"></i> 放大</button>
                         </div>
                     </div>
                 </div>
@@ -929,10 +1207,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-if="displayedStudents.length === 0">
-                                <td colspan="15" style="text-align:center; color:rgba(255,255,255,0.2); padding:2rem;">暂无数据</td>
-                            </tr>
-                            <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }">
+                            <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }" @click="showDetail(stu)" style="cursor:pointer;">
                                 <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
                                 <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
                                 <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
@@ -955,12 +1230,42 @@
                 <div class="modal-box">
                     <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.5rem;"></i>教师后台</h2>
                     <p class="sub">输入密码以编辑学生分数</p>
-                    <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" ref="passwordInput" />
+                    <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" ref="passwordInput" autofocus />
                     <div class="btn-row">
                         <button class="btn btn-primary" @click="verifyTeacher">确认</button>
                         <button class="btn" @click="closeTeacherModal">取消</button>
                     </div>
                     <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
+                </div>
+            </div>
+
+            <!-- 详情全屏弹窗 -->
+            <div v-if="showDetailModal" class="detail-overlay" @click.self="showDetailModal = false">
+                <div class="detail-box">
+                    <button class="close-btn" @click="showDetailModal = false"><i class="fas fa-times"></i> 关闭</button>
+                    <div class="student-name-big">{{ detailStudent.name }}</div>
+                    <div class="student-id-big">学号：{{ detailStudent.id }}</div>
+                    <div class="detail-score-grid">
+                        <div class="detail-score-item"><div class="label">考勤</div><div class="value blue">{{ detailStudent.attendance }}</div></div>
+                        <div class="detail-score-item"><div class="label">课堂表现</div><div class="value blue">{{ detailStudent.performance }}</div></div>
+                        <div class="detail-score-item"><div class="label">平时作业</div><div class="value blue">{{ detailStudent.homework }}</div></div>
+                        <div class="detail-score-item"><div class="label">期中测试</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
+                        <div class="detail-score-item"><div class="label">期末考试</div><div class="value pink">{{ detailStudent.final }}</div></div>
+                        <div class="detail-score-item"><div class="label">每日一题</div><div class="value green">{{ detailStudent.daily_score || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label">第1章</div><div class="value purple">{{ detailStudent.chapter1 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label">第2章</div><div class="value purple">{{ detailStudent.chapter2 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label">第3章</div><div class="value purple">{{ detailStudent.chapter3 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label">第4章</div><div class="value purple">{{ detailStudent.chapter4 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label">第5章</div><div class="value purple">{{ detailStudent.chapter5 || 0 }}</div></div>
+                        <div class="detail-score-item"><div class="label">第6章</div><div class="value purple">{{ detailStudent.chapter6 || 0 }}</div></div>
+                    </div>
+                    <div class="detail-total">
+                        <div class="label">总评</div>
+                        <div class="value">{{ detailStudent.total }}</div>
+                    </div>
+                    <div style="margin-top:1.2rem; text-align:center; color:rgba(255,255,255,0.15); font-size:0.8rem;">
+                        <i class="fas fa-info-circle"></i> 点击空白处或关闭按钮退出
+                    </div>
                 </div>
             </div>
 
@@ -982,14 +1287,13 @@
                     </div>
                     <div class="docs-card">
                         <p><strong style="color:rgba(255,255,255,0.3);">章节考核</strong> <span class="tag tag-purple">新增</span></p>
-                        <p style="margin-top:0.1rem; color:rgba(255,255,255,0.10); font-size:0.55rem;">存储在 <code>students</code> 表 <code>chapter1~6</code></p>
+                        <p style="margin-top:0.1rem; color:rgba(255,255,255,0.10); font-size:0.65rem;">存储在 <code>students</code> 表 <code>chapter1~6</code></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== 引入外部库 ===== -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
@@ -998,67 +1302,32 @@
     </script>
 
     <script>
-        // ===== 检查 Vue 是否加载 =====
+        // ===== 检查 Vue =====
         if (typeof Vue === 'undefined') {
-            document.getElementById('vue-error').classList.add('show');
+            document.body.innerHTML =
+                '<div style="text-align:center;padding:4rem 1rem;color:rgba(255,255,255,0.3);"><i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#ef4444;"></i><p style="margin-top:1rem;font-size:1.2rem;">Vue 加载失败，请检查网络连接</p></div>';
             console.error('❌ Vue 加载失败！');
         } else {
             console.log('✅ Vue 加载成功！版本:', Vue.version);
 
-            // ===== 检查 Supabase 是否加载 =====
-            let supabaseClient = null;
-
-            if (typeof supabase !== 'undefined' && supabase.createClient) {
-                console.log('✅ Supabase 加载成功！');
-                // Supabase 已加载，使用它
-                supabaseClient = supabase;
-            } else {
-                console.warn('⚠️ Supabase 未加载，使用模拟数据模式');
-                // 创建一个模拟客户端，直接使用模拟数据
-                supabaseClient = {
-                    from: function(table) {
-                        return {
-                            select: function(fields) {
-                                return {
-                                    order: function(col) {
-                                        return {
-                                            then: function(callback) {
-                                                // 返回空数据，让 loadAllData 使用模拟数据
-                                                callback({ data: [], error: null });
-                                            }
-                                        };
-                                    }
-                                };
-                            },
-                            update: function(data) {
-                                return {
-                                    eq: function(id) {
-                                        return {
-                                            then: function(callback) {
-                                                callback({ error: null });
-                                            }
-                                        };
-                                    }
-                                };
-                            }
-                        };
-                    }
-                };
-            }
-
-            // ============ Supabase 配置（如果使用真实 Supabase） ============
+            // ===== Supabase 配置 =====
             // ⚠️ 请将下面两行替换为您的 Supabase 实际值
             const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
             const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
 
-            // 如果 supabase 已加载，使用真实客户端
+            let supabaseClient = null;
+
             if (typeof supabase !== 'undefined' && supabase.createClient) {
                 try {
                     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                     console.log('✅ Supabase 客户端初始化成功');
                 } catch (e) {
-                    console.warn('⚠️ Supabase 客户端初始化失败，使用模拟模式', e);
+                    console.warn('⚠️ Supabase 初始化失败:', e);
+                    supabaseClient = null;
                 }
+            } else {
+                console.warn('⚠️ Supabase 未加载');
+                supabaseClient = null;
             }
 
             const TEACHER_PASSWORD = 'math2026';
@@ -1083,7 +1352,13 @@
                         showTeacherModal: false,
                         teacherPassword: '',
                         teacherError: '',
-                        isTeacher: false
+                        isTeacher: false,
+                        showDetailModal: false,
+                        detailStudent: { name: '', id: '', attendance: 0, performance: 0, homework: 0, midterm: 0,
+                            final: 0, daily_score: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0,
+                            chapter5: 0, chapter6: 0, total: 0 },
+                        supabaseUrlDisplay: SUPABASE_URL,
+                        supabaseKeyDisplay: SUPABASE_ANON_KEY ? SUPABASE_ANON_KEY.substring(0, 10) + '...' : '未配置'
                     };
                 },
                 mounted() {
@@ -1094,31 +1369,41 @@
                     async loadAllData() {
                         this.loading = true;
                         try {
-                            console.log('🔄 尝试连接 Supabase...');
-                            let students = [];
-                            let error = null;
-
-                            try {
-                                const result = await supabaseClient
-                                    .from('students')
-                                    .select('*')
-                                    .order('id');
-                                students = result.data || [];
-                                error = result.error;
-                            } catch (e) {
-                                console.warn('⚠️ Supabase 查询出错:', e);
-                                error = e;
+                            if (!supabaseClient) {
+                                console.warn('⚠️ Supabase 客户端未初始化');
+                                this.loading = false;
+                                this.allStudents = [];
+                                this.displayedStudents = [];
+                                this.showToast('⚠️ Supabase 未连接，请检查配置');
+                                return;
                             }
 
-                            if (error || !students || students.length === 0) {
-                                console.log('ℹ️ Supabase 无数据或连接失败，使用模拟数据');
-                                this.loadMockData();
+                            const { data: students, error } = await supabaseClient
+                                .from('students')
+                                .select('*')
+                                .order('id');
+
+                            if (error) {
+                                console.warn('⚠️ Supabase 查询出错:', error);
+                                this.loading = false;
+                                this.allStudents = [];
+                                this.displayedStudents = [];
+                                this.showToast('⚠️ 数据加载失败: ' + error.message);
+                                return;
+                            }
+
+                            if (!students || students.length === 0) {
+                                console.log('ℹ️ students 表为空');
+                                this.loading = false;
+                                this.allStudents = [];
+                                this.displayedStudents = [];
+                                this.showToast('ℹ️ students 表中暂无数据');
                                 return;
                             }
 
                             console.log('✅ Supabase 数据获取成功，共', students.length, '名学生');
 
-                            // 读取作业数据
+                            // 读取作业和每日一题数据
                             let homeworkData = [];
                             let dailyData = [];
                             try {
@@ -1152,39 +1437,13 @@
                             this.processStudentData(students, hwMap, dailyMap);
                             this.showToast('✅ 数据加载成功');
                         } catch (e) {
-                            console.warn('⚠️ 数据加载失败，使用模拟数据', e);
-                            this.loadMockData();
+                            console.warn('⚠️ 数据加载失败:', e);
+                            this.allStudents = [];
+                            this.displayedStudents = [];
+                            this.showToast('⚠️ 数据加载失败: ' + (e.message || '未知错误'));
                         } finally {
                             this.loading = false;
                         }
-                    },
-
-                    loadMockData() {
-                        const mockStudents = [
-                            { id: '061025022', name: '徐若伽', attendance: 8, performance: 7, homework: 18, midterm: 22,
-                                final: 25, daily_score: 5, chapter1: 15, chapter2: 16, chapter3: 14, chapter4: 17,
-                                chapter5: 18, chapter6: 15 },
-                            { id: '061025026', name: '程子昂', attendance: 9, performance: 8, homework: 20, midterm: 24,
-                                final: 28, daily_score: 6, chapter1: 18, chapter2: 17, chapter3: 16, chapter4: 19,
-                                chapter5: 20, chapter6: 18 },
-                            { id: '170425048', name: '李心然', attendance: 7, performance: 9, homework: 16, midterm: 20,
-                                final: 22, daily_score: 4, chapter1: 14, chapter2: 15, chapter3: 13, chapter4: 16,
-                                chapter5: 17, chapter6: 14 },
-                            { id: '061025041', name: '朱静蕾', attendance: 10, performance: 8, homework: 22, midterm: 25,
-                                final: 30, daily_score: 7, chapter1: 20, chapter2: 19, chapter3: 18, chapter4: 21,
-                                chapter5: 22, chapter6: 20 },
-                            { id: '170425057', name: '段诗雅', attendance: 6, performance: 7, homework: 15, midterm: 18,
-                                final: 20, daily_score: 3, chapter1: 12, chapter2: 13, chapter3: 11, chapter4: 14,
-                                chapter5: 15, chapter6: 12 },
-                            { id: '061025063', name: '王硕', attendance: 8, performance: 6, homework: 17, midterm: 19,
-                                final: 23, daily_score: 5, chapter1: 16, chapter2: 15, chapter3: 14, chapter4: 17,
-                                chapter5: 18, chapter6: 16 },
-                            { id: '061025103', name: '张怡', attendance: 8, performance: 9, homework: 18, midterm: 20,
-                                final: 23, daily_score: 5, chapter1: 16, chapter2: 17, chapter3: 15, chapter4: 18,
-                                chapter5: 19, chapter6: 16 },
-                        ];
-                        this.processStudentData(mockStudents, {}, {});
-                        this.showToast('⚠️ 使用模拟数据（请配置Supabase）');
                     },
 
                     processStudentData(students, hwMap, dailyMap) {
@@ -1267,14 +1526,9 @@
                         }
                     },
 
-                    showSingleStudent(id) {
-                        const target = this.allStudents.find(s => s.id === id);
-                        if (target) {
-                            this.displayedStudents = [target];
-                            this.displayMode = 'grid';
-                            this.selectedStudentId = id;
-                            this.searchSurname = target.name.charAt(0);
-                        }
+                    showDetail(student) {
+                        this.detailStudent = student;
+                        this.showDetailModal = true;
                     },
 
                     showAllStudents() {
@@ -1296,7 +1550,6 @@
 
                     // ===== 教师后台 =====
                     openTeacherModal() {
-                        console.log('🔓 打开教师后台弹窗');
                         this.showTeacherModal = true;
                         this.teacherPassword = '';
                         this.teacherError = '';
@@ -1312,7 +1565,6 @@
                         this.teacherError = '';
                     },
                     verifyTeacher() {
-                        console.log('🔑 验证密码...');
                         if (this.teacherPassword === TEACHER_PASSWORD) {
                             this.isTeacher = true;
                             this.closeTeacherModal();
@@ -1329,12 +1581,38 @@
                         }
                     },
 
-                    // ===== 编辑功能 =====
-                    async editStudent(id) {
+                    // ===== 编辑功能（每次操作后自动退出教师模式） =====
+                    async performEdit(id, updateData, successMsg) {
                         if (!this.isTeacher) {
                             this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-                            return;
+                            return false;
                         }
+                        if (!supabaseClient) {
+                            this.showToast('⚠️ Supabase 未连接，无法修改数据');
+                            return false;
+                        }
+                        try {
+                            const { error } = await supabaseClient
+                                .from('students')
+                                .update(updateData)
+                                .eq('id', id);
+                            if (error) throw error;
+
+                            this.showToast(successMsg);
+                            // 退出教师模式，防止别人恶意修改
+                            this.isTeacher = false;
+                            console.log('🔒 教师模式已自动退出（安全保护）');
+                            // 刷新数据
+                            await this.loadAllData();
+                            return true;
+                        } catch (e) {
+                            console.error(e);
+                            this.showToast('❌ 更新失败: ' + (e.message || '未知错误'));
+                            return false;
+                        }
+                    },
+
+                    async editStudent(id) {
                         const stu = this.allStudents.find(s => s.id === id);
                         if (!stu) return;
                         const newVal = prompt(
@@ -1344,24 +1622,13 @@
                         if (newVal) {
                             const parts = newVal.split(',').map(Number);
                             if (parts.length === 5 && parts.every(v => !isNaN(v))) {
-                                try {
-                                    const { error } = await supabaseClient
-                                        .from('students')
-                                        .update({
-                                            attendance: parts[0] || 0,
-                                            performance: parts[1] || 0,
-                                            homework: parts[2] || 0,
-                                            midterm: parts[3] || 0,
-                                            final: parts[4] || 0
-                                        })
-                                        .eq('id', id);
-                                    if (error) throw error;
-                                    this.showToast(`✅ ${stu.name} 分数已更新`);
-                                    this.loadAllData();
-                                } catch (e) {
-                                    console.error(e);
-                                    this.showToast('❌ 更新失败，请检查Supabase配置');
-                                }
+                                await this.performEdit(id, {
+                                    attendance: parts[0] || 0,
+                                    performance: parts[1] || 0,
+                                    homework: parts[2] || 0,
+                                    midterm: parts[3] || 0,
+                                    final: parts[4] || 0
+                                }, `✅ ${stu.name} 分数已更新`);
                             } else {
                                 this.showToast('❌ 请输入5个有效数字，用逗号分隔');
                             }
@@ -1369,10 +1636,6 @@
                     },
 
                     async editChapters(id) {
-                        if (!this.isTeacher) {
-                            this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-                            return;
-                        }
                         const stu = this.allStudents.find(s => s.id === id);
                         if (!stu) return;
                         const current =
@@ -1384,25 +1647,14 @@
                         if (newVal) {
                             const parts = newVal.split(',').map(Number);
                             if (parts.length === 6 && parts.every(v => !isNaN(v))) {
-                                try {
-                                    const { error } = await supabaseClient
-                                        .from('students')
-                                        .update({
-                                            chapter1: parts[0] || 0,
-                                            chapter2: parts[1] || 0,
-                                            chapter3: parts[2] || 0,
-                                            chapter4: parts[3] || 0,
-                                            chapter5: parts[4] || 0,
-                                            chapter6: parts[5] || 0
-                                        })
-                                        .eq('id', id);
-                                    if (error) throw error;
-                                    this.showToast(`✅ ${stu.name} 章节分数已更新`);
-                                    this.loadAllData();
-                                } catch (e) {
-                                    console.error(e);
-                                    this.showToast('❌ 更新失败，请检查Supabase配置');
-                                }
+                                await this.performEdit(id, {
+                                    chapter1: parts[0] || 0,
+                                    chapter2: parts[1] || 0,
+                                    chapter3: parts[2] || 0,
+                                    chapter4: parts[3] || 0,
+                                    chapter5: parts[4] || 0,
+                                    chapter6: parts[5] || 0
+                                }, `✅ ${stu.name} 章节分数已更新`);
                             } else {
                                 this.showToast('❌ 请输入6个有效数字，用逗号分隔');
                             }
@@ -1410,10 +1662,6 @@
                     },
 
                     async editDailyScore(id) {
-                        if (!this.isTeacher) {
-                            this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-                            return;
-                        }
                         const stu = this.allStudents.find(s => s.id === id);
                         if (!stu) return;
                         const newVal = prompt(`修改 ${stu.name} 的「每日一题」分数\n当前: ${stu.daily_score || 0}`, stu
@@ -1421,18 +1669,8 @@
                         if (newVal !== null) {
                             const score = Number(newVal);
                             if (!isNaN(score) && score >= 0) {
-                                try {
-                                    const { error } = await supabaseClient
-                                        .from('students')
-                                        .update({ daily_score: score })
-                                        .eq('id', id);
-                                    if (error) throw error;
-                                    this.showToast(`✅ ${stu.name} 每日一题分数已更新为 ${score}`);
-                                    this.loadAllData();
-                                } catch (e) {
-                                    console.error(e);
-                                    this.showToast('❌ 更新失败，请检查Supabase配置');
-                                }
+                                await this.performEdit(id, { daily_score: score },
+                                    `✅ ${stu.name} 每日一题分数已更新为 ${score}`);
                             } else {
                                 this.showToast('❌ 请输入有效数字（大于等于0）');
                             }

@@ -55,112 +55,9 @@
         .math-symbols.s3 { top: 35%; right: 1%; transform: rotate(12deg); font-size: 5rem; color: rgba(251,191,36,0.03); }
         .math-symbols.s4 { bottom: 30%; left: 1%; transform: rotate(-4deg); font-size: 6rem; color: rgba(52,211,153,0.025); }
         .math-symbols.s5 { top: 55%; left: 50%; transform: translateX(-50%) rotate(3deg); font-size: 12rem; color: rgba(255,255,255,0.005); letter-spacing: 2rem; }
-        .app-container {
-            max-width: 1480px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        .app-container { max-width: 1480px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* ===== 登录页面 ===== */
-        .login-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 80vh;
-            padding: 2rem;
-        }
-        .login-box {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border-radius: 2.5rem;
-            padding: 3.5rem 3rem;
-            max-width: 440px;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-        .login-box .logo-icon {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin: 0 auto 1.2rem;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
-        }
-        .login-box h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.3rem;
-        }
-        .login-box .sub {
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-        }
-        .login-box .class-badge-login {
-            display: inline-block;
-            background: rgba(251, 191, 36, 0.10);
-            border: 1px solid rgba(251, 191, 36, 0.15);
-            color: #fbbf24;
-            padding: 0.2rem 1.2rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
-            margin-bottom: 1.8rem;
-        }
-        .login-box input {
-            width: 100%;
-            padding: 0.9rem 1.4rem;
-            border-radius: 3.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            color: #f0f4ff;
-            font-size: 1.1rem;
-            outline: none;
-            transition: 0.2s;
-            margin-bottom: 0.8rem;
-        }
-        .login-box input:focus {
-            border-color: rgba(96, 165, 250, 0.2);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
-        }
-        .login-box input::placeholder {
-            color: rgba(255, 255, 255, 0.1);
-        }
-        .login-box .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 0.9rem 0;
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-        }
-        .login-box .error-msg {
-            color: #f87171;
-            font-size: 0.85rem;
-            margin-top: 0.8rem;
-            min-height: 1.5rem;
-        }
-        .login-box .hint {
-            color: rgba(255, 255, 255, 0.08);
-            font-size: 0.7rem;
-            margin-top: 1.2rem;
-        }
-
-        /* ===== 主界面样式（与之前相同） ===== */
+        /* ===== 全局字号 ===== */
         body { font-size: 1.15rem; }
         .header-left h1 { font-size: 2.4rem; }
         .header-left .sub { font-size: 1rem; }
@@ -236,12 +133,126 @@
         .btn-gold { background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.12); color: #fbbf24; }
         .btn-gold:hover { background: rgba(251,191,36,0.18); color: #fff; }
 
-        .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; margin-bottom: 1.8rem; }
-        .kpi-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 1.8rem; padding: 1.2rem 1rem; border: 1px solid rgba(255,255,255,0.04); text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
-        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent); opacity: 0.6; }
-        .kpi-card:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); transform: translateY(-2px); }
-        .kpi-card .label { color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
-        .kpi-card .value { font-weight: 700; margin-top: 0.2rem; letter-spacing: -0.02em; }
+        /* ===== 详细统计卡片行 ===== */
+        .stats-detail-row {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+        .stats-detail-card {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 1.2rem;
+            padding: 0.6rem 0.6rem;
+            border: 1px solid rgba(255,255,255,0.04);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .stats-detail-card:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+        .stats-detail-card .type-label {
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 500;
+            margin-bottom: 0.1rem;
+        }
+        .stats-detail-card .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.05rem 0.1rem;
+            font-size: 0.55rem;
+        }
+        .stats-detail-card .stat-row .stat-label {
+            color: rgba(255,255,255,0.15);
+            font-size: 0.5rem;
+        }
+        .stats-detail-card .stat-row .stat-value {
+            font-weight: 600;
+            font-size: 0.6rem;
+        }
+        .stats-detail-card .stat-row .stat-value.gold { color: #fbbf24; }
+        .stats-detail-card .stat-row .stat-value.blue { color: #60a5fa; }
+        .stats-detail-card .stat-row .stat-value.green { color: #6ee7b7; }
+        .stats-detail-card .stat-row .stat-value.purple { color: #a78bfa; }
+        .stats-detail-card .stat-row .stat-value.pink { color: #f472b6; }
+        .stats-detail-card .stat-row .stat-value.orange { color: #fb923c; }
+        .stats-detail-card .stat-row .stat-value.teal { color: #5eead4; }
+        .stats-detail-card .stat-row .stat-value.red { color: #f87171; }
+        .stats-detail-card .stat-row .student-name-small {
+            color: rgba(255,255,255,0.2);
+            font-size: 0.5rem;
+            max-width: 3.5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .stats-detail-card .stat-row .student-name-small:hover {
+            color: rgba(255,255,255,0.5);
+        }
+        .stats-detail-card .stat-row .student-name-small.revealed {
+            color: rgba(255,255,255,0.6);
+        }
+        .stats-detail-card .stat-row .change-up { color: #6ee7b7; }
+        .stats-detail-card .stat-row .change-down { color: #f87171; }
+        .stats-detail-card .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.04);
+            margin: 0.1rem 0;
+        }
+
+        /* ===== KPI Row ===== */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+        .kpi-card {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 1.8rem;
+            padding: 1.2rem 1rem;
+            border: 1px solid rgba(255,255,255,0.04);
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent);
+            opacity: 0.6;
+        }
+        .kpi-card:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
+        }
+        .kpi-card .label {
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 500;
+        }
+        .kpi-card .value {
+            font-weight: 700;
+            margin-top: 0.2rem;
+            letter-spacing: -0.02em;
+        }
         .kpi-card .value.gold { color: #fbbf24; }
         .kpi-card .value.blue { color: #60a5fa; }
         .kpi-card .value.green { color: #6ee7b7; }
@@ -251,7 +262,19 @@
         .kpi-card .change.up { color: #6ee7b7; }
         .kpi-card .change.down { color: #f87171; }
 
-        .search-section { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 4rem; padding: 0.3rem 0.3rem 0.3rem 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; border: 1px solid rgba(255,255,255,0.04); margin-bottom: 1.8rem; box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3); }
+        .search-section {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(12px);
+            border-radius: 4rem;
+            padding: 0.3rem 0.3rem 0.3rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3);
+        }
         .search-section i { color: rgba(255,255,255,0.12); }
         .search-section input { border: none; background: transparent; min-width: 150px; flex: 1; outline: none; color: rgba(255,255,255,0.7); font-weight: 400; }
         .search-section input::placeholder { color: rgba(255,255,255,0.1); }
@@ -375,6 +398,22 @@
 
         .teacher-badge { background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.15); color: #fbbf24; border-radius: 2.5rem; display: inline-flex; align-items: center; gap: 0.4rem; }
 
+        .login-page { display: flex; align-items: center; justify-content: center; min-height: 80vh; padding: 2rem; }
+        .login-box { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border-radius: 2.5rem; padding: 3.5rem 3rem; max-width: 440px; width: 100%; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 20px 60px rgba(0,0,0,0.5); text-align: center; }
+        .login-box .logo-icon { width: 72px; height: 72px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 1.8rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 2.2rem; font-weight: 700; margin: 0 auto 1.2rem; box-shadow: 0 8px 24px rgba(59,130,246,0.25); }
+        .login-box h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.3rem; }
+        .login-box .sub { color: rgba(255,255,255,0.2); font-size: 0.95rem; margin-bottom: 2rem; }
+        .login-box .class-badge-login { display: inline-block; background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.15); color: #fbbf24; padding: 0.2rem 1.2rem; border-radius: 2rem; font-size: 0.85rem; margin-bottom: 1.8rem; }
+        .login-box input { width: 100%; padding: 0.9rem 1.4rem; border-radius: 3.5rem; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); color: #f0f4ff; font-size: 1.1rem; outline: none; transition: 0.2s; margin-bottom: 0.8rem; }
+        .login-box input:focus { border-color: rgba(96,165,250,0.2); box-shadow: 0 0 0 3px rgba(59,130,246,0.05); }
+        .login-box input::placeholder { color: rgba(255,255,255,0.1); }
+        .login-box .btn { width: 100%; justify-content: center; padding: 0.9rem 0; font-size: 1.1rem; margin-top: 0.5rem; }
+        .login-box .error-msg { color: #f87171; font-size: 0.85rem; margin-top: 0.8rem; min-height: 1.5rem; }
+        .login-box .hint { color: rgba(255,255,255,0.08); font-size: 0.7rem; margin-top: 1.2rem; }
+
+        @media (max-width: 1200px) {
+            .stats-detail-row { grid-template-columns: repeat(4, 1fr); }
+        }
         @media (max-width: 700px) {
             body { padding: 0.8rem 0.5rem; font-size: 1rem; }
             body::before { font-size: 3rem; letter-spacing: 1.5rem; }
@@ -410,10 +449,13 @@
             .login-box { padding: 2.5rem 1.5rem; }
             .login-box h1 { font-size: 1.6rem; }
             .login-box .logo-icon { width: 56px; height: 56px; font-size: 1.6rem; }
+            .stats-detail-row { grid-template-columns: repeat(3, 1fr); }
+            .stats-detail-card .stat-row .student-name-small { max-width: 2.5rem; }
         }
         @media (max-width: 480px) {
             .kpi-row { grid-template-columns: repeat(2, 1fr); }
             .detail-score-grid { grid-template-columns: 1fr 1fr; }
+            .stats-detail-row { grid-template-columns: repeat(2, 1fr); }
             body::before { font-size: 2rem; letter-spacing: 1rem; }
         }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -447,7 +489,7 @@
                 </div>
             </div>
 
-            <!-- ===== 主界面（登录后显示） ===== -->
+            <!-- ===== 主界面 ===== -->
             <template v-else>
                 <!-- Header -->
                 <div class="header-card">
@@ -465,6 +507,129 @@
                         <button class="btn btn-teal" @click="showAllStudents" v-if="allStudents.length > 0"><i class="fas fa-th"></i> 全班</button>
                         <button class="btn btn-gold" @click="openTeacherModal"><i class="fas fa-user-cog"></i> 教师后台</button>
                         <button class="btn" @click="logout" style="color:rgba(255,255,255,0.2);"><i class="fas fa-sign-out-alt"></i> 退出</button>
+                    </div>
+                </div>
+
+                <!-- ===== 详细统计卡片行 ===== -->
+                <div class="stats-detail-row" v-if="allStudents.length > 0">
+                    <!-- 考勤 -->
+                    <div class="stats-detail-card">
+                        <div class="type-label" style="color:#60a5fa;">📋 考勤</div>
+                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value blue">{{ stats.attendance.avg }}</span></div>
+                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value blue">{{ stats.attendance.max }}</span><span class="student-name-small">{{ stats.attendance.maxName }}</span></div>
+                        <div class="divider"></div>
+                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.attendance.fastestChange }}</span><span class="student-name-small">{{ stats.attendance.fastestName }}</span></div>
+                        <div class="stat-row">
+                            <span class="stat-label">📉 下滑</span>
+                            <span class="stat-value red">{{ stats.attendance.slowestChange }}</span>
+                            <span class="student-name-small" 
+                                  :class="{ revealed: stats.attendance.slowestRevealed }"
+                                  @click="toggleSlowestReveal('attendance')">
+                                {{ stats.attendance.slowestRevealed ? stats.attendance.slowestName : '***' }}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 课堂表现 -->
+                    <div class="stats-detail-card">
+                        <div class="type-label" style="color:#6ee7b7;">🎯 表现</div>
+                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value green">{{ stats.performance.avg }}</span></div>
+                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value green">{{ stats.performance.max }}</span><span class="student-name-small">{{ stats.performance.maxName }}</span></div>
+                        <div class="divider"></div>
+                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.performance.fastestChange }}</span><span class="student-name-small">{{ stats.performance.fastestName }}</span></div>
+                        <div class="stat-row">
+                            <span class="stat-label">📉 下滑</span>
+                            <span class="stat-value red">{{ stats.performance.slowestChange }}</span>
+                            <span class="student-name-small" 
+                                  :class="{ revealed: stats.performance.slowestRevealed }"
+                                  @click="toggleSlowestReveal('performance')">
+                                {{ stats.performance.slowestRevealed ? stats.performance.slowestName : '***' }}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 平时作业 -->
+                    <div class="stats-detail-card">
+                        <div class="type-label" style="color:#fbbf24;">📝 作业</div>
+                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value gold">{{ stats.homework.avg }}</span></div>
+                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value gold">{{ stats.homework.max }}</span><span class="student-name-small">{{ stats.homework.maxName }}</span></div>
+                        <div class="divider"></div>
+                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.homework.fastestChange }}</span><span class="student-name-small">{{ stats.homework.fastestName }}</span></div>
+                        <div class="stat-row">
+                            <span class="stat-label">📉 下滑</span>
+                            <span class="stat-value red">{{ stats.homework.slowestChange }}</span>
+                            <span class="student-name-small" 
+                                  :class="{ revealed: stats.homework.slowestRevealed }"
+                                  @click="toggleSlowestReveal('homework')">
+                                {{ stats.homework.slowestRevealed ? stats.homework.slowestName : '***' }}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 期中测试 -->
+                    <div class="stats-detail-card">
+                        <div class="type-label" style="color:#f472b6;">🧪 期中</div>
+                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value pink">{{ stats.midterm.avg }}</span></div>
+                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value pink">{{ stats.midterm.max }}</span><span class="student-name-small">{{ stats.midterm.maxName }}</span></div>
+                        <div class="divider"></div>
+                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.midterm.fastestChange }}</span><span class="student-name-small">{{ stats.midterm.fastestName }}</span></div>
+                        <div class="stat-row">
+                            <span class="stat-label">📉 下滑</span>
+                            <span class="stat-value red">{{ stats.midterm.slowestChange }}</span>
+                            <span class="student-name-small" 
+                                  :class="{ revealed: stats.midterm.slowestRevealed }"
+                                  @click="toggleSlowestReveal('midterm')">
+                                {{ stats.midterm.slowestRevealed ? stats.midterm.slowestName : '***' }}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 期末考试 -->
+                    <div class="stats-detail-card">
+                        <div class="type-label" style="color:#fb923c;">🏆 期末</div>
+                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value orange">{{ stats.final.avg }}</span></div>
+                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value orange">{{ stats.final.max }}</span><span class="student-name-small">{{ stats.final.maxName }}</span></div>
+                        <div class="divider"></div>
+                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.final.fastestChange }}</span><span class="student-name-small">{{ stats.final.fastestName }}</span></div>
+                        <div class="stat-row">
+                            <span class="stat-label">📉 下滑</span>
+                            <span class="stat-value red">{{ stats.final.slowestChange }}</span>
+                            <span class="student-name-small" 
+                                  :class="{ revealed: stats.final.slowestRevealed }"
+                                  @click="toggleSlowestReveal('final')">
+                                {{ stats.final.slowestRevealed ? stats.final.slowestName : '***' }}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 每日一题 -->
+                    <div class="stats-detail-card">
+                        <div class="type-label" style="color:#5eead4;">🧩 每日一题</div>
+                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value teal">{{ stats.daily.avg }}</span></div>
+                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value teal">{{ stats.daily.max }}</span><span class="student-name-small">{{ stats.daily.maxName }}</span></div>
+                        <div class="divider"></div>
+                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.daily.fastestChange }}</span><span class="student-name-small">{{ stats.daily.fastestName }}</span></div>
+                        <div class="stat-row">
+                            <span class="stat-label">📉 下滑</span>
+                            <span class="stat-value red">{{ stats.daily.slowestChange }}</span>
+                            <span class="student-name-small" 
+                                  :class="{ revealed: stats.daily.slowestRevealed }"
+                                  @click="toggleSlowestReveal('daily')">
+                                {{ stats.daily.slowestRevealed ? stats.daily.slowestName : '***' }}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 章节考核 -->
+                    <div class="stats-detail-card">
+                        <div class="type-label" style="color:#a78bfa;">📚 章节</div>
+                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value purple">{{ stats.chapter.avg }}</span></div>
+                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value purple">{{ stats.chapter.max }}</span><span class="student-name-small">{{ stats.chapter.maxName }}</span></div>
+                        <div class="divider"></div>
+                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.chapter.fastestChange }}</span><span class="student-name-small">{{ stats.chapter.fastestName }}</span></div>
+                        <div class="stat-row">
+                            <span class="stat-label">📉 下滑</span>
+                            <span class="stat-value red">{{ stats.chapter.slowestChange }}</span>
+                            <span class="student-name-small" 
+                                  :class="{ revealed: stats.chapter.slowestRevealed }"
+                                  @click="toggleSlowestReveal('chapter')">
+                                {{ stats.chapter.slowestRevealed ? stats.chapter.slowestName : '***' }}
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -504,7 +669,7 @@
                     <button class="btn btn-primary" @click="loadAllData" style="margin-top:1.5rem;"><i class="fas fa-sync-alt"></i> 重新加载</button>
                 </div>
 
-                <!-- 学生数据展示 -->
+                <!-- 学生数据 -->
                 <template v-else>
                     <div v-if="displayMode === 'grid'" class="student-grid">
                         <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id" @click="showDetail(stu)">
@@ -570,7 +735,7 @@
                 <!-- Toast -->
                 <div id="toast"></div>
 
-                <!-- 教师后台密码弹窗（教师模式二次验证） -->
+                <!-- 教师后台弹窗 -->
                 <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
                     <div class="modal-box">
                         <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.6rem;"></i>教师后台</h2>
@@ -600,7 +765,7 @@
                     </div>
                 </div>
 
-                <!-- 详情全屏弹窗 -->
+                <!-- 详情弹窗 -->
                 <div v-if="showDetailModal" class="detail-overlay" @click.self="showDetailModal = false">
                     <div class="detail-box">
                         <button class="close-btn" @click="showDetailModal = false"><i class="fas fa-times"></i> 关闭</button>
@@ -642,7 +807,6 @@
     </script>
 
     <script>
-        // ===== 检查 Vue =====
         if (typeof Vue === 'undefined') {
             document.body.innerHTML =
                 '<div style="text-align:center;padding:4rem 1rem;color:rgba(255,255,255,0.3);"><i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#ef4444;"></i><p style="margin-top:1rem;font-size:1.2rem;">Vue 加载失败，请检查网络连接</p></div>';
@@ -650,7 +814,6 @@
         } else {
             console.log('✅ Vue 加载成功！版本:', Vue.version);
 
-            // ===== Supabase 配置 =====
             const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
             const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
 
@@ -669,30 +832,26 @@
                 supabaseClient = null;
             }
 
-            // ===== 密码配置 =====
-            const LOGIN_PASSWORD = 'math2026'; // 登录密码
-            const TEACHER_PASSWORD = 'math2026'; // 教师模式密码（可与登录密码不同）
+            const LOGIN_PASSWORD = 'math2026';
+            const TEACHER_PASSWORD = 'math2026';
 
-            // ===== 分数类型配置 =====
             const SCORE_TYPES = {
-                attendance: { table: 'attendance_scores', label: '考勤', icon: 'fa-user-check' },
-                performance: { table: 'performance_scores', label: '课堂表现', icon: 'fa-chalkboard-teacher' },
-                homework: { table: 'homework_scores', label: '平时作业', icon: 'fa-book-open' },
-                midterm: { table: 'midterm_scores', label: '期中测试', icon: 'fa-flask' },
-                final: { table: 'final_scores', label: '期末考试', icon: 'fa-check-circle' },
-                daily: { table: 'daily_scores', label: '每日一题', icon: 'fa-puzzle-piece' },
-                chapter: { table: 'chapter_scores', label: '章节考核', icon: 'fa-layer-group' }
+                attendance: { table: 'attendance_scores', label: '考勤', key: 'attendance' },
+                performance: { table: 'performance_scores', label: '课堂表现', key: 'performance' },
+                homework: { table: 'homework_scores', label: '平时作业', key: 'homework' },
+                midterm: { table: 'midterm_scores', label: '期中测试', key: 'midterm' },
+                final: { table: 'final_scores', label: '期末考试', key: 'final' },
+                daily: { table: 'daily_scores', label: '每日一题', key: 'daily_score' },
+                chapter: { table: 'chapter_scores', label: '章节考核', key: 'chapter' }
             };
 
             const app = Vue.createApp({
                 data() {
                     return {
-                        // ===== 登录状态 =====
                         isLoggedIn: false,
                         loginPassword: '',
                         loginError: '',
 
-                        // ===== 学生数据 =====
                         allStudents: [],
                         filteredStudents: [],
                         displayedStudents: [],
@@ -708,19 +867,33 @@
                         avgChapter: 0,
                         avgDaily: 0,
 
-                        // ===== 教师模式 =====
+                        stats: {
+                            attendance: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
+                                slowestChange: 0, slowestName: '', slowestRevealed: false },
+                            performance: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
+                                slowestChange: 0, slowestName: '', slowestRevealed: false },
+                            homework: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
+                                slowestChange: 0, slowestName: '', slowestRevealed: false },
+                            midterm: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
+                                slowestChange: 0, slowestName: '', slowestRevealed: false },
+                            final: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
+                                slowestChange: 0, slowestName: '', slowestRevealed: false },
+                            daily: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
+                                slowestChange: 0, slowestName: '', slowestRevealed: false },
+                            chapter: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
+                                slowestChange: 0, slowestName: '', slowestRevealed: false }
+                        },
+
                         showTeacherModal: false,
                         teacherPassword: '',
                         teacherError: '',
                         isTeacher: false,
 
-                        // ===== 详情弹窗 =====
                         showDetailModal: false,
                         detailStudent: { name: '', id: '', attendance: 0, performance: 0, homework: 0, midterm: 0,
                             final: 0, daily_score: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0,
                             chapter5: 0, chapter6: 0, total: 0 },
 
-                        // ===== 添加分数弹窗 =====
                         showScoreModal: false,
                         scoreModalStudentId: '',
                         scoreModalStudentName: '',
@@ -736,7 +909,6 @@
                 },
                 mounted() {
                     console.log('✅ Vue mounted!');
-                    // 自动聚焦登录输入框
                     this.$nextTick(() => {
                         if (this.$refs.loginInput) {
                             this.$refs.loginInput.focus();
@@ -744,14 +916,13 @@
                     });
                 },
                 methods: {
-                    // ===== 登录相关 =====
+                    // ===== 登录 =====
                     verifyLogin() {
                         if (this.loginPassword === LOGIN_PASSWORD) {
                             this.isLoggedIn = true;
                             this.loginError = '';
                             console.log('✅ 登录成功');
                             this.loadAllData();
-                            // 登录后聚焦到搜索框
                             this.$nextTick(() => {
                                 const searchInput = document.querySelector('.search-section input');
                                 if (searchInput) searchInput.focus();
@@ -780,6 +951,80 @@
                                 this.$refs.loginInput.focus();
                             }
                         });
+                    },
+
+                    // ===== 切换下滑姓名显示 =====
+                    toggleSlowestReveal(key) {
+                        if (this.stats[key]) {
+                            this.stats[key].slowestRevealed = !this.stats[key].slowestRevealed;
+                        }
+                    },
+
+                    // ===== 计算统计数据 =====
+                    calculateStats(students) {
+                        const stats = {};
+                        const fieldKeys = ['attendance', 'performance', 'homework', 'midterm', 'final', 'daily_score',
+                            'chapter'
+                        ];
+
+                        const studentsWithChapter = students.map(s => ({
+                            ...s,
+                            chapter: (s.chapter1 || 0) + (s.chapter2 || 0) + (s.chapter3 || 0) +
+                                (s.chapter4 || 0) + (s.chapter5 || 0) + (s.chapter6 || 0)
+                        }));
+
+                        fieldKeys.forEach(key => {
+                            const values = studentsWithChapter.map(s => s[key] || 0);
+                            const avg = Math.round(values.reduce((a, b) => a + b, 0) / values.length);
+
+                            let maxVal = -Infinity;
+                            let maxName = '';
+                            studentsWithChapter.forEach(s => {
+                                const val = s[key] || 0;
+                                if (val > maxVal) {
+                                    maxVal = val;
+                                    maxName = s.name;
+                                }
+                            });
+
+                            let fastestChange = -Infinity;
+                            let fastestName = '';
+                            let slowestChange = Infinity;
+                            let slowestName = '';
+
+                            studentsWithChapter.forEach(s => {
+                                const val = s[key] || 0;
+                                const deviation = val - avg;
+                                if (deviation > fastestChange) {
+                                    fastestChange = deviation;
+                                    fastestName = s.name;
+                                }
+                                if (deviation < slowestChange) {
+                                    slowestChange = deviation;
+                                    slowestName = s.name;
+                                }
+                            });
+
+                            const formatChange = (v) => {
+                                return v > 0 ? '+' + v : v;
+                            };
+
+                            stats[key] = {
+                                avg: avg,
+                                max: maxVal,
+                                maxName: maxName,
+                                fastestChange: formatChange(Math.round(fastestChange)),
+                                fastestName: fastestName,
+                                slowestChange: formatChange(Math.round(slowestChange)),
+                                slowestName: slowestName,
+                                slowestRevealed: false
+                            };
+                        });
+
+                        stats.chapter = stats.chapter || { avg: 0, max: 0, maxName: '', fastestChange: 0,
+                            fastestName: '', slowestChange: 0, slowestName: '', slowestRevealed: false };
+
+                        return stats;
                     },
 
                     // ===== 数据加载 =====
@@ -822,7 +1067,6 @@
 
                             console.log('✅ 学生数据获取成功，共', students.length, '名学生');
 
-                            // 读取所有分数表
                             const scoreData = {};
                             for (const [key, config] of Object.entries(SCORE_TYPES)) {
                                 try {
@@ -841,7 +1085,6 @@
                                 }
                             }
 
-                            // 汇总计算
                             const studentScores = {};
                             students.forEach(s => {
                                 studentScores[s.id] = {
@@ -924,7 +1167,6 @@
 
                             this.allStudents.sort((a, b) => b.total - a.total);
 
-                            // 计算KPI
                             if (this.allStudents.length > 0) {
                                 const totals = this.allStudents.map(s => s.total);
                                 this.avgTotal = Math.round(totals.reduce((a, b) => a + b, 0) / totals.length);
@@ -938,6 +1180,8 @@
                                 .length);
                                 this.avgDaily = Math.round(this.allStudents.reduce((a, b) => a + (b.daily_score ||
                                     0), 0) / this.allStudents.length);
+
+                                this.stats = this.calculateStats(this.allStudents);
                             }
 
                             this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
@@ -1043,7 +1287,7 @@
                         }
                     },
 
-                    // ===== 添加分数弹窗 =====
+                    // ===== 添加分数 =====
                     showAddScoreModal(studentId, type) {
                         if (!this.isTeacher) {
                             this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');

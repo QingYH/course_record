@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ===== 完整样式 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -56,9 +55,112 @@
         .math-symbols.s3 { top: 35%; right: 1%; transform: rotate(12deg); font-size: 5rem; color: rgba(251,191,36,0.03); }
         .math-symbols.s4 { bottom: 30%; left: 1%; transform: rotate(-4deg); font-size: 6rem; color: rgba(52,211,153,0.025); }
         .math-symbols.s5 { top: 55%; left: 50%; transform: translateX(-50%) rotate(3deg); font-size: 12rem; color: rgba(255,255,255,0.005); letter-spacing: 2rem; }
-        .app-container { max-width: 1480px; margin: 0 auto; position: relative; z-index: 1; }
+        .app-container {
+            max-width: 1480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-        /* ===== 全局字号 ===== */
+        /* ===== 登录页面 ===== */
+        .login-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 2rem;
+        }
+        .login-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 2.5rem;
+            padding: 3.5rem 3rem;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .login-box .logo-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+        }
+        .login-box h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.3rem;
+        }
+        .login-box .sub {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        .login-box .class-badge-login {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.10);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            padding: 0.2rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.8rem;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 0.9rem 1.4rem;
+            border-radius: 3.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            color: #f0f4ff;
+            font-size: 1.1rem;
+            outline: none;
+            transition: 0.2s;
+            margin-bottom: 0.8rem;
+        }
+        .login-box input:focus {
+            border-color: rgba(96, 165, 250, 0.2);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
+        }
+        .login-box input::placeholder {
+            color: rgba(255, 255, 255, 0.1);
+        }
+        .login-box .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 0.9rem 0;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+        .login-box .error-msg {
+            color: #f87171;
+            font-size: 0.85rem;
+            margin-top: 0.8rem;
+            min-height: 1.5rem;
+        }
+        .login-box .hint {
+            color: rgba(255, 255, 255, 0.08);
+            font-size: 0.7rem;
+            margin-top: 1.2rem;
+        }
+
+        /* ===== 主界面样式（与之前相同） ===== */
         body { font-size: 1.15rem; }
         .header-left h1 { font-size: 2.4rem; }
         .header-left .sub { font-size: 1rem; }
@@ -174,37 +276,30 @@
         .score-item.attendance i { color: #60a5fa; }
         .score-item.attendance .score-value { color: #93c5fd; }
         .score-item.attendance .label-text { color: #93c5fd; }
-
         .score-item.performance { border-color: rgba(52,211,153,0.20); background: rgba(52,211,153,0.05); }
         .score-item.performance i { color: #34d399; }
         .score-item.performance .score-value { color: #6ee7b7; }
         .score-item.performance .label-text { color: #6ee7b7; }
-
         .score-item.homework { border-color: rgba(251,191,36,0.20); background: rgba(251,191,36,0.05); }
         .score-item.homework i { color: #fbbf24; }
         .score-item.homework .score-value { color: #fcd34d; }
         .score-item.homework .label-text { color: #fcd34d; }
-
         .score-item.midterm { border-color: rgba(244,114,182,0.20); background: rgba(244,114,182,0.05); }
         .score-item.midterm i { color: #f472b6; }
         .score-item.midterm .score-value { color: #f9a8d4; }
         .score-item.midterm .label-text { color: #f9a8d4; }
-
         .score-item.final { border-color: rgba(251,146,60,0.20); background: rgba(251,146,60,0.05); }
         .score-item.final i { color: #fb923c; }
         .score-item.final .score-value { color: #fdba74; }
         .score-item.final .label-text { color: #fdba74; }
-
         .score-item.daily { border-color: rgba(110,231,183,0.20); background: rgba(110,231,183,0.05); }
         .score-item.daily i { color: #6ee7b7; }
         .score-item.daily .score-value { color: #8eeac7; }
         .score-item.daily .label-text { color: #8eeac7; }
-
         .score-item.chapter { border-color: rgba(167,139,250,0.15); background: rgba(167,139,250,0.04); }
         .score-item.chapter i { color: #a78bfa; }
         .score-item.chapter .score-value { color: #c4b5fd; }
         .score-item.chapter .label-text { color: #c4b5fd; }
-
         .score-item.total { grid-column: span 3; background: rgba(251,191,36,0.05); border-color: rgba(251,191,36,0.10); justify-content: center; gap: 1.2rem; padding: 0.4rem 0.6rem; }
         .score-item.total i { color: #fbbf24; }
         .score-item.total .score-value { background: rgba(251,191,36,0.08); color: #fbbf24; border: 1px solid rgba(251,191,36,0.06); }
@@ -312,6 +407,9 @@
             .empty-state { padding: 2rem 1rem; }
             .empty-state .title { font-size: 1.3rem; }
             .student-count-badge { font-size: 0.9rem; padding: 0.4rem 1.2rem; }
+            .login-box { padding: 2.5rem 1.5rem; }
+            .login-box h1 { font-size: 1.6rem; }
+            .login-box .logo-icon { width: 56px; height: 56px; font-size: 1.6rem; }
         }
         @media (max-width: 480px) {
             .kpi-row { grid-template-columns: repeat(2, 1fr); }
@@ -334,179 +432,205 @@
 
     <div id="app">
         <div class="app-container">
-            <div class="header-card">
-                <div class="header-left">
-                    <div class="logo"><i class="fas fa-chart-pie"></i></div>
-                    <div>
-                        <h1>高等数学 <span class="sub">· 学情驾驶舱</span><span class="class-badge">2026级A4班专享</span></h1>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="student-count-badge"><i class="fas fa-user-graduate"></i> <strong>{{ allStudents.length }}</strong> 人</div>
-                    <span v-if="isTeacher" class="teacher-badge"><i class="fas fa-user-cog"></i> 教师模式</span>
-                    <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
-                    <button class="btn btn-success" @click="exportExcel" v-if="allStudents.length > 0"><i class="fas fa-file-excel"></i> 导出</button>
-                    <button class="btn btn-teal" @click="showAllStudents" v-if="allStudents.length > 0"><i class="fas fa-th"></i> 全班</button>
-                    <button class="btn btn-gold" @click="openTeacherModal"><i class="fas fa-user-cog"></i> 教师后台</button>
+
+            <!-- ===== 登录页面 ===== -->
+            <div v-if="!isLoggedIn" class="login-page">
+                <div class="login-box">
+                    <div class="logo-icon"><i class="fas fa-calculator"></i></div>
+                    <h1>高等数学</h1>
+                    <p class="sub">学情驾驶舱 · 请先登录</p>
+                    <div class="class-badge-login"><i class="fas fa-users"></i> 2026级A4班专享</div>
+                    <input type="password" v-model="loginPassword" placeholder="请输入访问密码…" @keyup.enter="verifyLogin" ref="loginInput" autofocus />
+                    <button class="btn btn-primary" @click="verifyLogin"><i class="fas fa-unlock-alt"></i> 进入系统</button>
+                    <div class="error-msg">{{ loginError }}</div>
+                    <div class="hint">默认密码: math2024</div>
                 </div>
             </div>
 
-            <div class="kpi-row" v-if="allStudents.length > 0">
-                <div class="kpi-card" style="--accent: #fbbf24;"><div class="label">总评平均</div><div class="value gold">{{ avgTotal }}</div><div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div></div>
-                <div class="kpi-card" style="--accent: #60a5fa;"><div class="label">最高总评</div><div class="value blue">{{ maxTotal }}</div><div class="change"><i class="fas fa-crown"></i> TOP1</div></div>
-                <div class="kpi-card" style="--accent: #6ee7b7;"><div class="label">考勤平均</div><div class="value green">{{ avgAttendance }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +5%</div></div>
-                <div class="kpi-card" style="--accent: #a78bfa;"><div class="label">章节平均</div><div class="value purple">{{ avgChapter }}</div><div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div></div>
-                <div class="kpi-card" style="--accent: #f472b6;"><div class="label">每日一题平均</div><div class="value pink">{{ avgDaily }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +8%</div></div>
-            </div>
-
-            <div class="search-section" v-if="allStudents.length > 0">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
-                <div style="flex:2; min-width:150px;">
-                    <select v-model="selectedStudentId" @change="onSelectStudent">
-                        <option value="">— 选择学生 —</option>
-                        <option v-for="s in filteredStudentOptions" :key="s.id" :value="s.id">{{ s.name }} ({{ s.id }})</option>
-                    </select>
-                </div>
-                <button class="btn-clear" @click="clearSearch"><i class="fas fa-times-circle"></i></button>
-            </div>
-
-            <div v-if="loading" class="loading-overlay">
-                <i class="fas fa-spinner"></i>
-                <p>加载数据中…</p>
-            </div>
-
-            <div v-else-if="allStudents.length === 0" class="empty-state">
-                <i class="fas fa-database"></i>
-                <div class="title">暂无数据</div>
-                <p>请检查 Supabase 配置是否正确。<br>确保 <code>students</code> 表中已有学生数据。</p>
-                <button class="btn btn-primary" @click="loadAllData" style="margin-top:1.5rem;"><i class="fas fa-sync-alt"></i> 重新加载</button>
-            </div>
-
+            <!-- ===== 主界面（登录后显示） ===== -->
             <template v-else>
-                <div v-if="displayMode === 'grid'" class="student-grid">
-                    <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id" @click="showDetail(stu)">
-                        <div class="card-header">
-                            <span class="student-name">{{ stu.name }}</span>
-                            <span class="student-rank">#{{ idx + 1 }}</span>
+                <!-- Header -->
+                <div class="header-card">
+                    <div class="header-left">
+                        <div class="logo"><i class="fas fa-chart-pie"></i></div>
+                        <div>
+                            <h1>高等数学 <span class="sub">· 学情驾驶舱</span><span class="class-badge">2026级A4班专享</span></h1>
                         </div>
-                        <div class="score-grid">
-                            <div class="score-item attendance"><i class="fas fa-user-check"></i> <span class="label-text">考勤</span> <span class="score-value">{{ stu.attendance }}</span></div>
-                            <div class="score-item performance"><i class="fas fa-chalkboard-teacher"></i> <span class="label-text">表现</span> <span class="score-value">{{ stu.performance }}</span></div>
-                            <div class="score-item homework"><i class="fas fa-book-open"></i> <span class="label-text">作业</span> <span class="score-value">{{ stu.homework }}</span></div>
-                            <div class="score-item midterm"><i class="fas fa-flask"></i> <span class="label-text">期中</span> <span class="score-value">{{ stu.midterm }}</span></div>
-                            <div class="score-item final"><i class="fas fa-check-circle"></i> <span class="label-text">期末</span> <span class="score-value">{{ stu.final }}</span></div>
-                            <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> <span class="label-text">每日一题</span> <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第1章</span> <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第2章</span> <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第3章</span> <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第4章</span> <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第5章</span> <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
-                            <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第6章</span> <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
-                            <div class="score-item total"><i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span></div>
+                    </div>
+                    <div class="header-right">
+                        <div class="student-count-badge"><i class="fas fa-user-graduate"></i> <strong>{{ allStudents.length }}</strong> 人</div>
+                        <span v-if="isTeacher" class="teacher-badge"><i class="fas fa-user-cog"></i> 教师模式</span>
+                        <button class="btn btn-primary" @click="loadAllData"><i class="fas fa-sync-alt"></i> 刷新</button>
+                        <button class="btn btn-success" @click="exportExcel" v-if="allStudents.length > 0"><i class="fas fa-file-excel"></i> 导出</button>
+                        <button class="btn btn-teal" @click="showAllStudents" v-if="allStudents.length > 0"><i class="fas fa-th"></i> 全班</button>
+                        <button class="btn btn-gold" @click="openTeacherModal"><i class="fas fa-user-cog"></i> 教师后台</button>
+                        <button class="btn" @click="logout" style="color:rgba(255,255,255,0.2);"><i class="fas fa-sign-out-alt"></i> 退出</button>
+                    </div>
+                </div>
+
+                <!-- KPI -->
+                <div class="kpi-row" v-if="allStudents.length > 0">
+                    <div class="kpi-card" style="--accent: #fbbf24;"><div class="label">总评平均</div><div class="value gold">{{ avgTotal }}</div><div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div></div>
+                    <div class="kpi-card" style="--accent: #60a5fa;"><div class="label">最高总评</div><div class="value blue">{{ maxTotal }}</div><div class="change"><i class="fas fa-crown"></i> TOP1</div></div>
+                    <div class="kpi-card" style="--accent: #6ee7b7;"><div class="label">考勤平均</div><div class="value green">{{ avgAttendance }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +5%</div></div>
+                    <div class="kpi-card" style="--accent: #a78bfa;"><div class="label">章节平均</div><div class="value purple">{{ avgChapter }}</div><div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div></div>
+                    <div class="kpi-card" style="--accent: #f472b6;"><div class="label">每日一题平均</div><div class="value pink">{{ avgDaily }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +8%</div></div>
+                </div>
+
+                <!-- Search -->
+                <div class="search-section" v-if="allStudents.length > 0">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
+                    <div style="flex:2; min-width:150px;">
+                        <select v-model="selectedStudentId" @change="onSelectStudent">
+                            <option value="">— 选择学生 —</option>
+                            <option v-for="s in filteredStudentOptions" :key="s.id" :value="s.id">{{ s.name }} ({{ s.id }})</option>
+                        </select>
+                    </div>
+                    <button class="btn-clear" @click="clearSearch"><i class="fas fa-times-circle"></i></button>
+                </div>
+
+                <!-- Loading -->
+                <div v-if="loading" class="loading-overlay">
+                    <i class="fas fa-spinner"></i>
+                    <p>加载数据中…</p>
+                </div>
+
+                <!-- 空状态 -->
+                <div v-else-if="allStudents.length === 0" class="empty-state">
+                    <i class="fas fa-database"></i>
+                    <div class="title">暂无数据</div>
+                    <p>请检查 Supabase 配置是否正确。<br>确保 <code>students</code> 表中已有学生数据。</p>
+                    <button class="btn btn-primary" @click="loadAllData" style="margin-top:1.5rem;"><i class="fas fa-sync-alt"></i> 重新加载</button>
+                </div>
+
+                <!-- 学生数据展示 -->
+                <template v-else>
+                    <div v-if="displayMode === 'grid'" class="student-grid">
+                        <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id" @click="showDetail(stu)">
+                            <div class="card-header">
+                                <span class="student-name">{{ stu.name }}</span>
+                                <span class="student-rank">#{{ idx + 1 }}</span>
+                            </div>
+                            <div class="score-grid">
+                                <div class="score-item attendance"><i class="fas fa-user-check"></i> <span class="label-text">考勤</span> <span class="score-value">{{ stu.attendance }}</span></div>
+                                <div class="score-item performance"><i class="fas fa-chalkboard-teacher"></i> <span class="label-text">表现</span> <span class="score-value">{{ stu.performance }}</span></div>
+                                <div class="score-item homework"><i class="fas fa-book-open"></i> <span class="label-text">作业</span> <span class="score-value">{{ stu.homework }}</span></div>
+                                <div class="score-item midterm"><i class="fas fa-flask"></i> <span class="label-text">期中</span> <span class="score-value">{{ stu.midterm }}</span></div>
+                                <div class="score-item final"><i class="fas fa-check-circle"></i> <span class="label-text">期末</span> <span class="score-value">{{ stu.final }}</span></div>
+                                <div class="score-item daily"><i class="fas fa-puzzle-piece"></i> <span class="label-text">每日一题</span> <span class="score-value">{{ stu.daily_score || 0 }}</span></div>
+                                <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第1章</span> <span class="score-value">{{ stu.chapter1 || 0 }}</span></div>
+                                <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第2章</span> <span class="score-value">{{ stu.chapter2 || 0 }}</span></div>
+                                <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第3章</span> <span class="score-value">{{ stu.chapter3 || 0 }}</span></div>
+                                <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第4章</span> <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
+                                <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第5章</span> <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
+                                <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第6章</span> <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
+                                <div class="score-item total"><i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span></div>
+                            </div>
+                            <div class="card-actions" @click.stop>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'attendance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 考勤</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'performance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 表现</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'homework')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 作业</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'midterm')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期中</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'final')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期末</button>
+                                <button class="btn-small daily-btn" @click="showAddScoreModal(stu.id, 'daily')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
+                                <button class="btn-small chapter-btn" @click="showAddScoreModal(stu.id, 'chapter')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 章节</button>
+                                <button class="btn-small" @click="showDetail(stu)"><i class="fas fa-expand"></i> 放大</button>
+                            </div>
                         </div>
-                        <div class="card-actions" @click.stop>
-                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'attendance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 考勤</button>
-                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'performance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 表现</button>
-                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'homework')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 作业</button>
-                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'midterm')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期中</button>
-                            <button class="btn-small" @click="showAddScoreModal(stu.id, 'final')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期末</button>
-                            <button class="btn-small daily-btn" @click="showAddScoreModal(stu.id, 'daily')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
-                            <button class="btn-small chapter-btn" @click="showAddScoreModal(stu.id, 'chapter')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 章节</button>
-                            <button class="btn-small" @click="showDetail(stu)"><i class="fas fa-expand"></i> 放大</button>
+                    </div>
+
+                    <div v-else-if="displayMode === 'table'" class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th><th>学号</th><th>姓名</th>
+                                    <th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th>
+                                    <th>每日一题</th>
+                                    <th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th>
+                                    <th>总评</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }" @click="showDetail(stu)" style="cursor:pointer;">
+                                    <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
+                                    <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
+                                    <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
+                                    <td>{{ stu.daily_score || 0 }}</td>
+                                    <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td>
+                                    <td>{{ stu.chapter3 || 0 }}</td><td>{{ stu.chapter4 || 0 }}</td>
+                                    <td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
+                                    <td><strong>{{ stu.total }}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <!-- Toast -->
+                <div id="toast"></div>
+
+                <!-- 教师后台密码弹窗（教师模式二次验证） -->
+                <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
+                    <div class="modal-box">
+                        <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.6rem;"></i>教师后台</h2>
+                        <p class="sub">输入教师密码以编辑学生分数（支持负分减分）</p>
+                        <input type="password" v-model="teacherPassword" placeholder="请输入教师密码…" @keyup.enter="verifyTeacher" ref="passwordInput" autofocus />
+                        <div class="btn-row">
+                            <button class="btn btn-primary" @click="verifyTeacher">确认</button>
+                            <button class="btn" @click="closeTeacherModal">取消</button>
+                        </div>
+                        <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
+                    </div>
+                </div>
+
+                <!-- 添加分数弹窗 -->
+                <div v-if="showScoreModal" class="modal-overlay" @click.self="closeScoreModal">
+                    <div class="modal-box">
+                        <h2><i class="fas fa-plus-circle" style="color:#6ee7b7; margin-right:0.6rem;"></i>添加分数</h2>
+                        <p class="sub">{{ scoreModalStudentName }} · {{ scoreModalTypeLabel }}</p>
+                        <p style="color:rgba(255,255,255,0.15); font-size:0.85rem; text-align:center; margin-bottom:0.5rem;">当前总分：<strong style="color:#fbbf24;">{{ scoreModalCurrentTotal }}</strong></p>
+                        <input type="text" v-model="scoreModalValue" placeholder="输入分数（负值可减分）…" @keyup.enter="confirmAddScore" />
+                        <p style="color:rgba(255,255,255,0.1); font-size:0.7rem; text-align:center; margin-top:0.3rem;">输入正数加分，输入负数减分</p>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" @click="confirmAddScore">确认添加</button>
+                            <button class="btn" @click="closeScoreModal">取消</button>
+                        </div>
+                        <div v-if="scoreError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ scoreError }}</div>
+                    </div>
+                </div>
+
+                <!-- 详情全屏弹窗 -->
+                <div v-if="showDetailModal" class="detail-overlay" @click.self="showDetailModal = false">
+                    <div class="detail-box">
+                        <button class="close-btn" @click="showDetailModal = false"><i class="fas fa-times"></i> 关闭</button>
+                        <div class="student-name-big">{{ detailStudent.name }}</div>
+                        <div class="student-id-big">学号：{{ detailStudent.id }}</div>
+                        <div class="detail-score-grid">
+                            <div class="detail-score-item"><div class="label attendance-label">考勤</div><div class="value blue">{{ detailStudent.attendance }}</div></div>
+                            <div class="detail-score-item"><div class="label performance-label">课堂表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
+                            <div class="detail-score-item"><div class="label homework-label">平时作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
+                            <div class="detail-score-item"><div class="label midterm-label">期中测试</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
+                            <div class="detail-score-item"><div class="label final-label">期末考试</div><div class="value red">{{ detailStudent.final }}</div></div>
+                            <div class="detail-score-item"><div class="label daily-label">每日一题</div><div class="value teal">{{ detailStudent.daily_score || 0 }}</div></div>
+                            <div class="detail-score-item"><div class="label chapter-label">第1章</div><div class="value purple">{{ detailStudent.chapter1 || 0 }}</div></div>
+                            <div class="detail-score-item"><div class="label chapter-label">第2章</div><div class="value purple">{{ detailStudent.chapter2 || 0 }}</div></div>
+                            <div class="detail-score-item"><div class="label chapter-label">第3章</div><div class="value purple">{{ detailStudent.chapter3 || 0 }}</div></div>
+                            <div class="detail-score-item"><div class="label chapter-label">第4章</div><div class="value purple">{{ detailStudent.chapter4 || 0 }}</div></div>
+                            <div class="detail-score-item"><div class="label chapter-label">第5章</div><div class="value purple">{{ detailStudent.chapter5 || 0 }}</div></div>
+                            <div class="detail-score-item"><div class="label chapter-label">第6章</div><div class="value purple">{{ detailStudent.chapter6 || 0 }}</div></div>
+                        </div>
+                        <div class="detail-total">
+                            <div class="label">总评</div>
+                            <div class="value">{{ detailStudent.total }}</div>
+                        </div>
+                        <div style="margin-top:1.2rem; text-align:center; color:rgba(255,255,255,0.15); font-size:0.85rem;">
+                            <i class="fas fa-info-circle"></i> 点击空白处或关闭按钮退出
                         </div>
                     </div>
                 </div>
 
-                <div v-else-if="displayMode === 'table'" class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th><th>学号</th><th>姓名</th>
-                                <th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th>
-                                <th>每日一题</th>
-                                <th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th>
-                                <th>总评</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }" @click="showDetail(stu)" style="cursor:pointer;">
-                                <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
-                                <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
-                                <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
-                                <td>{{ stu.daily_score || 0 }}</td>
-                                <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td>
-                                <td>{{ stu.chapter3 || 0 }}</td><td>{{ stu.chapter4 || 0 }}</td>
-                                <td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
-                                <td><strong>{{ stu.total }}</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </template>
-
-            <div id="toast"></div>
-
-            <!-- 教师后台弹窗 -->
-            <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
-                <div class="modal-box">
-                    <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.6rem;"></i>教师后台</h2>
-                    <p class="sub">输入密码以编辑学生分数（支持负分减分）</p>
-                    <input type="password" v-model="teacherPassword" placeholder="请输入密码…" @keyup.enter="verifyTeacher" ref="passwordInput" autofocus />
-                    <div class="btn-row">
-                        <button class="btn btn-primary" @click="verifyTeacher">确认</button>
-                        <button class="btn" @click="closeTeacherModal">取消</button>
-                    </div>
-                    <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
-                </div>
-            </div>
-
-            <!-- 添加分数弹窗 -->
-            <div v-if="showScoreModal" class="modal-overlay" @click.self="closeScoreModal">
-                <div class="modal-box">
-                    <h2><i class="fas fa-plus-circle" style="color:#6ee7b7; margin-right:0.6rem;"></i>添加分数</h2>
-                    <p class="sub">{{ scoreModalStudentName }} · {{ scoreModalTypeLabel }}</p>
-                    <p style="color:rgba(255,255,255,0.15); font-size:0.85rem; text-align:center; margin-bottom:0.5rem;">当前总分：<strong style="color:#fbbf24;">{{ scoreModalCurrentTotal }}</strong></p>
-                    <input type="text" v-model="scoreModalValue" placeholder="输入分数（负值可减分）…" @keyup.enter="confirmAddScore" />
-                    <p style="color:rgba(255,255,255,0.1); font-size:0.7rem; text-align:center; margin-top:0.3rem;">输入正数加分，输入负数减分</p>
-                    <div class="btn-row">
-                        <button class="btn btn-primary" @click="confirmAddScore">确认添加</button>
-                        <button class="btn" @click="closeScoreModal">取消</button>
-                    </div>
-                    <div v-if="scoreError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ scoreError }}</div>
-                </div>
-            </div>
-
-            <!-- 详情全屏弹窗 -->
-            <div v-if="showDetailModal" class="detail-overlay" @click.self="showDetailModal = false">
-                <div class="detail-box">
-                    <button class="close-btn" @click="showDetailModal = false"><i class="fas fa-times"></i> 关闭</button>
-                    <div class="student-name-big">{{ detailStudent.name }}</div>
-                    <div class="student-id-big">学号：{{ detailStudent.id }}</div>
-                    <div class="detail-score-grid">
-                        <div class="detail-score-item"><div class="label attendance-label">考勤</div><div class="value blue">{{ detailStudent.attendance }}</div></div>
-                        <div class="detail-score-item"><div class="label performance-label">课堂表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
-                        <div class="detail-score-item"><div class="label homework-label">平时作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
-                        <div class="detail-score-item"><div class="label midterm-label">期中测试</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
-                        <div class="detail-score-item"><div class="label final-label">期末考试</div><div class="value red">{{ detailStudent.final }}</div></div>
-                        <div class="detail-score-item"><div class="label daily-label">每日一题</div><div class="value teal">{{ detailStudent.daily_score || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label chapter-label">第1章</div><div class="value purple">{{ detailStudent.chapter1 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label chapter-label">第2章</div><div class="value purple">{{ detailStudent.chapter2 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label chapter-label">第3章</div><div class="value purple">{{ detailStudent.chapter3 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label chapter-label">第4章</div><div class="value purple">{{ detailStudent.chapter4 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label chapter-label">第5章</div><div class="value purple">{{ detailStudent.chapter5 || 0 }}</div></div>
-                        <div class="detail-score-item"><div class="label chapter-label">第6章</div><div class="value purple">{{ detailStudent.chapter6 || 0 }}</div></div>
-                    </div>
-                    <div class="detail-total">
-                        <div class="label">总评</div>
-                        <div class="value">{{ detailStudent.total }}</div>
-                    </div>
-                    <div style="margin-top:1.2rem; text-align:center; color:rgba(255,255,255,0.15); font-size:0.85rem;">
-                        <i class="fas fa-info-circle"></i> 点击空白处或关闭按钮退出
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
@@ -545,7 +669,9 @@
                 supabaseClient = null;
             }
 
-            const TEACHER_PASSWORD = 'math2026';
+            // ===== 密码配置 =====
+            const LOGIN_PASSWORD = 'math2026'; // 登录密码
+            const TEACHER_PASSWORD = 'math2026'; // 教师模式密码（可与登录密码不同）
 
             // ===== 分数类型配置 =====
             const SCORE_TYPES = {
@@ -561,6 +687,12 @@
             const app = Vue.createApp({
                 data() {
                     return {
+                        // ===== 登录状态 =====
+                        isLoggedIn: false,
+                        loginPassword: '',
+                        loginError: '',
+
+                        // ===== 学生数据 =====
                         allStudents: [],
                         filteredStudents: [],
                         displayedStudents: [],
@@ -575,15 +707,20 @@
                         avgAttendance: 0,
                         avgChapter: 0,
                         avgDaily: 0,
+
+                        // ===== 教师模式 =====
                         showTeacherModal: false,
                         teacherPassword: '',
                         teacherError: '',
                         isTeacher: false,
+
+                        // ===== 详情弹窗 =====
                         showDetailModal: false,
                         detailStudent: { name: '', id: '', attendance: 0, performance: 0, homework: 0, midterm: 0,
                             final: 0, daily_score: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0,
                             chapter5: 0, chapter6: 0, total: 0 },
-                        // 添加分数弹窗
+
+                        // ===== 添加分数弹窗 =====
                         showScoreModal: false,
                         scoreModalStudentId: '',
                         scoreModalStudentName: '',
@@ -592,15 +729,60 @@
                         scoreModalCurrentTotal: 0,
                         scoreModalValue: '',
                         scoreError: '',
+
                         supabaseUrlDisplay: SUPABASE_URL,
                         supabaseKeyDisplay: SUPABASE_ANON_KEY ? SUPABASE_ANON_KEY.substring(0, 10) + '...' : '未配置'
                     };
                 },
                 mounted() {
-                    console.log('✅ Vue mounted! 开始加载数据...');
-                    this.loadAllData();
+                    console.log('✅ Vue mounted!');
+                    // 自动聚焦登录输入框
+                    this.$nextTick(() => {
+                        if (this.$refs.loginInput) {
+                            this.$refs.loginInput.focus();
+                        }
+                    });
                 },
                 methods: {
+                    // ===== 登录相关 =====
+                    verifyLogin() {
+                        if (this.loginPassword === LOGIN_PASSWORD) {
+                            this.isLoggedIn = true;
+                            this.loginError = '';
+                            console.log('✅ 登录成功');
+                            this.loadAllData();
+                            // 登录后聚焦到搜索框
+                            this.$nextTick(() => {
+                                const searchInput = document.querySelector('.search-section input');
+                                if (searchInput) searchInput.focus();
+                            });
+                        } else {
+                            this.loginError = '❌ 密码错误，请重试';
+                            this.loginPassword = '';
+                            this.$nextTick(() => {
+                                if (this.$refs.loginInput) {
+                                    this.$refs.loginInput.focus();
+                                }
+                            });
+                        }
+                    },
+
+                    logout() {
+                        this.isLoggedIn = false;
+                        this.isTeacher = false;
+                        this.loginPassword = '';
+                        this.loginError = '';
+                        this.allStudents = [];
+                        this.displayedStudents = [];
+                        this.showToast('已退出登录');
+                        this.$nextTick(() => {
+                            if (this.$refs.loginInput) {
+                                this.$refs.loginInput.focus();
+                            }
+                        });
+                    },
+
+                    // ===== 数据加载 =====
                     async loadAllData() {
                         this.loading = true;
                         try {
@@ -615,7 +797,6 @@
 
                             console.log('🔄 正在从 Supabase 读取数据...');
 
-                            // 1. 读取学生列表
                             const { data: students, error: stuError } = await supabaseClient
                                 .from('students')
                                 .select('*')
@@ -641,7 +822,7 @@
 
                             console.log('✅ 学生数据获取成功，共', students.length, '名学生');
 
-                            // 2. 读取所有分数表
+                            // 读取所有分数表
                             const scoreData = {};
                             for (const [key, config] of Object.entries(SCORE_TYPES)) {
                                 try {
@@ -653,7 +834,6 @@
                                         scoreData[key] = [];
                                     } else {
                                         scoreData[key] = data || [];
-                                        console.log(`✅ 表 ${config.table} 读取成功，共`, (data || []).length, '条记录');
                                     }
                                 } catch (e) {
                                     console.warn(`⚠️ 表 ${config.table} 读取异常:`, e);
@@ -661,7 +841,7 @@
                                 }
                             }
 
-                            // 3. 汇总计算每个学生的各类总分
+                            // 汇总计算
                             const studentScores = {};
                             students.forEach(s => {
                                 studentScores[s.id] = {
@@ -682,12 +862,10 @@
                                 };
                             });
 
-                            // 汇总各类分数
                             for (const [key, records] of Object.entries(scoreData)) {
                                 records.forEach(record => {
                                     if (studentScores[record.student_id] !== undefined) {
                                         if (key === 'chapter') {
-                                            // 章节考核特殊处理：根据 chapter_number 分到不同章节
                                             const chNum = record.chapter_number || 1;
                                             const fieldName = 'chapter' + chNum;
                                             if (studentScores[record.student_id][fieldName] !== undefined) {
@@ -702,14 +880,12 @@
                                 });
                             }
 
-                            // 计算总评
                             students.forEach(s => {
                                 const sc = studentScores[s.id];
                                 sc.total = sc.attendance + sc.performance + sc.homework +
                                     sc.midterm + sc.final + sc.daily + sc.chapter;
                             });
 
-                            // 4. 组装最终数据
                             this.allStudents = students.map(s => {
                                 const sc = studentScores[s.id] || {
                                     attendance: 0,
@@ -935,16 +1111,13 @@
                         const config = SCORE_TYPES[type];
 
                         try {
-                            // 写入数据库
                             const insertData = {
                                 student_id: studentId,
                                 score: score,
                                 created_at: new Date().toISOString()
                             };
 
-                            // 章节考核需要额外字段
                             if (type === 'chapter') {
-                                // 章节考核：询问是哪一章
                                 const chNum = prompt('请输入章节编号 (1-6):', '1');
                                 if (chNum === null) return;
                                 const ch = parseInt(chNum);
@@ -970,11 +1143,9 @@
                             this.showToast(`✅ ${this.scoreModalStudentName} 的「${config.label}」已添加 ${score} 分`);
                             this.closeScoreModal();
 
-                            // 退出教师模式（安全保护）
                             this.isTeacher = false;
                             console.log('🔒 教师模式已自动退出（安全保护）');
 
-                            // 重新加载数据
                             await this.loadAllData();
 
                         } catch (e) {

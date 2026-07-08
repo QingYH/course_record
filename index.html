@@ -209,7 +209,6 @@
             margin: 0.1rem 0;
         }
 
-        /* ===== KPI Row ===== */
         .kpi-row {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -512,7 +511,6 @@
 
                 <!-- ===== 详细统计卡片行 ===== -->
                 <div class="stats-detail-row" v-if="allStudents.length > 0">
-                    <!-- 考勤 -->
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#60a5fa;">📋 考勤</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value blue">{{ stats.attendance.avg }}</span></div>
@@ -522,14 +520,11 @@
                         <div class="stat-row">
                             <span class="stat-label">📉 下滑</span>
                             <span class="stat-value red">{{ stats.attendance.slowestChange }}</span>
-                            <span class="student-name-small" 
-                                  :class="{ revealed: stats.attendance.slowestRevealed }"
-                                  @click="toggleSlowestReveal('attendance')">
+                            <span class="student-name-small" :class="{ revealed: stats.attendance.slowestRevealed }" @click="toggleSlowestReveal('attendance')">
                                 {{ stats.attendance.slowestRevealed ? stats.attendance.slowestName : '***' }}
                             </span>
                         </div>
                     </div>
-                    <!-- 课堂表现 -->
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#6ee7b7;">🎯 表现</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value green">{{ stats.performance.avg }}</span></div>
@@ -539,14 +534,11 @@
                         <div class="stat-row">
                             <span class="stat-label">📉 下滑</span>
                             <span class="stat-value red">{{ stats.performance.slowestChange }}</span>
-                            <span class="student-name-small" 
-                                  :class="{ revealed: stats.performance.slowestRevealed }"
-                                  @click="toggleSlowestReveal('performance')">
+                            <span class="student-name-small" :class="{ revealed: stats.performance.slowestRevealed }" @click="toggleSlowestReveal('performance')">
                                 {{ stats.performance.slowestRevealed ? stats.performance.slowestName : '***' }}
                             </span>
                         </div>
                     </div>
-                    <!-- 平时作业 -->
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#fbbf24;">📝 作业</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value gold">{{ stats.homework.avg }}</span></div>
@@ -556,14 +548,11 @@
                         <div class="stat-row">
                             <span class="stat-label">📉 下滑</span>
                             <span class="stat-value red">{{ stats.homework.slowestChange }}</span>
-                            <span class="student-name-small" 
-                                  :class="{ revealed: stats.homework.slowestRevealed }"
-                                  @click="toggleSlowestReveal('homework')">
+                            <span class="student-name-small" :class="{ revealed: stats.homework.slowestRevealed }" @click="toggleSlowestReveal('homework')">
                                 {{ stats.homework.slowestRevealed ? stats.homework.slowestName : '***' }}
                             </span>
                         </div>
                     </div>
-                    <!-- 期中测试 -->
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#f472b6;">🧪 期中</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value pink">{{ stats.midterm.avg }}</span></div>
@@ -573,14 +562,11 @@
                         <div class="stat-row">
                             <span class="stat-label">📉 下滑</span>
                             <span class="stat-value red">{{ stats.midterm.slowestChange }}</span>
-                            <span class="student-name-small" 
-                                  :class="{ revealed: stats.midterm.slowestRevealed }"
-                                  @click="toggleSlowestReveal('midterm')">
+                            <span class="student-name-small" :class="{ revealed: stats.midterm.slowestRevealed }" @click="toggleSlowestReveal('midterm')">
                                 {{ stats.midterm.slowestRevealed ? stats.midterm.slowestName : '***' }}
                             </span>
                         </div>
                     </div>
-                    <!-- 期末考试 -->
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#fb923c;">🏆 期末</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value orange">{{ stats.final.avg }}</span></div>
@@ -590,14 +576,11 @@
                         <div class="stat-row">
                             <span class="stat-label">📉 下滑</span>
                             <span class="stat-value red">{{ stats.final.slowestChange }}</span>
-                            <span class="student-name-small" 
-                                  :class="{ revealed: stats.final.slowestRevealed }"
-                                  @click="toggleSlowestReveal('final')">
+                            <span class="student-name-small" :class="{ revealed: stats.final.slowestRevealed }" @click="toggleSlowestReveal('final')">
                                 {{ stats.final.slowestRevealed ? stats.final.slowestName : '***' }}
                             </span>
                         </div>
                     </div>
-                    <!-- 每日一题 -->
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#5eead4;">🧩 每日一题</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value teal">{{ stats.daily.avg }}</span></div>
@@ -607,14 +590,11 @@
                         <div class="stat-row">
                             <span class="stat-label">📉 下滑</span>
                             <span class="stat-value red">{{ stats.daily.slowestChange }}</span>
-                            <span class="student-name-small" 
-                                  :class="{ revealed: stats.daily.slowestRevealed }"
-                                  @click="toggleSlowestReveal('daily')">
+                            <span class="student-name-small" :class="{ revealed: stats.daily.slowestRevealed }" @click="toggleSlowestReveal('daily')">
                                 {{ stats.daily.slowestRevealed ? stats.daily.slowestName : '***' }}
                             </span>
                         </div>
                     </div>
-                    <!-- 章节考核 -->
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#a78bfa;">📚 章节</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value purple">{{ stats.chapter.avg }}</span></div>
@@ -624,9 +604,7 @@
                         <div class="stat-row">
                             <span class="stat-label">📉 下滑</span>
                             <span class="stat-value red">{{ stats.chapter.slowestChange }}</span>
-                            <span class="student-name-small" 
-                                  :class="{ revealed: stats.chapter.slowestRevealed }"
-                                  @click="toggleSlowestReveal('chapter')">
+                            <span class="student-name-small" :class="{ revealed: stats.chapter.slowestRevealed }" @click="toggleSlowestReveal('chapter')">
                                 {{ stats.chapter.slowestRevealed ? stats.chapter.slowestName : '***' }}
                             </span>
                         </div>
@@ -814,14 +792,23 @@
         } else {
             console.log('✅ Vue 加载成功！版本:', Vue.version);
 
-            const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
-            const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
+            // ===== Supabase 配置 =====
+            // ⚠️ 请将下面两行替换为您的 Supabase 实际值
+            const SUPABASE_URL = 'https://jujurutxwj1zlfenerdh.supabase.co';
+            const SUPABASE_ANON_KEY =
+            'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
 
             let supabaseClient = null;
 
+            // 使用标准方式初始化 Supabase
             if (typeof supabase !== 'undefined' && supabase.createClient) {
                 try {
-                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+                        auth: {
+                            persistSession: false,
+                            autoRefreshToken: false
+                        }
+                    });
                     console.log('✅ Supabase 客户端初始化成功');
                 } catch (e) {
                     console.warn('⚠️ Supabase 初始化失败:', e);
@@ -916,7 +903,6 @@
                     });
                 },
                 methods: {
-                    // ===== 登录 =====
                     verifyLogin() {
                         if (this.loginPassword === LOGIN_PASSWORD) {
                             this.isLoggedIn = true;
@@ -953,14 +939,12 @@
                         });
                     },
 
-                    // ===== 切换下滑姓名显示 =====
                     toggleSlowestReveal(key) {
                         if (this.stats[key]) {
                             this.stats[key].slowestRevealed = !this.stats[key].slowestRevealed;
                         }
                     },
 
-                    // ===== 计算统计数据 =====
                     calculateStats(students) {
                         const stats = {};
                         const fieldKeys = ['attendance', 'performance', 'homework', 'midterm', 'final', 'daily_score',
@@ -1027,7 +1011,7 @@
                         return stats;
                     },
 
-                    // ===== 数据加载 =====
+                    // ===== 核心：数据加载 =====
                     async loadAllData() {
                         this.loading = true;
                         try {
@@ -1042,20 +1026,31 @@
 
                             console.log('🔄 正在从 Supabase 读取数据...');
 
-                            const { data: students, error: stuError } = await supabaseClient
-                                .from('students')
-                                .select('*')
-                                .order('id');
+                            // 使用 Promise.all 并行请求，提高效率
+                            const [studentsResult, attendanceResult, performanceResult, homeworkResult,
+                                midtermResult, finalResult, dailyResult, chapterResult
+                            ] = await Promise.all([
+                                supabaseClient.from('students').select('*').order('id'),
+                                supabaseClient.from('attendance_scores').select('*'),
+                                supabaseClient.from('performance_scores').select('*'),
+                                supabaseClient.from('homework_scores').select('*'),
+                                supabaseClient.from('midterm_scores').select('*'),
+                                supabaseClient.from('final_scores').select('*'),
+                                supabaseClient.from('daily_scores').select('*'),
+                                supabaseClient.from('chapter_scores').select('*')
+                            ]);
 
-                            if (stuError) {
-                                console.warn('⚠️ 学生表查询出错:', stuError);
+                            // 检查学生数据
+                            if (studentsResult.error) {
+                                console.warn('⚠️ 学生表查询出错:', studentsResult.error);
                                 this.loading = false;
                                 this.allStudents = [];
                                 this.displayedStudents = [];
-                                this.showToast('⚠️ 数据加载失败: ' + stuError.message);
+                                this.showToast('⚠️ 数据加载失败: ' + studentsResult.error.message);
                                 return;
                             }
 
+                            const students = studentsResult.data || [];
                             if (!students || students.length === 0) {
                                 console.log('ℹ️ students 表为空');
                                 this.loading = false;
@@ -1067,24 +1062,18 @@
 
                             console.log('✅ 学生数据获取成功，共', students.length, '名学生');
 
-                            const scoreData = {};
-                            for (const [key, config] of Object.entries(SCORE_TYPES)) {
-                                try {
-                                    const { data, error } = await supabaseClient
-                                        .from(config.table)
-                                        .select('*');
-                                    if (error) {
-                                        console.warn(`⚠️ 表 ${config.table} 读取失败:`, error);
-                                        scoreData[key] = [];
-                                    } else {
-                                        scoreData[key] = data || [];
-                                    }
-                                } catch (e) {
-                                    console.warn(`⚠️ 表 ${config.table} 读取异常:`, e);
-                                    scoreData[key] = [];
-                                }
-                            }
+                            // 收集所有分数数据
+                            const scoreData = {
+                                attendance: attendanceResult.data || [],
+                                performance: performanceResult.data || [],
+                                homework: homeworkResult.data || [],
+                                midterm: midtermResult.data || [],
+                                final: finalResult.data || [],
+                                daily: dailyResult.data || [],
+                                chapter: chapterResult.data || []
+                            };
 
+                            // 汇总计算
                             const studentScores = {};
                             students.forEach(s => {
                                 studentScores[s.id] = {

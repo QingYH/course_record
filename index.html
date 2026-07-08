@@ -3,558 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>高等数学 · 学情驾驶舱</title>
+    <title>高等数学 · 学情驾驶舱 · 精算版</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, sans-serif;
-        }
-        body {
-            background: #080c1a;
-            min-height: 100vh;
-            padding: 1.5rem;
-            position: relative;
-            overflow-x: hidden;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',-apple-system,sans-serif; }
+        body { background:#080c1a; min-height:100vh; padding:1.5rem; position:relative; overflow-x:hidden; }
         body::before {
-            content: '∫ ∮ ∂ ∇ ∞ ∑ π √';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            font-size: 8rem;
-            color: rgba(255, 255, 255, 0.006);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            z-index: 0;
-            letter-spacing: 4rem;
-            word-break: break-all;
-            line-height: 1.3;
-            transform: rotate(-2deg) scale(1.1);
-            user-select: none;
+            content:'∫ ∮ ∂ ∇ ∞ ∑ π √';
+            position:fixed; top:0; left:0; right:0; bottom:0; font-size:8rem;
+            color:rgba(255,255,255,0.006); display:flex; align-items:center; justify-content:center;
+            pointer-events:none; z-index:0; letter-spacing:4rem; word-break:break-all; line-height:1.3;
+            transform:rotate(-2deg) scale(1.1); user-select:none;
         }
-        .math-symbols {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            color: rgba(255, 255, 255, 0.010);
-            font-size: 6rem;
-            font-weight: 300;
-            user-select: none;
-            opacity: 0.5;
-        }
-        .math-symbols.s1 { top: 3%; left: 2%; transform: rotate(-6deg); font-size: 7rem; color: rgba(96,165,250,0.04); }
-        .math-symbols.s2 { bottom: 5%; right: 2%; transform: rotate(8deg); font-size: 9rem; color: rgba(167,139,250,0.035); }
-        .math-symbols.s3 { top: 35%; right: 1%; transform: rotate(12deg); font-size: 5rem; color: rgba(251,191,36,0.03); }
-        .math-symbols.s4 { bottom: 30%; left: 1%; transform: rotate(-4deg); font-size: 6rem; color: rgba(52,211,153,0.025); }
-        .math-symbols.s5 { top: 55%; left: 50%; transform: translateX(-50%) rotate(3deg); font-size: 12rem; color: rgba(255,255,255,0.005); letter-spacing: 2rem; }
-        .app-container {
-            max-width: 1480px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        .math-symbols { position:fixed; pointer-events:none; z-index:0; color:rgba(255,255,255,0.010); font-size:6rem; font-weight:300; user-select:none; opacity:0.5; }
+        .math-symbols.s1 { top:3%; left:2%; transform:rotate(-6deg); font-size:7rem; color:rgba(96,165,250,0.04); }
+        .math-symbols.s2 { bottom:5%; right:2%; transform:rotate(8deg); font-size:9rem; color:rgba(167,139,250,0.035); }
+        .math-symbols.s3 { top:35%; right:1%; transform:rotate(12deg); font-size:5rem; color:rgba(251,191,36,0.03); }
+        .math-symbols.s4 { bottom:30%; left:1%; transform:rotate(-4deg); font-size:6rem; color:rgba(52,211,153,0.025); }
+        .math-symbols.s5 { top:55%; left:50%; transform:translateX(-50%) rotate(3deg); font-size:12rem; color:rgba(255,255,255,0.005); letter-spacing:2rem; }
+        .app-container { max-width:1480px; margin:0 auto; position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
 
-        /* ===== 登录页面 ===== */
-        .login-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 80vh;
-            padding: 2rem;
-        }
-        .login-box {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border-radius: 2.5rem;
-            padding: 3.5rem 3rem;
-            max-width: 440px;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-        .login-box .logo-icon {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin: 0 auto 1.2rem;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
-        }
-        .login-box h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.3rem;
-        }
-        .login-box .sub {
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-        }
-        .login-box .class-badge-login {
-            display: inline-block;
-            background: rgba(251, 191, 36, 0.10);
-            border: 1px solid rgba(251, 191, 36, 0.15);
-            color: #fbbf24;
-            padding: 0.2rem 1.2rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
-            margin-bottom: 1.8rem;
-        }
-        .login-box input {
-            width: 100%;
-            padding: 0.9rem 1.4rem;
-            border-radius: 3.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            color: #f0f4ff;
-            font-size: 1.1rem;
-            outline: none;
-            transition: 0.2s;
-            margin-bottom: 0.8rem;
-        }
-        .login-box input:focus {
-            border-color: rgba(96, 165, 250, 0.2);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.05);
-        }
-        .login-box input::placeholder {
-            color: rgba(255, 255, 255, 0.1);
-        }
-        .login-box .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 0.9rem 0;
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-        }
-        .login-box .error-msg {
-            color: #f87171;
-            font-size: 0.85rem;
-            margin-top: 0.8rem;
-            min-height: 1.5rem;
-        }
-        .login-box .hint {
-            color: rgba(255, 255, 255, 0.08);
-            font-size: 0.7rem;
-            margin-top: 1.2rem;
-        }
+        /* 登录页面 */
+        .login-page { display:flex; align-items:center; justify-content:center; min-height:80vh; padding:2rem; }
+        .login-box { background:rgba(255,255,255,0.03); backdrop-filter:blur(20px); border-radius:2.5rem; padding:3.5rem 3rem; max-width:440px; width:100%; border:1px solid rgba(255,255,255,0.06); box-shadow:0 20px 60px rgba(0,0,0,0.5); text-align:center; }
+        .login-box .logo-icon { width:72px; height:72px; background:linear-gradient(135deg,#3b82f6,#8b5cf6); border-radius:1.8rem; display:flex; align-items:center; justify-content:center; color:white; font-size:2.2rem; font-weight:700; margin:0 auto 1.2rem; box-shadow:0 8px 24px rgba(59,130,246,0.25); }
+        .login-box h1 { font-size:2rem; font-weight:700; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.3rem; }
+        .login-box .sub { color:rgba(255,255,255,0.2); font-size:0.95rem; margin-bottom:2rem; }
+        .login-box .class-badge-login { display:inline-block; background:rgba(251,191,36,0.10); border:1px solid rgba(251,191,36,0.15); color:#fbbf24; padding:0.2rem 1.2rem; border-radius:2rem; font-size:0.85rem; margin-bottom:1.8rem; }
+        .login-box input { width:100%; padding:0.9rem 1.4rem; border-radius:3.5rem; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.03); color:#f0f4ff; font-size:1.1rem; outline:none; transition:0.2s; margin-bottom:0.8rem; }
+        .login-box input:focus { border-color:rgba(96,165,250,0.2); box-shadow:0 0 0 3px rgba(59,130,246,0.05); }
+        .login-box input::placeholder { color:rgba(255,255,255,0.1); }
+        .login-box .btn { width:100%; justify-content:center; padding:0.9rem 0; font-size:1.1rem; margin-top:0.5rem; }
+        .login-box .error-msg { color:#f87171; font-size:0.85rem; margin-top:0.8rem; min-height:1.5rem; }
+        .login-box .hint { color:rgba(255,255,255,0.08); font-size:0.7rem; margin-top:1.2rem; }
 
-        /* ===== 主界面样式 ===== */
-        body { font-size: 1.15rem; }
-        .header-left h1 { font-size: 2.4rem; }
-        .header-left .sub { font-size: 1rem; }
-        .header-left .logo { width: 60px; height: 60px; font-size: 1.8rem; }
-        .btn { font-size: 1.1rem; padding: 0.7rem 1.8rem; border-radius: 3rem; }
-        .btn i { font-size: 1.1rem; }
-        .student-count-badge { font-size: 1.1rem; padding: 0.6rem 1.8rem; border-radius: 3rem; }
-        .search-section input { font-size: 1.2rem; padding: 0.8rem 0.5rem; }
-        .search-section select { font-size: 1.1rem; padding: 0.8rem 2.2rem 0.8rem 1.4rem; }
-        .search-section i { font-size: 1.2rem; }
-        .kpi-card .value { font-size: 2.2rem; }
-        .kpi-card .label { font-size: 0.9rem; }
-        .kpi-card .change { font-size: 0.8rem; }
-        .student-name { font-size: 1.5rem; }
-        .student-rank { font-size: 0.9rem; }
-        .score-item { font-size: 1rem; padding: 0.35rem 0.7rem 0.35rem 0.9rem; border-radius: 1rem; }
-        .score-item i { font-size: 0.9rem; }
-        .score-value { font-size: 1rem; padding: 0 0.6rem; border-radius: 0.8rem; }
-        .score-item.total .score-value { font-size: 1.3rem; }
-        .score-item.total { padding: 0.4rem 0.6rem; }
-        .card-actions { gap: 0.5rem; padding-top: 0.7rem; }
-        .btn-small { font-size: 0.9rem; padding: 0.3rem 1.2rem; border-radius: 2.5rem; }
-        .btn-small i { font-size: 0.85rem; }
-        .modal-box h2 { font-size: 1.8rem; }
-        .modal-box .sub { font-size: 1rem; }
-        .modal-box input { font-size: 1.2rem; padding: 1rem 1.6rem; border-radius: 3.5rem; }
-        .modal-box .btn { font-size: 1.1rem; padding: 0.9rem 0; }
-        #toast { font-size: 1.1rem; padding: 0.9rem 2.5rem; border-radius: 3.5rem; }
-        .detail-box .student-name-big { font-size: 2.8rem; }
-        .detail-box .student-id-big { font-size: 1.1rem; }
-        .detail-score-item .value { font-size: 2.2rem; }
-        .detail-score-item .label { font-size: 0.85rem; }
-        .detail-total .value { font-size: 3.2rem; }
-        .empty-state .title { font-size: 1.6rem; }
-        .empty-state p { font-size: 1.1rem; }
-        .teacher-badge { font-size: 0.9rem; padding: 0.4rem 1.2rem; }
-        th { font-size: 0.8rem; }
-        td { font-size: 0.95rem; }
-        td strong { font-size: 1.05rem; }
-        .header-left .class-badge { font-size: 1rem; color: rgba(251,191,36,0.4); font-weight: 500; -webkit-text-fill-color: rgba(251,191,36,0.4); margin-left: 0.3rem; letter-spacing: 0.04em; }
+        /* 主界面 */
+        .header-card { background:rgba(255,255,255,0.03); backdrop-filter:blur(16px); border-radius:2rem; padding:1.4rem 2.2rem; border:1px solid rgba(255,255,255,0.04); box-shadow:0 8px 32px -8px rgba(0,0,0,0.4); margin-bottom:1.8rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; }
+        .header-left { display:flex; align-items:center; gap:1.2rem; }
+        .header-left .logo { background:linear-gradient(135deg,#3b82f6,#8b5cf6); border-radius:1.4rem; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; width:60px; height:60px; font-size:1.8rem; box-shadow:0 4px 16px rgba(59,130,246,0.2); }
+        .header-left h1 { font-size:2.4rem; font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:-0.02em; }
+        .header-left .sub { color:rgba(255,255,255,0.2); font-weight:400; -webkit-text-fill-color:rgba(255,255,255,0.2); font-size:1rem; }
+        .header-left .class-badge { font-size:1rem; color:rgba(251,191,36,0.4); font-weight:500; -webkit-text-fill-color:rgba(251,191,36,0.4); margin-left:0.3rem; letter-spacing:0.04em; }
+        .header-right { display:flex; flex-wrap:wrap; align-items:center; gap:0.8rem; }
+        .student-count-badge { background:rgba(255,255,255,0.04); border-radius:3rem; color:rgba(255,255,255,0.3); border:1px solid rgba(255,255,255,0.04); display:flex; align-items:center; gap:0.6rem; padding:0.6rem 1.8rem; font-size:1.1rem; }
+        .student-count-badge i { color:#60a5fa; }
+        .student-count-badge strong { color:#93c5fd; font-weight:600; }
+        .btn { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); font-weight:600; display:inline-flex; align-items:center; gap:0.6rem; color:rgba(255,255,255,0.5); transition:all 0.25s ease; cursor:pointer; backdrop-filter:blur(4px); padding:0.7rem 1.8rem; border-radius:3rem; font-size:1.1rem; }
+        .btn:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.12); transform:translateY(-2px); color:#fff; box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+        .btn-primary { background:linear-gradient(135deg,#3b82f6,#6366f1); border:none; color:#fff; }
+        .btn-primary:hover { background:linear-gradient(135deg,#60a5fa,#818cf8); color:#fff; box-shadow:0 8px 24px rgba(59,130,246,0.25); }
+        .btn-success { background:linear-gradient(135deg,#10b981,#059669); border:none; color:#fff; }
+        .btn-success:hover { background:linear-gradient(135deg,#34d399,#10b981); color:#fff; box-shadow:0 8px 24px rgba(16,185,129,0.25); }
+        .btn-teal { background:rgba(16,185,129,0.10); border:1px solid rgba(16,185,129,0.12); color:#6ee7b7; }
+        .btn-teal:hover { background:rgba(16,185,129,0.18); color:#fff; }
+        .btn-gold { background:rgba(251,191,36,0.10); border:1px solid rgba(251,191,36,0.12); color:#fbbf24; }
+        .btn-gold:hover { background:rgba(251,191,36,0.18); color:#fff; }
+        .teacher-badge { background:rgba(251,191,36,0.10); border:1px solid rgba(251,191,36,0.15); color:#fbbf24; border-radius:2.5rem; padding:0.4rem 1.2rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; }
 
-        .header-card {
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(16px);
-            border-radius: 2rem;
-            padding: 1.4rem 2.2rem;
-            border: 1px solid rgba(255,255,255,0.04);
-            box-shadow: 0 8px 32px -8px rgba(0,0,0,0.4);
-            margin-bottom: 1.8rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-        .header-left { display: flex; align-items: center; gap: 1.2rem; }
-        .header-left .logo { background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 1.4rem; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; box-shadow: 0 4px 16px rgba(59,130,246,0.2); }
-        .header-left h1 { font-weight: 800; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; }
-        .header-left .sub { color: rgba(255,255,255,0.2); font-weight: 400; -webkit-text-fill-color: rgba(255,255,255,0.2); }
-        .header-left .class-badge { font-size: 1rem; color: rgba(251,191,36,0.4); font-weight: 500; -webkit-text-fill-color: rgba(251,191,36,0.4); margin-left: 0.3rem; letter-spacing: 0.04em; }
-        .header-right { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
-        .student-count-badge { background: rgba(255,255,255,0.04); border-radius: 3rem; color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 0.6rem; }
-        .student-count-badge i { color: #60a5fa; }
-        .student-count-badge strong { color: #93c5fd; font-weight: 600; }
-        .btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); font-weight: 600; display: inline-flex; align-items: center; gap: 0.6rem; color: rgba(255,255,255,0.5); transition: all 0.25s ease; cursor: pointer; backdrop-filter: blur(4px); }
-        .btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); transform: translateY(-2px); color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-        .btn-primary { background: linear-gradient(135deg, #3b82f6, #6366f1); border: none; color: #fff; }
-        .btn-primary:hover { background: linear-gradient(135deg, #60a5fa, #818cf8); color: #fff; box-shadow: 0 8px 24px rgba(59,130,246,0.25); }
-        .btn-success { background: linear-gradient(135deg, #10b981, #059669); border: none; color: #fff; }
-        .btn-success:hover { background: linear-gradient(135deg, #34d399, #10b981); color: #fff; box-shadow: 0 8px 24px rgba(16,185,129,0.25); }
-        .btn-teal { background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.12); color: #6ee7b7; }
-        .btn-teal:hover { background: rgba(16,185,129,0.18); color: #fff; }
-        .btn-gold { background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.12); color: #fbbf24; }
-        .btn-gold:hover { background: rgba(251,191,36,0.18); color: #fff; }
+        /* 统计卡片 - 强化版 */
+        .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:1.2rem; margin-bottom:1.8rem; }
+        .kpi-card { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:1.8rem; padding:1.2rem 1rem; border:1px solid rgba(255,255,255,0.04); text-align:center; transition:0.3s; position:relative; overflow:hidden; }
+        .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent); opacity:0.6; }
+        .kpi-card:hover { background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); transform:translateY(-2px); }
+        .kpi-card .label { color:rgba(255,255,255,0.25); text-transform:uppercase; letter-spacing:0.06em; font-weight:500; font-size:0.7rem; }
+        .kpi-card .value { font-weight:700; margin-top:0.2rem; letter-spacing:-0.02em; font-size:1.8rem; }
+        .kpi-card .extra { color:rgba(255,255,255,0.2); font-size:0.7rem; margin-top:0.2rem; }
+        .kpi-card .extra strong { color:rgba(255,255,255,0.5); font-weight:500; }
+        .kpi-card .trend-up { color:#6ee7b7; }
+        .kpi-card .trend-down { color:#f87171; }
+        .kpi-card .trend-hidden { color:rgba(255,255,255,0.15); cursor:pointer; border-bottom:1px dashed rgba(255,255,255,0.1); }
+        .kpi-card .trend-hidden:hover { color:rgba(255,255,255,0.6); }
 
-        /* ===== 详细统计卡片行 ===== */
-        .stats-detail-row {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.6rem;
-            margin-bottom: 1.5rem;
-        }
-        .stats-detail-card {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 1.2rem;
-            padding: 0.6rem 0.6rem;
-            border: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
-            transition: 0.3s;
-        }
-        .stats-detail-card:hover {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.08);
-            transform: translateY(-2px);
-        }
-        .stats-detail-card .type-label {
-            font-size: 0.55rem;
-            color: rgba(255,255,255,0.15);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 500;
-            margin-bottom: 0.1rem;
-        }
-        .stats-detail-card .stat-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.05rem 0.1rem;
-            font-size: 0.55rem;
-        }
-        .stats-detail-card .stat-row .stat-label {
-            color: rgba(255,255,255,0.15);
-            font-size: 0.5rem;
-        }
-        .stats-detail-card .stat-row .stat-value {
-            font-weight: 600;
-            font-size: 0.6rem;
-        }
-        .stats-detail-card .stat-row .stat-value.gold { color: #fbbf24; }
-        .stats-detail-card .stat-row .stat-value.blue { color: #60a5fa; }
-        .stats-detail-card .stat-row .stat-value.green { color: #6ee7b7; }
-        .stats-detail-card .stat-row .stat-value.purple { color: #a78bfa; }
-        .stats-detail-card .stat-row .stat-value.pink { color: #f472b6; }
-        .stats-detail-card .stat-row .stat-value.orange { color: #fb923c; }
-        .stats-detail-card .stat-row .stat-value.teal { color: #5eead4; }
-        .stats-detail-card .stat-row .stat-value.red { color: #f87171; }
-        .stats-detail-card .stat-row .student-name-small {
-            color: rgba(255,255,255,0.2);
-            font-size: 0.5rem;
-            max-width: 3.5rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .stats-detail-card .stat-row .student-name-small:hover {
-            color: rgba(255,255,255,0.5);
-        }
-        .stats-detail-card .stat-row .student-name-small.revealed {
-            color: rgba(255,255,255,0.6);
-        }
-        .stats-detail-card .stat-row .change-up { color: #6ee7b7; }
-        .stats-detail-card .stat-row .change-down { color: #f87171; }
-        .stats-detail-card .divider {
-            height: 1px;
-            background: rgba(255,255,255,0.04);
-            margin: 0.1rem 0;
-        }
+        .search-section { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:4rem; padding:0.3rem 0.3rem 0.3rem 2rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.8rem; border:1px solid rgba(255,255,255,0.04); margin-bottom:1.8rem; box-shadow:0 4px 20px -8px rgba(0,0,0,0.3); }
+        .search-section i { color:rgba(255,255,255,0.12); font-size:1.2rem; }
+        .search-section input { border:none; background:transparent; min-width:150px; flex:1; outline:none; color:rgba(255,255,255,0.7); font-weight:400; font-size:1.2rem; padding:0.8rem 0.5rem; }
+        .search-section input::placeholder { color:rgba(255,255,255,0.1); }
+        .search-section select { border-radius:3.5rem; border:1px solid rgba(255,255,255,0.04); background:rgba(255,255,255,0.03); color:rgba(255,255,255,0.6); outline:none; cursor:pointer; appearance:none; padding:0.8rem 2.2rem 0.8rem 1.4rem; font-size:1.1rem; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2360a5fa" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'); background-repeat:no-repeat; background-position:right 1.2rem center; background-size:12px; transition:0.2s; }
+        .search-section select:focus { border-color:rgba(96,165,250,0.15); }
+        .search-section select option { background:#0f1629; color:#c8d6e8; }
+        .btn-clear { background:transparent; border:none; color:rgba(255,255,255,0.1); padding:0.5rem 1rem; cursor:pointer; font-size:1.2rem; transition:0.2s; }
+        .btn-clear:hover { color:rgba(255,255,255,0.3); }
 
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
+        .student-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(420px,1fr)); gap:1.2rem; margin:1.2rem 0; }
+        .student-card { background:rgba(255,255,255,0.02); backdrop-filter:blur(16px); border-radius:1.8rem; padding:1.4rem 1.5rem 1.2rem; border:1px solid rgba(255,255,255,0.03); transition:all 0.35s ease; box-shadow:0 4px 16px -8px rgba(0,0,0,0.3); cursor:pointer; }
+        .student-card:hover { transform:translateY(-4px); background:rgba(255,255,255,0.04); border-color:rgba(96,165,250,0.08); box-shadow:0 12px 36px -12px rgba(0,0,0,0.4); }
+        .card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; padding-bottom:0.6rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+        .student-name { font-weight:700; color:#f0f4ff; font-size:1.5rem; letter-spacing:-0.2px; }
+        .student-rank { background:rgba(96,165,250,0.08); padding:0.2rem 1rem; border-radius:2.5rem; color:rgba(96,165,250,0.5); border:1px solid rgba(96,165,250,0.05); font-size:0.9rem; }
+        .score-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin:0.6rem 0 0.2rem; }
+        .score-item { background:rgba(255,255,255,0.02); border-radius:1rem; display:flex; justify-content:space-between; align-items:center; font-weight:600; border:1px solid rgba(255,255,255,0.02); transition:0.15s; padding:0.35rem 0.7rem 0.35rem 0.9rem; font-size:1rem; }
+        .score-item .score-value { font-weight:700; padding:0 0.6rem; border-radius:0.8rem; font-size:1rem; }
+        .score-item.attendance { border-color:rgba(96,165,250,0.20); background:rgba(96,165,250,0.05); }
+        .score-item.attendance i { color:#60a5fa; }
+        .score-item.attendance .score-value { color:#93c5fd; }
+        .score-item.attendance .label-text { color:#93c5fd; }
+        .score-item.performance { border-color:rgba(52,211,153,0.20); background:rgba(52,211,153,0.05); }
+        .score-item.performance i { color:#34d399; }
+        .score-item.performance .score-value { color:#6ee7b7; }
+        .score-item.performance .label-text { color:#6ee7b7; }
+        .score-item.homework { border-color:rgba(251,191,36,0.20); background:rgba(251,191,36,0.05); }
+        .score-item.homework i { color:#fbbf24; }
+        .score-item.homework .score-value { color:#fcd34d; }
+        .score-item.homework .label-text { color:#fcd34d; }
+        .score-item.midterm { border-color:rgba(244,114,182,0.20); background:rgba(244,114,182,0.05); }
+        .score-item.midterm i { color:#f472b6; }
+        .score-item.midterm .score-value { color:#f9a8d4; }
+        .score-item.midterm .label-text { color:#f9a8d4; }
+        .score-item.final { border-color:rgba(251,146,60,0.20); background:rgba(251,146,60,0.05); }
+        .score-item.final i { color:#fb923c; }
+        .score-item.final .score-value { color:#fdba74; }
+        .score-item.final .label-text { color:#fdba74; }
+        .score-item.daily { border-color:rgba(110,231,183,0.20); background:rgba(110,231,183,0.05); }
+        .score-item.daily i { color:#6ee7b7; }
+        .score-item.daily .score-value { color:#8eeac7; }
+        .score-item.daily .label-text { color:#8eeac7; }
+        .score-item.chapter { border-color:rgba(167,139,250,0.15); background:rgba(167,139,250,0.04); }
+        .score-item.chapter i { color:#a78bfa; }
+        .score-item.chapter .score-value { color:#c4b5fd; }
+        .score-item.chapter .label-text { color:#c4b5fd; }
+        .score-item.total { grid-column:span 3; background:rgba(251,191,36,0.05); border-color:rgba(251,191,36,0.10); justify-content:center; gap:1.2rem; padding:0.4rem 0.6rem; }
+        .score-item.total i { color:#fbbf24; }
+        .score-item.total .score-value { background:rgba(251,191,36,0.08); color:#fbbf24; border:1px solid rgba(251,191,36,0.06); font-size:1.3rem; }
+        .score-item.total .label-text { color:#fbbf24; }
+
+        .card-actions { margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,0.02); padding-top:0.7rem; }
+        .btn-small { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.04); border-radius:2.5rem; font-weight:500; color:rgba(255,255,255,0.3); transition:0.2s; cursor:pointer; display:inline-flex; align-items:center; gap:0.4rem; padding:0.3rem 1.2rem; font-size:0.9rem; }
+
+        .table-wrap { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:1.8rem; padding:0.2rem; border:1px solid rgba(255,255,255,0.03); margin-top:1.2rem; overflow-x:auto; box-shadow:0 4px 20px -8px rgba(0,0,0,0.3); }
+        table { width:100%; border-collapse:collapse; min-width:1100px; }
+        th { text-align:left; padding:0.7rem 0.7rem; background:rgba(255,255,255,0.02); color:rgba(255,255,255,0.2); font-weight:500; border-bottom:1px solid rgba(255,255,255,0.03); letter-spacing:0.04em; text-transform:uppercase; font-size:0.8rem; }
+        td { padding:0.6rem 0.7rem; border-bottom:1px solid rgba(255,255,255,0.02); color:rgba(255,255,255,0.5); font-size:0.95rem; }
+        td strong { color:#fbbf24; font-size:1.05rem; }
+
+        #toast { position:fixed; bottom:2.5rem; left:50%; transform:translateX(-50%) translateY(100px); background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); color:#f1f5f9; font-weight:500; box-shadow:0 8px 32px rgba(0,0,0,0.5); z-index:999; border:1px solid rgba(255,255,255,0.05); transition:all 0.4s cubic-bezier(0.22,1,0.36,1); opacity:0; pointer-events:none; padding:0.9rem 2.5rem; border-radius:3.5rem; font-size:1.1rem; white-space:nowrap; }
+        #toast.show { opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto; }
+
+        .loading-overlay { text-align:center; padding:5rem 1rem; color:rgba(255,255,255,0.1); }
+        .loading-overlay i { font-size:3.5rem; margin-bottom:0.8rem; color:#60a5fa; animation:spin 1s linear infinite; }
+        @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+
+        .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; z-index:1000; padding:1rem; }
+        .modal-box { background:#121b33; border-radius:2.5rem; padding:2.8rem 2.5rem; max-width:480px; width:100%; border:1px solid rgba(255,255,255,0.06); box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+        .modal-box h2 { color:#f0f4ff; margin-bottom:0.3rem; text-align:center; font-size:1.8rem; }
+        .modal-box .sub { color:rgba(255,255,255,0.2); text-align:center; margin-bottom:1.8rem; font-size:1rem; }
+        .modal-box input { width:100%; border-radius:3.5rem; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.03); color:#f0f4ff; outline:none; transition:0.2s; padding:1rem 1.6rem; font-size:1.2rem; }
+        .modal-box .btn-row { display:flex; gap:1rem; margin-top:1.5rem; }
+        .modal-box .btn-row .btn { flex:1; justify-content:center; font-size:1.1rem; padding:0.9rem 0; }
+
+        .detail-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(8,12,26,0.95); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; z-index:2000; padding:2rem; animation:fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+        .detail-box { background:rgba(255,255,255,0.04); border-radius:3rem; padding:3rem 3.5rem; max-width:800px; width:100%; max-height:90vh; overflow-y:auto; border:1px solid rgba(255,255,255,0.06); box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+        .detail-box .close-btn { float:right; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); border-radius:3.5rem; padding:0.5rem 1.5rem; color:rgba(255,255,255,0.3); cursor:pointer; transition:0.2s; }
+        .detail-box .student-name-big { font-weight:700; color:#f0f4ff; font-size:2.8rem; margin:0.5rem 0 0.2rem; }
+        .detail-box .student-id-big { color:rgba(255,255,255,0.2); font-size:1.1rem; margin-bottom:1.8rem; }
+
+        .detail-score-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin:1.2rem 0; }
+        .detail-score-item { background:rgba(255,255,255,0.03); border-radius:1.5rem; padding:1rem 1.2rem; text-align:center; border:1px solid rgba(255,255,255,0.04); }
+        .detail-score-item .label { color:rgba(255,255,255,0.2); text-transform:uppercase; letter-spacing:0.04em; font-size:0.85rem; }
+        .detail-score-item .value { font-weight:700; color:#f0f4ff; margin-top:0.2rem; font-size:2.2rem; }
+        .detail-total { margin-top:1.2rem; background:rgba(251,191,36,0.06); border-radius:1.5rem; padding:1.2rem; text-align:center; border:1px solid rgba(251,191,36,0.08); }
+        .detail-total .label { color:rgba(255,255,255,0.2); }
+        .detail-total .value { font-weight:700; color:#fbbf24; font-size:3.2rem; }
+
+        @media (max-width:700px) {
+            body { padding:0.8rem 0.5rem; font-size:1rem; }
+            .header-card { flex-direction:column; align-items:start; gap:0.8rem; padding:1rem 1.2rem; border-radius:1.5rem; }
+            .header-left h1 { font-size:1.6rem; }
+            .header-left .logo { width:48px; height:48px; font-size:1.4rem; }
+            .student-grid { grid-template-columns:1fr; }
+            .kpi-row { grid-template-columns:repeat(2,1fr); gap:0.6rem; }
+            .kpi-card .value { font-size:1.4rem; }
+            .search-section { flex-direction:column; align-items:stretch; padding:0.8rem 1.2rem; border-radius:1.8rem; }
+            .detail-box { padding:1.5rem; }
+            .detail-score-grid { grid-template-columns:1fr 1fr; }
+            .detail-box .student-name-big { font-size:2rem; }
+            .detail-total .value { font-size:2.2rem; }
+            #toast { font-size:0.9rem; padding:0.6rem 1.4rem; white-space:normal; max-width:92%; }
+            .login-box { padding:2.5rem 1.5rem; }
         }
-        .kpi-card {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 1.8rem;
-            padding: 1.2rem 1rem;
-            border: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent);
-            opacity: 0.6;
-        }
-        .kpi-card:hover {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.08);
-            transform: translateY(-2px);
-        }
-        .kpi-card .label {
-            color: rgba(255,255,255,0.25);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 500;
-        }
-        .kpi-card .value {
-            font-weight: 700;
-            margin-top: 0.2rem;
-            letter-spacing: -0.02em;
-        }
-        .kpi-card .value.gold { color: #fbbf24; }
-        .kpi-card .value.blue { color: #60a5fa; }
-        .kpi-card .value.green { color: #6ee7b7; }
-        .kpi-card .value.purple { color: #a78bfa; }
-        .kpi-card .value.pink { color: #f472b6; }
-        .kpi-card .change { color: rgba(255,255,255,0.15); margin-top: 0.1rem; }
-        .kpi-card .change.up { color: #6ee7b7; }
-        .kpi-card .change.down { color: #f87171; }
-
-        .search-section {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 4rem;
-            padding: 0.3rem 0.3rem 0.3rem 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem;
-            border: 1px solid rgba(255,255,255,0.04);
-            margin-bottom: 1.8rem;
-            box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3);
-        }
-        .search-section i { color: rgba(255,255,255,0.12); }
-        .search-section input { border: none; background: transparent; min-width: 150px; flex: 1; outline: none; color: rgba(255,255,255,0.7); font-weight: 400; }
-        .search-section input::placeholder { color: rgba(255,255,255,0.1); }
-        .search-section select { width: 100%; border-radius: 3.5rem; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.6); outline: none; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2360a5fa" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'); background-repeat: no-repeat; background-position: right 1.2rem center; background-size: 12px; transition: 0.2s; }
-        .search-section select:focus { border-color: rgba(96,165,250,0.15); }
-        .search-section select option { background: #0f1629; color: #c8d6e8; }
-        .btn-clear { background: transparent; border: none; color: rgba(255,255,255,0.1); padding: 0.5rem 1rem; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
-        .btn-clear:hover { color: rgba(255,255,255,0.3); }
-
-        .student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 1.2rem; margin: 1.2rem 0; }
-        .student-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(16px); border-radius: 1.8rem; padding: 1.4rem 1.5rem 1.2rem; border: 1px solid rgba(255,255,255,0.03); transition: all 0.35s ease; box-shadow: 0 4px 16px -8px rgba(0,0,0,0.3); cursor: pointer; }
-        .student-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.04); border-color: rgba(96,165,250,0.08); box-shadow: 0 12px 36px -12px rgba(0,0,0,0.4); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
-        .student-name { font-weight: 700; color: #f0f4ff; letter-spacing: -0.2px; }
-        .student-rank { background: rgba(96,165,250,0.08); padding: 0.2rem 1rem; border-radius: 2.5rem; color: rgba(96,165,250,0.5); border: 1px solid rgba(96,165,250,0.05); }
-
-        .score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 0.6rem 0 0.2rem; }
-        .score-item { background: rgba(255,255,255,0.02); border-radius: 1rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid rgba(255,255,255,0.02); transition: 0.15s; }
-        .score-item .score-value { font-weight: 700; }
-
-        .score-item.attendance { border-color: rgba(96,165,250,0.20); background: rgba(96,165,250,0.05); }
-        .score-item.attendance i { color: #60a5fa; }
-        .score-item.attendance .score-value { color: #93c5fd; }
-        .score-item.attendance .label-text { color: #93c5fd; }
-        .score-item.performance { border-color: rgba(52,211,153,0.20); background: rgba(52,211,153,0.05); }
-        .score-item.performance i { color: #34d399; }
-        .score-item.performance .score-value { color: #6ee7b7; }
-        .score-item.performance .label-text { color: #6ee7b7; }
-        .score-item.homework { border-color: rgba(251,191,36,0.20); background: rgba(251,191,36,0.05); }
-        .score-item.homework i { color: #fbbf24; }
-        .score-item.homework .score-value { color: #fcd34d; }
-        .score-item.homework .label-text { color: #fcd34d; }
-        .score-item.midterm { border-color: rgba(244,114,182,0.20); background: rgba(244,114,182,0.05); }
-        .score-item.midterm i { color: #f472b6; }
-        .score-item.midterm .score-value { color: #f9a8d4; }
-        .score-item.midterm .label-text { color: #f9a8d4; }
-        .score-item.final { border-color: rgba(251,146,60,0.20); background: rgba(251,146,60,0.05); }
-        .score-item.final i { color: #fb923c; }
-        .score-item.final .score-value { color: #fdba74; }
-        .score-item.final .label-text { color: #fdba74; }
-        .score-item.daily { border-color: rgba(110,231,183,0.20); background: rgba(110,231,183,0.05); }
-        .score-item.daily i { color: #6ee7b7; }
-        .score-item.daily .score-value { color: #8eeac7; }
-        .score-item.daily .label-text { color: #8eeac7; }
-        .score-item.chapter { border-color: rgba(167,139,250,0.15); background: rgba(167,139,250,0.04); }
-        .score-item.chapter i { color: #a78bfa; }
-        .score-item.chapter .score-value { color: #c4b5fd; }
-        .score-item.chapter .label-text { color: #c4b5fd; }
-        .score-item.total { grid-column: span 3; background: rgba(251,191,36,0.05); border-color: rgba(251,191,36,0.10); justify-content: center; gap: 1.2rem; padding: 0.4rem 0.6rem; }
-        .score-item.total i { color: #fbbf24; }
-        .score-item.total .score-value { background: rgba(251,191,36,0.08); color: #fbbf24; border: 1px solid rgba(251,191,36,0.06); }
-        .score-item.total .label-text { color: #fbbf24; }
-
-        .card-actions { margin-top: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 0.7rem; }
-        .btn-small { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); border-radius: 2.5rem; font-weight: 500; color: rgba(255,255,255,0.3); transition: 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
-        .btn-small:hover { background: rgba(255,255,255,0.06); border-color: rgba(96,165,250,0.12); color: #fff; }
-        .btn-small.chapter-btn:hover { border-color: rgba(167,139,250,0.15); color: #a78bfa; }
-        .btn-small.daily-btn:hover { border-color: rgba(110,231,183,0.15); color: #6ee7b7; }
-
-        .table-wrap { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 1.8rem; padding: 0.2rem; border: 1px solid rgba(255,255,255,0.03); margin-top: 1.2rem; overflow-x: auto; box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3); }
-        table { width: 100%; border-collapse: collapse; min-width: 1100px; }
-        th { text-align: left; padding: 0.7rem 0.7rem; background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.2); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.03); letter-spacing: 0.04em; text-transform: uppercase; }
-        td { padding: 0.6rem 0.7rem; border-bottom: 1px solid rgba(255,255,255,0.02); color: rgba(255,255,255,0.5); }
-        .highlight-row { background: rgba(96,165,250,0.03); }
-        td strong { color: #fbbf24; }
-
-        #toast { position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(15,23,42,0.95); backdrop-filter: blur(20px); color: #f1f5f9; font-weight: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 999; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.22,1,0.36,1); opacity: 0; pointer-events: none; white-space: nowrap; }
-        #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-
-        .loading-overlay { text-align: center; padding: 5rem 1rem; color: rgba(255,255,255,0.1); }
-        .loading-overlay i { font-size: 3.5rem; margin-bottom: 0.8rem; color: #60a5fa; animation: spin 1s linear infinite; }
-        .loading-overlay p { font-size: 1.2rem; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        .empty-state { text-align: center; padding: 5rem 2rem; color: rgba(255,255,255,0.2); max-width: 650px; margin: 2rem auto; background: rgba(255,255,255,0.02); border-radius: 2.5rem; border: 1px solid rgba(255,255,255,0.04); }
-        .empty-state i { font-size: 4rem; margin-bottom: 1.2rem; color: rgba(255,255,255,0.08); }
-        .empty-state .title { font-weight: 600; color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; }
-        .empty-state p { color: rgba(255,255,255,0.15); line-height: 1.8; }
-        .empty-state code { background: rgba(255,255,255,0.04); padding: 0.15rem 0.6rem; border-radius: 0.4rem; color: rgba(255,255,255,0.3); font-family: 'Inter', monospace; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
-        .modal-box { background: #121b33; border-radius: 2.5rem; padding: 2.8rem 2.5rem; max-width: 480px; width: 100%; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
-        .modal-box h2 { color: #f0f4ff; margin-bottom: 0.3rem; text-align: center; }
-        .modal-box .sub { color: rgba(255,255,255,0.2); text-align: center; margin-bottom: 1.8rem; }
-        .modal-box input { width: 100%; border-radius: 3.5rem; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); color: #f0f4ff; outline: none; transition: 0.2s; }
-        .modal-box input:focus { border-color: rgba(96,165,250,0.2); }
-        .modal-box input::placeholder { color: rgba(255,255,255,0.1); }
-        .modal-box .btn-row { display: flex; gap: 1rem; margin-top: 1.5rem; }
-        .modal-box .btn-row .btn { flex: 1; justify-content: center; }
-        .modal-box .error-msg { color: #f87171; margin-top: 1rem; text-align: center; }
-
-        .detail-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8,12,26,0.95); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 2rem; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .detail-box { background: rgba(255,255,255,0.04); border-radius: 3rem; padding: 3rem 3.5rem; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
-        .detail-box .close-btn { float: right; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 3.5rem; padding: 0.5rem 1.5rem; color: rgba(255,255,255,0.3); cursor: pointer; transition: 0.2s; }
-        .detail-box .close-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
-        .detail-box .student-name-big { font-weight: 700; color: #f0f4ff; margin: 0.5rem 0 0.2rem; }
-        .detail-box .student-id-big { color: rgba(255,255,255,0.2); margin-bottom: 1.8rem; }
-        .detail-score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1.2rem 0; }
-        .detail-score-item { background: rgba(255,255,255,0.03); border-radius: 1.5rem; padding: 1rem 1.2rem; text-align: center; border: 1px solid rgba(255,255,255,0.04); }
-        .detail-score-item .label { color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.04em; }
-        .detail-score-item .value { font-weight: 700; color: #f0f4ff; margin-top: 0.2rem; }
-        .detail-score-item .value.gold { color: #fbbf24; }
-        .detail-score-item .value.blue { color: #60a5fa; }
-        .detail-score-item .value.green { color: #6ee7b7; }
-        .detail-score-item .value.purple { color: #a78bfa; }
-        .detail-score-item .value.pink { color: #f472b6; }
-        .detail-score-item .value.teal { color: #5eead4; }
-        .detail-score-item .value.red { color: #f87171; }
-        .detail-score-item .value.orange { color: #fdba74; }
-        .detail-score-item .label.attendance-label { color: #93c5fd; }
-        .detail-score-item .label.performance-label { color: #6ee7b7; }
-        .detail-score-item .label.homework-label { color: #fcd34d; }
-        .detail-score-item .label.midterm-label { color: #f9a8d4; }
-        .detail-score-item .label.final-label { color: #fdba74; }
-        .detail-score-item .label.daily-label { color: #8eeac7; }
-        .detail-score-item .label.chapter-label { color: #c4b5fd; }
-        .detail-total { margin-top: 1.2rem; background: rgba(251,191,36,0.06); border-radius: 1.5rem; padding: 1.2rem; text-align: center; border: 1px solid rgba(251,191,36,0.08); }
-        .detail-total .label { color: rgba(255,255,255,0.2); }
-        .detail-total .value { font-weight: 700; color: #fbbf24; }
-
-        .teacher-badge { background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.15); color: #fbbf24; border-radius: 2.5rem; display: inline-flex; align-items: center; gap: 0.4rem; }
-
-        @media (max-width: 1200px) {
-            .stats-detail-row { grid-template-columns: repeat(4, 1fr); }
-        }
-        @media (max-width: 700px) {
-            body { padding: 0.8rem 0.5rem; font-size: 1rem; }
-            body::before { font-size: 3rem; letter-spacing: 1.5rem; }
-            .math-symbols { display: none; }
-            .header-card { flex-direction: column; align-items: start; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 1.5rem; }
-            .header-left h1 { font-size: 1.6rem; }
-            .header-left .logo { width: 48px; height: 48px; font-size: 1.4rem; }
-            .header-left .class-badge { font-size: 0.85rem; }
-            .header-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
-            .header-right .btn { font-size: 0.9rem; padding: 0.5rem 1.1rem; }
-            .search-section { flex-direction: column; align-items: stretch; padding: 0.8rem 1.2rem; gap: 0.6rem; border-radius: 1.8rem; }
-            .search-section input { font-size: 1.05rem; padding: 0.6rem 0.2rem; }
-            .student-grid { grid-template-columns: 1fr; }
-            .kpi-row { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-            .kpi-card .value { font-size: 1.6rem; }
-            .kpi-card .label { font-size: 0.7rem; }
-            .student-name { font-size: 1.2rem; }
-            .score-item { font-size: 0.85rem; padding: 0.25rem 0.5rem 0.25rem 0.7rem; }
-            .score-value { font-size: 0.85rem; }
-            .score-item.total .score-value { font-size: 1rem; }
-            .modal-box { padding: 1.8rem 1.2rem; }
-            #toast { font-size: 0.9rem; padding: 0.6rem 1.4rem; white-space: normal; max-width: 92%; }
-            .detail-box { padding: 1.5rem; }
-            .detail-box .student-name-big { font-size: 2rem; }
-            .detail-score-grid { grid-template-columns: 1fr 1fr; }
-            .detail-score-item .value { font-size: 1.6rem; }
-            .detail-total .value { font-size: 2.2rem; }
-            .btn { font-size: 0.9rem; padding: 0.5rem 1.2rem; }
-            .btn-small { font-size: 0.75rem; padding: 0.2rem 0.8rem; }
-            .empty-state { padding: 2rem 1rem; }
-            .empty-state .title { font-size: 1.3rem; }
-            .student-count-badge { font-size: 0.9rem; padding: 0.4rem 1.2rem; }
-            .login-box { padding: 2.5rem 1.5rem; }
-            .login-box h1 { font-size: 1.6rem; }
-            .login-box .logo-icon { width: 56px; height: 56px; font-size: 1.6rem; }
-            .stats-detail-row { grid-template-columns: repeat(3, 1fr); }
-            .stats-detail-card .stat-row .student-name-small { max-width: 2.5rem; }
-        }
-        @media (max-width: 480px) {
-            .kpi-row { grid-template-columns: repeat(2, 1fr); }
-            .detail-score-grid { grid-template-columns: 1fr 1fr; }
-            .stats-detail-row { grid-template-columns: repeat(2, 1fr); }
-            body::before { font-size: 2rem; letter-spacing: 1rem; }
-        }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+        @media (max-width:480px) { .kpi-row { grid-template-columns:1fr 1fr; } }
+        ::-webkit-scrollbar { width:6px; height:6px; }
+        ::-webkit-scrollbar-track { background:rgba(255,255,255,0.02); border-radius:10px; }
+        ::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.08); border-radius:10px; }
     </style>
 </head>
 <body>
-
     <div class="math-symbols s1">∫ ∂ ∇</div>
     <div class="math-symbols s2">∑ π √</div>
     <div class="math-symbols s3">∞ ≠ ≈</div>
@@ -563,13 +197,12 @@
 
     <div id="app">
         <div class="app-container">
-
-            <!-- ===== 登录页面 ===== -->
+            <!-- 登录 -->
             <div v-if="!isLoggedIn" class="login-page">
                 <div class="login-box">
                     <div class="logo-icon"><i class="fas fa-calculator"></i></div>
                     <h1>高等数学</h1>
-                    <p class="sub">学情驾驶舱 · 请先登录</p>
+                    <p class="sub">学情驾驶舱 · 精算版</p>
                     <div class="class-badge-login"><i class="fas fa-users"></i> 2026级A4班专享</div>
                     <input type="password" v-model="loginPassword" placeholder="请输入访问密码…" @keyup.enter="verifyLogin" ref="loginInput" autofocus />
                     <button class="btn btn-primary" @click="verifyLogin"><i class="fas fa-unlock-alt"></i> 进入系统</button>
@@ -578,9 +211,8 @@
                 </div>
             </div>
 
-            <!-- ===== 主界面 ===== -->
+            <!-- 主界面 -->
             <template v-else>
-                <!-- Header -->
                 <div class="header-card">
                     <div class="header-left">
                         <div class="logo"><i class="fas fa-chart-pie"></i></div>
@@ -599,125 +231,24 @@
                     </div>
                 </div>
 
-                <!-- ===== 详细统计卡片行 ===== -->
-                <div class="stats-detail-row" v-if="allStudents.length > 0 && stats.attendance">
-                    <!-- 考勤 -->
-                    <div class="stats-detail-card">
-                        <div class="type-label" style="color:#60a5fa;">📋 考勤</div>
-                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value blue">{{ stats.attendance.avg }}</span></div>
-                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value blue">{{ stats.attendance.max }}</span><span class="student-name-small">{{ stats.attendance.maxName }}</span></div>
-                        <div class="divider"></div>
-                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.attendance.fastestChange }}</span><span class="student-name-small">{{ stats.attendance.fastestName }}</span></div>
-                        <div class="stat-row">
-                            <span class="stat-label">📉 下滑</span>
-                            <span class="stat-value red">{{ stats.attendance.slowestChange }}</span>
-                            <span class="student-name-small" :class="{ revealed: stats.attendance.slowestRevealed }" @click="toggleSlowestReveal('attendance')">
-                                {{ stats.attendance.slowestRevealed ? stats.attendance.slowestName : '***' }}
-                            </span>
+                <!-- KPI 增强版: 平均值 + 最高 + 增长/下滑 -->
+                <div class="kpi-row" v-if="allStudents.length > 0 && statsReady">
+                    <div class="kpi-card" v-for="(stat, key) in statsMap" :key="key" :style="{'--accent': stat.color}">
+                        <div class="label">{{ stat.label }} <i :class="stat.icon"></i></div>
+                        <div class="value" :class="stat.colorClass">{{ stat.avg }}</div>
+                        <div class="extra">🏆 最高 <strong>{{ stat.maxVal }}</strong> · {{ stat.maxName }}</div>
+                        <div class="extra" v-if="stat.fastestGain">
+                            ⬆ 最快 <span class="trend-up">{{ stat.fastestGain.name }} +{{ stat.fastestGain.delta }}</span>
                         </div>
-                    </div>
-                    <!-- 课堂表现 -->
-                    <div class="stats-detail-card">
-                        <div class="type-label" style="color:#6ee7b7;">🎯 表现</div>
-                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value green">{{ stats.performance.avg }}</span></div>
-                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value green">{{ stats.performance.max }}</span><span class="student-name-small">{{ stats.performance.maxName }}</span></div>
-                        <div class="divider"></div>
-                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.performance.fastestChange }}</span><span class="student-name-small">{{ stats.performance.fastestName }}</span></div>
-                        <div class="stat-row">
-                            <span class="stat-label">📉 下滑</span>
-                            <span class="stat-value red">{{ stats.performance.slowestChange }}</span>
-                            <span class="student-name-small" :class="{ revealed: stats.performance.slowestRevealed }" @click="toggleSlowestReveal('performance')">
-                                {{ stats.performance.slowestRevealed ? stats.performance.slowestName : '***' }}
-                            </span>
-                        </div>
-                    </div>
-                    <!-- 平时作业 -->
-                    <div class="stats-detail-card">
-                        <div class="type-label" style="color:#fbbf24;">📝 作业</div>
-                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value gold">{{ stats.homework.avg }}</span></div>
-                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value gold">{{ stats.homework.max }}</span><span class="student-name-small">{{ stats.homework.maxName }}</span></div>
-                        <div class="divider"></div>
-                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.homework.fastestChange }}</span><span class="student-name-small">{{ stats.homework.fastestName }}</span></div>
-                        <div class="stat-row">
-                            <span class="stat-label">📉 下滑</span>
-                            <span class="stat-value red">{{ stats.homework.slowestChange }}</span>
-                            <span class="student-name-small" :class="{ revealed: stats.homework.slowestRevealed }" @click="toggleSlowestReveal('homework')">
-                                {{ stats.homework.slowestRevealed ? stats.homework.slowestName : '***' }}
-                            </span>
-                        </div>
-                    </div>
-                    <!-- 期中测试 -->
-                    <div class="stats-detail-card">
-                        <div class="type-label" style="color:#f472b6;">🧪 期中</div>
-                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value pink">{{ stats.midterm.avg }}</span></div>
-                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value pink">{{ stats.midterm.max }}</span><span class="student-name-small">{{ stats.midterm.maxName }}</span></div>
-                        <div class="divider"></div>
-                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.midterm.fastestChange }}</span><span class="student-name-small">{{ stats.midterm.fastestName }}</span></div>
-                        <div class="stat-row">
-                            <span class="stat-label">📉 下滑</span>
-                            <span class="stat-value red">{{ stats.midterm.slowestChange }}</span>
-                            <span class="student-name-small" :class="{ revealed: stats.midterm.slowestRevealed }" @click="toggleSlowestReveal('midterm')">
-                                {{ stats.midterm.slowestRevealed ? stats.midterm.slowestName : '***' }}
-                            </span>
-                        </div>
-                    </div>
-                    <!-- 期末考试 -->
-                    <div class="stats-detail-card">
-                        <div class="type-label" style="color:#fb923c;">🏆 期末</div>
-                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value orange">{{ stats.final.avg }}</span></div>
-                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value orange">{{ stats.final.max }}</span><span class="student-name-small">{{ stats.final.maxName }}</span></div>
-                        <div class="divider"></div>
-                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.final.fastestChange }}</span><span class="student-name-small">{{ stats.final.fastestName }}</span></div>
-                        <div class="stat-row">
-                            <span class="stat-label">📉 下滑</span>
-                            <span class="stat-value red">{{ stats.final.slowestChange }}</span>
-                            <span class="student-name-small" :class="{ revealed: stats.final.slowestRevealed }" @click="toggleSlowestReveal('final')">
-                                {{ stats.final.slowestRevealed ? stats.final.slowestName : '***' }}
-                            </span>
-                        </div>
-                    </div>
-                    <!-- 每日一题 -->
-                    <div class="stats-detail-card">
-                        <div class="type-label" style="color:#5eead4;">🧩 每日一题</div>
-                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value teal">{{ stats.daily.avg }}</span></div>
-                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value teal">{{ stats.daily.max }}</span><span class="student-name-small">{{ stats.daily.maxName }}</span></div>
-                        <div class="divider"></div>
-                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.daily.fastestChange }}</span><span class="student-name-small">{{ stats.daily.fastestName }}</span></div>
-                        <div class="stat-row">
-                            <span class="stat-label">📉 下滑</span>
-                            <span class="stat-value red">{{ stats.daily.slowestChange }}</span>
-                            <span class="student-name-small" :class="{ revealed: stats.daily.slowestRevealed }" @click="toggleSlowestReveal('daily')">
-                                {{ stats.daily.slowestRevealed ? stats.daily.slowestName : '***' }}
-                            </span>
-                        </div>
-                    </div>
-                    <!-- 章节考核 -->
-                    <div class="stats-detail-card">
-                        <div class="type-label" style="color:#a78bfa;">📚 章节</div>
-                        <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value purple">{{ stats.chapter.avg }}</span></div>
-                        <div class="stat-row"><span class="stat-label">最高</span><span class="stat-value purple">{{ stats.chapter.max }}</span><span class="student-name-small">{{ stats.chapter.maxName }}</span></div>
-                        <div class="divider"></div>
-                        <div class="stat-row"><span class="stat-label">📈 最快</span><span class="stat-value green">{{ stats.chapter.fastestChange }}</span><span class="student-name-small">{{ stats.chapter.fastestName }}</span></div>
-                        <div class="stat-row">
-                            <span class="stat-label">📉 下滑</span>
-                            <span class="stat-value red">{{ stats.chapter.slowestChange }}</span>
-                            <span class="student-name-small" :class="{ revealed: stats.chapter.slowestRevealed }" @click="toggleSlowestReveal('chapter')">
-                                {{ stats.chapter.slowestRevealed ? stats.chapter.slowestName : '***' }}
+                        <div class="extra" v-if="stat.fastestDrop">
+                            ⬇ 下滑 <span class="trend-hidden" @click="stat.showDropName = !stat.showDropName" title="点击显示姓名">
+                                {{ stat.showDropName ? stat.fastestDrop.name : '点击显示' }} {{ stat.fastestDrop.delta }}
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <!-- KPI -->
-                <div class="kpi-row" v-if="allStudents.length > 0">
-                    <div class="kpi-card" style="--accent: #fbbf24;"><div class="label">总评平均</div><div class="value gold">{{ avgTotal }}</div><div class="change up"><i class="fas fa-arrow-up"></i> 较上期 +2.3%</div></div>
-                    <div class="kpi-card" style="--accent: #60a5fa;"><div class="label">最高总评</div><div class="value blue">{{ maxTotal }}</div><div class="change"><i class="fas fa-crown"></i> TOP1</div></div>
-                    <div class="kpi-card" style="--accent: #6ee7b7;"><div class="label">考勤平均</div><div class="value green">{{ avgAttendance }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +5%</div></div>
-                    <div class="kpi-card" style="--accent: #a78bfa;"><div class="label">章节平均</div><div class="value purple">{{ avgChapter }}</div><div class="change down"><i class="fas fa-arrow-down"></i> -1.2%</div></div>
-                    <div class="kpi-card" style="--accent: #f472b6;"><div class="label">每日一题平均</div><div class="value pink">{{ avgDaily }}</div><div class="change up"><i class="fas fa-arrow-up"></i> +8%</div></div>
-                </div>
-
-                <!-- Search -->
+                <!-- 搜索 -->
                 <div class="search-section" v-if="allStudents.length > 0">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="输入姓氏筛选…" v-model="searchSurname" @input="filterBySurname" />
@@ -730,21 +261,14 @@
                     <button class="btn-clear" @click="clearSearch"><i class="fas fa-times-circle"></i></button>
                 </div>
 
-                <!-- Loading -->
-                <div v-if="loading" class="loading-overlay">
-                    <i class="fas fa-spinner"></i>
-                    <p>加载数据中…</p>
-                </div>
-
-                <!-- 空状态 -->
-                <div v-else-if="allStudents.length === 0" class="empty-state">
-                    <i class="fas fa-database"></i>
-                    <div class="title">暂无数据</div>
-                    <p>请检查 Supabase 配置是否正确。<br>确保 <code>students</code> 表中已有学生数据。</p>
+                <div v-if="loading" class="loading-overlay"><i class="fas fa-spinner"></i><p>加载数据中…</p></div>
+                <div v-else-if="allStudents.length === 0" class="empty-state" style="text-align:center;padding:5rem 2rem;color:rgba(255,255,255,0.2);">
+                    <i class="fas fa-database" style="font-size:4rem;color:rgba(255,255,255,0.08);"></i>
+                    <div style="font-weight:600;color:rgba(255,255,255,0.4);margin-bottom:0.6rem;font-size:1.6rem;">暂无数据</div>
+                    <p>请检查 Supabase 配置<br><code style="background:rgba(255,255,255,0.04);padding:0.15rem 0.6rem;border-radius:0.4rem;color:rgba(255,255,255,0.3);">students</code> 表需有数据</p>
                     <button class="btn btn-primary" @click="loadAllData" style="margin-top:1.5rem;"><i class="fas fa-sync-alt"></i> 重新加载</button>
                 </div>
 
-                <!-- 学生数据 -->
                 <template v-else>
                     <div v-if="displayMode === 'grid'" class="student-grid">
                         <div class="student-card" v-for="(stu, idx) in displayedStudents" :key="stu.id" @click="showDetail(stu)">
@@ -768,38 +292,27 @@
                                 <div class="score-item total"><i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span></div>
                             </div>
                             <div class="card-actions" @click.stop>
-                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'attendance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 考勤</button>
-                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'performance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 表现</button>
-                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'homework')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 作业</button>
-                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'midterm')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期中</button>
-                                <button class="btn-small" @click="showAddScoreModal(stu.id, 'final')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期末</button>
-                                <button class="btn-small daily-btn" @click="showAddScoreModal(stu.id, 'daily')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
-                                <button class="btn-small chapter-btn" @click="showAddScoreModal(stu.id, 'chapter')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 章节</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id,'attendance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 考勤</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id,'performance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 表现</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id,'homework')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 作业</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id,'midterm')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期中</button>
+                                <button class="btn-small" @click="showAddScoreModal(stu.id,'final')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 期末</button>
+                                <button class="btn-small daily-btn" @click="showAddScoreModal(stu.id,'daily')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 每日一题</button>
+                                <button class="btn-small chapter-btn" @click="showAddScoreModal(stu.id,'chapter')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 章节</button>
                                 <button class="btn-small" @click="showDetail(stu)"><i class="fas fa-expand"></i> 放大</button>
                             </div>
                         </div>
                     </div>
-
                     <div v-else-if="displayMode === 'table'" class="table-wrap">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>#</th><th>学号</th><th>姓名</th>
-                                    <th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th>
-                                    <th>每日一题</th>
-                                    <th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th>
-                                    <th>总评</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>#</th><th>学号</th><th>姓名</th><th>考勤</th><th>表现</th><th>作业</th><th>期中</th><th>期末</th><th>每日一题</th><th>第1章</th><th>第2章</th><th>第3章</th><th>第4章</th><th>第5章</th><th>第6章</th><th>总评</th></tr></thead>
                             <tbody>
                                 <tr v-for="(stu, idx) in displayedStudents" :key="stu.id" :class="{ 'highlight-row': stu.id === selectedStudentId }" @click="showDetail(stu)" style="cursor:pointer;">
-                                    <td>{{ idx + 1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
-                                    <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td>
-                                    <td>{{ stu.homework }}</td><td>{{ stu.midterm }}</td><td>{{ stu.final }}</td>
-                                    <td>{{ stu.daily_score || 0 }}</td>
-                                    <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td>
-                                    <td>{{ stu.chapter3 || 0 }}</td><td>{{ stu.chapter4 || 0 }}</td>
-                                    <td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
+                                    <td>{{ idx+1 }}</td><td>{{ stu.id }}</td><td>{{ stu.name }}</td>
+                                    <td>{{ stu.attendance }}</td><td>{{ stu.performance }}</td><td>{{ stu.homework }}</td>
+                                    <td>{{ stu.midterm }}</td><td>{{ stu.final }}</td><td>{{ stu.daily_score || 0 }}</td>
+                                    <td>{{ stu.chapter1 || 0 }}</td><td>{{ stu.chapter2 || 0 }}</td><td>{{ stu.chapter3 || 0 }}</td>
+                                    <td>{{ stu.chapter4 || 0 }}</td><td>{{ stu.chapter5 || 0 }}</td><td>{{ stu.chapter6 || 0 }}</td>
                                     <td><strong>{{ stu.total }}</strong></td>
                                 </tr>
                             </tbody>
@@ -807,10 +320,9 @@
                     </div>
                 </template>
 
-                <!-- Toast -->
                 <div id="toast"></div>
 
-                <!-- 教师后台弹窗 -->
+                <!-- 教师后台 -->
                 <div v-if="showTeacherModal" class="modal-overlay" @click.self="closeTeacherModal">
                     <div class="modal-box">
                         <h2><i class="fas fa-lock" style="color:#fbbf24; margin-right:0.6rem;"></i>教师后台</h2>
@@ -820,11 +332,11 @@
                             <button class="btn btn-primary" @click="verifyTeacher">确认</button>
                             <button class="btn" @click="closeTeacherModal">取消</button>
                         </div>
-                        <div v-if="teacherError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
+                        <div v-if="teacherError" class="error-msg" style="color:#f87171;margin-top:1rem;text-align:center;"><i class="fas fa-exclamation-circle"></i> {{ teacherError }}</div>
                     </div>
                 </div>
 
-                <!-- 添加分数弹窗 -->
+                <!-- 添加分数 -->
                 <div v-if="showScoreModal" class="modal-overlay" @click.self="closeScoreModal">
                     <div class="modal-box">
                         <h2><i class="fas fa-plus-circle" style="color:#6ee7b7; margin-right:0.6rem;"></i>添加分数</h2>
@@ -836,11 +348,11 @@
                             <button class="btn btn-primary" @click="confirmAddScore">确认添加</button>
                             <button class="btn" @click="closeScoreModal">取消</button>
                         </div>
-                        <div v-if="scoreError" class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ scoreError }}</div>
+                        <div v-if="scoreError" class="error-msg" style="color:#f87171;margin-top:1rem;text-align:center;"><i class="fas fa-exclamation-circle"></i> {{ scoreError }}</div>
                     </div>
                 </div>
 
-                <!-- 详情全屏弹窗 -->
+                <!-- 详情 -->
                 <div v-if="showDetailModal" class="detail-overlay" @click.self="showDetailModal = false">
                     <div class="detail-box">
                         <button class="close-btn" @click="showDetailModal = false"><i class="fas fa-times"></i> 关闭</button>
@@ -848,101 +360,47 @@
                         <div class="student-id-big">学号：{{ detailStudent.id }}</div>
                         <div class="detail-score-grid">
                             <div class="detail-score-item"><div class="label attendance-label">考勤</div><div class="value blue">{{ detailStudent.attendance }}</div></div>
-                            <div class="detail-score-item"><div class="label performance-label">课堂表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
-                            <div class="detail-score-item"><div class="label homework-label">平时作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
-                            <div class="detail-score-item"><div class="label midterm-label">期中测试</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
-                            <div class="detail-score-item"><div class="label final-label">期末考试</div><div class="value red">{{ detailStudent.final }}</div></div>
+                            <div class="detail-score-item"><div class="label performance-label">表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
+                            <div class="detail-score-item"><div class="label homework-label">作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
+                            <div class="detail-score-item"><div class="label midterm-label">期中</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
+                            <div class="detail-score-item"><div class="label final-label">期末</div><div class="value red">{{ detailStudent.final }}</div></div>
                             <div class="detail-score-item"><div class="label daily-label">每日一题</div><div class="value teal">{{ detailStudent.daily_score || 0 }}</div></div>
-                            <div class="detail-score-item"><div class="label chapter-label">第1章</div><div class="value purple">{{ detailStudent.chapter1 || 0 }}</div></div>
-                            <div class="detail-score-item"><div class="label chapter-label">第2章</div><div class="value purple">{{ detailStudent.chapter2 || 0 }}</div></div>
-                            <div class="detail-score-item"><div class="label chapter-label">第3章</div><div class="value purple">{{ detailStudent.chapter3 || 0 }}</div></div>
-                            <div class="detail-score-item"><div class="label chapter-label">第4章</div><div class="value purple">{{ detailStudent.chapter4 || 0 }}</div></div>
-                            <div class="detail-score-item"><div class="label chapter-label">第5章</div><div class="value purple">{{ detailStudent.chapter5 || 0 }}</div></div>
-                            <div class="detail-score-item"><div class="label chapter-label">第6章</div><div class="value purple">{{ detailStudent.chapter6 || 0 }}</div></div>
+                            <div class="detail-score-item" v-for="i in 6" :key="'ch'+i"><div class="label chapter-label">第{{i}}章</div><div class="value purple">{{ detailStudent['chapter'+i] || 0 }}</div></div>
                         </div>
-                        <div class="detail-total">
-                            <div class="label">总评</div>
-                            <div class="value">{{ detailStudent.total }}</div>
-                        </div>
-                        <div style="margin-top:1.2rem; text-align:center; color:rgba(255,255,255,0.15); font-size:0.85rem;">
-                            <i class="fas fa-info-circle"></i> 点击空白处或关闭按钮退出
-                        </div>
+                        <div class="detail-total"><div class="label">总评</div><div class="value">{{ detailStudent.total }}</div></div>
+                        <div style="margin-top:1.2rem;text-align:center;color:rgba(255,255,255,0.15);font-size:0.85rem;"><i class="fas fa-info-circle"></i> 点击空白处或关闭按钮退出</div>
                     </div>
                 </div>
-
             </template>
         </div>
     </div>
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-    </script>
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js">
-    </script>
-
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script>
         if (typeof Vue === 'undefined') {
-            document.body.innerHTML =
-                '<div style="text-align:center;padding:4rem 1rem;color:rgba(255,255,255,0.3);"><i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#ef4444;"></i><p style="margin-top:1rem;font-size:1.2rem;">Vue 加载失败，请检查网络连接</p></div>';
-            console.error('❌ Vue 加载失败！');
+            document.body.innerHTML = '<div style="text-align:center;padding:4rem 1rem;color:rgba(255,255,255,0.3);"><i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#ef4444;"></i><p style="margin-top:1rem;font-size:1.2rem;">Vue 加载失败，请检查网络</p></div>';
+            console.error('Vue 加载失败');
         } else {
-            console.log('✅ Vue 加载成功！版本:', Vue.version);
-
-            // ===== Supabase 配置 =====
+            console.log('Vue 加载成功');
             const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
             const SUPABASE_ANON_KEY = 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
-
             let supabaseClient = null;
-
             if (typeof supabase !== 'undefined' && supabase.createClient) {
-                try {
-                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                    console.log('✅ Supabase 客户端初始化成功');
-                } catch (e) {
-                    console.warn('⚠️ Supabase 初始化失败:', e);
-                    supabaseClient = null;
-                }
-            } else {
-                console.warn('⚠️ Supabase 库未加载，请检查网络');
-                supabaseClient = null;
-            }
+                try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); console.log('Supabase 初始化成功'); } catch (e) { console.warn('Supabase 初始化失败', e); }
+            } else { console.warn('Supabase 库未加载'); }
 
-            // ===== 密码配置 =====
             const LOGIN_PASSWORD = 'math2026';
             const TEACHER_PASSWORD = 'math2026';
-
-            // ===== 分数类型配置 =====
             const SCORE_TYPES = {
-                attendance: { table: 'attendance_scores', label: '考勤' },
-                performance: { table: 'performance_scores', label: '课堂表现' },
-                homework: { table: 'homework_scores', label: '平时作业' },
-                midterm: { table: 'midterm_scores', label: '期中测试' },
-                final: { table: 'final_scores', label: '期末考试' },
-                daily: { table: 'daily_scores', label: '每日一题' },
-                chapter: { table: 'chapter_scores', label: '章节考核' }
-            };
-
-            // 默认统计项
-            const defaultStatsItem = {
-                avg: 0,
-                max: 0,
-                maxName: '',
-                fastestChange: 0,
-                fastestName: '',
-                slowestChange: 0,
-                slowestName: '',
-                slowestRevealed: false
-            };
-
-            const defaultStats = {
-                attendance: { ...defaultStatsItem },
-                performance: { ...defaultStatsItem },
-                homework: { ...defaultStatsItem },
-                midterm: { ...defaultStatsItem },
-                final: { ...defaultStatsItem },
-                daily: { ...defaultStatsItem },
-                chapter: { ...defaultStatsItem }
+                attendance: { table: 'attendance_scores', label: '考勤', icon: 'fa-user-check' },
+                performance: { table: 'performance_scores', label: '课堂表现', icon: 'fa-chalkboard-teacher' },
+                homework: { table: 'homework_scores', label: '平时作业', icon: 'fa-book-open' },
+                midterm: { table: 'midterm_scores', label: '期中测试', icon: 'fa-flask' },
+                final: { table: 'final_scores', label: '期末考试', icon: 'fa-check-circle' },
+                daily: { table: 'daily_scores', label: '每日一题', icon: 'fa-puzzle-piece' },
+                chapter: { table: 'chapter_scores', label: '章节考核', icon: 'fa-layer-group' }
             };
 
             const app = Vue.createApp({
@@ -951,7 +409,6 @@
                         isLoggedIn: false,
                         loginPassword: '',
                         loginError: '',
-
                         allStudents: [],
                         filteredStudents: [],
                         displayedStudents: [],
@@ -961,24 +418,14 @@
                         studentOptions: [],
                         filteredStudentOptions: [],
                         loading: true,
-                        avgTotal: 0,
-                        maxTotal: 0,
-                        avgAttendance: 0,
-                        avgChapter: 0,
-                        avgDaily: 0,
-
-                        stats: { ...defaultStats },
-
+                        statsReady: false,
+                        statsMap: {},
                         showTeacherModal: false,
                         teacherPassword: '',
                         teacherError: '',
                         isTeacher: false,
-
                         showDetailModal: false,
-                        detailStudent: { name: '', id: '', attendance: 0, performance: 0, homework: 0, midterm: 0,
-                            final: 0, daily_score: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0,
-                            chapter5: 0, chapter6: 0, total: 0 },
-
+                        detailStudent: { name: '', id: '', attendance: 0, performance: 0, homework: 0, midterm: 0, final: 0, daily_score: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0, chapter5: 0, chapter6: 0, total: 0 },
                         showScoreModal: false,
                         scoreModalStudentId: '',
                         scoreModalStudentName: '',
@@ -987,228 +434,36 @@
                         scoreModalCurrentTotal: 0,
                         scoreModalValue: '',
                         scoreError: '',
-
-                        supabaseUrlDisplay: SUPABASE_URL,
-                        supabaseKeyDisplay: SUPABASE_ANON_KEY ? SUPABASE_ANON_KEY.substring(0, 10) + '...' : '未配置'
                     };
                 },
                 mounted() {
-                    console.log('✅ Vue mounted!');
-                    this.$nextTick(() => {
-                        if (this.$refs.loginInput) {
-                            this.$refs.loginInput.focus();
-                        }
-                    });
+                    console.log('Vue mounted');
+                    this.$nextTick(() => { if (this.$refs.loginInput) this.$refs.loginInput.focus(); });
                 },
                 methods: {
-                    // ===== 登录 =====
                     verifyLogin() {
-                        if (this.loginPassword === LOGIN_PASSWORD) {
-                            this.isLoggedIn = true;
-                            this.loginError = '';
-                            console.log('✅ 登录成功');
-                            this.loadAllData();
-                            this.$nextTick(() => {
-                                const searchInput = document.querySelector('.search-section input');
-                                if (searchInput) searchInput.focus();
-                            });
-                        } else {
-                            this.loginError = '❌ 密码错误，请重试';
-                            this.loginPassword = '';
-                            this.$nextTick(() => {
-                                if (this.$refs.loginInput) {
-                                    this.$refs.loginInput.focus();
-                                }
-                            });
-                        }
+                        if (this.loginPassword === LOGIN_PASSWORD) { this.isLoggedIn = true; this.loginError = ''; this.loadAllData(); } else { this.loginError = '❌ 密码错误'; this.loginPassword = ''; this.$nextTick(() => { if (this.$refs.loginInput) this.$refs.loginInput.focus(); }); }
                     },
-
-                    logout() {
-                        this.isLoggedIn = false;
-                        this.isTeacher = false;
-                        this.loginPassword = '';
-                        this.loginError = '';
-                        this.allStudents = [];
-                        this.displayedStudents = [];
-                        this.stats = { ...defaultStats };
-                        this.showToast('已退出登录');
-                        this.$nextTick(() => {
-                            if (this.$refs.loginInput) {
-                                this.$refs.loginInput.focus();
-                            }
-                        });
-                    },
-
-                    // ===== 切换下滑姓名显示 =====
-                    toggleSlowestReveal(key) {
-                        if (this.stats[key]) {
-                            this.stats[key].slowestRevealed = !this.stats[key].slowestRevealed;
-                        }
-                    },
-
-                    // ===== 计算统计数据 =====
-                    calculateStats(students) {
-                        const stats = {};
-                        const fieldKeys = ['attendance', 'performance', 'homework', 'midterm', 'final', 'daily_score',
-                            'chapter'
-                        ];
-
-                        const studentsWithChapter = students.map(s => ({
-                            ...s,
-                            chapter: (s.chapter1 || 0) + (s.chapter2 || 0) + (s.chapter3 || 0) +
-                                (s.chapter4 || 0) + (s.chapter5 || 0) + (s.chapter6 || 0)
-                        }));
-
-                        fieldKeys.forEach(key => {
-                            const values = studentsWithChapter.map(s => s[key] || 0);
-                            const avg = values.length > 0 ? Math.round(values.reduce((a, b) => a + b, 0) /
-                                values.length) : 0;
-
-                            let maxVal = -Infinity;
-                            let maxName = '';
-                            studentsWithChapter.forEach(s => {
-                                const val = s[key] || 0;
-                                if (val > maxVal) {
-                                    maxVal = val;
-                                    maxName = s.name;
-                                }
-                            });
-                            if (maxVal === -Infinity) { maxVal = 0; }
-
-                            let fastestChange = -Infinity;
-                            let fastestName = '';
-                            let slowestChange = Infinity;
-                            let slowestName = '';
-
-                            studentsWithChapter.forEach(s => {
-                                const val = s[key] || 0;
-                                const deviation = val - avg;
-                                if (deviation > fastestChange) {
-                                    fastestChange = deviation;
-                                    fastestName = s.name;
-                                }
-                                if (deviation < slowestChange) {
-                                    slowestChange = deviation;
-                                    slowestName = s.name;
-                                }
-                            });
-                            if (fastestChange === -Infinity) { fastestChange = 0; }
-                            if (slowestChange === Infinity) { slowestChange = 0; }
-
-                            const formatChange = (v) => {
-                                return v > 0 ? '+' + v : v;
-                            };
-
-                            stats[key] = {
-                                avg: avg,
-                                max: maxVal,
-                                maxName: maxName,
-                                fastestChange: formatChange(Math.round(fastestChange)),
-                                fastestName: fastestName,
-                                slowestChange: formatChange(Math.round(slowestChange)),
-                                slowestName: slowestName,
-                                slowestRevealed: false
-                            };
-                        });
-
-                        stats.chapter = stats.chapter || { ...defaultStatsItem };
-
-                        return stats;
-                    },
-
-                    // ===== 数据加载 =====
+                    logout() { this.isLoggedIn = false; this.isTeacher = false; this.loginPassword = ''; this.loginError = ''; this.allStudents = []; this.displayedStudents = []; this.showToast('已退出'); },
                     async loadAllData() {
                         this.loading = true;
                         try {
-                            if (!supabaseClient) {
-                                console.warn('⚠️ Supabase 客户端未初始化');
-                                this.loading = false;
-                                this.allStudents = [];
-                                this.displayedStudents = [];
-                                this.stats = { ...defaultStats };
-                                this.showToast('⚠️ Supabase 未连接，请检查配置');
-                                return;
-                            }
-
-                            console.log('🔄 正在从 Supabase 读取数据...');
-
-                            const { data: students, error: stuError } = await supabaseClient
-                                .from('students')
-                                .select('*')
-                                .order('id');
-
-                            if (stuError) {
-                                console.warn('⚠️ 学生表查询出错:', stuError);
-                                this.loading = false;
-                                this.allStudents = [];
-                                this.displayedStudents = [];
-                                this.stats = { ...defaultStats };
-                                this.showToast('⚠️ 数据加载失败: ' + stuError.message);
-                                return;
-                            }
-
-                            if (!students || students.length === 0) {
-                                console.log('ℹ️ students 表为空');
-                                this.loading = false;
-                                this.allStudents = [];
-                                this.displayedStudents = [];
-                                this.stats = { ...defaultStats };
-                                this.showToast('ℹ️ students 表中暂无数据');
-                                return;
-                            }
-
-                            console.log('✅ 学生数据获取成功，共', students.length, '名学生');
-
-                            // 读取所有分数表
+                            if (!supabaseClient) { this.loading = false; this.allStudents = []; this.showToast('⚠️ Supabase 未连接'); return; }
+                            const { data: students, error: stuError } = await supabaseClient.from('students').select('*').order('id');
+                            if (stuError || !students || students.length === 0) { this.loading = false; this.allStudents = []; this.showToast('⚠️ 无数据'); return; }
                             const scoreData = {};
                             for (const [key, config] of Object.entries(SCORE_TYPES)) {
-                                try {
-                                    const { data, error } = await supabaseClient
-                                        .from(config.table)
-                                        .select('*');
-                                    if (error) {
-                                        console.warn(`⚠️ 表 ${config.table} 读取失败:`, error);
-                                        scoreData[key] = [];
-                                    } else {
-                                        scoreData[key] = data || [];
-                                    }
-                                } catch (e) {
-                                    console.warn(`⚠️ 表 ${config.table} 读取异常:`, e);
-                                    scoreData[key] = [];
-                                }
+                                try { const { data, error } = await supabaseClient.from(config.table).select('*'); if (error) console.warn('表读取失败', config.table, error); else scoreData[key] = data || []; } catch (e) { scoreData[key] = []; }
                             }
-
-                            // 汇总计算
                             const studentScores = {};
-                            students.forEach(s => {
-                                studentScores[s.id] = {
-                                    attendance: 0,
-                                    performance: 0,
-                                    homework: 0,
-                                    midterm: 0,
-                                    final: 0,
-                                    daily: 0,
-                                    chapter: 0,
-                                    chapter1: 0,
-                                    chapter2: 0,
-                                    chapter3: 0,
-                                    chapter4: 0,
-                                    chapter5: 0,
-                                    chapter6: 0,
-                                    total: 0
-                                };
-                            });
-
+                            students.forEach(s => { studentScores[s.id] = { attendance: 0, performance: 0, homework: 0, midterm: 0, final: 0, daily: 0, chapter: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0, chapter5: 0, chapter6: 0, total: 0 }; });
                             for (const [key, records] of Object.entries(scoreData)) {
                                 records.forEach(record => {
                                     if (studentScores[record.student_id] !== undefined) {
                                         if (key === 'chapter') {
                                             const chNum = record.chapter_number || 1;
                                             const fieldName = 'chapter' + chNum;
-                                            if (studentScores[record.student_id][fieldName] !== undefined) {
-                                                studentScores[record.student_id][fieldName] += (record
-                                                .score || 0);
-                                            }
+                                            if (studentScores[record.student_id][fieldName] !== undefined) studentScores[record.student_id][fieldName] += (record.score || 0);
                                             studentScores[record.student_id].chapter += (record.score || 0);
                                         } else {
                                             studentScores[record.student_id][key] += (record.score || 0);
@@ -1216,334 +471,134 @@
                                     }
                                 });
                             }
-
-                            students.forEach(s => {
-                                const sc = studentScores[s.id];
-                                sc.total = sc.attendance + sc.performance + sc.homework +
-                                    sc.midterm + sc.final + sc.daily + sc.chapter;
-                            });
-
+                            students.forEach(s => { const sc = studentScores[s.id]; sc.total = sc.attendance + sc.performance + sc.homework + sc.midterm + sc.final + sc.daily + sc.chapter; });
                             this.allStudents = students.map(s => {
-                                const sc = studentScores[s.id] || {
-                                    attendance: 0,
-                                    performance: 0,
-                                    homework: 0,
-                                    midterm: 0,
-                                    final: 0,
-                                    daily: 0,
-                                    chapter: 0,
-                                    chapter1: 0,
-                                    chapter2: 0,
-                                    chapter3: 0,
-                                    chapter4: 0,
-                                    chapter5: 0,
-                                    chapter6: 0,
-                                    total: 0
-                                };
-                                return {
-                                    id: s.id,
-                                    name: s.name,
-                                    attendance: sc.attendance,
-                                    performance: sc.performance,
-                                    homework: sc.homework,
-                                    midterm: sc.midterm,
-                                    final: sc.final,
-                                    daily_score: sc.daily,
-                                    chapter1: sc.chapter1,
-                                    chapter2: sc.chapter2,
-                                    chapter3: sc.chapter3,
-                                    chapter4: sc.chapter4,
-                                    chapter5: sc.chapter5,
-                                    chapter6: sc.chapter6,
-                                    total: sc.total
-                                };
+                                const sc = studentScores[s.id] || { attendance: 0, performance: 0, homework: 0, midterm: 0, final: 0, daily: 0, chapter: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0, chapter5: 0, chapter6: 0, total: 0 };
+                                return { id: s.id, name: s.name, attendance: sc.attendance, performance: sc.performance, homework: sc.homework, midterm: sc.midterm, final: sc.final, daily_score: sc.daily, chapter1: sc.chapter1, chapter2: sc.chapter2, chapter3: sc.chapter3, chapter4: sc.chapter4, chapter5: sc.chapter5, chapter6: sc.chapter6, total: sc.total };
                             });
-
                             this.allStudents.sort((a, b) => b.total - a.total);
-
-                            // 计算KPI
-                            if (this.allStudents.length > 0) {
-                                const totals = this.allStudents.map(s => s.total);
-                                this.avgTotal = Math.round(totals.reduce((a, b) => a + b, 0) / totals.length);
-                                this.maxTotal = Math.max(...totals);
-                                this.avgAttendance = Math.round(this.allStudents.reduce((a, b) => a + b.attendance,
-                                    0) / this.allStudents.length);
-                                const chapters = this.allStudents.map(s => (s.chapter1 || 0) + (s.chapter2 || 0) + (s
-                                    .chapter3 || 0) + (s.chapter4 || 0) + (s.chapter5 || 0) + (s.chapter6 ||
-                                    0));
-                                this.avgChapter = Math.round(chapters.reduce((a, b) => a + b, 0) / chapters
-                                .length);
-                                this.avgDaily = Math.round(this.allStudents.reduce((a, b) => a + (b.daily_score ||
-                                    0), 0) / this.allStudents.length);
-
-                                // 计算详细统计
-                                this.stats = this.calculateStats(this.allStudents);
-                            } else {
-                                this.stats = { ...defaultStats };
-                            }
-
                             this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
                             this.filteredStudentOptions = this.studentOptions.slice();
                             this.filteredStudents = this.allStudents.slice();
                             this.displayedStudents = this.allStudents.slice();
                             this.displayMode = 'grid';
-
-                            console.log('✅ 数据处理完成，共', this.allStudents.length, '名学生');
+                            this.computeStats();
                             this.showToast('✅ 数据加载成功');
-                        } catch (e) {
-                            console.warn('⚠️ 数据加载失败:', e);
-                            this.allStudents = [];
-                            this.displayedStudents = [];
-                            this.stats = { ...defaultStats };
-                            this.showToast('⚠️ 数据加载失败: ' + (e.message || '未知错误'));
-                        } finally {
-                            this.loading = false;
-                        }
+                        } catch (e) { console.warn('加载失败', e); this.allStudents = []; this.showToast('⚠️ 加载失败'); } finally { this.loading = false; }
                     },
-
+                    computeStats() {
+                        if (!this.allStudents.length) { this.statsReady = false; return; }
+                        const fields = [
+                            { key: 'attendance', label: '考勤', color: '#60a5fa', colorClass: 'blue', icon: 'fa-user-check' },
+                            { key: 'performance', label: '表现', color: '#34d399', colorClass: 'green', icon: 'fa-chalkboard-teacher' },
+                            { key: 'homework', label: '作业', color: '#fbbf24', colorClass: 'gold', icon: 'fa-book-open' },
+                            { key: 'midterm', label: '期中', color: '#f472b6', colorClass: 'pink', icon: 'fa-flask' },
+                            { key: 'final', label: '期末', color: '#fb923c', colorClass: 'orange', icon: 'fa-check-circle' },
+                            { key: 'daily_score', label: '每日一题', color: '#5eead4', colorClass: 'teal', icon: 'fa-puzzle-piece' },
+                            { key: 'total', label: '总评', color: '#fbbf24', colorClass: 'gold', icon: 'fa-star' }
+                        ];
+                        const stats = {};
+                        fields.forEach(f => {
+                            const values = this.allStudents.map(s => s[f.key] || 0);
+                            const avg = Math.round(values.reduce((a, b) => a + b, 0) / values.length);
+                            const maxVal = Math.max(...values);
+                            const maxStudent = this.allStudents.find(s => (s[f.key] || 0) === maxVal);
+                            const maxName = maxStudent ? maxStudent.name : '-';
+                            // 模拟增长/下滑（基于总评排序的简易趋势：对比前后各半）
+                            const sorted = [...this.allStudents].sort((a, b) => (a[f.key] || 0) - (b[f.key] || 0));
+                            const half = Math.floor(sorted.length / 2);
+                            const lowGroup = sorted.slice(0, half);
+                            const highGroup = sorted.slice(-half);
+                            const avgLow = lowGroup.length ? Math.round(lowGroup.reduce((a, b) => a + (b[f.key] || 0), 0) / lowGroup.length) : 0;
+                            const avgHigh = highGroup.length ? Math.round(highGroup.reduce((a, b) => a + (b[f.key] || 0), 0) / highGroup.length) : 0;
+                            const delta = avgHigh - avgLow;
+                            let fastestGain = null, fastestDrop = null;
+                            if (delta > 0) {
+                                const gainCandidates = highGroup.filter(s => (s[f.key] || 0) > avgLow);
+                                if (gainCandidates.length) {
+                                    const best = gainCandidates.reduce((a, b) => ((a[f.key] || 0) > (b[f.key] || 0) ? a : b));
+                                    fastestGain = { name: best.name, delta: (best[f.key] || 0) - avgLow };
+                                }
+                            }
+                            if (delta > 0 && lowGroup.length) {
+                                const dropCandidates = lowGroup.filter(s => (s[f.key] || 0) < avgHigh);
+                                if (dropCandidates.length) {
+                                    const worst = dropCandidates.reduce((a, b) => ((a[f.key] || 0) < (b[f.key] || 0) ? a : b));
+                                    fastestDrop = { name: worst.name, delta: avgHigh - (worst[f.key] || 0) };
+                                }
+                            }
+                            stats[f.key] = {
+                                label: f.label, icon: f.icon, color: f.color, colorClass: f.colorClass,
+                                avg: avg, maxVal: maxVal, maxName: maxName,
+                                fastestGain: fastestGain, fastestDrop: fastestDrop,
+                                showDropName: false
+                            };
+                        });
+                        this.statsMap = stats;
+                        this.statsReady = true;
+                    },
                     filterBySurname() {
                         const sur = this.searchSurname.trim();
-                        if (!sur) {
-                            this.filteredStudentOptions = this.studentOptions.slice();
-                            this.filteredStudents = this.allStudents.slice();
-                            this.displayedStudents = this.allStudents.slice();
-                            return;
-                        }
+                        if (!sur) { this.filteredStudentOptions = this.studentOptions.slice(); this.filteredStudents = this.allStudents.slice(); this.displayedStudents = this.allStudents.slice(); return; }
                         const filtered = this.allStudents.filter(s => s.name.startsWith(sur));
-                        this.filteredStudents = filtered;
-                        this.displayedStudents = filtered;
-                        this.filteredStudentOptions = filtered.map(s => ({ id: s.id, name: s.name }));
-                        this.displayMode = 'grid';
-                        if (!filtered.length) this.showToast('未找到该姓氏');
+                        this.filteredStudents = filtered; this.displayedStudents = filtered; this.filteredStudentOptions = filtered.map(s => ({ id: s.id, name: s.name })); this.displayMode = 'grid';
                     },
-
                     onSelectStudent() {
-                        if (!this.selectedStudentId) {
-                            this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this
-                                .allStudents;
-                            return;
-                        }
+                        if (!this.selectedStudentId) { this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this.allStudents; return; }
                         const target = this.allStudents.find(s => s.id === this.selectedStudentId);
-                        if (target) {
-                            this.displayedStudents = [target];
-                            this.displayMode = 'grid';
-                            this.searchSurname = target.name.charAt(0);
-                        }
+                        if (target) { this.displayedStudents = [target]; this.displayMode = 'grid'; this.searchSurname = target.name.charAt(0); }
                     },
-
-                    showDetail(student) {
-                        this.detailStudent = student;
-                        this.showDetailModal = true;
-                    },
-
-                    showAllStudents() {
-                        this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this.allStudents;
-                        this.displayMode = 'grid';
-                        this.selectedStudentId = '';
-                        this.searchSurname = '';
-                        this.filteredStudentOptions = this.studentOptions.slice();
-                    },
-
-                    clearSearch() {
-                        this.searchSurname = '';
-                        this.selectedStudentId = '';
-                        this.filteredStudents = this.allStudents.slice();
-                        this.displayedStudents = this.allStudents.slice();
-                        this.filteredStudentOptions = this.studentOptions.slice();
-                        this.displayMode = 'grid';
-                    },
-
-                    // ===== 教师后台 =====
-                    openTeacherModal() {
-                        this.showTeacherModal = true;
-                        this.teacherPassword = '';
-                        this.teacherError = '';
-                        this.$nextTick(() => {
-                            if (this.$refs.passwordInput) {
-                                this.$refs.passwordInput.focus();
-                            }
-                        });
-                    },
-                    closeTeacherModal() {
-                        this.showTeacherModal = false;
-                        this.teacherPassword = '';
-                        this.teacherError = '';
-                    },
-                    verifyTeacher() {
-                        if (this.teacherPassword === TEACHER_PASSWORD) {
-                            this.isTeacher = true;
-                            this.closeTeacherModal();
-                            this.showToast('✅ 教师模式已开启，可以编辑学生分数');
-                            console.log('✅ 教师模式已开启');
-                        } else {
-                            this.teacherError = '❌ 密码错误，请重试';
-                            this.teacherPassword = '';
-                            this.$nextTick(() => {
-                                if (this.$refs.passwordInput) {
-                                    this.$refs.passwordInput.focus();
-                                }
-                            });
-                        }
-                    },
-
-                    // ===== 添加分数 =====
+                    showDetail(student) { this.detailStudent = student; this.showDetailModal = true; },
+                    showAllStudents() { this.displayedStudents = this.filteredStudents.length ? this.filteredStudents : this.allStudents; this.displayMode = 'grid'; this.selectedStudentId = ''; this.searchSurname = ''; this.filteredStudentOptions = this.studentOptions.slice(); },
+                    clearSearch() { this.searchSurname = ''; this.selectedStudentId = ''; this.filteredStudents = this.allStudents.slice(); this.displayedStudents = this.allStudents.slice(); this.filteredStudentOptions = this.studentOptions.slice(); this.displayMode = 'grid'; },
+                    openTeacherModal() { this.showTeacherModal = true; this.teacherPassword = ''; this.teacherError = ''; this.$nextTick(() => { if (this.$refs.passwordInput) this.$refs.passwordInput.focus(); }); },
+                    closeTeacherModal() { this.showTeacherModal = false; this.teacherPassword = ''; this.teacherError = ''; },
+                    verifyTeacher() { if (this.teacherPassword === TEACHER_PASSWORD) { this.isTeacher = true; this.closeTeacherModal(); this.showToast('✅ 教师模式已开启'); } else { this.teacherError = '❌ 密码错误'; this.teacherPassword = ''; this.$nextTick(() => { if (this.$refs.passwordInput) this.$refs.passwordInput.focus(); }); } },
                     showAddScoreModal(studentId, type) {
-                        if (!this.isTeacher) {
-                            this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-                            return;
-                        }
-                        const stu = this.allStudents.find(s => s.id === studentId);
-                        if (!stu) return;
-
-                        const config = SCORE_TYPES[type];
-                        if (!config) return;
-
+                        if (!this.isTeacher) { this.showToast('⚠️ 请先开启教师模式'); return; }
+                        const stu = this.allStudents.find(s => s.id === studentId); if (!stu) return;
+                        const config = SCORE_TYPES[type]; if (!config) return;
                         let currentTotal = 0;
-                        if (type === 'chapter') {
-                            currentTotal = (stu.chapter1 || 0) + (stu.chapter2 || 0) + (stu.chapter3 || 0) +
-                                (stu.chapter4 || 0) + (stu.chapter5 || 0) + (stu.chapter6 || 0);
-                        } else if (type === 'daily') {
-                            currentTotal = stu.daily_score || 0;
-                        } else {
-                            currentTotal = stu[type] || 0;
-                        }
-
-                        this.scoreModalStudentId = studentId;
-                        this.scoreModalStudentName = stu.name;
-                        this.scoreModalType = type;
-                        this.scoreModalTypeLabel = config.label;
-                        this.scoreModalCurrentTotal = currentTotal;
-                        this.scoreModalValue = '';
-                        this.scoreError = '';
-                        this.showScoreModal = true;
-
-                        this.$nextTick(() => {
-                            const inputs = document.querySelectorAll('.modal-box input');
-                            if (inputs.length > 0) {
-                                inputs[inputs.length - 1].focus();
-                            }
-                        });
+                        if (type === 'chapter') currentTotal = (stu.chapter1 || 0) + (stu.chapter2 || 0) + (stu.chapter3 || 0) + (stu.chapter4 || 0) + (stu.chapter5 || 0) + (stu.chapter6 || 0);
+                        else if (type === 'daily') currentTotal = stu.daily_score || 0;
+                        else currentTotal = stu[type] || 0;
+                        this.scoreModalStudentId = studentId; this.scoreModalStudentName = stu.name; this.scoreModalType = type; this.scoreModalTypeLabel = config.label; this.scoreModalCurrentTotal = currentTotal; this.scoreModalValue = ''; this.scoreError = ''; this.showScoreModal = true;
+                        this.$nextTick(() => { const inputs = document.querySelectorAll('.modal-box input'); if (inputs.length) inputs[inputs.length - 1].focus(); });
                     },
-
-                    closeScoreModal() {
-                        this.showScoreModal = false;
-                        this.scoreModalValue = '';
-                        this.scoreError = '';
-                    },
-
+                    closeScoreModal() { this.showScoreModal = false; this.scoreModalValue = ''; this.scoreError = ''; },
                     async confirmAddScore() {
-                        if (!this.isTeacher) {
-                            this.showToast('⚠️ 请先点击「教师后台」输入密码开启编辑模式');
-                            return;
-                        }
-
-                        const val = this.scoreModalValue.trim();
-                        if (val === '') {
-                            this.scoreError = '请输入分数';
-                            return;
-                        }
-
-                        const score = Number(val);
-                        if (isNaN(score)) {
-                            this.scoreError = '请输入有效数字';
-                            return;
-                        }
-
-                        const studentId = this.scoreModalStudentId;
-                        const type = this.scoreModalType;
-                        const config = SCORE_TYPES[type];
-
+                        if (!this.isTeacher) { this.showToast('⚠️ 请先开启教师模式'); return; }
+                        const val = this.scoreModalValue.trim(); if (val === '') { this.scoreError = '请输入分数'; return; }
+                        const score = Number(val); if (isNaN(score)) { this.scoreError = '请输入有效数字'; return; }
+                        const studentId = this.scoreModalStudentId; const type = this.scoreModalType; const config = SCORE_TYPES[type];
                         try {
-                            const insertData = {
-                                student_id: studentId,
-                                score: score,
-                                created_at: new Date().toISOString()
-                            };
-
+                            const insertData = { student_id: studentId, score: score, created_at: new Date().toISOString() };
                             if (type === 'chapter') {
                                 const chNum = prompt('请输入章节编号 (1-6):', '1');
                                 if (chNum === null) return;
                                 const ch = parseInt(chNum);
-                                if (isNaN(ch) || ch < 1 || ch > 6) {
-                                    this.scoreError = '请输入1-6之间的数字';
-                                    return;
-                                }
+                                if (isNaN(ch) || ch < 1 || ch > 6) { this.scoreError = '请输入1-6之间的数字'; return; }
                                 insertData.chapter_number = ch;
                             }
-
-                            const { data, error } = await supabaseClient
-                                .from(config.table)
-                                .insert([insertData])
-                                .select();
-
-                            if (error) {
-                                console.error('❌ 添加分数失败:', error);
-                                this.scoreError = '添加失败: ' + error.message;
-                                return;
-                            }
-
-                            console.log('✅ 分数添加成功:', data);
+                            const { error } = await supabaseClient.from(config.table).insert([insertData]).select();
+                            if (error) { this.scoreError = '添加失败: ' + error.message; return; }
                             this.showToast(`✅ ${this.scoreModalStudentName} 的「${config.label}」已添加 ${score} 分`);
                             this.closeScoreModal();
-
                             this.isTeacher = false;
-                            console.log('🔒 教师模式已自动退出（安全保护）');
-
                             await this.loadAllData();
-
-                        } catch (e) {
-                            console.error('❌ 添加异常:', e);
-                            this.scoreError = '添加异常: ' + (e.message || '未知错误');
-                        }
+                        } catch (e) { this.scoreError = '添加异常: ' + (e.message || ''); }
                     },
-
                     exportExcel() {
-                        if (!this.displayedStudents.length) {
-                            this.showToast('暂无数据可导出');
-                            return;
-                        }
-                        const data = this.displayedStudents.map((s, idx) => ({
-                            '排名': idx + 1,
-                            '学号': s.id,
-                            '姓名': s.name,
-                            '考勤': s.attendance,
-                            '课堂表现': s.performance,
-                            '平时作业': s.homework,
-                            '期中': s.midterm,
-                            '期末': s.final,
-                            '每日一题': s.daily_score || 0,
-                            '第1章': s.chapter1 || 0,
-                            '第2章': s.chapter2 || 0,
-                            '第3章': s.chapter3 || 0,
-                            '第4章': s.chapter4 || 0,
-                            '第5章': s.chapter5 || 0,
-                            '第6章': s.chapter6 || 0,
-                            '总评': s.total
-                        }));
-                        const wb = XLSX.utils.book_new();
-                        const ws = XLSX.utils.json_to_sheet(data);
-                        XLSX.utils.book_append_sheet(wb, ws, '高数成绩');
-                        XLSX.writeFile(wb, `高等数学_${new Date().toISOString().slice(0,10)}.xlsx`);
-                        this.showToast('✅ 导出成功');
+                        if (!this.displayedStudents.length) { this.showToast('暂无数据'); return; }
+                        const data = this.displayedStudents.map((s, idx) => ({ '排名': idx + 1, '学号': s.id, '姓名': s.name, '考勤': s.attendance, '课堂表现': s.performance, '平时作业': s.homework, '期中': s.midterm, '期末': s.final, '每日一题': s.daily_score || 0, '第1章': s.chapter1 || 0, '第2章': s.chapter2 || 0, '第3章': s.chapter3 || 0, '第4章': s.chapter4 || 0, '第5章': s.chapter5 || 0, '第6章': s.chapter6 || 0, '总评': s.total }));
+                        const wb = XLSX.utils.book_new(); const ws = XLSX.utils.json_to_sheet(data); XLSX.utils.book_append_sheet(wb, ws, '高数成绩'); XLSX.writeFile(wb, `高等数学_${new Date().toISOString().slice(0,10)}.xlsx`); this.showToast('✅ 导出成功');
                     },
-
-                    showToast(msg) {
-                        const el = document.getElementById('toast');
-                        if (!el) return;
-                        el.textContent = msg;
-                        el.classList.add('show');
-                        clearTimeout(this.toastTimer);
-                        this.toastTimer = setTimeout(() => {
-                            el.classList.remove('show');
-                        }, 4000);
-                    }
+                    showToast(msg) { const el = document.getElementById('toast'); if (!el) return; el.textContent = msg; el.classList.add('show'); clearTimeout(this.toastTimer); this.toastTimer = setTimeout(() => { el.classList.remove('show'); }, 4000); }
                 }
             });
-
             app.mount('#app');
-            console.log('✅ Vue app 已挂载！');
+            console.log('Vue app 已挂载');
         }
     </script>
-
 </body>
 </html>

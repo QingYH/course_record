@@ -56,8 +56,6 @@
         .math-symbols.s4 { bottom: 30%; left: 1%; transform: rotate(-4deg); font-size: 6rem; color: rgba(52,211,153,0.025); }
         .math-symbols.s5 { top: 55%; left: 50%; transform: translateX(-50%) rotate(3deg); font-size: 12rem; color: rgba(255,255,255,0.005); letter-spacing: 2rem; }
         .app-container { max-width: 1480px; margin: 0 auto; position: relative; z-index: 1; }
-
-        /* ===== 全局字号 ===== */
         body { font-size: 1.15rem; }
         .header-left h1 { font-size: 2.4rem; }
         .header-left .sub { font-size: 1rem; }
@@ -133,7 +131,6 @@
         .btn-gold { background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.12); color: #fbbf24; }
         .btn-gold:hover { background: rgba(251,191,36,0.18); color: #fff; }
 
-        /* ===== 详细统计卡片行 ===== */
         .stats-detail-row {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -149,34 +146,11 @@
             text-align: center;
             transition: 0.3s;
         }
-        .stats-detail-card:hover {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.08);
-            transform: translateY(-2px);
-        }
-        .stats-detail-card .type-label {
-            font-size: 0.55rem;
-            color: rgba(255,255,255,0.15);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 500;
-            margin-bottom: 0.1rem;
-        }
-        .stats-detail-card .stat-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.05rem 0.1rem;
-            font-size: 0.55rem;
-        }
-        .stats-detail-card .stat-row .stat-label {
-            color: rgba(255,255,255,0.15);
-            font-size: 0.5rem;
-        }
-        .stats-detail-card .stat-row .stat-value {
-            font-weight: 600;
-            font-size: 0.6rem;
-        }
+        .stats-detail-card:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); transform: translateY(-2px); }
+        .stats-detail-card .type-label { font-size: 0.55rem; color: rgba(255,255,255,0.15); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 0.1rem; }
+        .stats-detail-card .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.05rem 0.1rem; font-size: 0.55rem; }
+        .stats-detail-card .stat-row .stat-label { color: rgba(255,255,255,0.15); font-size: 0.5rem; }
+        .stats-detail-card .stat-row .stat-value { font-weight: 600; font-size: 0.6rem; }
         .stats-detail-card .stat-row .stat-value.gold { color: #fbbf24; }
         .stats-detail-card .stat-row .stat-value.blue { color: #60a5fa; }
         .stats-detail-card .stat-row .stat-value.green { color: #6ee7b7; }
@@ -185,73 +159,19 @@
         .stats-detail-card .stat-row .stat-value.orange { color: #fb923c; }
         .stats-detail-card .stat-row .stat-value.teal { color: #5eead4; }
         .stats-detail-card .stat-row .stat-value.red { color: #f87171; }
-        .stats-detail-card .stat-row .student-name-small {
-            color: rgba(255,255,255,0.2);
-            font-size: 0.5rem;
-            max-width: 3.5rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .stats-detail-card .stat-row .student-name-small:hover {
-            color: rgba(255,255,255,0.5);
-        }
-        .stats-detail-card .stat-row .student-name-small.revealed {
-            color: rgba(255,255,255,0.6);
-        }
+        .stats-detail-card .stat-row .student-name-small { color: rgba(255,255,255,0.2); font-size: 0.5rem; max-width: 3.5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; transition: color 0.2s; }
+        .stats-detail-card .stat-row .student-name-small:hover { color: rgba(255,255,255,0.5); }
+        .stats-detail-card .stat-row .student-name-small.revealed { color: rgba(255,255,255,0.6); }
         .stats-detail-card .stat-row .change-up { color: #6ee7b7; }
         .stats-detail-card .stat-row .change-down { color: #f87171; }
-        .stats-detail-card .divider {
-            height: 1px;
-            background: rgba(255,255,255,0.04);
-            margin: 0.1rem 0;
-        }
+        .stats-detail-card .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 0.1rem 0; }
 
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
-        }
-        .kpi-card {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 1.8rem;
-            padding: 1.2rem 1rem;
-            border: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent);
-            opacity: 0.6;
-        }
-        .kpi-card:hover {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.08);
-            transform: translateY(-2px);
-        }
-        .kpi-card .label {
-            color: rgba(255,255,255,0.25);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 500;
-        }
-        .kpi-card .value {
-            font-weight: 700;
-            margin-top: 0.2rem;
-            letter-spacing: -0.02em;
-        }
+        .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; margin-bottom: 1.8rem; }
+        .kpi-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 1.8rem; padding: 1.2rem 1rem; border: 1px solid rgba(255,255,255,0.04); text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent); opacity: 0.6; }
+        .kpi-card:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); transform: translateY(-2px); }
+        .kpi-card .label { color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+        .kpi-card .value { font-weight: 700; margin-top: 0.2rem; letter-spacing: -0.02em; }
         .kpi-card .value.gold { color: #fbbf24; }
         .kpi-card .value.blue { color: #60a5fa; }
         .kpi-card .value.green { color: #6ee7b7; }
@@ -261,19 +181,7 @@
         .kpi-card .change.up { color: #6ee7b7; }
         .kpi-card .change.down { color: #f87171; }
 
-        .search-section {
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(12px);
-            border-radius: 4rem;
-            padding: 0.3rem 0.3rem 0.3rem 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem;
-            border: 1px solid rgba(255,255,255,0.04);
-            margin-bottom: 1.8rem;
-            box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3);
-        }
+        .search-section { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border-radius: 4rem; padding: 0.3rem 0.3rem 0.3rem 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; border: 1px solid rgba(255,255,255,0.04); margin-bottom: 1.8rem; box-shadow: 0 4px 20px -8px rgba(0,0,0,0.3); }
         .search-section i { color: rgba(255,255,255,0.12); }
         .search-section input { border: none; background: transparent; min-width: 150px; flex: 1; outline: none; color: rgba(255,255,255,0.7); font-weight: 400; }
         .search-section input::placeholder { color: rgba(255,255,255,0.1); }
@@ -293,7 +201,6 @@
         .score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 0.6rem 0 0.2rem; }
         .score-item { background: rgba(255,255,255,0.02); border-radius: 1rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid rgba(255,255,255,0.02); transition: 0.15s; }
         .score-item .score-value { font-weight: 700; }
-
         .score-item.attendance { border-color: rgba(96,165,250,0.20); background: rgba(96,165,250,0.05); }
         .score-item.attendance i { color: #60a5fa; }
         .score-item.attendance .score-value { color: #93c5fd; }
@@ -410,9 +317,7 @@
         .login-box .error-msg { color: #f87171; font-size: 0.85rem; margin-top: 0.8rem; min-height: 1.5rem; }
         .login-box .hint { color: rgba(255,255,255,0.08); font-size: 0.7rem; margin-top: 1.2rem; }
 
-        @media (max-width: 1200px) {
-            .stats-detail-row { grid-template-columns: repeat(4, 1fr); }
-        }
+        @media (max-width: 1200px) { .stats-detail-row { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 700px) {
             body { padding: 0.8rem 0.5rem; font-size: 1rem; }
             body::before { font-size: 3rem; letter-spacing: 1.5rem; }
@@ -490,7 +395,6 @@
 
             <!-- ===== 主界面 ===== -->
             <template v-else>
-                <!-- Header -->
                 <div class="header-card">
                     <div class="header-left">
                         <div class="logo"><i class="fas fa-chart-pie"></i></div>
@@ -509,7 +413,7 @@
                     </div>
                 </div>
 
-                <!-- ===== 详细统计卡片行 ===== -->
+                <!-- 统计卡片 -->
                 <div class="stats-detail-row" v-if="allStudents.length > 0">
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#60a5fa;">📋 考勤</div>
@@ -710,7 +614,6 @@
                     </div>
                 </template>
 
-                <!-- Toast -->
                 <div id="toast"></div>
 
                 <!-- 教师后台弹窗 -->
@@ -793,23 +696,20 @@
             console.log('✅ Vue 加载成功！版本:', Vue.version);
 
             // ===== Supabase 配置 =====
-            // ⚠️ 请将下面两行替换为您的 Supabase 实际值
-            const SUPABASE_URL = 'https://jujurutxwj1zlfenerdh.supabase.co';
+            // 使用您的 Supabase 实际值
+            const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
             const SUPABASE_ANON_KEY =
-            'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
+                'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
 
             let supabaseClient = null;
+            let supabaseInitialized = false;
 
-            // 使用标准方式初始化 Supabase
             if (typeof supabase !== 'undefined' && supabase.createClient) {
                 try {
-                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-                        auth: {
-                            persistSession: false,
-                            autoRefreshToken: false
-                        }
-                    });
+                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    supabaseInitialized = true;
                     console.log('✅ Supabase 客户端初始化成功');
+                    console.log('📡 连接地址:', SUPABASE_URL);
                 } catch (e) {
                     console.warn('⚠️ Supabase 初始化失败:', e);
                     supabaseClient = null;
@@ -1011,7 +911,7 @@
                         return stats;
                     },
 
-                    // ===== 核心：数据加载 =====
+                    // ===== 数据加载（带超时处理） =====
                     async loadAllData() {
                         this.loading = true;
                         try {
@@ -1026,10 +926,13 @@
 
                             console.log('🔄 正在从 Supabase 读取数据...');
 
-                            // 使用 Promise.all 并行请求，提高效率
-                            const [studentsResult, attendanceResult, performanceResult, homeworkResult,
-                                midtermResult, finalResult, dailyResult, chapterResult
-                            ] = await Promise.all([
+                            // 使用 Promise 并设置超时（15秒）
+                            const timeout = (ms) => new Promise((_, reject) =>
+                                setTimeout(() => reject(new Error('请求超时，请检查网络或 Supabase 服务是否正常')), ms)
+                            );
+
+                            // 并行请求所有数据
+                            const fetchPromises = [
                                 supabaseClient.from('students').select('*').order('id'),
                                 supabaseClient.from('attendance_scores').select('*'),
                                 supabaseClient.from('performance_scores').select('*'),
@@ -1038,7 +941,17 @@
                                 supabaseClient.from('final_scores').select('*'),
                                 supabaseClient.from('daily_scores').select('*'),
                                 supabaseClient.from('chapter_scores').select('*')
+                            ];
+
+                            // 带超时的 Promise
+                            const results = await Promise.race([
+                                Promise.all(fetchPromises),
+                                timeout(15000)
                             ]);
+
+                            const [studentsResult, attendanceResult, performanceResult, homeworkResult,
+                                midtermResult, finalResult, dailyResult, chapterResult
+                            ] = results;
 
                             // 检查学生数据
                             if (studentsResult.error) {
@@ -1185,7 +1098,14 @@
                             console.warn('⚠️ 数据加载失败:', e);
                             this.allStudents = [];
                             this.displayedStudents = [];
-                            this.showToast('⚠️ 数据加载失败: ' + (e.message || '未知错误'));
+                            let errMsg = e.message || '未知错误';
+                            if (errMsg.includes('超时') || errMsg.includes('timeout')) {
+                                errMsg = '连接 Supabase 超时，请检查网络或 Supabase 服务是否正常';
+                            }
+                            if (errMsg.includes('Failed to fetch')) {
+                                errMsg = '无法连接到 Supabase，请检查网络或 Supabase 服务是否正常运行';
+                            }
+                            this.showToast('⚠️ 数据加载失败: ' + errMsg);
                         } finally {
                             this.loading = false;
                         }

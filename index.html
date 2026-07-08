@@ -413,8 +413,8 @@
                     </div>
                 </div>
 
-                <!-- 统计卡片 -->
-                <div class="stats-detail-row" v-if="allStudents.length > 0">
+                <!-- 统计卡片 - 使用 v-if 确保 stats 存在 -->
+                <div class="stats-detail-row" v-if="allStudents.length > 0 && stats.attendance">
                     <div class="stats-detail-card">
                         <div class="type-label" style="color:#60a5fa;">📋 考勤</div>
                         <div class="stat-row"><span class="stat-label">平均</span><span class="stat-value blue">{{ stats.attendance.avg }}</span></div>
@@ -696,18 +696,15 @@
             console.log('✅ Vue 加载成功！版本:', Vue.version);
 
             // ===== Supabase 配置 =====
-            // 使用您的 Supabase 实际值
-            const SUPABASE_URL = 'https://jujurutxwjlzlfenirdh.supabase.co';
+            const SUPABASE_URL = 'https://jujurutxwj1zlfenerdh.supabase.co';
             const SUPABASE_ANON_KEY =
                 'sb_publishable_gUAP6pf0Eb5UGdISQQ0vmQ_5tCiJGSF';
 
             let supabaseClient = null;
-            let supabaseInitialized = false;
 
             if (typeof supabase !== 'undefined' && supabase.createClient) {
                 try {
                     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                    supabaseInitialized = true;
                     console.log('✅ Supabase 客户端初始化成功');
                     console.log('📡 连接地址:', SUPABASE_URL);
                 } catch (e) {
@@ -732,6 +729,28 @@
                 chapter: { table: 'chapter_scores', label: '章节考核', key: 'chapter' }
             };
 
+            // 创建默认的 stats 对象
+            const defaultStatsItem = {
+                avg: 0,
+                max: 0,
+                maxName: '',
+                fastestChange: 0,
+                fastestName: '',
+                slowestChange: 0,
+                slowestName: '',
+                slowestRevealed: false
+            };
+
+            const defaultStats = {
+                attendance: { ...defaultStatsItem },
+                performance: { ...defaultStatsItem },
+                homework: { ...defaultStatsItem },
+                midterm: { ...defaultStatsItem },
+                final: { ...defaultStatsItem },
+                daily: { ...defaultStatsItem },
+                chapter: { ...defaultStatsItem }
+            };
+
             const app = Vue.createApp({
                 data() {
                     return {
@@ -754,22 +773,8 @@
                         avgChapter: 0,
                         avgDaily: 0,
 
-                        stats: {
-                            attendance: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
-                                slowestChange: 0, slowestName: '', slowestRevealed: false },
-                            performance: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
-                                slowestChange: 0, slowestName: '', slowestRevealed: false },
-                            homework: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
-                                slowestChange: 0, slowestName: '', slowestRevealed: false },
-                            midterm: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
-                                slowestChange: 0, slowestName: '', slowestRevealed: false },
-                            final: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
-                                slowestChange: 0, slowestName: '', slowestRevealed: false },
-                            daily: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
-                                slowestChange: 0, slowestName: '', slowestRevealed: false },
-                            chapter: { avg: 0, max: 0, maxName: '', fastestChange: 0, fastestName: '',
-                                slowestChange: 0, slowestName: '', slowestRevealed: false }
-                        },
+                        // 完整初始化 stats
+                        stats: { ...defaultStats },
 
                         showTeacherModal: false,
                         teacherPassword: '',
@@ -831,6 +836,8 @@
                         this.loginError = '';
                         this.allStudents = [];
                         this.displayedStudents = [];
+                        // 重置 stats
+                        this.stats = { ...defaultStats };
                         this.showToast('已退出登录');
                         this.$nextTick(() => {
                             if (this.$refs.loginInput) {
@@ -905,13 +912,13 @@
                             };
                         });
 
-                        stats.chapter = stats.chapter || { avg: 0, max: 0, maxName: '', fastestChange: 0,
-                            fastestName: '', slowestChange: 0, slowestName: '', slowestRevealed: false };
+                        // 确保 chapter 存在
+                        stats.chapter = stats.chapter || { ...defaultStatsItem };
 
                         return stats;
                     },
 
-                    // ===== 数据加载（带超时处理） =====
+                    // ===== 数据加载 =====
                     async loadAllData() {
                         this.loading = true;
                         try {
@@ -920,18 +927,18 @@
                                 this.loading = false;
                                 this.allStudents = [];
                                 this.displayedStudents = [];
+                                this.stats = { ...defaultStats };
                                 this.showToast('⚠️ Supabase 未连接，请检查配置');
                                 return;
                             }
 
                             console.log('🔄 正在从 Supabase 读取数据...');
 
-                            // 使用 Promise 并设置超时（15秒）
+                            // 设置超时
                             const timeout = (ms) => new Promise((_, reject) =>
                                 setTimeout(() => reject(new Error('请求超时，请检查网络或 Supabase 服务是否正常')), ms)
                             );
 
-                            // 并行请求所有数据
                             const fetchPromises = [
                                 supabaseClient.from('students').select('*').order('id'),
                                 supabaseClient.from('attendance_scores').select('*'),
@@ -943,7 +950,6 @@
                                 supabaseClient.from('chapter_scores').select('*')
                             ];
 
-                            // 带超时的 Promise
                             const results = await Promise.race([
                                 Promise.all(fetchPromises),
                                 timeout(15000)
@@ -953,12 +959,12 @@
                                 midtermResult, finalResult, dailyResult, chapterResult
                             ] = results;
 
-                            // 检查学生数据
                             if (studentsResult.error) {
                                 console.warn('⚠️ 学生表查询出错:', studentsResult.error);
                                 this.loading = false;
                                 this.allStudents = [];
                                 this.displayedStudents = [];
+                                this.stats = { ...defaultStats };
                                 this.showToast('⚠️ 数据加载失败: ' + studentsResult.error.message);
                                 return;
                             }
@@ -969,6 +975,7 @@
                                 this.loading = false;
                                 this.allStudents = [];
                                 this.displayedStudents = [];
+                                this.stats = { ...defaultStats };
                                 this.showToast('ℹ️ students 表中暂无数据');
                                 return;
                             }
@@ -1083,7 +1090,10 @@
                                 this.avgDaily = Math.round(this.allStudents.reduce((a, b) => a + (b.daily_score ||
                                     0), 0) / this.allStudents.length);
 
+                                // 计算详细统计
                                 this.stats = this.calculateStats(this.allStudents);
+                            } else {
+                                this.stats = { ...defaultStats };
                             }
 
                             this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
@@ -1098,6 +1108,7 @@
                             console.warn('⚠️ 数据加载失败:', e);
                             this.allStudents = [];
                             this.displayedStudents = [];
+                            this.stats = { ...defaultStats };
                             let errMsg = e.message || '未知错误';
                             if (errMsg.includes('超时') || errMsg.includes('timeout')) {
                                 errMsg = '连接 Supabase 超时，请检查网络或 Supabase 服务是否正常';

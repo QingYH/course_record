@@ -61,8 +61,8 @@
         .btn-gold:hover { background:rgba(251,191,36,0.18); color:#fff; }
         .teacher-badge { background:rgba(251,191,36,0.10); border:1px solid rgba(251,191,36,0.15); color:#fbbf24; border-radius:2.5rem; padding:0.4rem 1.2rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; }
 
-        /* KPI 卡片 - 超大字号 + 明亮颜色 + 动态图标 */
-        .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+        /* KPI 卡片 - 超大字号 + 股票风格涨跌幅 */
+        .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.5rem; margin-bottom:2rem; }
         .kpi-card { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:2rem; padding:1.5rem 1.2rem; border:1px solid rgba(255,255,255,0.04); text-align:center; transition:0.3s; position:relative; overflow:hidden; }
         .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent); opacity:0.8; }
         .kpi-card:hover { background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); transform:translateY(-3px); box-shadow:0 8px 30px -8px rgba(0,0,0,0.4); }
@@ -94,23 +94,44 @@
         .kpi-card .value.teal { color:#5eead4; }
         .kpi-card .value.purple { color:#c4b5fd; }
 
+        /* 股票风格涨跌幅区域 */
+        .kpi-card .change-section {
+            margin-top:0.5rem;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:0.4rem 0.8rem;
+            font-size:0.9rem;
+            font-weight:600;
+            padding:0.3rem 0.5rem;
+            border-radius:1rem;
+            background:rgba(255,255,255,0.02);
+            border:1px solid rgba(255,255,255,0.03);
+        }
+        .kpi-card .change-item {
+            display:inline-flex;
+            align-items:center;
+            gap:0.2rem;
+            padding:0.1rem 0.4rem;
+            border-radius:0.5rem;
+        }
+        .kpi-card .change-item .period { color:rgba(255,255,255,0.2); font-weight:400; font-size:0.7rem; }
+        .kpi-card .change-up { color:#34d399; }
+        .kpi-card .change-down { color:#f87171; }
+        .kpi-card .change-flat { color:rgba(255,255,255,0.2); }
+        .kpi-card .change-item i { font-size:0.7rem; }
+
         .kpi-card .extra { 
             color:rgba(255,255,255,0.4); 
-            font-size:0.95rem; 
-            margin-top:0.3rem; 
+            font-size:0.85rem; 
+            margin-top:0.2rem; 
             display:flex; 
             flex-wrap:wrap; 
             justify-content:center; 
-            gap:0.3rem 0.8rem; 
+            gap:0.2rem 0.6rem; 
             font-weight:500;
         }
         .kpi-card .extra strong { color:rgba(255,255,255,0.7); font-weight:700; }
-        .kpi-card .trend-up { color:#34d399; font-weight:700; }
-        .kpi-card .trend-down { color:#f87171; font-weight:700; }
-        .kpi-card .trend-hidden { color:rgba(255,255,255,0.3); cursor:pointer; border-bottom:1px dashed rgba(255,255,255,0.15); transition:0.2s; font-weight:600; }
-        .kpi-card .trend-hidden:hover { color:rgba(255,255,255,0.8); }
-        .kpi-card .trend-indicator { display:inline-flex; align-items:center; gap:0.3rem; font-weight:800; font-size:1.05rem; }
-        .kpi-card .trend-indicator i { font-size:1.1rem; }
 
         .search-section { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:4rem; padding:0.3rem 0.3rem 0.3rem 2rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.8rem; border:1px solid rgba(255,255,255,0.04); margin-bottom:1.8rem; box-shadow:0 4px 20px -8px rgba(0,0,0,0.3); }
         .search-section i { color:rgba(255,255,255,0.12); font-size:1.2rem; }
@@ -212,6 +233,7 @@
             .kpi-row { grid-template-columns:repeat(2,1fr); gap:0.8rem; }
             .kpi-card .value { font-size:2.4rem; }
             .kpi-card .label { font-size:0.9rem; }
+            .kpi-card .change-section { font-size:0.75rem; }
             .search-section { flex-direction:column; align-items:stretch; padding:0.8rem 1.2rem; border-radius:1.8rem; }
             .detail-box { padding:1.5rem; }
             .detail-score-grid { grid-template-columns:1fr 1fr; }
@@ -269,7 +291,7 @@
                     </div>
                 </div>
 
-                <!-- KPI 增强版: 超大字号 + 股市行情涨跌 + 动态图标 -->
+                <!-- KPI 增强版: 股票风格涨跌幅 (日/周/月) -->
                 <div class="kpi-row" v-if="allStudents.length > 0 && statsReady">
                     <div class="kpi-card" v-for="(stat, key) in statsMap" :key="key" :style="{'--accent': stat.color}">
                         <div class="label">
@@ -277,18 +299,22 @@
                             {{ stat.label }}
                         </div>
                         <div class="value" :class="stat.colorClass">{{ stat.avg }}</div>
+                        
+                        <!-- 涨跌幅区域：日/周/月 -->
+                        <div class="change-section">
+                            <span class="change-item" v-for="(chg, period) in stat.changes" :key="period">
+                                <span class="period">{{ period }}</span>
+                                <i v-if="chg > 0" class="fas fa-arrow-up change-up"></i>
+                                <i v-else-if="chg < 0" class="fas fa-arrow-down change-down"></i>
+                                <i v-else class="fas fa-minus change-flat"></i>
+                                <span :class="chg > 0 ? 'change-up' : (chg < 0 ? 'change-down' : 'change-flat')">
+                                    {{ chg > 0 ? '+' : '' }}{{ chg }}%
+                                </span>
+                            </span>
+                        </div>
+
                         <div class="extra">
                             <span>🏆 最高 <strong>{{ stat.maxVal }}</strong> · {{ stat.maxName }}</span>
-                        </div>
-                        <div class="extra" v-if="stat.fastestGain">
-                            <span class="trend-indicator trend-up"><i class="fas fa-arrow-up"></i> +{{ stat.fastestGain.delta }}</span>
-                            <span class="trend-up">{{ stat.fastestGain.name }}</span>
-                        </div>
-                        <div class="extra" v-if="stat.fastestDrop">
-                            <span class="trend-indicator trend-down"><i class="fas fa-arrow-down"></i> -{{ stat.fastestDrop.delta }}</span>
-                            <span class="trend-hidden" @click="stat.showDropName = !stat.showDropName" title="点击显示姓名">
-                                {{ stat.showDropName ? stat.fastestDrop.name : '点击显示' }}
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -479,6 +505,8 @@
                         scoreModalCurrentTotal: 0,
                         scoreModalValue: '',
                         scoreError: '',
+                        // 模拟历史数据用于涨跌幅计算
+                        historyData: {}
                     };
                 },
                 mounted() {
@@ -502,6 +530,21 @@
                             }
                             const studentScores = {};
                             students.forEach(s => { studentScores[s.id] = { attendance: 0, performance: 0, homework: 0, midterm: 0, final: 0, daily: 0, chapter: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0, chapter5: 0, chapter6: 0, total: 0 }; });
+                            // 收集历史数据用于涨跌幅（按日期）
+                            const historyMap = {};
+                            for (const [key, records] of Object.entries(scoreData)) {
+                                records.forEach(record => {
+                                    const sid = record.student_id;
+                                    if (!historyMap[sid]) historyMap[sid] = {};
+                                    if (!historyMap[sid][key]) historyMap[sid][key] = [];
+                                    historyMap[sid][key].push({
+                                        date: new Date(record.created_at || Date.now()),
+                                        score: record.score || 0
+                                    });
+                                });
+                            }
+                            this.historyData = historyMap;
+
                             for (const [key, records] of Object.entries(scoreData)) {
                                 records.forEach(record => {
                                     if (studentScores[record.student_id] !== undefined) {
@@ -543,40 +586,79 @@
                             { key: 'total', label: '总评', color: '#fbbf24', colorClass: 'gold', icon: 'fa-star' }
                         ];
                         const stats = {};
+                        const now = new Date();
+                        const dayAgo = new Date(now); dayAgo.setDate(dayAgo.getDate() - 1);
+                        const weekAgo = new Date(now); weekAgo.setDate(weekAgo.getDate() - 7);
+                        const monthAgo = new Date(now); monthAgo.setMonth(monthAgo.getMonth() - 1);
+
                         fields.forEach(f => {
                             const values = this.allStudents.map(s => s[f.key] || 0);
                             const avg = Math.round(values.reduce((a, b) => a + b, 0) / values.length);
                             const maxVal = Math.max(...values);
                             const maxStudent = this.allStudents.find(s => (s[f.key] || 0) === maxVal);
                             const maxName = maxStudent ? maxStudent.name : '-';
-                            // 增长/下滑模拟：基于高低分组差值
-                            const sorted = [...this.allStudents].sort((a, b) => (a[f.key] || 0) - (b[f.key] || 0));
-                            const half = Math.floor(sorted.length / 2);
-                            const lowGroup = sorted.slice(0, half);
-                            const highGroup = sorted.slice(-half);
-                            const avgLow = lowGroup.length ? Math.round(lowGroup.reduce((a, b) => a + (b[f.key] || 0), 0) / lowGroup.length) : 0;
-                            const avgHigh = highGroup.length ? Math.round(highGroup.reduce((a, b) => a + (b[f.key] || 0), 0) / highGroup.length) : 0;
-                            const delta = avgHigh - avgLow;
-                            let fastestGain = null, fastestDrop = null;
-                            if (delta > 0) {
-                                const gainCandidates = highGroup.filter(s => (s[f.key] || 0) > avgLow);
-                                if (gainCandidates.length) {
-                                    const best = gainCandidates.reduce((a, b) => ((a[f.key] || 0) > (b[f.key] || 0) ? a : b));
-                                    fastestGain = { name: best.name, delta: (best[f.key] || 0) - avgLow };
+
+                            // 计算涨跌幅：日/周/月 (基于历史数据)
+                            const changes = { '日': 0, '周': 0, '月': 0 };
+                            // 模拟：基于当前平均值与历史平均值的对比
+                            // 从historyData中提取该字段的历史记录
+                            let historyScores = [];
+                            for (const sid in this.historyData) {
+                                const h = this.historyData[sid];
+                                if (h[f.key]) {
+                                    h[f.key].forEach(item => {
+                                        historyScores.push({ date: item.date, score: item.score });
+                                    });
                                 }
                             }
-                            if (delta > 0 && lowGroup.length) {
-                                const dropCandidates = lowGroup.filter(s => (s[f.key] || 0) < avgHigh);
-                                if (dropCandidates.length) {
-                                    const worst = dropCandidates.reduce((a, b) => ((a[f.key] || 0) < (b[f.key] || 0) ? a : b));
-                                    fastestDrop = { name: worst.name, delta: avgHigh - (worst[f.key] || 0) };
+                            // 按日期分组计算每日平均
+                            const dailyAvgs = {};
+                            historyScores.forEach(item => {
+                                const d = item.date.toISOString().slice(0,10);
+                                if (!dailyAvgs[d]) dailyAvgs[d] = [];
+                                dailyAvgs[d].push(item.score);
+                            });
+                            const dates = Object.keys(dailyAvgs).sort();
+                            if (dates.length > 0) {
+                                // 日增幅: 今天 vs 昨天
+                                const today = now.toISOString().slice(0,10);
+                                const yesterday = new Date(now); yesterday.setDate(yesterday.getDate() - 1);
+                                const yStr = yesterday.toISOString().slice(0,10);
+                                if (dailyAvgs[today] && dailyAvgs[yStr]) {
+                                    const todayAvg = dailyAvgs[today].reduce((a,b) => a+b, 0) / dailyAvgs[today].length;
+                                    const yAvg = dailyAvgs[yStr].reduce((a,b) => a+b, 0) / dailyAvgs[yStr].length;
+                                    changes['日'] = Math.round((todayAvg - yAvg) / (yAvg || 1) * 100);
+                                } else {
+                                    // 如果没有今天数据，用最近两天
+                                    const last2 = dates.slice(-2);
+                                    if (last2.length === 2) {
+                                        const d1 = dailyAvgs[last2[0]].reduce((a,b) => a+b, 0) / dailyAvgs[last2[0]].length;
+                                        const d2 = dailyAvgs[last2[1]].reduce((a,b) => a+b, 0) / dailyAvgs[last2[1]].length;
+                                        changes['日'] = Math.round((d2 - d1) / (d1 || 1) * 100);
+                                    }
+                                }
+                                // 周增幅: 最近7天 vs 前7天
+                                const weekDates = dates.filter(d => new Date(d) >= weekAgo);
+                                const prevWeekDates = dates.filter(d => new Date(d) < weekAgo && new Date(d) >= new Date(weekAgo.getTime() - 7*24*60*60*1000));
+                                if (weekDates.length > 0 && prevWeekDates.length > 0) {
+                                    const wAvg = weekDates.reduce((sum, d) => sum + (dailyAvgs[d].reduce((a,b) => a+b, 0) / dailyAvgs[d].length), 0) / weekDates.length;
+                                    const pAvg = prevWeekDates.reduce((sum, d) => sum + (dailyAvgs[d].reduce((a,b) => a+b, 0) / dailyAvgs[d].length), 0) / prevWeekDates.length;
+                                    changes['周'] = Math.round((wAvg - pAvg) / (pAvg || 1) * 100);
+                                }
+                                // 月增幅: 最近30天 vs 前30天
+                                const monthDates = dates.filter(d => new Date(d) >= monthAgo);
+                                const prevMonthDates = dates.filter(d => new Date(d) < monthAgo && new Date(d) >= new Date(monthAgo.getTime() - 30*24*60*60*1000));
+                                if (monthDates.length > 0 && prevMonthDates.length > 0) {
+                                    const mAvg = monthDates.reduce((sum, d) => sum + (dailyAvgs[d].reduce((a,b) => a+b, 0) / dailyAvgs[d].length), 0) / monthDates.length;
+                                    const pMAvg = prevMonthDates.reduce((sum, d) => sum + (dailyAvgs[d].reduce((a,b) => a+b, 0) / dailyAvgs[d].length), 0) / prevMonthDates.length;
+                                    changes['月'] = Math.round((mAvg - pMAvg) / (pMAvg || 1) * 100);
                                 }
                             }
+
                             stats[f.key] = {
                                 label: f.label, icon: f.icon, color: f.color, colorClass: f.colorClass,
                                 avg: avg, maxVal: maxVal, maxName: maxName,
-                                fastestGain: fastestGain, fastestDrop: fastestDrop,
-                                showDropName: false
+                                changes: changes
                             };
                         });
                         this.statsMap = stats;

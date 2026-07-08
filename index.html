@@ -61,13 +61,31 @@
         .btn-gold:hover { background:rgba(251,191,36,0.18); color:#fff; }
         .teacher-badge { background:rgba(251,191,36,0.10); border:1px solid rgba(251,191,36,0.15); color:#fbbf24; border-radius:2.5rem; padding:0.4rem 1.2rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; }
 
-        /* KPI 卡片 - 增强字号与亮度 */
-        .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.2rem; margin-bottom:1.8rem; }
-        .kpi-card { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:1.8rem; padding:1.2rem 1rem; border:1px solid rgba(255,255,255,0.04); text-align:center; transition:0.3s; position:relative; overflow:hidden; }
-        .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent); opacity:0.6; }
-        .kpi-card:hover { background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); transform:translateY(-2px); }
-        .kpi-card .label { color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; font-size:0.85rem; }
-        .kpi-card .value { font-weight:800; margin-top:0.3rem; letter-spacing:-0.02em; font-size:2.6rem; line-height:1.1; text-shadow:0 0 12px rgba(255,255,255,0.08); }
+        /* KPI 卡片 - 超大字号 + 明亮颜色 + 动态图标 */
+        .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+        .kpi-card { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:2rem; padding:1.5rem 1.2rem; border:1px solid rgba(255,255,255,0.04); text-align:center; transition:0.3s; position:relative; overflow:hidden; }
+        .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, transparent, var(--accent, #60a5fa), transparent); opacity:0.8; }
+        .kpi-card:hover { background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); transform:translateY(-3px); box-shadow:0 8px 30px -8px rgba(0,0,0,0.4); }
+        .kpi-card .label { 
+            color:rgba(255,255,255,0.5); 
+            text-transform:uppercase; 
+            letter-spacing:0.1em; 
+            font-weight:700; 
+            font-size:1.1rem; 
+            display:flex; 
+            align-items:center; 
+            justify-content:center; 
+            gap:0.6rem;
+        }
+        .kpi-card .label i { font-size:1.4rem; opacity:0.9; }
+        .kpi-card .value { 
+            font-weight:900; 
+            margin-top:0.4rem; 
+            letter-spacing:-0.02em; 
+            font-size:3.4rem; 
+            line-height:1.1; 
+            text-shadow:0 0 20px rgba(255,255,255,0.06); 
+        }
         .kpi-card .value.blue { color:#93c5fd; }
         .kpi-card .value.green { color:#6ee7b7; }
         .kpi-card .value.gold { color:#fbbf24; }
@@ -75,13 +93,24 @@
         .kpi-card .value.orange { color:#fdba74; }
         .kpi-card .value.teal { color:#5eead4; }
         .kpi-card .value.purple { color:#c4b5fd; }
-        .kpi-card .extra { color:rgba(255,255,255,0.3); font-size:0.75rem; margin-top:0.2rem; display:flex; flex-wrap:wrap; justify-content:center; gap:0.2rem 0.6rem; }
-        .kpi-card .extra strong { color:rgba(255,255,255,0.6); font-weight:600; }
-        .kpi-card .trend-up { color:#34d399; font-weight:600; }
-        .kpi-card .trend-down { color:#f87171; font-weight:600; }
-        .kpi-card .trend-hidden { color:rgba(255,255,255,0.25); cursor:pointer; border-bottom:1px dashed rgba(255,255,255,0.1); transition:0.2s; }
-        .kpi-card .trend-hidden:hover { color:rgba(255,255,255,0.7); }
-        .kpi-card .trend-indicator { display:inline-flex; align-items:center; gap:0.2rem; font-weight:700; }
+
+        .kpi-card .extra { 
+            color:rgba(255,255,255,0.4); 
+            font-size:0.95rem; 
+            margin-top:0.3rem; 
+            display:flex; 
+            flex-wrap:wrap; 
+            justify-content:center; 
+            gap:0.3rem 0.8rem; 
+            font-weight:500;
+        }
+        .kpi-card .extra strong { color:rgba(255,255,255,0.7); font-weight:700; }
+        .kpi-card .trend-up { color:#34d399; font-weight:700; }
+        .kpi-card .trend-down { color:#f87171; font-weight:700; }
+        .kpi-card .trend-hidden { color:rgba(255,255,255,0.3); cursor:pointer; border-bottom:1px dashed rgba(255,255,255,0.15); transition:0.2s; font-weight:600; }
+        .kpi-card .trend-hidden:hover { color:rgba(255,255,255,0.8); }
+        .kpi-card .trend-indicator { display:inline-flex; align-items:center; gap:0.3rem; font-weight:800; font-size:1.05rem; }
+        .kpi-card .trend-indicator i { font-size:1.1rem; }
 
         .search-section { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:4rem; padding:0.3rem 0.3rem 0.3rem 2rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.8rem; border:1px solid rgba(255,255,255,0.04); margin-bottom:1.8rem; box-shadow:0 4px 20px -8px rgba(0,0,0,0.3); }
         .search-section i { color:rgba(255,255,255,0.12); font-size:1.2rem; }
@@ -180,8 +209,9 @@
             .header-left h1 { font-size:1.6rem; }
             .header-left .logo { width:48px; height:48px; font-size:1.4rem; }
             .student-grid { grid-template-columns:1fr; }
-            .kpi-row { grid-template-columns:repeat(2,1fr); gap:0.6rem; }
-            .kpi-card .value { font-size:2rem; }
+            .kpi-row { grid-template-columns:repeat(2,1fr); gap:0.8rem; }
+            .kpi-card .value { font-size:2.4rem; }
+            .kpi-card .label { font-size:0.9rem; }
             .search-section { flex-direction:column; align-items:stretch; padding:0.8rem 1.2rem; border-radius:1.8rem; }
             .detail-box { padding:1.5rem; }
             .detail-score-grid { grid-template-columns:1fr 1fr; }
@@ -239,10 +269,13 @@
                     </div>
                 </div>
 
-                <!-- KPI 增强版: 大字号 + 股市行情涨跌 -->
+                <!-- KPI 增强版: 超大字号 + 股市行情涨跌 + 动态图标 -->
                 <div class="kpi-row" v-if="allStudents.length > 0 && statsReady">
                     <div class="kpi-card" v-for="(stat, key) in statsMap" :key="key" :style="{'--accent': stat.color}">
-                        <div class="label">{{ stat.label }} <i :class="stat.icon"></i></div>
+                        <div class="label">
+                            <i :class="stat.icon" :style="{color: stat.color}"></i>
+                            {{ stat.label }}
+                        </div>
                         <div class="value" :class="stat.colorClass">{{ stat.avg }}</div>
                         <div class="extra">
                             <span>🏆 最高 <strong>{{ stat.maxVal }}</strong> · {{ stat.maxName }}</span>

@@ -23,31 +23,32 @@
         .math-symbols.s4 { bottom:30%; left:1%; transform:rotate(-4deg); font-size:6rem; color:rgba(52,211,153,0.025); }
         .math-symbols.s5 { top:55%; left:50%; transform:translateX(-50%) rotate(3deg); font-size:12rem; color:rgba(255,255,255,0.005); letter-spacing:2rem; }
 
-        /* 动态光效扫描 */
+        /* 动态光效扫描 - 修复可见性 */
         @keyframes scanGlow {
-            0% { left: -20%; opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { left: 120%; opacity: 0; }
+            0% { left: -30%; opacity: 0; }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% { left: 130%; opacity: 0; }
         }
         .glow-scan {
             position: fixed;
             top: 0;
-            left: -20%;
+            left: -30%;
             width: 60%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(96,165,250,0.04), rgba(167,139,250,0.06), rgba(251,191,36,0.04), transparent);
+            background: linear-gradient(90deg, transparent, rgba(96,165,250,0.08), rgba(167,139,250,0.10), rgba(251,191,36,0.06), transparent);
             pointer-events: none;
             z-index: 0;
-            animation: scanGlow 12s ease-in-out infinite;
-            transform: skewX(-15deg);
-            filter: blur(40px);
+            animation: scanGlow 14s ease-in-out infinite;
+            transform: skewX(-12deg);
+            filter: blur(50px);
+            will-change: transform, left, opacity;
         }
         .glow-scan:nth-child(2) {
-            animation-delay: 6s;
+            animation-delay: 7s;
             width: 40%;
-            background: linear-gradient(90deg, transparent, rgba(52,211,153,0.03), rgba(96,165,250,0.05), transparent);
-            filter: blur(60px);
+            background: linear-gradient(90deg, transparent, rgba(52,211,153,0.06), rgba(96,165,250,0.08), transparent);
+            filter: blur(70px);
         }
 
         .app-container { max-width:1480px; margin:0 auto; position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
@@ -89,7 +90,7 @@
         .btn-gold:hover { background:rgba(251,191,36,0.18); color:#fff; }
         .teacher-badge { background:rgba(251,191,36,0.10); border:1px solid rgba(251,191,36,0.15); color:#fbbf24; border-radius:2.5rem; padding:0.4rem 1.2rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; }
 
-        /* KPI 卡片 - 超大字号 + 明亮 + 动态图标 */
+        /* KPI 卡片 - 图标已修正 */
         .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.5rem; margin-bottom:2rem; position:relative; z-index:1; }
         .kpi-card { 
             background:rgba(255,255,255,0.02); 
@@ -146,7 +147,8 @@
         .kpi-card .label i { 
             font-size:1.8rem; 
             opacity:1; 
-            filter: drop-shadow(0 0 8px var(--accent, rgba(96,165,250,0.2)));
+            filter: drop-shadow(0 0 12px var(--accent, rgba(96,165,250,0.3)));
+            display: inline-block;
         }
         .kpi-card .value { 
             font-weight:900; 
@@ -284,6 +286,7 @@
         .modal-box .btn-row { display:flex; gap:1rem; margin-top:1.5rem; }
         .modal-box .btn-row .btn { flex:1; justify-content:center; font-size:1.1rem; padding:0.9rem 0; }
 
+        /* 详情弹窗 - 颜色与卡片保持一致 */
         .detail-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(8,12,26,0.95); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; z-index:2000; padding:2rem; animation:fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
         .detail-box { background:rgba(255,255,255,0.04); border-radius:3rem; padding:3rem 3.5rem; max-width:800px; width:100%; max-height:90vh; overflow-y:auto; border:1px solid rgba(255,255,255,0.06); box-shadow:0 30px 80px rgba(0,0,0,0.6); }
@@ -294,7 +297,17 @@
         .detail-score-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin:1.2rem 0; }
         .detail-score-item { background:rgba(255,255,255,0.03); border-radius:1.5rem; padding:1rem 1.2rem; text-align:center; border:1px solid rgba(255,255,255,0.04); }
         .detail-score-item .label { color:rgba(255,255,255,0.2); text-transform:uppercase; letter-spacing:0.04em; font-size:0.85rem; }
-        .detail-score-item .value { font-weight:700; color:#f0f4ff; margin-top:0.2rem; font-size:2.2rem; }
+        /* 详情弹窗中的数值颜色与卡片一致 */
+        .detail-score-item .value { font-weight:700; margin-top:0.2rem; font-size:2.2rem; }
+        .detail-score-item .value.blue { color:#93c5fd; }
+        .detail-score-item .value.green { color:#6ee7b7; }
+        .detail-score-item .value.gold { color:#fbbf24; }
+        .detail-score-item .value.pink { color:#f9a8d4; }
+        .detail-score-item .value.red { color:#f87171; }
+        .detail-score-item .value.teal { color:#5eead4; }
+        .detail-score-item .value.purple { color:#c4b5fd; }
+        .detail-score-item .value.orange { color:#fdba74; }
+
         .detail-total { margin-top:1.2rem; background:rgba(251,191,36,0.06); border-radius:1.5rem; padding:1.2rem; text-align:center; border:1px solid rgba(251,191,36,0.08); }
         .detail-total .label { color:rgba(255,255,255,0.2); }
         .detail-total .value { font-weight:700; color:#fbbf24; font-size:3.2rem; }
@@ -502,7 +515,7 @@
                     </div>
                 </div>
 
-                <!-- 详情 -->
+                <!-- 详情弹窗 - 颜色已修复 -->
                 <div v-if="showDetailModal" class="detail-overlay" @click.self="showDetailModal = false">
                     <div class="detail-box">
                         <button class="close-btn" @click="showDetailModal = false"><i class="fas fa-times"></i> 关闭</button>
@@ -510,10 +523,10 @@
                         <div class="student-id-big">学号：{{ detailStudent.id }}</div>
                         <div class="detail-score-grid">
                             <div class="detail-score-item"><div class="label attendance-label">考勤</div><div class="value blue">{{ detailStudent.attendance }}</div></div>
-                            <div class="detail-score-item"><div class="label performance-label">表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
-                            <div class="detail-score-item"><div class="label homework-label">作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
-                            <div class="detail-score-item"><div class="label midterm-label">期中</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
-                            <div class="detail-score-item"><div class="label final-label">期末</div><div class="value red">{{ detailStudent.final }}</div></div>
+                            <div class="detail-score-item"><div class="label performance-label">课堂表现</div><div class="value green">{{ detailStudent.performance }}</div></div>
+                            <div class="detail-score-item"><div class="label homework-label">平时作业</div><div class="value gold">{{ detailStudent.homework }}</div></div>
+                            <div class="detail-score-item"><div class="label midterm-label">期中测试</div><div class="value pink">{{ detailStudent.midterm }}</div></div>
+                            <div class="detail-score-item"><div class="label final-label">期末考试</div><div class="value red">{{ detailStudent.final }}</div></div>
                             <div class="detail-score-item"><div class="label daily-label">每日一题</div><div class="value teal">{{ detailStudent.daily_score || 0 }}</div></div>
                             <div class="detail-score-item" v-for="i in 6" :key="'ch'+i"><div class="label chapter-label">第{{i}}章</div><div class="value purple">{{ detailStudent['chapter'+i] || 0 }}</div></div>
                         </div>
@@ -664,7 +677,6 @@
                         ];
                         const stats = {};
                         const now = new Date();
-                        const dayAgo = new Date(now); dayAgo.setDate(dayAgo.getDate() - 1);
                         const weekAgo = new Date(now); weekAgo.setDate(weekAgo.getDate() - 7);
                         const monthAgo = new Date(now); monthAgo.setMonth(monthAgo.getMonth() - 1);
 

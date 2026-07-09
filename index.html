@@ -23,41 +23,44 @@
         .math-symbols.s4 { bottom:30%; left:1%; transform:rotate(-4deg); font-size:6rem; color:rgba(52,211,153,0.025); }
         .math-symbols.s5 { top:55%; left:50%; transform:translateX(-50%) rotate(3deg); font-size:12rem; color:rgba(255,255,255,0.005); letter-spacing:2rem; }
 
-        /* ===== 动态光效扫描 - 增强可见度 ===== */
+        /* ===== 动态光效扫描 - 增强效果 ===== */
         @keyframes scanGlow {
-            0% { left: -40%; opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { left: 140%; opacity: 0; }
+            0% { left: -50%; opacity: 0; transform: skewX(-12deg) scaleX(0.8); }
+            15% { opacity: 1; transform: skewX(-12deg) scaleX(1); }
+            85% { opacity: 1; transform: skewX(-12deg) scaleX(1); }
+            100% { left: 150%; opacity: 0; transform: skewX(-12deg) scaleX(0.8); }
         }
         .glow-scan {
             position: fixed;
-            top: 0;
-            left: -40%;
-            width: 50%;
-            height: 100%;
+            top: -10%;
+            left: -50%;
+            width: 45%;
+            height: 120%;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(96,165,250,0.15), 
-                rgba(167,139,250,0.20), 
-                rgba(251,191,36,0.12), 
+                rgba(96,165,250,0.20), 
+                rgba(167,139,250,0.25), 
+                rgba(251,191,36,0.15), 
                 transparent);
             pointer-events: none;
             z-index: 0;
-            animation: scanGlow 12s ease-in-out infinite;
-            transform: skewX(-10deg);
-            filter: blur(60px);
+            animation: scanGlow 14s ease-in-out infinite;
+            filter: blur(70px);
             will-change: transform, left, opacity;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         }
         .glow-scan:nth-child(2) {
-            animation-delay: 6s;
-            width: 35%;
+            animation-delay: 7s;
+            width: 30%;
+            height: 100%;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(52,211,153,0.12), 
-                rgba(96,165,250,0.18), 
+                rgba(52,211,153,0.18), 
+                rgba(96,165,250,0.22), 
                 transparent);
-            filter: blur(80px);
+            filter: blur(90px);
+            border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+            top: 5%;
         }
 
         .app-container { max-width:1480px; margin:0 auto; position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
@@ -99,8 +102,8 @@
         .btn-gold:hover { background:rgba(251,191,36,0.18); color:#fff; }
         .teacher-badge { background:rgba(251,191,36,0.10); border:1px solid rgba(251,191,36,0.15); color:#fbbf24; border-radius:2.5rem; padding:0.4rem 1.2rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; }
 
-        /* ===== KPI 卡片 - 图标强制显示 ===== */
-        .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.5rem; margin-bottom:2rem; position:relative; z-index:1; }
+        /* ===== KPI 卡片 ===== */
+        .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(270px,1fr)); gap:1.5rem; margin-bottom:2rem; position:relative; z-index:1; }
         .kpi-card { 
             background:rgba(255,255,255,0.02); 
             backdrop-filter:blur(12px); 
@@ -153,18 +156,17 @@
             position:relative;
             z-index:1;
         }
-        /* 图标强制显示 + 发光效果 */
         .kpi-card .label i { 
             font-size:2rem; 
             opacity:1 !important; 
             display:inline-block !important;
             visibility:visible !important;
-            filter: drop-shadow(0 0 14px var(--accent, rgba(96,165,250,0.4)));
+            filter: drop-shadow(0 0 16px var(--accent, rgba(96,165,250,0.5)));
             color: var(--accent, #60a5fa);
             transition: filter 0.3s ease;
         }
         .kpi-card:hover .label i {
-            filter: drop-shadow(0 0 24px var(--accent, rgba(96,165,250,0.6)));
+            filter: drop-shadow(0 0 28px var(--accent, rgba(96,165,250,0.7)));
         }
         .kpi-card .value { 
             font-weight:900; 
@@ -214,17 +216,24 @@
 
         .kpi-card .extra { 
             color:rgba(255,255,255,0.4); 
-            font-size:0.95rem; 
+            font-size:0.9rem; 
             margin-top:0.3rem; 
             display:flex; 
             flex-wrap:wrap; 
             justify-content:center; 
-            gap:0.2rem 0.6rem; 
+            gap:0.2rem 0.8rem; 
             font-weight:500;
             position:relative;
             z-index:1;
         }
         .kpi-card .extra strong { color:rgba(255,255,255,0.7); font-weight:700; }
+        .kpi-card .extra .min-item { 
+            color:rgba(255,255,255,0.35); 
+            cursor:pointer; 
+            border-bottom:1px dashed rgba(255,255,255,0.1);
+            transition:0.2s;
+        }
+        .kpi-card .extra .min-item:hover { color:rgba(255,255,255,0.7); }
 
         .search-section { background:rgba(255,255,255,0.02); backdrop-filter:blur(12px); border-radius:4rem; padding:0.3rem 0.3rem 0.3rem 2rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.8rem; border:1px solid rgba(255,255,255,0.04); margin-bottom:1.8rem; box-shadow:0 4px 20px -8px rgba(0,0,0,0.3); position:relative; z-index:1; }
         .search-section i { color:rgba(255,255,255,0.12); font-size:1.2rem; }
@@ -242,6 +251,30 @@
         .card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; padding-bottom:0.6rem; border-bottom:1px solid rgba(255,255,255,0.03); }
         .student-name { font-weight:700; color:#f0f4ff; font-size:1.5rem; letter-spacing:-0.2px; }
         .student-rank { background:rgba(96,165,250,0.08); padding:0.2rem 1rem; border-radius:2.5rem; color:rgba(96,165,250,0.5); border:1px solid rgba(96,165,250,0.05); font-size:0.9rem; }
+
+        /* 学生卡片内的涨跌幅 */
+        .student-changes {
+            display:flex;
+            gap:0.6rem;
+            justify-content:center;
+            margin-top:0.4rem;
+            font-size:0.75rem;
+            font-weight:600;
+            flex-wrap:wrap;
+        }
+        .student-changes .sc-item {
+            display:inline-flex;
+            align-items:center;
+            gap:0.2rem;
+            padding:0.05rem 0.4rem;
+            border-radius:0.4rem;
+            background:rgba(255,255,255,0.02);
+        }
+        .student-changes .sc-up { color:#34d399; }
+        .student-changes .sc-down { color:#f87171; }
+        .student-changes .sc-flat { color:rgba(255,255,255,0.2); }
+        .student-changes .sc-period { color:rgba(255,255,255,0.15); font-size:0.6rem; }
+
         .score-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin:0.6rem 0 0.2rem; }
         .score-item { background:rgba(255,255,255,0.02); border-radius:1rem; display:flex; justify-content:space-between; align-items:center; font-weight:600; border:1px solid rgba(255,255,255,0.02); transition:0.15s; padding:0.35rem 0.7rem 0.35rem 0.9rem; font-size:1rem; }
         .score-item .score-value { font-weight:700; padding:0 0.6rem; border-radius:0.8rem; font-size:1rem; }
@@ -273,7 +306,7 @@
         .score-item.chapter i { color:#a78bfa; }
         .score-item.chapter .score-value { color:#c4b5fd; }
         .score-item.chapter .label-text { color:#c4b5fd; }
-        .score-item.total { grid-column:span 3; background:rgba(251,191,36,0.05); border-color:rgba(251,191,36,0.10); justify-content:center; gap:1.2rem; padding:0.4rem 0.6rem; }
+        .score-item.total { grid-column:span 3; background:rgba(251,191,36,0.05); border-color:rgba(251,191,36,0.10); justify-content:center; gap:1.2rem; padding:0.4rem 0.6rem; flex-wrap:wrap; }
         .score-item.total i { color:#fbbf24; }
         .score-item.total .score-value { background:rgba(251,191,36,0.08); color:#fbbf24; border:1px solid rgba(251,191,36,0.06); font-size:1.3rem; }
         .score-item.total .label-text { color:#fbbf24; }
@@ -302,7 +335,7 @@
         .modal-box .btn-row { display:flex; gap:1rem; margin-top:1.5rem; }
         .modal-box .btn-row .btn { flex:1; justify-content:center; font-size:1.1rem; padding:0.9rem 0; }
 
-        /* ===== 详情弹窗 - 颜色与卡片完全一致 ===== */
+        /* ===== 详情弹窗 - 标签颜色与数值一致 ===== */
         .detail-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(8,12,26,0.95); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; z-index:2000; padding:2rem; animation:fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
         .detail-box { background:rgba(255,255,255,0.04); border-radius:3rem; padding:3rem 3.5rem; max-width:800px; width:100%; max-height:90vh; overflow-y:auto; border:1px solid rgba(255,255,255,0.06); box-shadow:0 30px 80px rgba(0,0,0,0.6); }
@@ -313,8 +346,15 @@
 
         .detail-score-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin:1.2rem 0; }
         .detail-score-item { background:rgba(255,255,255,0.03); border-radius:1.5rem; padding:1rem 1.2rem; text-align:center; border:1px solid rgba(255,255,255,0.04); }
-        .detail-score-item .label { color:rgba(255,255,255,0.2); text-transform:uppercase; letter-spacing:0.04em; font-size:0.85rem; }
-        /* 详情弹窗数值颜色 - 与KPI卡片完全一致 */
+        /* 标签颜色与数值一致 */
+        .detail-score-item .label { text-transform:uppercase; letter-spacing:0.04em; font-size:0.85rem; font-weight:600; }
+        .detail-score-item .label.attendance-label { color:#93c5fd; }
+        .detail-score-item .label.performance-label { color:#6ee7b7; }
+        .detail-score-item .label.homework-label { color:#fbbf24; }
+        .detail-score-item .label.midterm-label { color:#f9a8d4; }
+        .detail-score-item .label.final-label { color:#fdba74; }
+        .detail-score-item .label.daily-label { color:#5eead4; }
+        .detail-score-item .label.chapter-label { color:#c4b5fd; }
         .detail-score-item .value { font-weight:700; margin-top:0.2rem; font-size:2.2rem; }
         .detail-score-item .value.blue { color:#93c5fd; }
         .detail-score-item .value.green { color:#6ee7b7; }
@@ -354,7 +394,7 @@
     </style>
 </head>
 <body>
-    <!-- 动态光效扫描层 - 增强可见度 -->
+    <!-- 动态光效扫描层 -->
     <div class="glow-scan"></div>
     <div class="glow-scan"></div>
 
@@ -400,7 +440,7 @@
                     </div>
                 </div>
 
-                <!-- KPI 卡片 - 图标正确显示 -->
+                <!-- KPI 卡片 -->
                 <div class="kpi-row" v-if="allStudents.length > 0 && statsReady">
                     <div class="kpi-card" v-for="(stat, key) in statsMap" :key="key" :style="{'--accent': stat.color}">
                         <div class="label">
@@ -409,7 +449,6 @@
                         </div>
                         <div class="value" :class="stat.colorClass">{{ stat.avg }}</div>
                         
-                        <!-- 涨跌幅区域：日/周/月 -->
                         <div class="change-section">
                             <span class="change-item" v-for="(chg, period) in stat.changes" :key="period">
                                 <span class="period">{{ period }}</span>
@@ -424,6 +463,9 @@
 
                         <div class="extra">
                             <span>🏆 最高 <strong>{{ stat.maxVal }}</strong> · {{ stat.maxName }}</span>
+                            <span v-if="stat.minVal !== undefined" class="min-item" @click="stat.showMin = !stat.showMin" title="点击显示/隐藏最低分姓名">
+                                📉 最低 <strong>{{ stat.minVal }}</strong> · {{ stat.showMin ? stat.minName : '点击显示' }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -469,7 +511,20 @@
                                 <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第4章</span> <span class="score-value">{{ stu.chapter4 || 0 }}</span></div>
                                 <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第5章</span> <span class="score-value">{{ stu.chapter5 || 0 }}</span></div>
                                 <div class="score-item chapter"><i class="fas fa-layer-group"></i> <span class="label-text">第6章</span> <span class="score-value">{{ stu.chapter6 || 0 }}</span></div>
-                                <div class="score-item total"><i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span></div>
+                                <div class="score-item total">
+                                    <i class="fas fa-star"></i> <span class="label-text">总评</span> <span class="score-value">{{ stu.total }}</span>
+                                    <span class="student-changes">
+                                        <span class="sc-item" v-for="(chg, p) in stu.totalChanges" :key="p">
+                                            <span class="sc-period">{{ p }}</span>
+                                            <i v-if="chg > 0" class="fas fa-arrow-up sc-up"></i>
+                                            <i v-else-if="chg < 0" class="fas fa-arrow-down sc-down"></i>
+                                            <i v-else class="fas fa-minus sc-flat"></i>
+                                            <span :class="chg > 0 ? 'sc-up' : (chg < 0 ? 'sc-down' : 'sc-flat')">
+                                                {{ chg > 0 ? '+' : '' }}{{ chg }}%
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
                             <div class="card-actions" @click.stop>
                                 <button class="btn-small" @click="showAddScoreModal(stu.id,'attendance')" v-if="isTeacher"><i class="fas fa-plus-circle"></i> 考勤</button>
@@ -532,7 +587,7 @@
                     </div>
                 </div>
 
-                <!-- 详情弹窗 - 颜色与卡片一致 -->
+                <!-- 详情弹窗 - 标签颜色已修正 -->
                 <div v-if="showDetailModal" class="detail-overlay" @click.self="showDetailModal = false">
                     <div class="detail-box">
                         <button class="close-btn" @click="showDetailModal = false"><i class="fas fa-times"></i> 关闭</button>
@@ -669,7 +724,18 @@
                             students.forEach(s => { const sc = studentScores[s.id]; sc.total = sc.attendance + sc.performance + sc.homework + sc.midterm + sc.final + sc.daily + sc.chapter; });
                             this.allStudents = students.map(s => {
                                 const sc = studentScores[s.id] || { attendance: 0, performance: 0, homework: 0, midterm: 0, final: 0, daily: 0, chapter: 0, chapter1: 0, chapter2: 0, chapter3: 0, chapter4: 0, chapter5: 0, chapter6: 0, total: 0 };
-                                return { id: s.id, name: s.name, attendance: sc.attendance, performance: sc.performance, homework: sc.homework, midterm: sc.midterm, final: sc.final, daily_score: sc.daily, chapter1: sc.chapter1, chapter2: sc.chapter2, chapter3: sc.chapter3, chapter4: sc.chapter4, chapter5: sc.chapter5, chapter6: sc.chapter6, total: sc.total };
+                                // 计算该学生总评的涨跌幅
+                                const totalChanges = this.calculateStudentChanges(s.id, 'total', sc.total);
+                                return { 
+                                    id: s.id, name: s.name, 
+                                    attendance: sc.attendance, performance: sc.performance, 
+                                    homework: sc.homework, midterm: sc.midterm, final: sc.final, 
+                                    daily_score: sc.daily, 
+                                    chapter1: sc.chapter1, chapter2: sc.chapter2, chapter3: sc.chapter3,
+                                    chapter4: sc.chapter4, chapter5: sc.chapter5, chapter6: sc.chapter6, 
+                                    total: sc.total,
+                                    totalChanges: totalChanges
+                                };
                             });
                             this.allStudents.sort((a, b) => b.total - a.total);
                             this.studentOptions = this.allStudents.map(s => ({ id: s.id, name: s.name }));
@@ -680,6 +746,86 @@
                             this.computeStats();
                             this.showToast('✅ 数据加载成功');
                         } catch (e) { console.warn('加载失败', e); this.allStudents = []; this.showToast('⚠️ 加载失败'); } finally { this.loading = false; }
+                    },
+                    calculateStudentChanges(studentId, key, currentTotal) {
+                        const changes = { '日': 0, '周': 0, '月': 0 };
+                        const now = new Date();
+                        const dayAgo = new Date(now); dayAgo.setDate(dayAgo.getDate() - 1);
+                        const weekAgo = new Date(now); weekAgo.setDate(weekAgo.getDate() - 7);
+                        const monthAgo = new Date(now); monthAgo.setMonth(monthAgo.getMonth() - 1);
+                        
+                        const history = this.historyData[studentId];
+                        if (!history) return changes;
+                        
+                        // 收集该学生该字段的历史分数
+                        let scores = [];
+                        const keyMap = {
+                            'total': 'total'
+                        };
+                        // 对于total，需要汇总所有分数
+                        if (key === 'total') {
+                            // 从各科历史中汇总每日总评
+                            const dailyTotals = {};
+                            for (const k in history) {
+                                history[k].forEach(item => {
+                                    const d = item.date.toISOString().slice(0,10);
+                                    if (!dailyTotals[d]) dailyTotals[d] = 0;
+                                    dailyTotals[d] += item.score;
+                                });
+                            }
+                            for (const d in dailyTotals) {
+                                scores.push({ date: new Date(d), score: dailyTotals[d] });
+                            }
+                        } else {
+                            if (history[key]) {
+                                history[key].forEach(item => {
+                                    scores.push({ date: item.date, score: item.score });
+                                });
+                            }
+                        }
+                        scores.sort((a, b) => a.date - b.date);
+                        if (scores.length < 2) return changes;
+                        
+                        const today = now.toISOString().slice(0,10);
+                        const yesterday = new Date(now); yesterday.setDate(yesterday.getDate() - 1);
+                        const yStr = yesterday.toISOString().slice(0,10);
+                        
+                        // 日涨跌幅
+                        let todayScore = null, yesterdayScore = null;
+                        for (const s of scores) {
+                            const d = s.date.toISOString().slice(0,10);
+                            if (d === today) todayScore = s.score;
+                            if (d === yStr) yesterdayScore = s.score;
+                        }
+                        if (todayScore !== null && yesterdayScore !== null && yesterdayScore !== 0) {
+                            changes['日'] = Math.round((todayScore - yesterdayScore) / Math.abs(yesterdayScore) * 100);
+                        } else {
+                            // 用最近两天
+                            const last2 = scores.slice(-2);
+                            if (last2.length === 2 && last2[0].score !== 0) {
+                                changes['日'] = Math.round((last2[1].score - last2[0].score) / Math.abs(last2[0].score) * 100);
+                            }
+                        }
+                        
+                        // 周涨跌幅
+                        const weekScores = scores.filter(s => s.date >= weekAgo);
+                        const prevWeekScores = scores.filter(s => s.date < weekAgo && s.date >= new Date(weekAgo.getTime() - 7*24*60*60*1000));
+                        if (weekScores.length > 0 && prevWeekScores.length > 0) {
+                            const wAvg = weekScores.reduce((a,b) => a + b.score, 0) / weekScores.length;
+                            const pAvg = prevWeekScores.reduce((a,b) => a + b.score, 0) / prevWeekScores.length;
+                            if (pAvg !== 0) changes['周'] = Math.round((wAvg - pAvg) / Math.abs(pAvg) * 100);
+                        }
+                        
+                        // 月涨跌幅
+                        const monthScores = scores.filter(s => s.date >= monthAgo);
+                        const prevMonthScores = scores.filter(s => s.date < monthAgo && s.date >= new Date(monthAgo.getTime() - 30*24*60*60*1000));
+                        if (monthScores.length > 0 && prevMonthScores.length > 0) {
+                            const mAvg = monthScores.reduce((a,b) => a + b.score, 0) / monthScores.length;
+                            const pMAvg = prevMonthScores.reduce((a,b) => a + b.score, 0) / prevMonthScores.length;
+                            if (pMAvg !== 0) changes['月'] = Math.round((mAvg - pMAvg) / Math.abs(pMAvg) * 100);
+                        }
+                        
+                        return changes;
                     },
                     computeStats() {
                         if (!this.allStudents.length) { this.statsReady = false; return; }
@@ -703,6 +849,9 @@
                             const maxVal = Math.max(...values);
                             const maxStudent = this.allStudents.find(s => (s[f.key] || 0) === maxVal);
                             const maxName = maxStudent ? maxStudent.name : '-';
+                            const minVal = Math.min(...values);
+                            const minStudent = this.allStudents.find(s => (s[f.key] || 0) === minVal);
+                            const minName = minStudent ? minStudent.name : '-';
 
                             const changes = { '日': 0, '周': 0, '月': 0 };
                             let historyScores = [];
@@ -756,6 +905,7 @@
                             stats[f.key] = {
                                 label: f.label, icon: f.icon, color: f.color, colorClass: f.colorClass,
                                 avg: avg, maxVal: maxVal, maxName: maxName,
+                                minVal: minVal, minName: minName, showMin: false,
                                 changes: changes
                             };
                         });
